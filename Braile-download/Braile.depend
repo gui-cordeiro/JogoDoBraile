@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1623251049 source:c:\users\guilherme cordeiro\desktop\coisas diversas\projetos c\braile\braile.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<locale.h>
+	<math.h>
+
+1623250997 source:c:\users\guilherme cordeiro\desktop\coisas diversas\projetos c\braile\functions.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<locale.h>
+	<math.h>
+
