@@ -27,5 +27,5 @@ Neste jogo, cada pergunta é composta por:
 ### 4) Exemplo do desempenho final do(a) jogador(a)
 <img src="Screenshots/04.jpg" width="80%">
 
-### 4) Imagem contendo o link do GitHub do desenvolvedor
+### 5) Imagem contendo o link do GitHub do desenvolvedor
 <img src="Screenshots/05.jpg" width="80%">
