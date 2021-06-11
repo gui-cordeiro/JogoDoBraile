@@ -13,3 +13,21 @@
 	<locale.h>
 	<math.h>
 
+1623360833 source:c:\users\guilherme cordeiro\documents\+++ projetosgithub +++\meusprojetos\braile\braile-download\braile.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<windows.h>
+	<locale.h>
+	<math.h>
+	<string.h>
+
+1623360672 source:c:\users\guilherme cordeiro\documents\+++ projetosgithub +++\meusprojetos\braile\braile-download\functions.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<windows.h>
+	<locale.h>
+	<math.h>
+	<string.h>
+
