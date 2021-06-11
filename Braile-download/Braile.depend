@@ -13,7 +13,7 @@
 	<locale.h>
 	<math.h>
 
-1623360833 source:c:\users\guilherme cordeiro\documents\+++ projetosgithub +++\meusprojetos\braile\braile-download\braile.c
+1623439179 source:c:\users\guilherme cordeiro\documents\+++ projetosgithub +++\meusprojetos\braile\braile-download\braile.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -22,7 +22,25 @@
 	<math.h>
 	<string.h>
 
-1623360672 source:c:\users\guilherme cordeiro\documents\+++ projetosgithub +++\meusprojetos\braile\braile-download\functions.c
+1623439066 source:c:\users\guilherme cordeiro\documents\+++ projetosgithub +++\meusprojetos\braile\braile-download\functions.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<windows.h>
+	<locale.h>
+	<math.h>
+	<string.h>
+
+1623439311 source:c:\users\guilherme cordeiro\documents\+++ projetosgithub +++\meusprojetos\braile\braile-download\functauxiliar.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<windows.h>
+	<locale.h>
+	<math.h>
+	<string.h>
+
+1623439487 source:c:\users\guilherme cordeiro\documents\+++ projetosgithub +++\meusprojetos\braile\braile-download\funcopts.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>

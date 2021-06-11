@@ -34,7 +34,10 @@
 		<Unit filename="Braile.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="functions.c">
+		<Unit filename="funcOpts.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="functAuxiliar.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>

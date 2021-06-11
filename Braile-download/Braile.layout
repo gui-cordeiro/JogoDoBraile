@@ -2,28 +2,29 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="Braile.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+	<File name="funcOpts.c" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1169" topLine="14" />
+			<Cursor1 position="29261" topLine="486" />
 		</Cursor>
 	</File>
-	<File name="functions.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+	<File name="Braile.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="17374" topLine="36" />
+			<Cursor1 position="224" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="functAuxiliar.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="141" topLine="0" />
 		</Cursor>
 		<Folding>
-			<Collapse line="19" />
-			<Collapse line="47" />
-			<Collapse line="85" />
-			<Collapse line="109" />
-			<Collapse line="246" />
-			<Collapse line="326" />
-			<Collapse line="346" />
-			<Collapse line="384" />
-			<Collapse line="442" />
-			<Collapse line="506" />
-			<Collapse line="621" />
-			<Collapse line="732" />
+			<Collapse line="9" />
+			<Collapse line="37" />
+			<Collapse line="75" />
+			<Collapse line="98" />
+			<Collapse line="235" />
+			<Collapse line="289" />
+			<Collapse line="345" />
+			<Collapse line="353" />
 		</Folding>
 	</File>
 </CodeBlocks_layout_file>
