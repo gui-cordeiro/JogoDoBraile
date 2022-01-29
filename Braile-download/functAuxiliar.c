@@ -39,8 +39,23 @@ int newPergunta(int questao, char l1, char l2, char l3, char l4, char altResp, c
     int tempo = 50;
     int acertoCont;
     char opt;
-    printf("\n * SEUS PONTOS: %d", pts);Sleep(tempo);
-    printf("\n * SEUS ACERTOS: %d\n", acertos);Sleep(tempo);
+    printf(" +------------------+");Sleep(tempo);
+    printf("\n | ACERTOS | PONTOS |", questao);Sleep(tempo);
+    printf("\n +------------------+");Sleep(tempo);
+    printf("\n |   ");
+    if (acertos < 10) {
+        printf("0");
+    }
+    printf("0%d   |  ", acertos);
+    if (pts < 99) {
+        printf("000");
+    } else if (pts < 99) {
+        printf("00");
+    } else if (pts < 999) {
+        printf("0");
+    }
+    printf("%d  |", pts);Sleep(tempo);
+    printf("\n +------------------+");Sleep(tempo);
     printf("\n +-----------------------------------------------+");Sleep(tempo);
     printf("\n |                PERGUNTA Nº %d                  |", questao);Sleep(tempo);
     printf("\n +-----------------------------------------------+");Sleep(tempo);
@@ -58,11 +73,11 @@ int newPergunta(int questao, char l1, char l2, char l3, char l4, char altResp, c
     printf("\n +-----------------------------------------------+");Sleep(tempo);
     if(tolower(opt) == altResp){
         printf("\n |                CERTA RESPOSTA!                | ");Sleep(tempo);
-        printf("\n |           VOCÊ GANHOU: 150 PONTOS!            | ");Sleep(tempo);
+        printf("\n |           VOCÊ GANHOU: +150 PONTOS!           | ");Sleep(tempo);
         acertoCont = 1;
     }else{
         printf("\n |     VOCÊ ERROU... RESPOSTA CORRETA: \"%c)\"      | ", tolower(altResp));Sleep(tempo);
-        printf("\n |           VOCÊ GANHOU: 50 PONTOS.             | ");Sleep(tempo);
+        printf("\n |           VOCÊ GANHOU: +50 PONTOS!            | ");Sleep(tempo);
         acertoCont = 0;
     }
     printf("\n +-----------------------------------------------+");Sleep(tempo);
@@ -76,7 +91,7 @@ int newPergunta(int questao, char l1, char l2, char l3, char l4, char altResp, c
 void apresentacao(){
     int tempo = 50;
     addFade(7, 0, 0);
-    printf("                                 **** Criado por Guilherme Cordeiro - 2017, 2021 ****                                \n\n");
+    printf("                                 **** Criado por Guilherme Cordeiro (2017-%d) ****                                \n\n", recuperarAnoAtual());
     printf("+---------------------------------------------------------------------------------------------------------------------+\n");Sleep(tempo);
     printf("|      ##  #######   ######    #######     ########   #######     ########  ########     ###    #### ##       ########|\n");Sleep(tempo);
     printf("|      ## ##     ## ##    ##  ##     ##    ##     ## ##     ##    ##     ## ##     ##   ## ##    ##  ##       ##      |\n");Sleep(tempo);
@@ -242,9 +257,9 @@ int inicioJogo(char nivel[9]){
         printf("\n     **** OPÇÃO SELECIONADA : 'Jogar - NÍVEL %s' **** \n", nivel);Sleep(tempo);
         printf("\n           Confirma? ('1' para Sim, '2' para Não): ");
         scanf("%d",&opt);
-        addFade(25, 0, 0);
-        addFade(5, 30, 1);
         if(opt == 2){
+            addFade(25, 0, 0);
+            addFade(5, 30, 1);
             return 0;
         }else if(opt != 1){
             system("cls");
@@ -259,8 +274,8 @@ int inicioJogo(char nivel[9]){
     addFade(2, 50, 1);
     printf("\n - Para começar, digite o seu nome: ");
     scanf(" %s",&nome);
-    addFade(25, 0, 0);
-    addFade(5, 30, 1);
+    //addFade(25, 0, 0);
+    //addFade(5, 30, 1);
     system("cls");
     printf("\n\n * Olá '%s'! É um prazer enorme ter você aqui jogando! *       ",nome);
     addFade(4, 50, 1);
@@ -280,8 +295,8 @@ int inicioJogo(char nivel[9]){
     addFade(2, 50, 1);
     printf("                      **** Pressione qualquer tecla para continuar ****");
     getch();
-    addFade(5, 0, 0);
-    addFade(25, 30, 1);
+    //addFade(5, 0, 0);
+    //addFade(25, 30, 1);
     system("cls");
     return 1;
 }
@@ -326,8 +341,8 @@ void fimJogo(int nivel, char frase[100], int pts, int acertos, int numPerg){
     Sleep(1500);
     printf("\n\n\n\n\n **** Pressione qualquer tecla para continuar **** ");
     getch();
-    addFade(12, 0, 0);
-    addFade(18, 30, 1);
+    //addFade(12, 0, 0);
+    //addFade(18, 30, 1);
     system("cls");
     printf("\n   * %s *", frase);Sleep(tempo);
     printf("\n\n                         Selecione-o no menu!\n\n");Sleep(tempo);
@@ -354,10 +369,19 @@ void addFade(int rep, int millis, int isLento){
 void banner(){
     int tempo = 50;
     printf("\n              +-------------------------------------------+");Sleep(tempo);
-    printf("\n              |        Jogo do Braile - 2017, 2021        |");Sleep(tempo);
+    printf("\n              |        Jogo do Braile - 2017, %d        |", recuperarAnoAtual());Sleep(tempo);
     printf("\n              +-------------------------------------------+");Sleep(tempo);
     printf("\n              |      Criado por: Guilherme Cordeiro       |");Sleep(tempo);
     printf("\n              +-------------------------------------------+\n");Sleep(tempo);
     return;
 }
 
+/* H) RECUPERA O ANO ATUAL DO SISTEMA */
+int recuperarAnoAtual(){
+    int anoAtual = 0;
+    time_t data_ano;
+    time(&data_ano);
+    struct tm *data = localtime(&data_ano);
+    anoAtual = (data->tm_year+1900);
+    return anoAtual;
+}

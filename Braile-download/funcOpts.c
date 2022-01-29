@@ -20,15 +20,17 @@ int menu(){
     printf("\n       |%s|       %d       | ", optMenu[c], c + 1);Sleep(tempo);
     }
     printf("\n       +-----------------------+---------------+ \n");Sleep(tempo);
-    printf("\n\n       Para onde vamos?: ");
+    printf("\n\n       Digite a opção desejada e pressione ENTER: ");
     scanf(" %d",&a);
-    addFade(30, 27, 1);
+    if (a >= 1 && a <= 7){
+        addFade(30, 27, 1);
+    }
     return(a);
 }
 
 /* 1) Jogar - NÍVEL FÁCIL */
 void opcao1(){
-    int cont = 10, tempo = 50, numPerg = 0;
+    int cont = 0, tempo = 50, numPerg = 0;
     int conf = 0, pts = 0, acertos = 0;
     if(inicioJogo("FÁCIL") == 0) return 0;
     printf("\n           As letras em braile nesta dificuldade são:  \n");Sleep(tempo);
@@ -397,8 +399,10 @@ void opcao5(){
 
     printf("\n\n\n DESEJA VER UM EXEMPLO DE UMA PERGUNTA? ('1' para Sim, '2' para Não): ");
     scanf("%d",&a);
-    addFade(30, 25, 1);
-    if(a == 2) return 0;
+    if(a == 2){
+        addFade(30, 25, 1);
+        return 0;
+    }
     system("cls");
     printf("\n **** EXEMPLO DE UMA PERGUNTA **** \n");Sleep(tempo);
     printf("\n Esta tela mostra um exemplo de uma pergunta. Como dito anteriormente, cada pergunta apresenta: ");Sleep(tempo);
@@ -474,15 +478,15 @@ void opcao5(){
     printf("\n No final do jogo, a tela de estatísticas será exibida. Nele, é possível observar:\n");Sleep(tempo);
     printf("\n   * O número total de acertos do(a) jogador(a); e");Sleep(tempo);
     printf("\n   * A pontuação final referente ao(à) mesmo(a).\n\n");Sleep(tempo);
-    printf("\n       +--------------------------------------+");Sleep(tempo);
-    printf("\n       |           SEU DESEMPENHO             |");Sleep(tempo);
-    printf("\n       +--------------------------------------+");Sleep(tempo);
-    printf("\n       |                                      |");Sleep(tempo);
-    printf("\n       |         Nº de acertos : 8 / 10       |");Sleep(tempo);
-    printf("\n       |                                      |");Sleep(tempo);
-    printf("\n       |       Nº total de pontos : 1200      |");Sleep(tempo);
-    printf("\n       |                                      |");Sleep(tempo);
-    printf("\n       +--------------------------------------+");Sleep(tempo);
+    printf("\n                +--------------------------------------+");Sleep(tempo);
+    printf("\n                |           SEU DESEMPENHO             |");Sleep(tempo);
+    printf("\n                +--------------------------------------+");Sleep(tempo);
+    printf("\n                |                                      |");Sleep(tempo);
+    printf("\n                |        Nº de acertos : 8 / 10        |");Sleep(tempo);
+    printf("\n                |                                      |");Sleep(tempo);
+    printf("\n                |       Nº total de pontos : 1200      |");Sleep(tempo);
+    printf("\n                |                                      |");Sleep(tempo);
+    printf("\n                +--------------------------------------+");Sleep(tempo);
     addFade(2, 50, 1);
     banner();
     addFade(2, 50, 1);
@@ -501,13 +505,13 @@ void opcao6(){
     printf("\n     | Este jogo foi originalmente desenvolvido como forma de avaliação parcial para o   | ");Sleep(tempo);
     printf("\n     | trabalho final do 1º ano do Curso Técnico em Informática, ofertado pelo Instituto | ");Sleep(tempo);
     printf("\n     | Federal do Paraná - Campus Colombo. Tal trabalho foi apresentado no ano de 2017   | ");Sleep(tempo);
-    printf("\n     | sob o nome 'Acessibilidade dos deficientes visuais na atualidade'.                | ");Sleep(tempo);
+    printf("\n     | sob o nome 'Acessibilidade das pessoas com deficiências visuais na atualidade'.   | ");Sleep(tempo);
     printf("\n     +-----------------------------------------------------------------------------------+ \n");Sleep(tempo);
-    printf("\n * Membros originais da equipe do trabalho final: \n");Sleep(tempo);
+    printf("\n * Membros da equipe original (Obrigado por todo o apoio!): \n");Sleep(tempo);
     printf("\n     * Arthur Ogg - 'https://github.com/Arthur-Diesel'\n");Sleep(tempo);
     printf("\n     * Guilherme Cordeiro - 'https://github.com/gui-cordeiro'\n");Sleep(tempo);
-    printf("\n     * João Lucas - *sem contato*\n");Sleep(tempo);
-    printf("\n     * Lucas Pereira - 'https://facebook.com/luca.lima.9674'\n");Sleep(tempo);
+    printf("\n     * João Lucas - Nenhum contato dele foi encontrado, mas fica aqui registrado o enorme agradecimento a ele!\n");Sleep(tempo);
+    printf("\n     * Lucas Pereira - 'https://github.com/Luc45-Pereira'\n");Sleep(tempo);
     printf("\n     * Matheus Delay - 'https://twitter.com/DelayMath'\n");Sleep(tempo);
     banner();
     printf("\n   **** Pressione qualquer tecla para continuar ****");

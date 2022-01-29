@@ -39,8 +39,8 @@ int main(void){
                 addFade(2, 50, 1);
                 printf("\n           **** Pressione qualquer tecla para continuar ****");
                 getch();
-                addFade(25, 0, 0);
-                addFade(5, 30, 1);
+                //addFade(25, 0, 0);
+                //addFade(5, 30, 1);
                 system("cls");
         };
         system("cls");
@@ -49,6 +49,6 @@ int main(void){
     github();
     printf("\n **** Obrigado por jogar! Pressione qualquer tecla para sair do jogo ****");
     getch();
-    addFade(30, 30, 1);
+    //addFade(30, 30, 1);
     system("cls");
 }
