@@ -11,7 +11,7 @@ Neste jogo, cada pergunta é composta por:
 
  Para responder tais perguntas, é necessário memorizar as letras que aparecerão na tela por alguns segundos.
 
-> * *Este jogo foi desenvolvido em Linguagem C, como forma de avaliação parcial para o trabalho final do 1º ano do Curso Técnico em Informática, ofertado pelo *Instituto Federal do Paraná - Campus Colombo*. Tal trabalho foi apresentado no ano de 2017 sob o nome **"Acessibilidade dos deficientes visuais na atualidade"**.*
+> * *Este jogo foi desenvolvido em Linguagem C, como forma de avaliação parcial para o trabalho final do 1º ano do Curso Técnico em Informática, ofertado pelo *Instituto Federal do Paraná - Campus Colombo*. Tal trabalho foi apresentado no ano de 2017 sob o nome **"Acessibilidade das pessoas com deficiências visuais na atualidade"**.*
 
 ### 👀 **Veja abaixo algumas capturas de tela deste jogo:** 👀
 
