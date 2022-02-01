@@ -8,10 +8,11 @@
 
 int main(void) {
     int tempo = 0, a = 0;
-    setlocale(LC_ALL,"Portuguese");
+    configJogo();
     apresentacao();
     do{
         a = menu();
+        fflush(stdin);
         switch(a){
             case 1:
                 opcao1();
@@ -34,7 +35,6 @@ int main(void) {
             case 7:
                 continue;
             default:
-                fflush(stdin);
                 a = 0;
                 system("cls");
                 telaErro();

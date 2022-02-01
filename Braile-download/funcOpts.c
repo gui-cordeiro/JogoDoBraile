@@ -11,6 +11,7 @@ int menu(){
     int tempo = 50, i = 0, a = 0;
     char opt[100];
     char optMenu [7][24] = {"  Jogar - NÍVEL FÁCIL  "," Jogar - NÍVEL MÉDIO I "," Jogar - NÍVEL MÉDIO II"," Jogar - NÍVEL DIFÍCIL ","  Instruções do Jogo   ","   Créditos do Jogo    ","     Sair do Jogo      "};
+    titulo("-", "Menu Principal");
     printf("\n\n               **** MENU PRINCIPAL **** \n");Sleep(tempo);
     printf("\n       +-----------------------+---------------+");Sleep(tempo);
     printf("\n       |      DESCRIÇÃO        | NUM. DA OPÇÃO | ");Sleep(tempo);
@@ -21,9 +22,9 @@ int menu(){
     }
     printf("\n       +-----------------------+---------------+ \n");Sleep(tempo);
     printf("\n\n       Digite a opção desejada e pressione ENTER: ");
-    scanf("%s", opt);
+    fgets(opt, 100, stdin);
     while (opt[i] != '\0') {
-        if ((opt[i] == '') || ((opt[i] >= 'a' && opt[i] <= 'z') || (opt[i] >= 'A' && opt[i] <= 'Z'))) {
+        if ((opt[i] == ' ') || ((opt[i] >= 'a' && opt[i] <= 'z') || (opt[i] >= 'A' && opt[i] <= 'Z'))) {
             return 0;
         }
         i ++;
@@ -377,8 +378,8 @@ void opcao4(){
 
 /* 5) Instruções do Jogo */
 void opcao5(){
-    int tempo = 50;
-    char a = ' ';
+    int tempo = 50, i = 0, erro = 0;;
+    char opt[100];
     system("cls");
     do {
         printf("\n **** INSTRUÇÕES DO JOGO **** \n");Sleep(tempo);
@@ -404,18 +405,28 @@ void opcao5(){
 
 
         printf("\n\n DESEJA VER UM EXEMPLO DE UMA PERGUNTA? ('S' para Sim, 'N' para Não): ");
-        scanf(" %c",&a);
-        if(tolower(a) == 'n'){
-            //addFade(30, 25, 1);
-            system("cls");
-            return 0;
-        } else if (tolower(a) != 's') {
+        fgets(opt, 100, stdin);
+
+        while (opt[i] != '\0') {
+            if ((i > 1) || ((opt[i] == ' ') || (opt[i] <= '0' && opt[i] >= '1'))) {
+                erro ++;
+                break;
+            }
+            i ++;
+        }
+        if (erro != 1) {
             system("cls");
             printf(" +-----------+---------------------------------------------------------------+\n");Sleep(tempo);
             printf(" |  ATENÇÃO  | Opção inválida. Siga as instruções especificadas logo abaixo. |\n");Sleep(tempo);
             printf(" +-----------+---------------------------------------------------------------+\n");Sleep(tempo);
+        } else if (strcmp(opt, "n") == 0 || strcmp(opt, "N") == 0) {
+            //addFade(30, 25, 1);
+            system("cls");
+            return 0;
         }
-    } while (tolower(a) != 's');
+        erro = 0;
+        i = 0;
+    } while (strcmp(opt, "s") == 0 || strcmp(opt, "S") == 0);
     system("cls");
     printf("\n **** EXEMPLO DE UMA PERGUNTA **** \n");Sleep(tempo);
     printf("\n Esta tela mostra um exemplo de uma pergunta. Como dito anteriormente, cada pergunta apresenta: ");Sleep(tempo);
@@ -518,7 +529,7 @@ void opcao6(){
     printf("\n     | Este jogo foi originalmente desenvolvido como forma de avaliação parcial para o   | ");Sleep(tempo);
     printf("\n     | trabalho final do 1º ano do Curso Técnico em Informática, ofertado pelo Instituto | ");Sleep(tempo);
     printf("\n     | Federal do Paraná - Campus Colombo. Tal trabalho foi apresentado no ano de 2017   | ");Sleep(tempo);
-    printf("\n     | sob o nome 'Acessibilidade das pessoas com deficiências visuais na atualidade'.   | ");Sleep(tempo);
+    printf("\n     | sob o nome 'Acessibilidade das pessoas com deficiência visual na atualidade'.     | ");Sleep(tempo);
     printf("\n     +-----------------------------------------------------------------------------------+ \n");Sleep(tempo);
     printf("\n * Membros da equipe original (Obrigado por todo o apoio!): \n");Sleep(tempo);
     printf("\n     * Arthur Ogg - 'https://github.com/Arthur-Diesel'\n");Sleep(tempo);
@@ -533,7 +544,7 @@ void opcao6(){
     github();
     printf("\n   **** Pressione qualquer tecla para retornar ao menu ****      ");
     getch();
-    addFade(30, 25, 1);
-    return;
+    //addFade(30, 25, 1);
+    system("cls");
 }
 

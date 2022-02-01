@@ -253,10 +253,12 @@ int inicioJogo(char nivel[9]){
     char opt;
     char nome[40];
     system("cls");
+    titulo("-", "Confirmação da Dificuldade");
     do{
         printf("\n     **** DIFICULDADE SELECIONADA: 'Jogar - NÍVEL %s' **** \n", nivel);Sleep(tempo);
         printf("\n    Digite 'S' para confirmar ou 'N' para voltar ao menu, e pressione ENTER. ");
         scanf(" %c",&opt);
+        fflush(stdin);
         if(tolower(opt) == 'n'){
             //addFade(25, 0, 0);
             //addFade(5, 30, 1);
@@ -268,30 +270,46 @@ int inicioJogo(char nivel[9]){
         }
     }while(tolower(opt) != 's');
     system("cls");
-    printf("\n *** Boas vindas ao \"Jogo do Braile\" - Dificuldade '%s'! ***", nivel);Sleep(tempo);
+    titulo(nivel, "Boas-vindas");
+    if (strcmp(nivel, "FÁCIL") == 0) {
+        printf("\t\t\t      +-------------------------------------------------------+\n");Sleep(tempo);
+        printf("\t\t\t      | Boas vindas ao \"Jogo do Braile\" - Dificuldade '%s' |\n", nivel);Sleep(tempo);
+        printf("\t\t\t      +-------------------------------------------------------+\n");Sleep(tempo);
+    } else if (strcmp(nivel, "MÉDIO I") == 0 || strcmp(nivel, "DIFÍCIL") == 0) {
+        printf(" +---------------------------------------------------------+\n");Sleep(tempo);
+        printf(" | Boas vindas ao \"Jogo do Braile\" - Dificuldade '%s' |\n", nivel);Sleep(tempo);
+        printf(" +---------------------------------------------------------+\n");Sleep(tempo);
+    } else if (strcmp(nivel, "MÉDIO II") == 0) {
+        printf(" +----------------------------------------------------------+\n");Sleep(tempo);
+        printf(" | Boas vindas ao \"Jogo do Braile\" - Dificuldade '%s' |\n", nivel);Sleep(tempo);
+        printf(" +----------------------------------------------------------+\n");Sleep(tempo);
+    }
     addFade(2, 50, 1);
-    printf("\n - Para começar, digite o seu nome: ");
-    scanf(" %s",&nome);
+    printf(" - Antes de tudo, digite o seu nome: ");
+    scanf("%s", nome);
+    fflush(stdin);
     //addFade(25, 0, 0);
     //addFade(5, 30, 1);
-    system("cls");
-    printf("\n\n * Olá '%s'! É um prazer enorme ter você aqui jogando! *       ",nome);
-    addFade(4, 50, 1);
-    printf("   ########  #### ##     ## #### ########  ########    ###             ######  ######## #### \n");Sleep(tempo);
-    printf("   ##     ##  ##  ##     ##  ##  ##     ##    ##      ## ##           ##    ## ##       #### \n");Sleep(tempo);
-    printf("   ##     ##  ##  ##     ##  ##  ##     ##    ##     ##   ##          ##       ##       #### \n");Sleep(tempo);
-    printf("   ##     ##  ##  ##     ##  ##  ########     ##    ##     ## #######  ######  ######    ##  \n");Sleep(tempo);
-    printf("   ##     ##  ##   ##   ##   ##  ##   ##      ##    #########               ## ##            \n");Sleep(tempo);
-    printf("   ##     ##  ##    ## ##    ##  ##    ##     ##    ##     ##         ##    ## ##       #### \n");Sleep(tempo);
-    printf("   ########  ####    ###    #### ##     ##    ##    ##     ##          ######  ######## #### \n");Sleep(tempo);
+    //printf("-----------------------------------------------------------------------------------------------------------------------\n");
+    printf("\n * Olá '%s'! É um prazer enorme ter você aqui jogando! *", nome);
     addFade(3, 50, 1);
-    printf("               +---------------------------------------------------------------+\n");Sleep(tempo);
-    printf("               |                         * ATENÇÃO! *                          |\n");Sleep(tempo);
-    printf("               +---------------------------------------------------------------+\n");Sleep(tempo);
-    printf("               | As letras em braile aparecerão na próxima tela. Preparado(a)? |\n");Sleep(tempo);
-    printf("               +---------------------------------------------------------------+");
+    printf("\t      +-----------------------------------------------------------------------------------------+\n");Sleep(tempo);
+    printf("\t      |########  #### ##     ## #### ########  ########    ###             ######  ######## ####|\n");Sleep(tempo);
+    printf("\t      |##     ##  ##  ##     ##  ##  ##     ##    ##      ## ##           ##    ## ##       ####|\n");Sleep(tempo);
+    printf("\t      |##     ##  ##  ##     ##  ##  ##     ##    ##     ##   ##          ##       ##       ####|\n");Sleep(tempo);
+    printf("\t      |##     ##  ##  ##     ##  ##  ########     ##    ##     ## #######  ######  ######    ## |\n");Sleep(tempo);
+    printf("\t      |##     ##  ##   ##   ##   ##  ##   ##      ##    #########               ## ##           |\n");Sleep(tempo);
+    printf("\t      |##     ##  ##    ## ##    ##  ##    ##     ##    ##     ##         ##    ## ##       ####|\n");Sleep(tempo);
+    printf("\t      |########  ####    ###    #### ##     ##    ##    ##     ##          ######  ######## ####|\n");Sleep(tempo);
+    printf("\t      +-----------------------------------------------------------------------------------------+\n");Sleep(tempo);
     addFade(2, 50, 1);
-    printf("                      **** Pressione qualquer tecla para continuar ****");
+    printf("\t\t\t  +---------------------------------------------------------------+\n");Sleep(tempo);
+    printf("\t\t\t  |                         * ATENÇÃO! *                          |\n");Sleep(tempo);
+    printf("\t\t\t  +---------------------------------------------------------------+\n");Sleep(tempo);
+    printf("\t\t\t  | As letras em braile aparecerão na próxima tela. Preparado(a)? |\n");Sleep(tempo);
+    printf("\t\t\t  +---------------------------------------------------------------+");
+    addFade(2, 50, 1);
+    printf("\t\t\t\t  **** Pressione qualquer tecla para continuar ****");
     getch();
     //addFade(5, 0, 0);
     //addFade(25, 30, 1);
@@ -392,4 +410,49 @@ int obterAnoAtual(){
     struct tm *data = localtime(&data_ano);
     anoAtual = (data->tm_year+1900);
     return anoAtual;
+}
+
+/* K) CONFIGURAÇÕES INICIAIS DO JOGO  */
+void configJogo(){
+    setlocale(LC_ALL,"Portuguese");
+    system("title Tela de título - Jogo do Braile 1.0.0");
+    system("mode con:cols=119 lines=30");
+
+    //Ignorar esta parte:
+    /*printf("#######################################################################################################################\n");
+    for (int i = 0; i <= 27; i ++) {
+        if (i == 12) {
+            printf("#\t\t\t\t Ajuste a janela do console para uma melhor experiência \t\t\t      #\n");
+        } else if (i == 13) {
+            printf("#\t\t\t\t      Para isso, utilize as bordas como referência \t\t\t\t      #\n");
+        } else if (i == 16) {
+            printf("#\t\t\t\t* Feito isso, pressione qualquer tecla para continuar! *\t\t\t      #\n");
+        } else {
+            printf("#\t\t\t\t\t\t\t\t\t\t\t\t\t\t      #\n");
+        }
+    }
+    printf("#######################################################################################################################");
+    getchar();
+    system("cls");*/
+}
+
+/* L) ALTERNAR ENTRE MODO "JANELA" E MODO "TELA CHEIA"  */
+void fullScreen() {
+    keybd_event(VK_MENU  , 0x36, 0, 0);
+    keybd_event(VK_RETURN, 0x1C, 0, 0);
+    keybd_event(VK_RETURN, 0x1C, KEYEVENTF_KEYUP, 0);
+    keybd_event(VK_MENU  , 0x38, KEYEVENTF_KEYUP, 0);
+}
+
+/* M) RETORNA TÍTULO PERSONALIZADO  */
+void titulo(char nivel[9], char frase[50]){
+    char comando[100] = "title ";
+    if (strncmp(nivel, "-", 1) != 0) {
+        strcat(comando, "[");
+        strcat(comando, nivel);
+        strcat(comando, "] ");
+    }
+    strcat(comando, frase);
+    strcat(comando, " - Jogo do Braile 1.0.0");
+    system(comando);
 }
