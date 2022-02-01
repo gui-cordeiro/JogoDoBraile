@@ -6,8 +6,8 @@
 #include <math.h>
 #include <string.h>
 
-int main(void){
-    int a = 0, tempo = 0;
+int main(void) {
+    int tempo = 0, a = 0;
     setlocale(LC_ALL,"Portuguese");
     apresentacao();
     do{
@@ -34,16 +34,13 @@ int main(void){
             case 7:
                 continue;
             default:
+                fflush(stdin);
+                a = 0;
                 system("cls");
-                printf("\n Opção inválida! Por favor, digite um número válido entre '1' e '7'...");Sleep(tempo);
-                addFade(2, 50, 1);
-                printf("\n           **** Pressione qualquer tecla para continuar ****");
-                getch();
+                telaErro();
                 //addFade(25, 0, 0);
                 //addFade(5, 30, 1);
-                system("cls");
         };
-        system("cls");
     }while(a != 7);
     system("cls");
     github();

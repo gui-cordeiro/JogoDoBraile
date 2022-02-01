@@ -91,7 +91,7 @@ int newPergunta(int questao, char l1, char l2, char l3, char l4, char altResp, c
 void apresentacao(){
     int tempo = 50;
     addFade(7, 0, 0);
-    printf("                                 **** Criado por Guilherme Cordeiro (2017-%d) ****                                \n\n", recuperarAnoAtual());
+    printf("                                 **** Criado por Guilherme Cordeiro (2017-%d) ****                                \n\n", obterAnoAtual());
     printf("+---------------------------------------------------------------------------------------------------------------------+\n");Sleep(tempo);
     printf("|      ##  #######   ######    #######     ########   #######     ########  ########     ###    #### ##       ########|\n");Sleep(tempo);
     printf("|      ## ##     ## ##    ##  ##     ##    ##     ## ##     ##    ##     ## ##     ##   ## ##    ##  ##       ##      |\n");Sleep(tempo);
@@ -104,8 +104,8 @@ void apresentacao(){
     addFade(2, 50, 1);
     printf("                                   **** Pressione qualquer tecla para iniciar ****");
     getch();
-    addFade(8, 0, 0);
-    addFade(22, 32, 1);
+    //addFade(8, 0, 0);
+    //addFade(22, 32, 1);
     system("cls");
     return;
 }
@@ -250,25 +250,23 @@ void printAlfabeto(char letra){
 /* E) INICIO DO JOGO */
 int inicioJogo(char nivel[9]){
     int tempo = 50;
-    int opt = 0;
+    char opt;
     char nome[40];
+    system("cls");
     do{
-        system("cls");Sleep(tempo);
-        printf("\n     **** OPÇÃO SELECIONADA : 'Jogar - NÍVEL %s' **** \n", nivel);Sleep(tempo);
-        printf("\n           Confirma? ('1' para Sim, '2' para Não): ");
-        scanf("%d",&opt);
-        if(opt == 2){
-            addFade(25, 0, 0);
-            addFade(5, 30, 1);
-            return 0;
-        }else if(opt != 1){
+        printf("\n     **** DIFICULDADE SELECIONADA: 'Jogar - NÍVEL %s' **** \n", nivel);Sleep(tempo);
+        printf("\n    Digite 'S' para confirmar ou 'N' para voltar ao menu, e pressione ENTER. ");
+        scanf(" %c",&opt);
+        if(tolower(opt) == 'n'){
+            //addFade(25, 0, 0);
+            //addFade(5, 30, 1);
             system("cls");
-            printf("\n Opção inválida! Por favor, digite um número válido entre '1' e '2'...");
-            addFade(1, 50, 1);
-            printf("\n        **** Pressione qualquer tecla para continuar ****");
-            getch();
+            return 0;
+        }else if(tolower(opt) != 's'){
+            system("cls");
+            telaErro();
         }
-    }while(opt != 1);
+    }while(tolower(opt) != 's');
     system("cls");
     printf("\n *** Boas vindas ao \"Jogo do Braile\" - Dificuldade '%s'! ***", nivel);Sleep(tempo);
     addFade(2, 50, 1);
@@ -352,8 +350,8 @@ void fimJogo(int nivel, char frase[100], int pts, int acertos, int numPerg){
     addFade(5, 50, 1);
     printf("         **** Pressione qualquer tecla para retornar ao menu ****");
     getch();
-    addFade(6, 0, 0);
-    addFade(24, 30, 1);
+    //addFade(6, 0, 0);
+    //addFade(24, 30, 1);
     return;
 }
 
@@ -369,15 +367,25 @@ void addFade(int rep, int millis, int isLento){
 void banner(){
     int tempo = 50;
     printf("\n              +-------------------------------------------+");Sleep(tempo);
-    printf("\n              |        Jogo do Braile - 2017, %d        |", recuperarAnoAtual());Sleep(tempo);
+    printf("\n              |        Jogo do Braile - 2017, %d        |", obterAnoAtual());Sleep(tempo);
     printf("\n              +-------------------------------------------+");Sleep(tempo);
     printf("\n              |      Criado por: Guilherme Cordeiro       |");Sleep(tempo);
     printf("\n              +-------------------------------------------+\n");Sleep(tempo);
     return;
 }
 
-/* H) RECUPERA O ANO ATUAL DO SISTEMA */
-int recuperarAnoAtual(){
+/* I) TELA DE ERRO (AO DIGITAR UMA OPÇÃO ERRADA) */
+void telaErro(){
+    int tempo = 50;
+    printf("  +---------------------------------------------------------+\n");Sleep(tempo);
+    printf("  |                       * ATENÇÃO *                       |\n");Sleep(tempo);
+    printf("  +---------------------------------------------------------+\n");Sleep(tempo);
+    printf("  | Opção inválida. Siga as instruções especificadas abaixo |\n");Sleep(tempo);
+    printf("  +---------------------------------------------------------+");Sleep(tempo);
+}
+
+/* J) RECUPERA O ANO ATUAL DO SISTEMA */
+int obterAnoAtual(){
     int anoAtual = 0;
     time_t data_ano;
     time(&data_ano);

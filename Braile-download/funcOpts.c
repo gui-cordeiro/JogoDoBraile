@@ -8,29 +8,33 @@
 
 /* 0) Menu principal */
 int menu(){
-    int tempo = 50;
-    int a = 0;
+    int tempo = 50, i = 0, a = 0;
+    char opt[100];
     char optMenu [7][24] = {"  Jogar - NÍVEL FÁCIL  "," Jogar - NÍVEL MÉDIO I "," Jogar - NÍVEL MÉDIO II"," Jogar - NÍVEL DIFÍCIL ","  Instruções do Jogo   ","   Créditos do Jogo    ","     Sair do Jogo      "};
-    printf("\n\n              **** MENU PRINCIPAL **** \n");Sleep(tempo);
+    printf("\n\n               **** MENU PRINCIPAL **** \n");Sleep(tempo);
     printf("\n       +-----------------------+---------------+");Sleep(tempo);
     printf("\n       |      DESCRIÇÃO        | NUM. DA OPÇÃO | ");Sleep(tempo);
     printf("\n       +-----------------------+---------------+ ");Sleep(tempo);
-    for(int c = 0; c < 7; c ++){
-    printf("\n       +-----------------------+---------------+ ");Sleep(tempo);
-    printf("\n       |%s|       %d       | ", optMenu[c], c + 1);Sleep(tempo);
+    for (int c = 0; c < 7; c ++) {
+        printf("\n       +-----------------------+---------------+ ");Sleep(tempo);
+        printf("\n       |%s|       %d       | ", optMenu[c], c + 1);Sleep(tempo);
     }
     printf("\n       +-----------------------+---------------+ \n");Sleep(tempo);
     printf("\n\n       Digite a opção desejada e pressione ENTER: ");
-    scanf(" %d",&a);
-    if (a >= 1 && a <= 7){
-        addFade(30, 27, 1);
+    scanf("%s", opt);
+    while (opt[i] != '\0') {
+        if ((opt[i] == '') || ((opt[i] >= 'a' && opt[i] <= 'z') || (opt[i] >= 'A' && opt[i] <= 'Z'))) {
+            return 0;
+        }
+        i ++;
     }
-    return(a);
+    a = atoi(opt);
+    return a;
 }
 
 /* 1) Jogar - NÍVEL FÁCIL */
 void opcao1(){
-    int cont = 0, tempo = 50, numPerg = 0;
+    int cont = 10, tempo = 50, numPerg = 0;
     int conf = 0, pts = 0, acertos = 0;
     if(inicioJogo("FÁCIL") == 0) return 0;
     printf("\n           As letras em braile nesta dificuldade são:  \n");Sleep(tempo);
@@ -373,36 +377,45 @@ void opcao4(){
 
 /* 5) Instruções do Jogo */
 void opcao5(){
-    int tempo = 50, a = 0;
+    int tempo = 50;
+    char a = ' ';
     system("cls");
-    printf("\n **** INSTRUÇÕES DO JOGO **** \n\n");Sleep(tempo);
-    printf("\n +------------------------------------------------------------------------------------------+");Sleep(tempo);
-    printf("\n |                               O QUE É O 'JOGO DO BRAILE'?                                |");Sleep(tempo);
-    printf("\n +------------------------------------------------------------------------------------------+");Sleep(tempo);
-    printf("\n | O 'Jogo do Braile' é um simples jogo de memória sob a forma de quiz, cujo objetivo do(a) |");Sleep(tempo);
-    printf("\n | jogador(a) é acertar o máximo de perguntas possíveis. Ele tem o intuito de ensinar o     |");Sleep(tempo);
-    printf("\n | sistema de escrita tátil 'Braile', de forma simples e lúdica, para pessoas sem           |");Sleep(tempo);
-    printf("\n | deficiência visual.                                                                      |");Sleep(tempo);
-    printf("\n +------------------------------------------------------------------------------------------+\n\n");Sleep(tempo);
-    printf("\n +------------------------------------------------------------------------------------------+");Sleep(tempo);
-    printf("\n |                                  COMO O JOGO FUNCIONA?                                   |");Sleep(tempo);
-    printf("\n +------------------------------------------------------------------------------------------+");Sleep(tempo);
-    printf("\n | Neste jogo, cada pergunta é composta por:                                                |");Sleep(tempo);
-    printf("\n |                                                                                          |");Sleep(tempo);
-    printf("\n | * Uma letra que será exibida em destaque, escrita de acordo com a grafia do 'Braile'; e  |");Sleep(tempo);
-    printf("\n | * Quatro outras letras (alternativas) escritas de acordo com o alfabeto latino.          |");Sleep(tempo);
-    printf("\n |                                                                                          |");Sleep(tempo);
-    printf("\n | Para responder tais perguntas, é necessário memorizar as letras que aparecerão na tela   |");Sleep(tempo);
-    printf("\n | por alguns segundos.                                                                     |");Sleep(tempo);
-    printf("\n +------------------------------------------------------------------------------------------+");Sleep(tempo);
+    do {
+        printf("\n **** INSTRUÇÕES DO JOGO **** \n");Sleep(tempo);
+        printf("\n +------------------------------------------------------------------------------------------+");Sleep(tempo);
+        printf("\n |                               O QUE É O 'JOGO DO BRAILE'?                                |");Sleep(tempo);
+        printf("\n +------------------------------------------------------------------------------------------+");Sleep(tempo);
+        printf("\n | O 'Jogo do Braile' é um simples jogo de memória sob a forma de quiz, cujo objetivo do(a) |");Sleep(tempo);
+        printf("\n | jogador(a) é acertar o máximo de perguntas possíveis. Ele tem o intuito de ensinar o     |");Sleep(tempo);
+        printf("\n | sistema de escrita tátil 'Braile', de forma simples e lúdica, para pessoas sem           |");Sleep(tempo);
+        printf("\n | deficiência visual.                                                                      |");Sleep(tempo);
+        printf("\n +------------------------------------------------------------------------------------------+\n");Sleep(tempo);
+        printf("\n +------------------------------------------------------------------------------------------+");Sleep(tempo);
+        printf("\n |                                  COMO O JOGO FUNCIONA?                                   |");Sleep(tempo);
+        printf("\n +------------------------------------------------------------------------------------------+");Sleep(tempo);
+        printf("\n | Neste jogo, cada pergunta é composta por:                                                |");Sleep(tempo);
+        printf("\n |                                                                                          |");Sleep(tempo);
+        printf("\n | * Uma letra que será exibida em destaque, escrita de acordo com a grafia do 'Braile'; e  |");Sleep(tempo);
+        printf("\n | * Quatro outras letras (alternativas) escritas de acordo com o alfabeto latino.          |");Sleep(tempo);
+        printf("\n |                                                                                          |");Sleep(tempo);
+        printf("\n | Para responder tais perguntas, é necessário memorizar as letras que aparecerão na tela   |");Sleep(tempo);
+        printf("\n | por alguns segundos.                                                                     |");Sleep(tempo);
+        printf("\n +------------------------------------------------------------------------------------------+");Sleep(tempo);
 
 
-    printf("\n\n\n DESEJA VER UM EXEMPLO DE UMA PERGUNTA? ('1' para Sim, '2' para Não): ");
-    scanf("%d",&a);
-    if(a == 2){
-        addFade(30, 25, 1);
-        return 0;
-    }
+        printf("\n\n DESEJA VER UM EXEMPLO DE UMA PERGUNTA? ('S' para Sim, 'N' para Não): ");
+        scanf(" %c",&a);
+        if(tolower(a) == 'n'){
+            //addFade(30, 25, 1);
+            system("cls");
+            return 0;
+        } else if (tolower(a) != 's') {
+            system("cls");
+            printf(" +-----------+---------------------------------------------------------------+\n");Sleep(tempo);
+            printf(" |  ATENÇÃO  | Opção inválida. Siga as instruções especificadas logo abaixo. |\n");Sleep(tempo);
+            printf(" +-----------+---------------------------------------------------------------+\n");Sleep(tempo);
+        }
+    } while (tolower(a) != 's');
     system("cls");
     printf("\n **** EXEMPLO DE UMA PERGUNTA **** \n");Sleep(tempo);
     printf("\n Esta tela mostra um exemplo de uma pergunta. Como dito anteriormente, cada pergunta apresenta: ");Sleep(tempo);
