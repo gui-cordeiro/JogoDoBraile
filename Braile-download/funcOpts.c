@@ -12,16 +12,17 @@ int menu(){
     char opt[100];
     char optMenu [7][24] = {"  Jogar - NÍVEL FÁCIL  "," Jogar - NÍVEL MÉDIO I "," Jogar - NÍVEL MÉDIO II"," Jogar - NÍVEL DIFÍCIL ","  Instruções do Jogo   ","   Créditos do Jogo    ","     Sair do Jogo      "};
     titulo("-", "Menu Principal");
-    printf("\n\n               **** MENU PRINCIPAL **** \n");Sleep(tempo);
-    printf("\n       +-----------------------+---------------+");Sleep(tempo);
-    printf("\n       |      DESCRIÇÃO        | NUM. DA OPÇÃO | ");Sleep(tempo);
-    printf("\n       +-----------------------+---------------+ ");Sleep(tempo);
+    fflush(stdin);
+    printf("\n\n\t\t\t\t\t        **** MENU PRINCIPAL **** \n");Sleep(tempo);
+    printf("\n\t\t\t\t       +-------------------------+---------------+");Sleep(tempo);
+    printf("\n\t\t\t\t       |       DESCRIÇÃO         | NUM. DA OPÇÃO | ");Sleep(tempo);
+    printf("\n\t\t\t\t       +-------------------------+---------------+ ");Sleep(tempo);
     for (int c = 0; c < 7; c ++) {
-        printf("\n       +-----------------------+---------------+ ");Sleep(tempo);
-        printf("\n       |%s|       %d       | ", optMenu[c], c + 1);Sleep(tempo);
+        printf("\n\t\t\t\t       +-------------------------+---------------+ ");Sleep(tempo);
+        printf("\n\t\t\t\t       | %s |       %d       | ", optMenu[c], c + 1);Sleep(tempo);
     }
-    printf("\n       +-----------------------+---------------+ \n");Sleep(tempo);
-    printf("\n\n       Digite a opção desejada e pressione ENTER: ");
+    printf("\n\t\t\t\t       +-------------------------+---------------+ \n");Sleep(tempo);
+    printf("\n\n\t\t\t\t       Digite a opção desejada e pressione ENTER: ");
     fgets(opt, 100, stdin);
     while (opt[i] != '\0') {
         if ((opt[i] == ' ') || ((opt[i] >= 'a' && opt[i] <= 'z') || (opt[i] >= 'A' && opt[i] <= 'Z'))) {
@@ -85,7 +86,7 @@ void opcao1(){
 
 /* 2) Jogar - NÍVEL MÉDIO I */
 void opcao2(){
-    int cont = 15, tempo = 50, numPerg = 0;
+    int cont = 1, tempo = 50, numPerg = 0;
     int conf = 0, pts = 0, acertos = 0;
     if(inicioJogo("MÉDIO I") == 0) return 0;
     printf("\n           As letras em braile nesta dificuldade são:     \n");Sleep(tempo);
@@ -369,65 +370,55 @@ void opcao4(){
     }else pts += 50; numPerg ++;
 
     if(acertos == 26){
-        fimJogo(4, "MEUS SINCEROS PARABÉNS! VOCÊ PROVOU QUE MANDA VER NO BRAILE!!!", pts, acertos, numPerg);
+        fimJogo(4, "MEUS PARABÉNS! VOCÊ PROVOU COM MAESTRIA QUE É EXPERT NO BRAILE!", pts, acertos, numPerg);
     }else{
-        fimJogo(4, "NÃO DESISTA! JOGUE EM OUTROS MODOS PARA MELHORAR SEUS CONHECIMENTOS!", pts, acertos, numPerg);
+        fimJogo(4, "NÃO DESISTA! JOGUE EM OUTROS MODOS PARA MELHORAR SEU CONHECIMENTO!", pts, acertos, numPerg);
     }
     return;
 }
 
 /* 5) Instruções do Jogo */
-void opcao5(){
-    int tempo = 50, i = 0, erro = 0;;
+int opcao5(){
+    int tempo = 50, finalopt = 0, erro = 0;
     char opt[100];
     system("cls");
     do {
-        printf("\n **** INSTRUÇÕES DO JOGO **** \n");Sleep(tempo);
-        printf("\n +------------------------------------------------------------------------------------------+");Sleep(tempo);
-        printf("\n |                               O QUE É O 'JOGO DO BRAILE'?                                |");Sleep(tempo);
-        printf("\n +------------------------------------------------------------------------------------------+");Sleep(tempo);
-        printf("\n | O 'Jogo do Braile' é um simples jogo de memória sob a forma de quiz, cujo objetivo do(a) |");Sleep(tempo);
-        printf("\n | jogador(a) é acertar o máximo de perguntas possíveis. Ele tem o intuito de ensinar o     |");Sleep(tempo);
-        printf("\n | sistema de escrita tátil 'Braile', de forma simples e lúdica, para pessoas sem           |");Sleep(tempo);
-        printf("\n | deficiência visual.                                                                      |");Sleep(tempo);
-        printf("\n +------------------------------------------------------------------------------------------+\n");Sleep(tempo);
-        printf("\n +------------------------------------------------------------------------------------------+");Sleep(tempo);
-        printf("\n |                                  COMO O JOGO FUNCIONA?                                   |");Sleep(tempo);
-        printf("\n +------------------------------------------------------------------------------------------+");Sleep(tempo);
-        printf("\n | Neste jogo, cada pergunta é composta por:                                                |");Sleep(tempo);
-        printf("\n |                                                                                          |");Sleep(tempo);
-        printf("\n | * Uma letra que será exibida em destaque, escrita de acordo com a grafia do 'Braile'; e  |");Sleep(tempo);
-        printf("\n | * Quatro outras letras (alternativas) escritas de acordo com o alfabeto latino.          |");Sleep(tempo);
-        printf("\n |                                                                                          |");Sleep(tempo);
-        printf("\n | Para responder tais perguntas, é necessário memorizar as letras que aparecerão na tela   |");Sleep(tempo);
-        printf("\n | por alguns segundos.                                                                     |");Sleep(tempo);
-        printf("\n +------------------------------------------------------------------------------------------+");Sleep(tempo);
-
-
-        printf("\n\n DESEJA VER UM EXEMPLO DE UMA PERGUNTA? ('S' para Sim, 'N' para Não): ");
-        fgets(opt, 100, stdin);
-
-        while (opt[i] != '\0') {
-            if ((i > 1) || ((opt[i] == ' ') || (opt[i] <= '0' && opt[i] >= '1'))) {
-                erro ++;
-                break;
-            }
-            i ++;
+        if (erro == 0) {
+            addFade(4, 50, 0);
         }
-        if (erro != 1) {
-            system("cls");
-            printf(" +-----------+---------------------------------------------------------------+\n");Sleep(tempo);
-            printf(" |  ATENÇÃO  | Opção inválida. Siga as instruções especificadas logo abaixo. |\n");Sleep(tempo);
-            printf(" +-----------+---------------------------------------------------------------+\n");Sleep(tempo);
-        } else if (strcmp(opt, "n") == 0 || strcmp(opt, "N") == 0) {
-            //addFade(30, 25, 1);
-            system("cls");
+        printf("\t     +------------------------------------------------------------------------------------------+\n");Sleep(tempo);
+        printf("\t     |                     INSTRUÇÕES DO JOGO - O QUE É O 'JOGO DO BRAILE'?                     |\n");Sleep(tempo);
+        printf("\t     +------------------------------------------------------------------------------------------+\n");Sleep(tempo);
+        printf("\t     | O 'Jogo do Braile' é um simples jogo de memória sob a forma de quiz, cujo objetivo do(a) |\n");Sleep(tempo);
+        printf("\t     | jogador(a) é acertar o máximo de perguntas possíveis. Ele tem o intuito de ensinar o     |\n");Sleep(tempo);
+        printf("\t     | sistema de escrita tátil 'Braile', de forma simples e lúdica, para pessoas sem           |\n");Sleep(tempo);
+        printf("\t     | deficiência visual.                                                                      |\n");Sleep(tempo);
+        printf("\t     +------------------------------------------------------------------------------------------+\n\n");Sleep(tempo);
+        printf("\t     +------------------------------------------------------------------------------------------+\n");Sleep(tempo);
+        printf("\t     |                                  COMO O JOGO FUNCIONA?                                   |\n");Sleep(tempo);
+        printf("\t     +------------------------------------------------------------------------------------------+\n");Sleep(tempo);
+        printf("\t     | Neste jogo, cada pergunta é composta por:                                                |\n");Sleep(tempo);
+        printf("\t     |                                                                                          |\n");Sleep(tempo);
+        printf("\t     | * Uma letra que será exibida em destaque, escrita de acordo com a grafia do 'Braile'; e  |\n");Sleep(tempo);
+        printf("\t     | * Quatro outras letras (alternativas) escritas de acordo com o alfabeto latino.          |\n");Sleep(tempo);
+        printf("\t     |                                                                                          |\n");Sleep(tempo);
+        printf("\t     | Para responder tais perguntas, é necessário memorizar as letras que aparecerão na tela   |\n");Sleep(tempo);
+        printf("\t     | por alguns segundos.                                                                     |\n");Sleep(tempo);
+        printf("\t     +------------------------------------------------------------------------------------------+");Sleep(tempo);
+        addFade(3, 50, 1);
+        printf("\t\t\tDESEJA VER UM EXEMPLO DE UMA PERGUNTA? ('S' para Sim, 'N' para Não): ");
+        fgets(opt, 100, stdin);
+        finalopt = verifyOpt(opt, 1);
+        system("cls");
+        if (finalopt == 0) {
+            erro ++;
+            printf("\n");
+            telaErro();
+            addFade(2, 50, 1);
+        } else if (finalopt == 2) {
             return 0;
         }
-        erro = 0;
-        i = 0;
-    } while (strcmp(opt, "s") == 0 || strcmp(opt, "S") == 0);
-    system("cls");
+    } while (finalopt != 1);
     printf("\n **** EXEMPLO DE UMA PERGUNTA **** \n");Sleep(tempo);
     printf("\n Esta tela mostra um exemplo de uma pergunta. Como dito anteriormente, cada pergunta apresenta: ");Sleep(tempo);
     printf("\n\n 1) Uma letra que ficará em destaque, escrita de acordo com a grafia do 'Braile'; e ");Sleep(tempo);
@@ -470,8 +461,8 @@ void opcao5(){
     printf("\n d) D");Sleep(tempo);
     printf("\n\n Alternativa: d ");Sleep(tempo);
     printf("\n +-----------------------------------------------+");Sleep(tempo);
-    printf("\n |                CERTA RESPOSTA!                |");Sleep(tempo);
-    printf("\n |           VOCÊ GANHOU: 150 PONTOS!            |");Sleep(tempo);
+    printf("\n |                CERTA RESPOSTA!                | ");Sleep(tempo);
+    printf("\n |           VOCÊ GANHOU: +150 PONTOS!           | ");Sleep(tempo);
     printf("\n +-----------------------------------------------+");Sleep(tempo);
     printf("\n\n\n **** Pressione qualquer tecla para continuar **** ");
     getche();
@@ -494,7 +485,7 @@ void opcao5(){
     printf("\n\n Opção : b ");Sleep(tempo);
     printf("\n +-----------------------------------------------+");Sleep(tempo);
     printf("\n |     VOCÊ ERROU... RESPOSTA CORRETA: \"d)\"      | ");Sleep(tempo);
-    printf("\n |           VOCÊ GANHOU: 50 PONTOS.             | ");Sleep(tempo);
+    printf("\n |           VOCÊ GANHOU: +50 PONTOS!            | ");Sleep(tempo);
     printf("\n +-----------------------------------------------+");Sleep(tempo);
     printf("\n\n**** Pressione qualquer tecla para continuar **** ");
     getche();
@@ -516,8 +507,9 @@ void opcao5(){
     addFade(2, 50, 1);
     printf("\n **** Pressione qualquer tecla para retornar ao menu **** ");
     getche();
-    addFade(30, 25, 1);
-    return;
+    system("cls");
+    //addFade(30, 25, 1);
+    return 0;
 }
 
 /* 6) Créditos do Jogo */

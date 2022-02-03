@@ -9,28 +9,28 @@
 /* A) TELA DO GITHUB */
 void github(){
     int tempo = 50;
-    printf("\n **** O código-fonte deste jogo está disponível gratuitamente **** "); Sleep(tempo);
-    printf("\n      no repositório do GitHub de Guilherme Cordeiro. Acesse:  \n\n"); Sleep(tempo);
-    printf("\n                        @@@@@@@@@@@@@@@@@@@                        "); Sleep(tempo);
-    printf("\n                    @@@@@@@@@@@@@@@@@@@@@@@@@@@                    "); Sleep(tempo);
-    printf("\n                 @@@@@@  @@@@@@@@@@@@@@@@@  @@@@@@                 "); Sleep(tempo);
-    printf("\n               @@@@@@@    @@@@@@@@@@@@@@@    @@@@@@@               "); Sleep(tempo);
-    printf("\n             @@@@@@@@                         @@@@@@@@             "); Sleep(tempo);
-    printf("\n            @@@@@@@@@                         @@@@@@@@@            "); Sleep(tempo);
-    printf("\n           @@@@@@@@@                           @@@@@@@@@           "); Sleep(tempo);
-    printf("\n           @@@@@@@@                             @@@@@@@@           "); Sleep(tempo);
-    printf("\n           @@@@@@@@                             @@@@@@@@           "); Sleep(tempo);
-    printf("\n           @@@@@@@@                             @@@@@@@@           "); Sleep(tempo);
-    printf("\n           @@@@@@@@@                           @@@@@@@@@           "); Sleep(tempo);
-    printf("\n            @@@@@@@@@@                       @@@@@@@@@@            "); Sleep(tempo);
-    printf("\n             @@@@   @@@@@@@@           @@@@@@@@@@@@@@@             "); Sleep(tempo);
-    printf("\n              @@@@@   @@@@@@           @@@@@@@@@@@@@@              "); Sleep(tempo);
-    printf("\n                @@@@@                  @@@@@@@@@@@@                "); Sleep(tempo);
-    printf("\n                   @@@@@@@@@           @@@@@@@@@                   "); Sleep(tempo);
-    printf("\n                      @@@@@@           @@@@@@                  \n\n"); Sleep(tempo);
-    printf("\n              +-------------------------------------+              "); Sleep(tempo);
-    printf("\n              |   https://github.com/gui-cordeiro   |              "); Sleep(tempo);
-    printf("\n              +-------------------------------------+            \n"); Sleep(tempo);
+    printf("\n\t\t\t  **** O código-fonte deste jogo está disponível gratuitamente **** "); Sleep(tempo);
+    printf("\n\t\t\t       no repositório do GitHub de Guilherme Cordeiro. Acesse:  \n\n"); Sleep(tempo);
+    printf("\n\t\t\t                         @@@@@@@@@@@@@@@@@@@                        "); Sleep(tempo);
+    printf("\n\t\t\t                     @@@@@@@@@@@@@@@@@@@@@@@@@@@                    "); Sleep(tempo);
+    printf("\n\t\t\t                  @@@@@@  @@@@@@@@@@@@@@@@@  @@@@@@                 "); Sleep(tempo);
+    printf("\n\t\t\t                @@@@@@@    @@@@@@@@@@@@@@@    @@@@@@@               "); Sleep(tempo);
+    printf("\n\t\t\t              @@@@@@@@                         @@@@@@@@             "); Sleep(tempo);
+    printf("\n\t\t\t             @@@@@@@@@                         @@@@@@@@@            "); Sleep(tempo);
+    printf("\n\t\t\t            @@@@@@@@@                           @@@@@@@@@           "); Sleep(tempo);
+    printf("\n\t\t\t            @@@@@@@@                             @@@@@@@@           "); Sleep(tempo);
+    printf("\n\t\t\t            @@@@@@@@                             @@@@@@@@           "); Sleep(tempo);
+    printf("\n\t\t\t            @@@@@@@@                             @@@@@@@@           "); Sleep(tempo);
+    printf("\n\t\t\t            @@@@@@@@@                           @@@@@@@@@           "); Sleep(tempo);
+    printf("\n\t\t\t             @@@@@@@@@@                       @@@@@@@@@@            "); Sleep(tempo);
+    printf("\n\t\t\t              @@@@   @@@@@@@@           @@@@@@@@@@@@@@@             "); Sleep(tempo);
+    printf("\n\t\t\t               @@@@@   @@@@@@           @@@@@@@@@@@@@@              "); Sleep(tempo);
+    printf("\n\t\t\t                 @@@@@                  @@@@@@@@@@@@                "); Sleep(tempo);
+    printf("\n\t\t\t                    @@@@@@@@@           @@@@@@@@@                   "); Sleep(tempo);
+    printf("\n\t\t\t                       @@@@@@           @@@@@@                  \n\n"); Sleep(tempo);
+    printf("\n\t\t\t               +-------------------------------------+              "); Sleep(tempo);
+    printf("\n\t\t\t               |   https://github.com/gui-cordeiro   |              "); Sleep(tempo);
+    printf("\n\t\t\t               +-------------------------------------+            \n"); Sleep(tempo);
     return;
 }
 
@@ -57,7 +57,12 @@ int newPergunta(int questao, char l1, char l2, char l3, char l4, char altResp, c
     printf("%d  |", pts);Sleep(tempo);
     printf("\n +------------------+");Sleep(tempo);
     printf("\n +-----------------------------------------------+");Sleep(tempo);
-    printf("\n |                PERGUNTA Nº %d                  |", questao);Sleep(tempo);
+    printf("\n |                PERGUNTA Nº %d                 ", questao);Sleep(tempo);
+    if (questao < 10) {
+        printf(" |");
+    } else {
+        printf("|");
+    }
     printf("\n +-----------------------------------------------+");Sleep(tempo);
     printf("\n |                                               |");Sleep(tempo);
     printAlfabeto(letrResp);
@@ -90,7 +95,7 @@ int newPergunta(int questao, char l1, char l2, char l3, char l4, char altResp, c
 /* C) TELA DE APRESENTAÇÃO */
 void apresentacao(){
     int tempo = 50;
-    addFade(7, 0, 0);
+    addFade(8, 0, 0);
     printf("                                 **** Criado por Guilherme Cordeiro (2017-%d) ****                                \n\n", obterAnoAtual());
     printf("+---------------------------------------------------------------------------------------------------------------------+\n");Sleep(tempo);
     printf("|      ##  #######   ######    #######     ########   #######     ########  ########     ###    #### ##       ########|\n");Sleep(tempo);
@@ -104,9 +109,9 @@ void apresentacao(){
     addFade(2, 50, 1);
     printf("                                   **** Pressione qualquer tecla para iniciar ****");
     getch();
+    system("cls");
     //addFade(8, 0, 0);
     //addFade(22, 32, 1);
-    system("cls");
     return;
 }
 
@@ -249,27 +254,32 @@ void printAlfabeto(char letra){
 
 /* E) INICIO DO JOGO */
 int inicioJogo(char nivel[9]){
-    int tempo = 50;
-    char opt;
+    int tempo = 50, finalopt = 0, erro = 0;
+    char opt[100];
     char nome[40];
     system("cls");
     titulo("-", "Confirmação da Dificuldade");
     do{
-        printf("\n     **** DIFICULDADE SELECIONADA: 'Jogar - NÍVEL %s' **** \n", nivel);Sleep(tempo);
-        printf("\n    Digite 'S' para confirmar ou 'N' para voltar ao menu, e pressione ENTER. ");
-        scanf(" %c",&opt);
-        fflush(stdin);
-        if(tolower(opt) == 'n'){
-            //addFade(25, 0, 0);
-            //addFade(5, 30, 1);
-            system("cls");
-            return 0;
-        }else if(tolower(opt) != 's'){
-            system("cls");
-            telaErro();
+        if (erro == 0) {
+            addFade(11, 50, 0);
+        } else {
+            addFade(4, 50, 1);
         }
-    }while(tolower(opt) != 's');
-    system("cls");
+        printf("\t\t\t\t      **** DIFICULDADE SELECIONADA: '%s' **** \n", nivel);Sleep(tempo);
+        printf("\t\t    (Insira 'S' para \"Confirmar\" ou 'N' para \"Voltar ao Menu\", e pressione ENTER)");
+        addFade(3, 50, 1);
+        printf("\t\t\t\t\t\t     Opção: ");
+        fgets(opt, 100, stdin);
+        finalopt = verifyOpt(opt, 1);
+        system("cls");
+        if (finalopt == 0) {
+            erro ++;
+            addFade(3, 50, 0);
+            telaErro();
+        } else if (finalopt == 2) {
+            return 0;
+        }
+    } while (finalopt != 1);
     titulo(nivel, "Boas-vindas");
     if (strcmp(nivel, "FÁCIL") == 0) {
         printf("\t\t\t      +-------------------------------------------------------+\n");Sleep(tempo);
@@ -285,13 +295,13 @@ int inicioJogo(char nivel[9]){
         printf(" +----------------------------------------------------------+\n");Sleep(tempo);
     }
     addFade(2, 50, 1);
-    printf(" - Antes de tudo, digite o seu nome: ");
+    printf(" -> Antes de começar, digite o seu nome: ");
     scanf("%s", nome);
     fflush(stdin);
     //addFade(25, 0, 0);
     //addFade(5, 30, 1);
     //printf("-----------------------------------------------------------------------------------------------------------------------\n");
-    printf("\n * Olá '%s'! É um prazer enorme ter você aqui jogando! *", nome);
+    printf("\n -> Olá '%s'! É um prazer enorme ter você aqui jogando!", nome);
     addFade(3, 50, 1);
     printf("\t      +-----------------------------------------------------------------------------------------+\n");Sleep(tempo);
     printf("\t      |########  #### ##     ## #### ########  ########    ###             ######  ######## ####|\n");Sleep(tempo);
@@ -368,6 +378,7 @@ void fimJogo(int nivel, char frase[100], int pts, int acertos, int numPerg){
     addFade(5, 50, 1);
     printf("         **** Pressione qualquer tecla para retornar ao menu ****");
     getch();
+    system("cls");
     //addFade(6, 0, 0);
     //addFade(24, 30, 1);
     return;
@@ -395,11 +406,11 @@ void banner(){
 /* I) TELA DE ERRO (AO DIGITAR UMA OPÇÃO ERRADA) */
 void telaErro(){
     int tempo = 50;
-    printf("  +---------------------------------------------------------+\n");Sleep(tempo);
-    printf("  |                       * ATENÇÃO *                       |\n");Sleep(tempo);
-    printf("  +---------------------------------------------------------+\n");Sleep(tempo);
-    printf("  | Opção inválida. Siga as instruções especificadas abaixo |\n");Sleep(tempo);
-    printf("  +---------------------------------------------------------+");Sleep(tempo);
+    printf("\t\t\t     +---------------------------------------------------------+\n");Sleep(tempo);
+    printf("\t\t\t     |                       * ATENÇÃO *                       |\n");Sleep(tempo);
+    printf("\t\t\t     +---------------------------------------------------------+\n");Sleep(tempo);
+    printf("\t\t\t     | Opção inválida. Siga as instruções especificadas abaixo |\n");Sleep(tempo);
+    printf("\t\t\t     +---------------------------------------------------------+");Sleep(tempo);
 }
 
 /* J) RECUPERA O ANO ATUAL DO SISTEMA */
@@ -416,7 +427,7 @@ int obterAnoAtual(){
 void configJogo(){
     setlocale(LC_ALL,"Portuguese");
     system("title Tela de título - Jogo do Braile 1.0.0");
-    system("mode con:cols=119 lines=30");
+    system("mode con:cols=119 lines=31");
 
     //Ignorar esta parte:
     /*printf("#######################################################################################################################\n");
@@ -455,4 +466,30 @@ void titulo(char nivel[9], char frase[50]){
     strcat(comando, frase);
     strcat(comando, " - Jogo do Braile 1.0.0");
     system(comando);
+}
+
+/* N) VERIFICA SE A OPÇÃO ESTÁ CORRETA (RETORNO 0=ERRO, 1=SIM, 2=NÃO)  */
+int verifyOpt(char opt[100], int mode){
+    int i = 0, espaco = 0;
+    while (opt[i] != '\0') {
+        if (opt[i] == ' ') {
+           espaco ++;
+        }
+        i ++;
+    }
+    if ((strlen(opt) - 1) == 1 && espaco == 0) {
+        if (mode == 1) {
+            if (strncmp(opt, "n", 1) == 0 || strncmp(opt, "N", 1) == 0) {
+                return 2;
+            } else if (strncmp(opt, "s", 1) != 0 && strncmp(opt, "S", 1) != 0) {
+                return 0;
+            }
+        } else if (mode == 2) {
+            //W.I.P....
+        }
+    } else {
+        //addFade(30, 25, 1);
+        return 0;
+    }
+    return 1;
 }

@@ -44,8 +44,7 @@ int main(void) {
     }while(a != 7);
     system("cls");
     github();
-    printf("\n **** Obrigado por jogar! Pressione qualquer tecla para sair do jogo ****");
-    getch();
+    printf("\n\t\t      **** Obrigado por jogar! Pressione qualquer tecla para sair do jogo ****");
+    getchar();
     //addFade(30, 30, 1);
-    system("cls");
 }
