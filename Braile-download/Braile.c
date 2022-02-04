@@ -9,6 +9,7 @@
 int main(void) {
     int tempo = 0, a = 0, erroMenu = 0;
     configJogo();
+    newPergunta(1, 'A', 'I', 'E', 'U', 3, 'E', 0, 0);
     apresentacao();
     do{
         a = menu(erroMenu);

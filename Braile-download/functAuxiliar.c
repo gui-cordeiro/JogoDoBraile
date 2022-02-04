@@ -35,10 +35,10 @@ void github(){
 }
 
 /* B) MODELO DAS PERGUNTAS */
-int newPergunta(int questao, char l1, char l2, char l3, char l4, char altResp, char letrResp, int pts, int acertos){
+int newPergunta(int questao, char a1, char a2, char a3, char a4, int altResp, char letrResp, int pts, int acertos){
     int tempo = 50;
     int acertoCont;
-    char opt;
+    int opt;
     printf(" +------------------+");Sleep(tempo);
     printf("\n | ACERTOS | PONTOS |", questao);Sleep(tempo);
     printf("\n +------------------+");Sleep(tempo);
@@ -69,19 +69,19 @@ int newPergunta(int questao, char l1, char l2, char l3, char l4, char altResp, c
     printf("\n |                                               |");Sleep(tempo);
     printf("\n +-----------------------------------------------+\n");Sleep(tempo);
     printf("\n Qual é a letra correspondente?\n");Sleep(tempo);
-    printf("\n a) '%c'", l1);Sleep(tempo);
-    printf("\n b) '%c'", l2);Sleep(tempo);
-    printf("\n c) '%c'", l3);Sleep(tempo);
-    printf("\n d) '%c'", l4);Sleep(tempo);
-    printf("\n\n Alternativa: ");
-    scanf(" %c",&opt);
+    printf("\n 1) '%c'", a1);Sleep(tempo);
+    printf("\n 2) '%c'", a2);Sleep(tempo);
+    printf("\n 3) '%c'", a3);Sleep(tempo);
+    printf("\n 4) '%c'", a4);Sleep(tempo);
+    printf("\n\n Resposta nº: ");
+    scanf("%d",&opt);
     printf("\n +-----------------------------------------------+");Sleep(tempo);
-    if(tolower(opt) == altResp){
+    if (opt == altResp) {
         printf("\n |                CERTA RESPOSTA!                | ");Sleep(tempo);
         printf("\n |           VOCÊ GANHOU: +150 PONTOS!           | ");Sleep(tempo);
         acertoCont = 1;
-    }else{
-        printf("\n |     VOCÊ ERROU... RESPOSTA CORRETA: \"%c)\"      | ", tolower(altResp));Sleep(tempo);
+    } else {
+        printf("\n |     VOCÊ ERROU... RESPOSTA CORRETA: \"%d)\"      | ", altResp);Sleep(tempo);
         printf("\n |           VOCÊ GANHOU: +50 PONTOS!            | ");Sleep(tempo);
         acertoCont = 0;
     }
@@ -253,13 +253,14 @@ void printAlfabeto(char letra){
     }
 }
 
+
 /* E) INICIO DO JOGO */
-int inicioJogo(char nivel[9]){
+int confirmarJogo(char nivel[9]){
     int tempo = 50, finalopt = 0, erro = 0;
     char opt[100];
     char nome[40];
     system("cls");
-    titulo("-", "Confirmação da Dificuldade");
+    titulo(nivel, "Confirmar Dificuldade");
     do{
         if (erro == 0) {
             addFade(11, 50, 0);
@@ -281,7 +282,13 @@ int inicioJogo(char nivel[9]){
             return 0;
         }
     } while (finalopt != 1);
-    titulo(nivel, "Boas-vindas");
+    return 1;
+}
+
+/* E) INICIO DO JOGO */
+void boasVindas01(char nivel[9]){
+    int tempo = 50;
+    titulo(nivel, "Boas-vindas ao Jogo do Braile!");
     if (strcmp(nivel, "FÁCIL") == 0) {
         printf("\t\t\t      +-------------------------------------------------------+\n");Sleep(tempo);
         printf("\t\t\t      | Boas vindas ao \"Jogo do Braile\" - Dificuldade '%s' |\n", nivel);Sleep(tempo);
@@ -296,9 +303,11 @@ int inicioJogo(char nivel[9]){
         printf(" +----------------------------------------------------------+\n");Sleep(tempo);
     }
     addFade(2, 50, 1);
-    printf(" -> Antes de começar, digite o seu nome: ");
-    scanf("%s", nome);
-    fflush(stdin);
+}
+
+/* E) INICIO DO JOGO */
+void boasVindas02(char nome[40]){
+    int tempo = 50;
     //addFade(25, 0, 0);
     //addFade(5, 30, 1);
     //printf("-----------------------------------------------------------------------------------------------------------------------\n");
@@ -321,18 +330,27 @@ int inicioJogo(char nivel[9]){
     printf("\t\t\t  +---------------------------------------------------------------+");
     addFade(2, 50, 1);
     printf("\t\t\t\t  **** Pressione qualquer tecla para continuar ****");
-    getch();
+    getchar();
     //addFade(5, 0, 0);
     //addFade(25, 30, 1);
     system("cls");
-    return 1;
 }
 
+
+
 /* F) FIM DO JOGO (TABELA DE ESTATÍSTICAS) */
-void fimJogo(int nivel, char frase[100], int pts, int acertos, int numPerg){
+void fimJogo(int nivel, char frase[100], char nome[40], int pts, int acertos, int numPerg){
     int tempo = 50;
     printf("\n +--------------------------------------+");Sleep(tempo);
-    printf("\n |           SEU DESEMPENHO             |");Sleep(tempo);
+    if (nivel == 1) {
+        printf("\n |   RESULTADO FINAL - NÍVEL 'FÁCIL'    |");Sleep(tempo);
+    } else if(nivel == 2){
+        printf("\n |  RESULTADO FINAL - NÍVEL 'MÉDIO I'   |");Sleep(tempo);
+    } else if(nivel == 3){
+        printf("\n |  RESULTADO FINAL - NÍVEL 'MÉDIO II'  |");Sleep(tempo);
+    } else {
+        printf("\n |  RESULTADO FINAL - NÍVEL 'DIFÍCIL'   |");Sleep(tempo);
+    }
     printf("\n +--------------------------------------+");Sleep(tempo);
     printf("\n |                                      |");Sleep(tempo);
     if(numPerg < 10){
@@ -354,16 +372,16 @@ void fimJogo(int nivel, char frase[100], int pts, int acertos, int numPerg){
     printf("\n +--------------------------------------+");
     Sleep(1000);
     if(((nivel == 1 && acertos <= 2) || (nivel == 2 && acertos <= 3)) || ((nivel == 3 && acertos <= 3) || (nivel == 4 && acertos <= 8))){
-        printf("\n\n\n Bom. . . Você precisa aprender um pouco mais de braile. Não desanime, tente novamente!");
+        printf("\n\n\n Não se frustre, %s! Errar faz parte, e é somente errando que você irá aprender!", nome);
     }
     else if(((nivel == 1 && acertos <= 3) || (nivel == 2 && acertos <= 6)) || ((nivel == 3 && acertos <= 6) || (nivel == 4 && acertos <= 15))){
-        printf("\n\n\n Você tem potencial, mas precisa se esforçar um pouco mais!");
+        printf("\n\n\n Você está indo no caminho certo, %s! Continue firme, você consegue!", nome);
     }
     else if(((nivel == 1 && acertos <= 4) || (nivel == 2 && acertos <= 9)) || ((nivel == 3 && acertos <= 9) || (nivel == 4 && acertos <= 22))){
-        printf("\n\n\n Muito bem! Você realmente mandou bem, mas um pouquinho mais de empenho não faz mal para ninguém!");
+        printf("\n\n\n Muito bem, %s! Você realmente mandou bem, mas um pouquinho mais de empenho não faz mal para ninguém!", nome);
     }
     else if(((nivel == 1 && acertos == 5) || (nivel == 2 && acertos == 10)) || ((nivel == 3 && acertos == 11) || (nivel == 4 && acertos == 26))){
-        printf("\n\n\n Meus parabéns! Você acertou todas as questões e provou do que é capaz!");
+        printf("\n\n\n Meus parabéns, %s! Você acertou todas as questões e provou do que é capaz!", nome);
     }
     Sleep(1500);
     printf("\n\n\n\n\n **** Pressione qualquer tecla para continuar **** ");
@@ -372,7 +390,11 @@ void fimJogo(int nivel, char frase[100], int pts, int acertos, int numPerg){
     //addFade(18, 30, 1);
     system("cls");
     printf("\n   * %s *", frase);Sleep(tempo);
-    printf("\n\n                         Selecione-o no menu!\n\n");Sleep(tempo);
+
+    if (acertos != 26) {
+        printf("\n\n                         Selecione-o no menu!\n\n");Sleep(tempo);
+    }
+
     printf("\n                     **** OBRIGADO POR JOGAR! ****\n");
     addFade(5, 50, 1);
     banner();
