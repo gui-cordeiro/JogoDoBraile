@@ -95,7 +95,8 @@ int newPergunta(int questao, char l1, char l2, char l3, char l4, char altResp, c
 /* C) TELA DE APRESENTAÇÃO */
 void apresentacao(){
     int tempo = 50;
-    addFade(8, 0, 0);
+    system("cls");
+    addFade(12, 0, 0);
     printf("                                 **** Criado por Guilherme Cordeiro (2017-%d) ****                                \n\n", obterAnoAtual());
     printf("+---------------------------------------------------------------------------------------------------------------------+\n");Sleep(tempo);
     printf("|      ##  #######   ######    #######     ########   #######     ########  ########     ###    #### ##       ########|\n");Sleep(tempo);
@@ -395,22 +396,22 @@ void addFade(int rep, int millis, int isLento){
 /* H) BANNER DE APRESENTAÇÃO */
 void banner(){
     int tempo = 50;
-    printf("\n              +-------------------------------------------+");Sleep(tempo);
-    printf("\n              |        Jogo do Braile - 2017, %d        |", obterAnoAtual());Sleep(tempo);
-    printf("\n              +-------------------------------------------+");Sleep(tempo);
-    printf("\n              |      Criado por: Guilherme Cordeiro       |");Sleep(tempo);
-    printf("\n              +-------------------------------------------+\n");Sleep(tempo);
+    printf("\n\t\t\t\t     +-------------------------------------------+");Sleep(tempo);
+    printf("\n\t\t\t\t     |        Jogo do Braile - 2017, %d        |", obterAnoAtual());Sleep(tempo);
+    printf("\n\t\t\t\t     +-------------------------------------------+");Sleep(tempo);
+    printf("\n\t\t\t\t     |      Criado por: Guilherme Cordeiro       |");Sleep(tempo);
+    printf("\n\t\t\t\t     +-------------------------------------------+\n");Sleep(tempo);
     return;
 }
 
 /* I) TELA DE ERRO (AO DIGITAR UMA OPÇÃO ERRADA) */
 void telaErro(){
     int tempo = 50;
-    printf("\t\t\t     +---------------------------------------------------------+\n");Sleep(tempo);
-    printf("\t\t\t     |                       * ATENÇÃO *                       |\n");Sleep(tempo);
-    printf("\t\t\t     +---------------------------------------------------------+\n");Sleep(tempo);
-    printf("\t\t\t     | Opção inválida. Siga as instruções especificadas abaixo |\n");Sleep(tempo);
-    printf("\t\t\t     +---------------------------------------------------------+");Sleep(tempo);
+    printf("\t\t\t      +---------------------------------------------------------+\n");Sleep(tempo);
+    printf("\t\t\t      |                       * ATENÇÃO *                       |\n");Sleep(tempo);
+    printf("\t\t\t      +---------------------------------------------------------+\n");Sleep(tempo);
+    printf("\t\t\t      | Opção inválida. Siga as instruções especificadas abaixo |\n");Sleep(tempo);
+    printf("\t\t\t      +---------------------------------------------------------+");Sleep(tempo);
 }
 
 /* J) RECUPERA O ANO ATUAL DO SISTEMA */
@@ -427,7 +428,7 @@ int obterAnoAtual(){
 void configJogo(){
     setlocale(LC_ALL,"Portuguese");
     system("title Tela de título - Jogo do Braile 1.0.0");
-    system("mode con:cols=119 lines=31");
+    system("mode con:cols=119 lines=38");
 
     //Ignorar esta parte:
     /*printf("#######################################################################################################################\n");

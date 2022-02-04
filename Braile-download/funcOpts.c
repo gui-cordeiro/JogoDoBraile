@@ -7,22 +7,31 @@
 #include <string.h>
 
 /* 0) Menu principal */
-int menu(){
+int menu(int erro){
     int tempo = 50, i = 0, a = 0;
     char opt[100];
     char optMenu [7][24] = {"  Jogar - NÍVEL FÁCIL  "," Jogar - NÍVEL MÉDIO I "," Jogar - NÍVEL MÉDIO II"," Jogar - NÍVEL DIFÍCIL ","  Instruções do Jogo   ","   Créditos do Jogo    ","     Sair do Jogo      "};
     titulo("-", "Menu Principal");
     fflush(stdin);
-    printf("\n\n\t\t\t\t\t        **** MENU PRINCIPAL **** \n");Sleep(tempo);
-    printf("\n\t\t\t\t       +-------------------------+---------------+");Sleep(tempo);
-    printf("\n\t\t\t\t       |       DESCRIÇÃO         | NUM. DA OPÇÃO | ");Sleep(tempo);
-    printf("\n\t\t\t\t       +-------------------------+---------------+ ");Sleep(tempo);
-    for (int c = 0; c < 7; c ++) {
-        printf("\n\t\t\t\t       +-------------------------+---------------+ ");Sleep(tempo);
-        printf("\n\t\t\t\t       | %s |       %d       | ", optMenu[c], c + 1);Sleep(tempo);
+    if (erro == 0) {
+        addFade(3, tempo, 0);
     }
-    printf("\n\t\t\t\t       +-------------------------+---------------+ \n");Sleep(tempo);
-    printf("\n\n\t\t\t\t       Digite a opção desejada e pressione ENTER: ");
+    printf("\n\t\t\t\t _____                 _____     _         _         _ \n");Sleep(tempo);
+    printf("\t\t\t\t|     |___ ___ _ _    |  _  |___|_|___ ___|_|___ ___| |\n");Sleep(tempo);
+    printf("\t\t\t\t| | | | -_|   | | |   |   __|  _| |   |  _| | . | .'| |\n");Sleep(tempo);
+    printf("\t\t\t\t|_|_|_|___|_|_|___|   |__|  |_| |_|_|_|___|_|  _|__,|_|\n");Sleep(tempo);
+    printf("\t\t\t\t                                            |_|        \n");Sleep(tempo);
+    printf("\t\t\t\t      (Insira a opção desejada e pressione ENTER)");
+    addFade(3, 50, 1);
+    printf("\t\t\t\t      +-------------------------+---------------+");Sleep(tempo);
+    printf("\n\t\t\t\t      |       DESCRIÇÃO         | NUM. DA OPÇÃO | ");Sleep(tempo);
+    printf("\n\t\t\t\t      +-------------------------+---------------+ ");Sleep(tempo);
+    for (int c = 0; c < 7; c ++) {
+        printf("\n\t\t\t\t      +-------------------------+---------------+ ");Sleep(tempo);
+        printf("\n\t\t\t\t      | %s |       %d       | ", optMenu[c], c + 1);Sleep(tempo);
+    }
+    printf("\n\t\t\t\t      +-------------------------+---------------+");addFade(2, 50, 1);
+    printf("\t\t\t\t\t          Para onde vamos? -> ");
     fgets(opt, 100, stdin);
     while (opt[i] != '\0') {
         if ((opt[i] == ' ') || ((opt[i] >= 'a' && opt[i] <= 'z') || (opt[i] >= 'A' && opt[i] <= 'Z'))) {
@@ -86,7 +95,7 @@ void opcao1(){
 
 /* 2) Jogar - NÍVEL MÉDIO I */
 void opcao2(){
-    int cont = 1, tempo = 50, numPerg = 0;
+    int cont = 15, tempo = 50, numPerg = 0;
     int conf = 0, pts = 0, acertos = 0;
     if(inicioJogo("MÉDIO I") == 0) return 0;
     printf("\n           As letras em braile nesta dificuldade são:     \n");Sleep(tempo);
@@ -386,8 +395,14 @@ int opcao5(){
         if (erro == 0) {
             addFade(4, 50, 0);
         }
+        printf("\t\t\t\t     _____                     __                 \n");Sleep(tempo);
+        printf("\t\t\t\t    |     |___ _____ ___    __|  |___ ___ ___ ___ \n");Sleep(tempo);
+        printf("\t\t\t\t    |   --| . |     | . |  |  |  | . | . | .'|  _|\n");Sleep(tempo);
+        printf("\t\t\t\t    |_____|___|_|_|_|___|  |_____|___|_  |__,|_|  \n");Sleep(tempo);
+        printf("\t\t\t\t                                     |___|        \n");Sleep(tempo);
+
         printf("\t     +------------------------------------------------------------------------------------------+\n");Sleep(tempo);
-        printf("\t     |                     INSTRUÇÕES DO JOGO - O QUE É O 'JOGO DO BRAILE'?                     |\n");Sleep(tempo);
+        printf("\t     |                               O QUE É O 'JOGO DO BRAILE'?                                |\n");Sleep(tempo);
         printf("\t     +------------------------------------------------------------------------------------------+\n");Sleep(tempo);
         printf("\t     | O 'Jogo do Braile' é um simples jogo de memória sob a forma de quiz, cujo objetivo do(a) |\n");Sleep(tempo);
         printf("\t     | jogador(a) é acertar o máximo de perguntas possíveis. Ele tem o intuito de ensinar o     |\n");Sleep(tempo);
@@ -414,7 +429,7 @@ int opcao5(){
             erro ++;
             printf("\n");
             telaErro();
-            addFade(2, 50, 1);
+            addFade(1, 50, 1);
         } else if (finalopt == 2) {
             return 0;
         }
@@ -516,25 +531,38 @@ int opcao5(){
 void opcao6(){
     int tempo = 50;
     system("cls");
-    printf("\n **** CRÉDITOS DO JOGO **** \n");Sleep(tempo);
-    printf("\n     +-----------------------------------------------------------------------------------+ ");Sleep(tempo);
-    printf("\n     | Este jogo foi originalmente desenvolvido como forma de avaliação parcial para o   | ");Sleep(tempo);
-    printf("\n     | trabalho final do 1º ano do Curso Técnico em Informática, ofertado pelo Instituto | ");Sleep(tempo);
-    printf("\n     | Federal do Paraná - Campus Colombo. Tal trabalho foi apresentado no ano de 2017   | ");Sleep(tempo);
-    printf("\n     | sob o nome 'Acessibilidade das pessoas com deficiência visual na atualidade'.     | ");Sleep(tempo);
-    printf("\n     +-----------------------------------------------------------------------------------+ \n");Sleep(tempo);
-    printf("\n * Membros da equipe original (Obrigado por todo o apoio!): \n");Sleep(tempo);
-    printf("\n     * Arthur Ogg - 'https://github.com/Arthur-Diesel'\n");Sleep(tempo);
-    printf("\n     * Guilherme Cordeiro - 'https://github.com/gui-cordeiro'\n");Sleep(tempo);
-    printf("\n     * João Lucas - Nenhum contato dele foi encontrado, mas fica aqui registrado o enorme agradecimento a ele!\n");Sleep(tempo);
-    printf("\n     * Lucas Pereira - 'https://github.com/Luc45-Pereira'\n");Sleep(tempo);
-    printf("\n     * Matheus Delay - 'https://twitter.com/DelayMath'\n");Sleep(tempo);
+    printf("\t\t\t\t\t               ___                  \n");Sleep(tempo);
+    printf("\t\t\t\t\t    _____     /__/  _ _ _           \n");Sleep(tempo);
+    printf("\t\t\t\t\t   |     |___ ___ _| |_| |_ ___ ___ \n");Sleep(tempo);
+    printf("\t\t\t\t\t   |   --|  _| -_| . | |  _| . |_ -|\n");Sleep(tempo);
+    printf("\t\t\t\t\t   |_____|_| |___|___|_|_| |___|___|");Sleep(tempo);
+    addFade(2, tempo, 1);
+    printf("\t\t +-----------------------------------------------------------------------------------+ ");Sleep(tempo);
+    printf("\n\t\t | Este jogo foi originalmente desenvolvido como forma de avaliação parcial para o   | ");Sleep(tempo);
+    printf("\n\t\t | trabalho final do 1º ano do Curso Técnico em Informática, ofertado pelo Instituto | ");Sleep(tempo);
+    printf("\n\t\t | Federal do Paraná - Campus Colombo. Tal trabalho foi apresentado no ano de 2017   | ");Sleep(tempo);
+    printf("\n\t\t | sob o nome 'Acessibilidade das pessoas com deficiência visual na atualidade'.     | ");Sleep(tempo);
+    printf("\n\t\t +-----------------------------------------------------------------------------------+ \n");Sleep(tempo);
+
+
+    printf("\t\t\t      _____               _         _               _           \n");Sleep(tempo);
+    printf("\t\t\t     |  _  |___ ___ ___ _| |___ ___|_|_____ ___ ___| |_ ___ ___ \n");Sleep(tempo);
+    printf("\t\t\t     |     | . |  _| .'| . | -_|  _| |     | -_|   |  _| . |_ -|\n");Sleep(tempo);
+    printf("\t\t\t     |__|__|_  |_| |__,|___|___|___|_|_|_|_|___|_|_|_| |___|___|\n");Sleep(tempo);
+    printf("\t\t\t           |___|                                                \n");Sleep(tempo);
+    printf("\t\t\t      (Membros da equipe original - Obrigado por todo o apoio!) \n");Sleep(tempo);
+    addFade(1, tempo, 1);
+    printf("\n     -> Arthur Ogg - 'https://github.com/Arthur-Diesel'\n");Sleep(tempo);
+    printf("\n     -> Guilherme Cordeiro - 'https://github.com/gui-cordeiro'\n");Sleep(tempo);
+    printf("\n     -> João Lucas - Nenhum contato dele foi encontrado, mas fica aqui registrado o enorme agradecimento a ele!\n");Sleep(tempo);
+    printf("\n     -> Lucas Pereira - 'https://github.com/Luc45-Pereira'\n");Sleep(tempo);
+    printf("\n     -> Matheus Delay - 'https://twitter.com/DelayMath'\n");Sleep(tempo);
     banner();
-    printf("\n   **** Pressione qualquer tecla para continuar ****");
+    printf("\n\t\t\t\t   **** Pressione qualquer tecla para continuar ****");
     getch();
     system("cls");
     github();
-    printf("\n   **** Pressione qualquer tecla para retornar ao menu ****      ");
+    printf("\n\t\t\t       **** Pressione qualquer tecla para retornar ao menu ****");
     getch();
     //addFade(30, 25, 1);
     system("cls");

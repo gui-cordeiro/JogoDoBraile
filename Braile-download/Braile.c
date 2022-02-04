@@ -7,12 +7,13 @@
 #include <string.h>
 
 int main(void) {
-    int tempo = 0, a = 0;
+    int tempo = 0, a = 0, erroMenu = 0;
     configJogo();
     apresentacao();
     do{
-        a = menu();
+        a = menu(erroMenu);
         fflush(stdin);
+        erroMenu = 0;
         switch(a){
             case 1:
                 opcao1();
@@ -34,9 +35,14 @@ int main(void) {
                 break;
             case 7:
                 continue;
+            case 8:
+                apresentacao();
+                break;
             default:
                 a = 0;
+                erroMenu ++;
                 system("cls");
+                addFade(1, 50, 0);
                 telaErro();
                 //addFade(25, 0, 0);
                 //addFade(5, 30, 1);
