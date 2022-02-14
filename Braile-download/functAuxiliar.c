@@ -38,12 +38,21 @@ void exibirTelaGitHub(){
 
 /* B) MODELO DAS PERGUNTAS */
 int newPergunta(int questao, char a1, char a2, char a3, char a4, char altResp, char letrResp, int pts, int acertos){
-    //int tempo = 50;
-    int acertoCont;
+    int acertoCont = 0;
     char opt;
 
     printf("\t\t\t\t   +-------------+ \t\t    +--------------+\n");Sleep(tempo);
-    printf("\t\t\t\t   | ACERTOS: 00 | \t\t    | PONTOS: 0000 |\n");Sleep(tempo);
+    printf("\t\t\t\t   | ACERTOS: ");
+    if (acertos < 10) printf("0");
+    printf("%d | \t\t    | PONTOS: ", acertos);
+    if (pts < 10) {
+        printf("000");
+    } else if (pts < 100) {
+        printf("00");
+    } else if (pts < 1000) {
+        printf("0");
+    }
+    printf("%d |\n", pts);Sleep(tempo);
     printf("\t\t\t\t   +-------------+ \t\t    +--------------+\n\n");Sleep(tempo);
 
     exibirbannerPergunta(questao);
@@ -67,7 +76,7 @@ int newPergunta(int questao, char a1, char a2, char a3, char a4, char altResp, c
     printf("\n\t\t\t\t   +--------------+-----+-----+-----+-----+");Sleep(tempo);
     printf("\n\t\t\t\t   |    Opções    | '%c' | '%c' | '%c' | '%c' |", a1, a2, a3, a4);Sleep(tempo);
     printf("\n\t\t\t\t   +--------------+-----+-----+-----+-----+");Sleep(tempo);*/
-    printf("\n\n\t\t\t\t\t       +--------------------+\n");
+    printf("\n\n\t\t\t\t\t       +--------------------+\n");Sleep(tempo);
     printf("\n\t\t\t\t\t\t Insira sua opção: ");
     scanf(" %c", &opt);
     printf("\n\t\t\t\t   +-----------------------------------------------+");Sleep(tempo);
@@ -363,17 +372,17 @@ void boasVindas01(char nivel[9]){
     titulo(nivel, "Boas-vindas ao Jogo do Braile!");
     printf("\n\n\n\n\n");
     if (strcmp(nivel, "FÁCIL") == 0) {
-        printf("\t\t\t        +-------------------------------------------------------+\n");Sleep(tempo);
-        printf("\t\t\t        | Boas vindas ao \"Jogo do Braile\" - Dificuldade '%s' |\n", nivel);Sleep(tempo);
-        printf("\t\t\t        +-------------------------------------------------------+\n");Sleep(tempo);
+        printf("\t\t\t       +-------------------------------------------------------+\n");Sleep(tempo);
+        printf("\t\t\t       | Boas vindas ao \"Jogo do Braile\" - Dificuldade '%s' |\n", nivel);Sleep(tempo);
+        printf("\t\t\t       +-------------------------------------------------------+\n");Sleep(tempo);
     } else if (strcmp(nivel, "MÉDIO I") == 0 || strcmp(nivel, "DIFÍCIL") == 0) {
-        printf("t\t\t         +---------------------------------------------------------+\n");Sleep(tempo);
-        printf("t\t\t         | Boas vindas ao \"Jogo do Braile\" - Dificuldade '%s' |\n", nivel);Sleep(tempo);
-        printf("t\t\t         +---------------------------------------------------------+\n");Sleep(tempo);
+        printf("\t\t\t      +---------------------------------------------------------+\n");Sleep(tempo);
+        printf("\t\t\t      | Boas vindas ao \"Jogo do Braile\" - Dificuldade '%s' |\n", nivel);Sleep(tempo);
+        printf("\t\t\t      +---------------------------------------------------------+\n");Sleep(tempo);
     } else if (strcmp(nivel, "MÉDIO II") == 0) {
-        printf("t\t\t         +----------------------------------------------------------+\n");Sleep(tempo);
-        printf("t\t\t         | Boas vindas ao \"Jogo do Braile\" - Dificuldade '%s' |\n", nivel);Sleep(tempo);
-        printf("t\t\t         +----------------------------------------------------------+\n");Sleep(tempo);
+        printf("\t\t\t      +----------------------------------------------------------+\n");Sleep(tempo);
+        printf("\t\t\t      | Boas vindas ao \"Jogo do Braile\" - Dificuldade '%s' |\n", nivel);Sleep(tempo);
+        printf("\t\t\t      +----------------------------------------------------------+\n");Sleep(tempo);
     }
     addFade(2, 50, 1);
 }
@@ -384,7 +393,7 @@ void boasVindas02(char nome[40]){
     //addFade(25, 0, 0);
     //addFade(5, 30, 1);
     //printf("-----------------------------------------------------------------------------------------------------------------------\n");
-    printf("\n -> Olá '%s'! É um prazer enorme ter você aqui jogando!", nome);
+    printf("\n\t       -> Olá '%s'! É um prazer enorme ter você aqui jogando!", nome);
     addFade(3, 50, 1);
     printf("\t      +-----------------------------------------------------------------------------------------+\n");Sleep(tempo);
     printf("\t      |########  #### ##     ## #### ########  ########    ###             ######  ######## ####|\n");Sleep(tempo);

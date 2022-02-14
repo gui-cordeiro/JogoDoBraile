@@ -10,7 +10,8 @@
 int main(void) {
     int opt = 0, erroMenu = 0;
     configJogo();
-    confirmarJogo("MÉDIO II");
+    opcao2();
+    //confirmarJogo("MÉDIO II");
     //newPergunta(1, 'A', 'I', 'E', 'U', 'c', 'E', 0, 0);
     apresentacao();
     do{

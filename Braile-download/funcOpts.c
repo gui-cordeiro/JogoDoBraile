@@ -50,31 +50,33 @@ void opcao1(){
     char nome[40];
     if(confirmarJogo("FÁCIL") == 0) return 0;
     boasVindas01("FÁCIL");
-    printf(" -> Antes de começar, digite o seu nome: ");
+    printf("\t       -> Antes de começar, digite o seu nome: ");
     scanf("%s", nome);
     fflush(stdin);
     boasVindas02(nome);
-    printf("\n           As letras em braile nesta dificuldade são:  \n");Sleep(tempo);
-    printf("\n          A          E          I          O          U \n");Sleep(tempo);
-    printf("\n        |o   |     |o   |     |   o|     |o   |     |o   |");Sleep(tempo);
-    printf("\n        |    |     |   o|     |o   |     |   o|     |    |");Sleep(tempo);
-    printf("\n        |    |     |    |     |    |     |o   |     |o  o|");addFade(2, 50, 1);
-    printf("         * Tente memorizar as letras acima e boa sorte! *");addFade(2, 50, 1);
-    printf("                    Tempo restante: %d segundos",cont);Sleep(tempo);
+    addFade(13, 50, 0);
+    printf("\t\t\t\t      As letras em braile nesta dificuldade são:    \n");Sleep(tempo);
+    printf("\n\t\t\t\t    A          E          I          O          U \n");Sleep(tempo);
+    printf("\t\t\t\t  |o   |     |o   |     |   o|     |o   |     |o   |\n");Sleep(tempo);
+    printf("\t\t\t\t  |    |     |   o|     |o   |     |   o|     |    |\n");Sleep(tempo);
+    printf("\t\t\t\t  |    |     |    |     |    |     |o   |     |o  o|\n");addFade(2, 50, 1);
+    printf("\t\t\t\t   * Tente memorizar as letras acima e boa sorte! * \n");addFade(1, 50, 1);
+    printf("\t\t\t\t              Tempo restante: %d segundos",cont);Sleep(tempo);
     Sleep(800);
     system("cls");
     cont --;
     do{
-        printf("\n           As letras em braile nesta dificuldade são:  \n");
-        printf("\n          A          E          I          O          U \n");
-        printf("\n        |o   |     |o   |     |   o|     |o   |     |o   |");
-        printf("\n        |    |     |   o|     |o   |     |   o|     |    |");
-        printf("\n        |    |     |    |     |    |     |o   |     |o  o|\n");
-        printf("\n         * Tente memorizar as letras acima e boa sorte! *\n");
+        addFade(13, 50, 0);
+        printf("\t\t\t\t      As letras em braile nesta dificuldade são:    \n");
+        printf("\n\t\t\t\t    A          E          I          O          U \n");
+        printf("\t\t\t\t  |o   |     |o   |     |   o|     |o   |     |o   |\n");
+        printf("\t\t\t\t  |    |     |   o|     |o   |     |   o|     |    |\n");
+        printf("\t\t\t\t  |    |     |    |     |    |     |o   |     |o  o|\n\n\n");
+        printf("\t\t\t\t   * Tente memorizar as letras acima e boa sorte! * \n\n");
         if(cont != 1){
-            printf("\n                    Tempo restante: %d segundos",cont);
+            printf("\t\t\t\t              Tempo restante: %d segundos",cont);
         }else{
-            printf("\n                    Tempo restante: %d segundo",cont);
+            printf("\t\t\t\t              Tempo restante: %d segundo",cont);
         }
         Sleep(1000);
         system("cls");
@@ -110,40 +112,42 @@ void opcao2(){
     char nome[40];
     if(confirmarJogo("MÉDIO I") == 0) return 0;
     boasVindas01("MÉDIO I");
-    printf(" -> Antes de começar, digite o seu nome: ");
+    printf("\t       -> Antes de começar, digite o seu nome: ");
     scanf("%s", nome);
     fflush(stdin);
     boasVindas02(nome);
-    printf("\n           As letras em braile nesta dificuldade são:     \n");Sleep(tempo);
-    printf("\n          B          C          D          F          G    \n");Sleep(tempo);
-    printf("\n        |o   |     |o  o|     |o  o|     |o  o|     |o  o|   ");Sleep(tempo);
-    printf("\n        |o   |     |    |     |   o|     |o   |     |o  o|   ");Sleep(tempo);
-    printf("\n        |    |     |    |     |    |     |    |     |    | \n");Sleep(tempo);
-    printf("\n          H          J          K          L          M    \n");Sleep(tempo);
-    printf("\n        |o   |     |   o|     |o   |     |o   |     |o  o|   ");Sleep(tempo);
-    printf("\n        |o  o|     |o  o|     |    |     |o   |     |    |   ");Sleep(tempo);
-    printf("\n        |    |     |    |     |o   |     |o   |     |o   | \n");Sleep(tempo);
-    printf("\n         * Tente memorizar as letras acima e boa sorte! *");addFade(2, 50, 1);
-    printf("                    Tempo restante: %d segundos",cont);Sleep(tempo);
+    addFade(11, 50, 0);
+    printf("\t\t\t\t      As letras em braile nesta dificuldade são:      \n");Sleep(tempo);
+    printf("\n\t\t\t\t    B          C          D          F          G   \n");Sleep(tempo);
+    printf("\t\t\t\t  |o   |     |o  o|     |o  o|     |o  o|     |o  o|  \n");Sleep(tempo);
+    printf("\t\t\t\t  |o   |     |    |     |   o|     |o   |     |o  o|  \n");Sleep(tempo);
+    printf("\t\t\t\t  |    |     |    |     |    |     |    |     |    |  \n");Sleep(tempo);
+    printf("\n\t\t\t\t    H          J          K          L          M   \n");Sleep(tempo);
+    printf("\t\t\t\t  |o   |     |   o|     |o   |     |o   |     |o  o|  \n");Sleep(tempo);
+    printf("\t\t\t\t  |o  o|     |o  o|     |    |     |o   |     |    |  \n");Sleep(tempo);
+    printf("\t\t\t\t  |    |     |    |     |o   |     |o   |     |o   |  \n");addFade(2, 50, 1);
+    printf("\t\t\t\t   * Tente memorizar as letras acima e boa sorte! *\n");addFade(1, 50, 1);
+    printf("\t\t\t\t              Tempo restante: %d segundos",cont);Sleep(tempo);
     Sleep(1000);
     system("cls");
     cont --;
     do{
-        printf("\n           As letras em braile nesta dificuldade são:     \n");
-        printf("\n          B          C          D          F          G    \n");
-        printf("\n        |o   |     |o  o|     |o  o|     |o  o|     |o  o|   ");
-        printf("\n        |o   |     |    |     |   o|     |o   |     |o  o|   ");
-        printf("\n        |    |     |    |     |    |     |    |     |    | \n");
-        printf("\n          H          J          K          L          M    \n");
-        printf("\n        |o   |     |   o|     |o   |     |o   |     |o  o|   ");
-        printf("\n        |o  o|     |o  o|     |    |     |o   |     |    |   ");
-        printf("\n        |    |     |    |     |o   |     |o   |     |o   | \n");
-        printf("\n         * Tente memorizar as letras acima e boa sorte! *");addFade(2, 50, 1);
+        addFade(11, 50, 0);
+        printf("\t\t\t\t      As letras em braile nesta dificuldade são:     \n");
+        printf("\n\t\t\t\t    B          C          D          F          G  \n");
+        printf("\t\t\t\t  |o   |     |o  o|     |o  o|     |o  o|     |o  o| \n");
+        printf("\t\t\t\t  |o   |     |    |     |   o|     |o   |     |o  o| \n");
+        printf("\t\t\t\t  |    |     |    |     |    |     |    |     |    | \n");
+        printf("\n\t\t\t\t    H          J          K          L          M  \n");
+        printf("\t\t\t\t  |o   |     |   o|     |o   |     |o   |     |o  o| \n");
+        printf("\t\t\t\t  |o  o|     |o  o|     |    |     |o   |     |    | \n");
+        printf("\t\t\t\t  |    |     |    |     |o   |     |o   |     |o   | \n\n\n");
+        printf("\t\t\t\t   * Tente memorizar as letras acima e boa sorte! *  \n\n");
         if(cont == 1){
-            printf("                    Tempo restante: %d segundo",cont);
+            printf("\t\t\t\t              Tempo restante: %d segundo",cont);
         }
         else{
-            printf("                    Tempo restante: %d segundos",cont);
+            printf("\t\t\t\t              Tempo restante: %d segundos",cont);
         }
         Sleep(1000);
         system("cls");
@@ -194,7 +198,7 @@ void opcao3(){
     char nome[40];
     if(confirmarJogo("MÉDIO II") == 0) return 0;
     boasVindas01("MÉDIO II");
-    printf(" -> Antes de começar, digite o seu nome: ");
+    printf("\t       -> Antes de começar, digite o seu nome: ");
     scanf("%s", nome);
     fflush(stdin);
     boasVindas02(nome);
@@ -288,7 +292,7 @@ void opcao4(){
     char nome[40];
     if(confirmarJogo("DIFÍCIL") == 0) return 0;
     boasVindas01("DIFÍCIL");
-    printf(" -> Antes de começar, digite o seu nome: ");
+    printf("\t       -> Antes de começar, digite o seu nome: ");
     scanf("%s", nome);
     fflush(stdin);
     boasVindas02(nome);
