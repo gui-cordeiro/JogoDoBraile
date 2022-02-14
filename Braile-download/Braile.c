@@ -5,17 +5,19 @@
 #include <locale.h>
 #include <math.h>
 #include <string.h>
+#define tempo 50
 
 int main(void) {
-    int tempo = 0, a = 0, erroMenu = 0;
+    int opt = 0, erroMenu = 0;
     configJogo();
-    newPergunta(1, 'A', 'I', 'E', 'U', 3, 'E', 0, 0);
+    confirmarJogo("MÉDIO II");
+    //newPergunta(1, 'A', 'I', 'E', 'U', 'c', 'E', 0, 0);
     apresentacao();
     do{
-        a = menu(erroMenu);
+        opt = menu(erroMenu);
         fflush(stdin);
         erroMenu = 0;
-        switch(a){
+        switch(opt){
             case 1:
                 opcao1();
                 break;
@@ -40,18 +42,26 @@ int main(void) {
                 apresentacao();
                 break;
             default:
-                a = 0;
+                opt = 0;
                 erroMenu ++;
                 system("cls");
-                addFade(1, 50, 0);
+                addFade(2, 50, 0);
                 telaErro();
                 //addFade(25, 0, 0);
                 //addFade(5, 30, 1);
         };
-    }while(a != 7);
+    }while(opt != 7);
     system("cls");
-    github();
-    printf("\n\t\t      **** Obrigado por jogar! Pressione qualquer tecla para sair do jogo ****");
+    printf("\t\t                                                                               __ \n");Sleep(tempo);
+    printf("\t\t       _____ _       _           _                          __                |  |\n");Sleep(tempo);
+    printf("\t\t      |     | |_ ___|_|___ ___ _| |___    ___ ___ ___    __|  |___ ___ ___ ___|  |\n");Sleep(tempo);
+    printf("\t\t      |  |  | . |  _| | . | .'| . | . |  | . | . |  _|  |  |  | . | . | .'|  _|__|\n");Sleep(tempo);
+    printf("\t\t      |_____|___|_| |_|_  |__,|___|___|  |  _|___|_|    |_____|___|_  |__,|_| |__|\n");Sleep(tempo);
+    printf("\t\t                      |___|              |_|                      |___|           \n");Sleep(tempo);
+    addFade(1, 50, 0);
+    exibirTelaGitHub();
+    printf("\n\t\t\t\t  **** Pressione qualquer tecla para sair do jogo ****");
     getchar();
+    system("cls");
     //addFade(30, 30, 1);
 }

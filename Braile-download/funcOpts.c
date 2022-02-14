@@ -80,23 +80,23 @@ void opcao1(){
         system("cls");
         cont --;
     }while(cont > 0);
-    if(newPergunta(1, 'A', 'I', 'E', 'U', 3, 'E', pts, acertos) == 1){
+    if(newPergunta(1, 'A', 'I', 'E', 'U', 'c', 'E', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(2, 'U', 'I', 'O', 'A', 1, 'U', pts, acertos) == 1){
+    if(newPergunta(2, 'U', 'I', 'O', 'A', 'a', 'U', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(3, 'E', 'O', 'I', 'A', 4, 'A', pts, acertos) == 1){
+    if(newPergunta(3, 'E', 'O', 'I', 'A', 'd', 'A', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(4, 'I', 'O', 'U', 'E', 1, 'I', pts, acertos) == 1){
+    if(newPergunta(4, 'I', 'O', 'U', 'E', 'a', 'I', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(5, 'O', 'A', 'U', 'E', 1, 'O', pts, acertos) == 1){
+    if(newPergunta(5, 'O', 'A', 'U', 'E', 'a', 'O', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
     if (acertos == 5) {
-        fimJogo(1, "FOI MAMÃO COM AÇÚCAR, NÃO FOI? COMO É? VOCÊ QUER UM DESAFIO? ENTÃO VÁ AO NÍVEL 'MÉDIO I'!", nome, pts, acertos, numPerg);
+        fimJogo(1, "ESSA FOI FÁCIL! MAS AGORA AS COISAS VÃO DIFICULTAR UM POUCO: VÁ AO NÍVEL 'MÉDIO I'!", nome, pts, acertos, numPerg);
     } else {
         fimJogo(1, "BOA TENTATIVA, MAS NÃO DESISTA! TENTE NOVAMENTE NESTE MODO, VOCÊ CONSEGUE!", nome, pts, acertos, numPerg);
     }
@@ -149,34 +149,34 @@ void opcao2(){
         system("cls");
         cont --;
     }while(cont > 0);
-    if(newPergunta(1, 'G', 'D', 'M', 'J', 1, 'G', pts, acertos) == 1){
+    if(newPergunta(1, 'G', 'D', 'M', 'J', 'a', 'G', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(2, 'C', 'H', 'L', 'B', 3, 'L', pts, acertos) == 1){
+    if(newPergunta(2, 'C', 'H', 'L', 'B', 'c', 'L', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(3, 'B', 'F', 'J', 'C', 4, 'C', pts, acertos) == 1){
+    if(newPergunta(3, 'B', 'F', 'J', 'C', 'd', 'C', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(4, 'G', 'J', 'D', 'M', 2, 'J', pts, acertos) == 1){
+    if(newPergunta(4, 'G', 'J', 'D', 'M', 'b', 'J', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(5, 'D', 'B', 'M', 'H', 3, 'M', pts, acertos) == 1){
+    if(newPergunta(5, 'D', 'B', 'M', 'H', 'c', 'M', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(6, 'B', 'J', 'H', 'D', 1, 'B', pts, acertos) == 1){
+    if(newPergunta(6, 'B', 'J', 'H', 'D', 'a', 'B', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(7, 'K', 'F', 'B', 'H', 1, 'K', pts, acertos) == 1){
+    if(newPergunta(7, 'K', 'F', 'B', 'H', 'a', 'K', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(8, 'M', 'D', 'C', 'H', 4, 'H', pts, acertos) == 1){
+    if(newPergunta(8, 'M', 'D', 'C', 'H', 'd', 'H', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(9, 'G', 'D', 'K', 'F', 2, 'D', pts, acertos) == 1){
+    if(newPergunta(9, 'G', 'D', 'K', 'F', 'b', 'D', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(10, 'F', 'M', 'B', 'J', 1, 'F', pts, acertos) == 1){
+    if(newPergunta(10, 'F', 'M', 'B', 'J', 'a', 'F', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
     if (acertos == 10) {
@@ -240,37 +240,37 @@ void opcao3(){
         system("cls");
         cont --;
     }while(cont > 0);
-    if(newPergunta(1, 'V', 'W', 'T', 'N', 1, 'V', pts, acertos) == 1){
+    if(newPergunta(1, 'V', 'W', 'T', 'N', 'a', 'V', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(2, 'P', 'S', 'Q', 'R', 3, 'Q', pts, acertos) == 1){
+    if(newPergunta(2, 'P', 'S', 'Q', 'R', 'c', 'Q', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(3, 'N', 'P', 'T', 'Y', 4, 'Y', pts, acertos) == 1){
+    if(newPergunta(3, 'N', 'P', 'T', 'Y', 'd', 'Y', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(4, 'Z', 'T', 'S', 'Y', 2, 'T', pts, acertos) == 1){
+    if(newPergunta(4, 'Z', 'T', 'S', 'Y', 'b', 'T', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(5, 'R', 'Z', 'P', 'W', 2, 'Z', pts, acertos) == 1){
+    if(newPergunta(5, 'R', 'Z', 'P', 'W', 'b', 'Z', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(6, 'V', 'W', 'Z', 'N', 4, 'N', pts, acertos) == 1){
+    if(newPergunta(6, 'V', 'W', 'Z', 'N', 'd', 'N', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(7, 'N', 'S', 'P', 'Y', 2, 'S', pts, acertos) == 1){
+    if(newPergunta(7, 'N', 'S', 'P', 'Y', 'b', 'S', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(8, 'S', 'Q', 'W', 'Y', 3, 'W', pts, acertos) == 1){
+    if(newPergunta(8, 'S', 'Q', 'W', 'Y', 'c', 'W', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(9, 'R', 'Q', 'P', 'Y', 1, 'R', pts, acertos) == 1){
+    if(newPergunta(9, 'R', 'Q', 'P', 'Y', 'a', 'R', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(10, 'Z', 'X', 'P', 'T', 2, 'X', pts, acertos) == 1){
+    if(newPergunta(10, 'Z', 'X', 'P', 'T', 'b', 'X', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(11, 'X', 'W', 'S', 'P', 4, 'P', pts, acertos) == 1){
+    if(newPergunta(11, 'X', 'W', 'S', 'P', 'd', 'P', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
     if (acertos == 11) {
@@ -335,82 +335,82 @@ void opcao4(){
         cont --;
     }while(cont > 0);
 
-    if(newPergunta(1, 'G', 'D', 'M', 'A', 1, 'G', pts, acertos) == 1){
+    if(newPergunta(1, 'G', 'D', 'M', 'A', 'a', 'G', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(2, 'V', 'I', 'U', 'N', 1, 'V', pts, acertos) == 1){
+    if(newPergunta(2, 'V', 'I', 'U', 'N', 'a', 'V', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(3, 'Q', 'S', 'P', 'R', 1, 'Q', pts, acertos) == 1){
+    if(newPergunta(3, 'Q', 'S', 'P', 'R', 'a', 'Q', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(4, 'C', 'H', 'L', 'E', 3, 'L', pts, acertos) == 1){
+    if(newPergunta(4, 'C', 'H', 'L', 'E', 'c', 'L', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(5, 'A', 'H', 'E', 'Z', 3, 'E', pts, acertos) == 1){
+    if(newPergunta(5, 'A', 'H', 'E', 'Z', 'c', 'E', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(6, 'B', 'F', 'J', 'C', 4, 'C', pts, acertos) == 1){
+    if(newPergunta(6, 'B', 'F', 'J', 'C', 'd', 'C', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(7, 'N', 'U', 'T', 'Y', 4, 'Y', pts, acertos) == 1){
+    if(newPergunta(7, 'N', 'U', 'T', 'Y', 'd', 'Y', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(8, 'Z', 'T', 'S', 'Y', 2, 'T', pts, acertos) == 1){
+    if(newPergunta(8, 'Z', 'T', 'S', 'Y', 'b', 'T', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(9, 'G', 'J', 'A', 'O', 2, 'J', pts, acertos) == 1){
+    if(newPergunta(9, 'G', 'J', 'A', 'O', 'b', 'J', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(10, 'U', 'C', 'H', 'P', 1, 'U', pts, acertos) == 1){
+    if(newPergunta(10, 'U', 'C', 'H', 'P', 'a', 'U', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(11, 'D', 'B', 'M', 'O', 3, 'M', pts, acertos) == 1){
+    if(newPergunta(11, 'D', 'B', 'M', 'O', 'c', 'M', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(12, 'R', 'Z', 'P', 'A', 2, 'Z', pts, acertos) == 1){
+    if(newPergunta(12, 'R', 'Z', 'P', 'A', 'b', 'Z', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(13, 'I', 'W', 'E', 'N', 4, 'N', pts, acertos) == 1){
+    if(newPergunta(13, 'I', 'W', 'E', 'N', 'd', 'N', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(14, 'B', 'J', 'H', 'U', 1, 'B', pts, acertos) == 1){
+    if(newPergunta(14, 'B', 'J', 'H', 'U', 'a', 'B', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(15, 'A', 'K', 'I', 'B', 1, 'A', pts, acertos) == 1){
+    if(newPergunta(15, 'A', 'K', 'I', 'B', 'a', 'A', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(16, 'K', 'F', 'B', 'O', 1, 'K', pts, acertos) == 1){
+    if(newPergunta(16, 'K', 'F', 'B', 'O', 'a', 'K', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(17, 'N', 'S', 'F', 'W', 2, 'S', pts, acertos) == 1){
+    if(newPergunta(17, 'N', 'S', 'F', 'W', 'b', 'S', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(18, 'A', 'W', 'Q', 'U', 2, 'W', pts, acertos) == 1){
+    if(newPergunta(18, 'A', 'W', 'Q', 'U', 'b', 'W', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(19, 'M', 'D', 'E', 'H', 4, 'H', pts, acertos) == 1){
+    if(newPergunta(19, 'M', 'D', 'E', 'H', 'd', 'H', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(20, 'O', 'I', 'M', 'Y', 2, 'I', pts, acertos) == 1){
+    if(newPergunta(20, 'O', 'I', 'M', 'Y', 'b', 'I', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(21, 'G', 'D', 'K', 'I', 2, 'D', pts, acertos) == 1){
+    if(newPergunta(21, 'G', 'D', 'K', 'I', 'b', 'D', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(22, 'R', 'A', 'P', 'I', 1, 'R', pts, acertos) == 1){
+    if(newPergunta(22, 'R', 'A', 'P', 'I', 'a', 'R', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(23, 'E', 'X', 'P', 'T', 2, 'X', pts, acertos) == 1){
+    if(newPergunta(23, 'E', 'X', 'P', 'T', 'b', 'X', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(24, 'F', 'M', 'J', 'P', 1, 'F', pts, acertos) == 1){
+    if(newPergunta(24, 'F', 'M', 'J', 'P', 'a', 'F', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(25, 'O', 'J', 'U', 'P', 1, 'O', pts, acertos) == 1){
+    if(newPergunta(25, 'O', 'J', 'U', 'P', 'a', 'O', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
-    if(newPergunta(26, 'P', 'E', 'S', 'O', 1, 'P', pts, acertos) == 1){
+    if(newPergunta(26, 'P', 'E', 'S', 'O', 'a', 'P', pts, acertos) == 1){
         pts += 150; acertos ++;
     }else pts += 50; numPerg ++;
 
@@ -597,7 +597,8 @@ void opcao6(){
     printf("\n\t\t\t\t   **** Pressione qualquer tecla para continuar ****");
     getch();
     system("cls");
-    github();
+    addFade(4, 50, 0);
+    exibirTelaGitHub();
     printf("\n\t\t\t       **** Pressione qualquer tecla para retornar ao menu ****");
     getch();
     //addFade(30, 25, 1);
