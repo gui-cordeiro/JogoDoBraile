@@ -10,9 +10,7 @@
 int main(void) {
     int opt = 0, erroMenu = 0;
     configJogo();
-    opcao2();
-    //confirmarJogo("MÉDIO II");
-    //newPergunta(1, 'A', 'I', 'E', 'U', 'c', 'E', 0, 0);
+    opcao5();
     apresentacao();
     do{
         opt = menu(erroMenu);
@@ -53,13 +51,8 @@ int main(void) {
         };
     }while(opt != 7);
     system("cls");
-    printf("\t\t                                                                               __ \n");Sleep(tempo);
-    printf("\t\t       _____ _       _           _                          __                |  |\n");Sleep(tempo);
-    printf("\t\t      |     | |_ ___|_|___ ___ _| |___    ___ ___ ___    __|  |___ ___ ___ ___|  |\n");Sleep(tempo);
-    printf("\t\t      |  |  | . |  _| | . | .'| . | . |  | . | . |  _|  |  |  | . | . | .'|  _|__|\n");Sleep(tempo);
-    printf("\t\t      |_____|___|_| |_|_  |__,|___|___|  |  _|___|_|    |_____|___|_  |__,|_| |__|\n");Sleep(tempo);
-    printf("\t\t                      |___|              |_|                      |___|           \n");Sleep(tempo);
-    addFade(1, 50, 0);
+    exibirBannerDificuldade("AGRADECIMENTO");
+    addFade(2, 50, 1);
     exibirTelaGitHub();
     printf("\n\t\t\t\t  **** Pressione qualquer tecla para sair do jogo ****");
     getchar();
