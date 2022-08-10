@@ -726,7 +726,7 @@ int opcao5(){
     printf("\t\t\t\t       |                                       |\n");Sleep(tempo);
     printf("\t\t\t\t       |        Total de ACERTOS: 5 / 5        |\n");
     printf("\t\t\t\t       |                                       |\n");Sleep(tempo);
-    printf("\t\t\t\t       |         Total de PONTOS: 750         |\n");
+    printf("\t\t\t\t       |         Total de PONTOS: 750          |\n");
     printf("\t\t\t\t       |                                       |\n");Sleep(tempo);
     printf("\t\t\t\t       +---------------------------------------+");Sleep(tempo);
     addFade(2, tempo, 1);
