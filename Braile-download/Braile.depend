@@ -49,25 +49,7 @@
 	<math.h>
 	<string.h>
 
-1644883010 source:c:\users\tatyk\onedrive\documentos\github\jogodobraile\braile-download\braile.c
-	<stdio.h>
-	<stdlib.h>
-	<time.h>
-	<windows.h>
-	<locale.h>
-	<math.h>
-	<string.h>
-
-1644881863 source:c:\users\tatyk\onedrive\documentos\github\jogodobraile\braile-download\funcopts.c
-	<stdio.h>
-	<stdlib.h>
-	<time.h>
-	<windows.h>
-	<locale.h>
-	<math.h>
-	<string.h>
-
-1644876496 source:c:\users\tatyk\onedrive\documentos\github\jogodobraile\braile-download\functauxiliar.c
+1660058987 source:c:\users\tatyk\onedrive\documentos\github\jogodobraile\braile-download\braile.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -76,4 +58,27 @@
 	<math.h>
 	<string.h>
 	<conio.h>
+	<ctype.h>
+
+1660096378 source:c:\users\tatyk\onedrive\documentos\github\jogodobraile\braile-download\funcopts.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<windows.h>
+	<locale.h>
+	<math.h>
+	<string.h>
+	<conio.h>
+	<ctype.h>
+
+1660096282 source:c:\users\tatyk\onedrive\documentos\github\jogodobraile\braile-download\functauxiliar.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<windows.h>
+	<locale.h>
+	<math.h>
+	<string.h>
+	<conio.h>
+	<ctype.h>
 

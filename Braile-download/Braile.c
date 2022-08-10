@@ -1,3 +1,9 @@
+/*
+ * -> Código-Fonte do Jogo do Braile
+ * -> Desenvolvido por: Guilherme Cordeiro
+ * -> Ano: 2017, 2022
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -5,12 +11,13 @@
 #include <locale.h>
 #include <math.h>
 #include <string.h>
+#include <conio.h>
+#include <ctype.h>
 #define tempo 50
 
 int main(void) {
     int opt = 0, erroMenu = 0;
     configJogo();
-    opcao5();
     apresentacao();
     do{
         opt = menu(erroMenu);
@@ -37,9 +44,6 @@ int main(void) {
                 break;
             case 7:
                 continue;
-            case 8:
-                apresentacao();
-                break;
             default:
                 opt = 0;
                 erroMenu ++;
@@ -50,12 +54,5 @@ int main(void) {
                 //addFade(5, 30, 1);
         };
     }while(opt != 7);
-    system("cls");
-    exibirBannerDificuldade("AGRADECIMENTO");
-    addFade(2, 50, 1);
-    exibirTelaGitHub();
-    printf("\n\t\t\t\t  **** Pressione qualquer tecla para sair do jogo ****");
-    getchar();
-    system("cls");
-    //addFade(30, 30, 1);
+    opcao7();
 }
