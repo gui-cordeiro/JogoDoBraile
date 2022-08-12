@@ -7,6 +7,20 @@
 			<Cursor1 position="472" topLine="37" />
 		</Cursor>
 	</File>
+	<File name="funcOpts.c" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="37936" topLine="177" />
+		</Cursor>
+		<Folding>
+			<Collapse line="18" />
+			<Collapse line="57" />
+			<Collapse line="137" />
+			<Collapse line="250" />
+			<Collapse line="375" />
+			<Collapse line="744" />
+			<Collapse line="786" />
+		</Folding>
+	</File>
 	<File name="functAuxiliar.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="31418" topLine="113" />
@@ -34,20 +48,6 @@
 			<Collapse line="871" />
 			<Collapse line="899" />
 			<Collapse line="919" />
-		</Folding>
-	</File>
-	<File name="funcOpts.c" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="38705" topLine="54" />
-		</Cursor>
-		<Folding>
-			<Collapse line="18" />
-			<Collapse line="57" />
-			<Collapse line="137" />
-			<Collapse line="250" />
-			<Collapse line="375" />
-			<Collapse line="574" />
-			<Collapse line="786" />
 		</Folding>
 	</File>
 </CodeBlocks_layout_file>
