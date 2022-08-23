@@ -49,7 +49,7 @@
 	<math.h>
 	<string.h>
 
-1660058987 source:c:\users\tatyk\onedrive\documentos\github\jogodobraile\braile-download\braile.c
+1661267746 source:c:\users\tatyk\onedrive\documentos\github\jogodobraile\braile-download\braile.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -59,6 +59,8 @@
 	<string.h>
 	<conio.h>
 	<ctype.h>
+	"functAuxiliar.h"
+	"funcOpts.h"
 
 1660109105 source:c:\users\tatyk\onedrive\documentos\github\jogodobraile\braile-download\funcopts.c
 	<stdio.h>
@@ -81,4 +83,8 @@
 	<string.h>
 	<conio.h>
 	<ctype.h>
+
+1661267365 c:\users\tatyk\onedrive\documentos\github\jogodobraile\braile-download\functauxiliar.h
+
+1661267372 c:\users\tatyk\onedrive\documentos\github\jogodobraile\braile-download\funcopts.h
 

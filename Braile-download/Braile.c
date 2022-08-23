@@ -15,6 +15,9 @@
 #include <ctype.h>
 #define tempo 50
 
+#include "functAuxiliar.h"
+#include "funcOpts.h"
+
 int main(void) {
     int opt = 0, erroMenu = 0;
     configJogo();

@@ -34,12 +34,8 @@
 		<Unit filename="Braile.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="funcOpts.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="functAuxiliar.c">
-			<Option compilerVar="CC" />
-		</Unit>
+		<Unit filename="funcOpts.h" />
+		<Unit filename="functAuxiliar.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

@@ -4,17 +4,6 @@
  * -> Ano: 2017, 2022
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <windows.h>
-#include <locale.h>
-#include <math.h>
-#include <string.h>
-#include <conio.h>
-#include <ctype.h>
-#define tempo 50
-
 /* 0) MENU PRINCIPAL */
 int menu(int erro){
     int i = 0, a = 0;
