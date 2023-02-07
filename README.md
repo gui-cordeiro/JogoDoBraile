@@ -1,7 +1,7 @@
 # 🕹️ Jogo do Braile 🕹️
 ## ♿ Aprenda este importante sistema de escrita tátil de forma simples e divertida! ♿
 
-> :warning: **ATENÇÃO**: **Usuários de Windows 11** se depararão com vários inconsistências no novo **Windows Terminal** (o substituto do clássico **Prompt de Comando**), como inconsistências no pré-redimensionamento da janela do console e nas animações de *fade-out* do programa.
+> :warning: **ATENÇÃO**: **Usuários de Windows 11** se depararão com algumas inconsistências no novo **Windows Terminal** (o substituto do clássico **Prompt de Comando**), como no pré-dimensionamento da janela do console e nas animações de *fade-out* do programa.
 > 
 > Para mais informações sobre o problema e possíveis soluções, [acesse a Issue relacionada](https://github.com/gui-cordeiro/JogoDoBraile/issues/1).
 
