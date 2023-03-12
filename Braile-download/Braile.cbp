@@ -31,11 +31,14 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Braile.c">
+		<Linker>
+			<Add option="-lwinmm" />
+		</Linker>
+		<Unit filename="config-functions.h" />
+		<Unit filename="main-functions.h" />
+		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="funcOpts.h" />
-		<Unit filename="functAuxiliar.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

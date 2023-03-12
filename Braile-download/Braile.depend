@@ -88,3 +88,38 @@
 
 1661267372 c:\users\tatyk\onedrive\documentos\github\jogodobraile\braile-download\funcopts.h
 
+1676562652 source:c:\users\guilh\onedrive\documentos\github\jogodobraile\braile-download\braile.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<windows.h>
+	<locale.h>
+	<math.h>
+	<string.h>
+	<conio.h>
+	<ctype.h>
+	"functAuxiliar.h"
+	"funcOpts.h"
+
+1676261547 c:\users\guilh\onedrive\documentos\github\jogodobraile\braile-download\functauxiliar.h
+
+1676562911 c:\users\guilh\onedrive\documentos\github\jogodobraile\braile-download\funcopts.h
+
+1678488098 source:c:\users\guilh\onedrive\documentos\github\jogodobraile\braile-download\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<windows.h>
+	<locale.h>
+	<math.h>
+	<string.h>
+	<conio.h>
+	<ctype.h>
+	<stdbool.h>
+	"config-functions.h"
+	"main-functions.h"
+
+1678658615 c:\users\guilh\onedrive\documentos\github\jogodobraile\braile-download\config-functions.h
+
+1678656042 c:\users\guilh\onedrive\documentos\github\jogodobraile\braile-download\main-functions.h
+
