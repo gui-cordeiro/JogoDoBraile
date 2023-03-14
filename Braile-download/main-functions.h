@@ -122,29 +122,31 @@ void opcao1(){
     titulo("FÁCIL", "O jogo começará em breve...");
 
     setlocale(LC_ALL, "C");
-    linhaCol(14, 37); printf("%c ", 254);
+    linhaCol(14, 38); printf("%c ", 254);
     setlocale(LC_ALL, "Portuguese");
     printf("As letras em braile nesta dificuldade são");
     setlocale(LC_ALL, "C");
     printf(" %c", 254);
     setlocale(LC_ALL, "Portuguese");
-    linhaCol(17, 37); printf("A          E          I          O          U ");
-    linhaCol(18, 35); printf("|o   |     |o   |     |   o|     |o   |     |o   |");
-    linhaCol(19, 35); printf("|    |     |   o|     |o   |     |   o|     |    |");
-    linhaCol(20, 35); printf("|    |     |    |     |    |     |o   |     |o  o|");
+
+    printAlfabeto('A', 18, 37, true);
+    printAlfabeto('E', 18, 48, true);
+    printAlfabeto('I', 18, 59, true);
+    printAlfabeto('O', 18, 70, true);
+    printAlfabeto('U', 18, 81, true);
 
     setlocale(LC_ALL, "C");
-    linhaCol(23, 36); printf("%c ", 254);
+    linhaCol(24, 36); printf("%c ", 254);
     setlocale(LC_ALL, "Portuguese");
     printf("Tente memorizar as letras acima e boa sorte!");
     setlocale(LC_ALL, "C");
     printf(" %c", 254);
     setlocale(LC_ALL, "Portuguese");
 
-    linhaCol(25, 45); printf("Tempo restante: %d segundo(s)",cont);
+    linhaCol(26, 45); printf("Tempo restante: %d segundo(s)",cont);
     do{
         //if (cont < 3) PlaySound(TEXT("..\\sounds\\countdown.wav"), NULL, SND_ASYNC);
-        linhaCol(25, 45); printf("Tempo restante: %d segundo(s) ", cont);
+        linhaCol(26, 45); printf("Tempo restante: %d segundo(s) ", cont);
         for (int fast = 0; fast < 78; fast ++) {
             Sleep(10);
             if (GetAsyncKeyState(VK_SHIFT)) {
@@ -185,6 +187,7 @@ void opcao1(){
         } else {
         }
     }
+    system("cls");
     fimJogo("FÁCIL", pts, acertos, totPerguntas);
     return;
 }
@@ -719,7 +722,7 @@ int opcao6(){
     printf("\t\t\t\t   |     Letra escrita em Braile (EM DESTAQUE)     |\n");Sleep(tempo);
     printf("\t\t\t\t   +-----------------------------------------------+\n");Sleep(tempo);
     printf("\t\t\t\t   |                                               |");Sleep(tempo);
-    printAlfabeto('E', 34, true);
+    printAlfabeto('E', 21, 34, true);
     printf("\n\t\t\t\t   |                                               |\n");Sleep(tempo);
     printf("\t\t\t\t   +-----------------------------------------------+");Sleep(tempo);
     addFade(2, tempo, 1);
@@ -742,7 +745,7 @@ int opcao6(){
     printf("\t\t\t\t   |     Letra escrita em Braile (EM DESTAQUE)     |\n");Sleep(tempo);
     printf("\t\t\t\t   +-----------------------------------------------+\n");Sleep(tempo);
     printf("\t\t\t\t   |                                               |");Sleep(tempo);
-    printAlfabeto('E', 34, true);
+    printAlfabeto('E', 21, 34, true);
     printf("\n\t\t\t\t   |                                               |\n");Sleep(tempo);
     printf("\t\t\t\t   +-----------------------------------------------+");Sleep(tempo);
     addFade(2, tempo, 1);
@@ -771,7 +774,7 @@ int opcao6(){
     printf("\t\t\t\t   |     Letra escrita em Braile (EM DESTAQUE)     |\n");Sleep(tempo);
     printf("\t\t\t\t   +-----------------------------------------------+\n");Sleep(tempo);
     printf("\t\t\t\t   |                                               |");Sleep(tempo);
-    printAlfabeto('E', 34, true);
+    printAlfabeto('E', 21, 34, true);
     printf("\n\t\t\t\t   |                                               |\n");Sleep(tempo);
     printf("\t\t\t\t   +-----------------------------------------------+");Sleep(tempo);
     addFade(2, tempo, 1);

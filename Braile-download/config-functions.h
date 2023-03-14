@@ -123,7 +123,7 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
     printf(" %c", 254);
     setlocale(LC_ALL, "Portuguese");
 
-    printAlfabeto(letrResp2, 34, false);
+    printAlfabeto(letrResp2, 21, 34, false);
 
     linhaCol(25, 33); printf("ATUAL");
 
@@ -133,7 +133,7 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
         setlocale(LC_ALL, "Portuguese");
         textColor(DARKGRAY, _BLACK);
 
-        printAlfabeto(letrResp1, 20, true);
+        printAlfabeto(letrResp1, 21, 20, true);
 
         linhaCol(25, 18); printf("Anterior");
     }
@@ -145,23 +145,105 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
         setlocale(LC_ALL, "Portuguese");
         textColor(DARKGRAY, _BLACK);
 
-        printAlfabeto(letrResp3, 48, false);
+        printAlfabeto(letrResp3, 21, 48, false);
 
         linhaCol(25, 46); printf("Próximo");
     }
     textColor(WHITE, _BLACK);
 
     opt = modeloMenu(17, 88, 4, lista);
-
     if (opt - 1 == posCorreta) {
         acertoCont = true;
         totPts += 150;
         totAcertos ++;
         progresso[questao - 1] = 1;
+
+        textColor(GREEN, BLACK);
+        box(9, 3, 31, 117);
+
+        linhaCol(11, 29); printf("                                                           __ ");
+        linhaCol(12, 29); printf(" _____         _                                  _       |  |");
+        linhaCol(13, 29); printf("|     |___ ___| |_ ___    ___ ___ ___ ___ ___ ___| |_ ___ |  |");
+        linhaCol(14, 29); printf("|   --| -_|  _|  _| .'|  |  _| -_|_ -| . | . |_ -|  _| .'||__|");
+        linhaCol(15, 29); printf("|_____|___|_| |_| |__,|  |_| |___|___|  _|___|___|_| |__,||__|");
+        linhaCol(16, 29); printf("                                     |_|                      ");
+
+        setlocale(LC_ALL, "C");
+        linhaCol(28, 42); printf("%c ", 254);
+        setlocale(LC_ALL, "Portuguese");
+        printf("Pressione ENTER para continuar");
+        setlocale(LC_ALL, "C");
+        printf(" %c", 254);
+        setlocale(LC_ALL, "Portuguese");
+
+        box(18, 29, 25, 90);
+        linhaCol(21, 32); printf(" Sua resposta: ");
+        printAlfabeto(letrResp2, 21, 51, true);
+        setlocale(LC_ALL, "C");
+
+        linhaCol(18, 59); printf("%c", 194);
+        for (int cont = 0; cont <= 6; cont ++) {
+            linhaCol(19 + cont, 59); printf("%c", 179);
+        }
+        linhaCol(25, 59); printf("%c", 193);
+
+        linhaCol(20, 67); printf("%c ", 254);
+        setlocale(LC_ALL, "Portuguese");
+        printf("Você recebeu");
+        setlocale(LC_ALL, "C");
+        printf(" %c", 254);
+        setlocale(LC_ALL, "Portuguese");
+        linhaCol(22, 62); printf("+1 ACERTO  E  +150 PONTOS!");
     } else {
         totPts += 50;
         totErros ++;
         progresso[questao - 1] = 0;
+
+        textColor(RED, BLACK);
+        box(9, 3, 31, 117);
+
+        linhaCol(10, 16); printf("                                                          ___                           ");
+        linhaCol(11, 16); printf("                                                         / _ \\                          ");
+        linhaCol(12, 16); printf(" _____                                      _____       /_/ \\_\\                         ");
+        linhaCol(13, 16); printf("|     |_ _ ___    ___ ___ ___ ___          |  |  |___ ___ ___    ___ ___ ___ ___ _ _    ");
+        linhaCol(14, 16); printf("|  |  | | | -_|  | . | -_|   | .'| _ _ _   |  |  | . |  _| -_|  | -_|  _|  _| . | | | _ ");
+        linhaCol(15, 16); printf("|__  _|___|___|  |  _|___|_|_|__,||_|_|_|   \\___/|___|___|___|  |___|_| |_| |___|___||_|");
+        linhaCol(16, 16); printf("   |__|          |_|                                                                    ");
+
+        setlocale(LC_ALL, "C");
+        linhaCol(28, 42); printf("%c ", 254);
+        setlocale(LC_ALL, "Portuguese");
+        printf("Pressione ENTER para continuar");
+        setlocale(LC_ALL, "C");
+        printf(" %c", 254);
+        setlocale(LC_ALL, "Portuguese");
+
+        box(18, 14, 25, 104);
+        linhaCol(21, 17); printf("Você escolheu: ");
+        printAlfabeto(alt[opt - 1], 21, 36, true);
+        setlocale(LC_ALL, "C");
+
+        linhaCol(18, 44); printf("%c", 194);
+        linhaCol(18, 74); printf("%c", 194);
+        for (int cont = 0; cont <= 6; cont ++) {
+            linhaCol(19 + cont, 44); printf("%c", 179);
+            linhaCol(19 + cont, 74); printf("%c", 179);
+        }
+        linhaCol(25, 44); printf("%c", 193);
+        linhaCol(25, 74); printf("%c", 193);
+
+        linhaCol(21, 48); printf(" A resposta");
+        linhaCol(22, 48); printf("correta era:");
+        printAlfabeto(letrResp2, 21, 66, true);
+
+        setlocale(LC_ALL, "C");
+        linhaCol(20, 81); printf("%c ", 254);
+        setlocale(LC_ALL, "Portuguese");
+        printf("Você recebeu");
+        setlocale(LC_ALL, "C");
+        printf(" %c", 254);
+        setlocale(LC_ALL, "Portuguese");
+        linhaCol(22, 78); printf("+1 ERRO  E  +50 PONTOS.");
     }
 
     currentProgressionBanner(dificuldade, progresso, totAcertos, totErros, totPts);
@@ -175,6 +257,8 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
         tecla = (tecla == 0 || tecla == 224) ? getch() : tecla;
         if (tecla == 13) break;
     }
+    cleanScreen(6);
+    textColor(WHITE, _BLACK);
     return acertoCont;
 }
 
@@ -244,16 +328,17 @@ void apresentacao(){
 }
 
 /* D) ALFABETO EM BRAILE */
-void printAlfabeto(char letra, int col, bool isVisible){
+void printAlfabeto(char letra, int lin1, int col, bool isVisible){
     //int tempo = 50;
-    int lin1 = 21, lin2 = 22, lin3 = 23;
-    box(20, col - 2, 24, col + 4);
+    int lin2 = lin1 + 1, lin3 = lin1 + 2;
+    box(lin1 - 1, col - 2, lin1 + 3, col + 4);
+    SetConsoleOutputCP(CP_UTF8);
     setlocale(LC_ALL, "C");
     switch(tolower(letra)){
         case 'a':
-            linhaCol(lin1, col); printf("o %c", 250);
-            linhaCol(lin2, col); printf("%c %c", 250, 250);
-            linhaCol(lin3, col); printf("%c %c", 250, 250);
+            linhaCol(lin1, col); printf("\u25cf \u25cb");
+            linhaCol(lin2, col); printf("\u25cb \u25cb");
+            linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'b':
             printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
@@ -272,9 +357,9 @@ void printAlfabeto(char letra, int col, bool isVisible){
             break;
         case 'e':
             linhaCol(lin1 - 2, col + 1); printf("E");
-            linhaCol(lin1, col); printf("o %c", 250);
-            linhaCol(lin2, col); printf("%c o", 250);
-            linhaCol(lin3, col); printf("%c %c", 250, 250);
+            linhaCol(lin1, col); printf("\u25cf \u25cb");
+            linhaCol(lin2, col); printf("\u25cb \u25cf");
+            linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'f':
             printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
@@ -293,9 +378,9 @@ void printAlfabeto(char letra, int col, bool isVisible){
             break;
         case 'i':
             linhaCol(lin1 - 2, col + 1); printf("I");
-            linhaCol(lin1, col); printf("%c o", 250);
-            linhaCol(lin2, col); printf("o %c", 250);
-            linhaCol(lin3, col); printf("%c %c", 250, 250);
+            linhaCol(lin1, col); printf("\u25cb \u25cf");
+            linhaCol(lin2, col); printf("\u25cf \u25cb");
+            linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'j':
             printf("\n\t\t\t\t   |                   |   o|                      |");Sleep(tempo);
@@ -324,9 +409,9 @@ void printAlfabeto(char letra, int col, bool isVisible){
             break;
         case 'o':
             linhaCol(lin1 - 2, col + 1); printf("O");
-            linhaCol(lin1, col); printf("o %c", 250);
-            linhaCol(lin2, col); printf("%c o", 250);
-            linhaCol(lin3, col); printf("o %c", 250);
+            linhaCol(lin1, col); printf("\u25cf \u25cb");
+            linhaCol(lin2, col); printf("\u25cb \u25cf");
+            linhaCol(lin3, col); printf("\u25cf \u25cb");
             break;
         case 'p':
             printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
@@ -355,9 +440,9 @@ void printAlfabeto(char letra, int col, bool isVisible){
             break;
         case 'u':
             linhaCol(lin1 - 2, col + 1); printf("U");
-            linhaCol(lin1, col); printf("o %c", 250);
-            linhaCol(lin2, col); printf("%c %c", 250, 250);
-            linhaCol(lin3, col); printf("o o");
+            linhaCol(lin1, col); printf("\u25cf \u25cb");
+            linhaCol(lin2, col); printf("\u25cb \u25cb");
+            linhaCol(lin3, col); printf("\u25cf \u25cf");
             break;
         case 'v':
             printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
@@ -385,6 +470,7 @@ void printAlfabeto(char letra, int col, bool isVisible){
             printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
             break;
     }
+    SetConsoleOutputCP(850);
     setlocale(LC_ALL, "Portuguese");
     linhaCol(lin1 - 2, col + 1);
     if (isVisible == true) printf("%c", letra);
@@ -456,14 +542,14 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
     titulo(nivel, "Entrando no jogo, prepare-se!");
     bottomBannerTitle(1);
     setlocale(LC_ALL, "C");
-    linhaCol(13, 21); printf("%c ", 254);
+    linhaCol(12, 21); printf("%c ", 254);
     setlocale(LC_ALL, "Portuguese");
     printf("Boas vindas ao \"Jogo do Braile\"! Pressione Enter para iniciar o jogo agora.");
     setlocale(LC_ALL, "C");
     printf(" %c", 254);
     setlocale(LC_ALL, "Portuguese");
 
-    box(16, 14, 24, 106);
+    box(15, 13, 25, 107);
     linhaCol(17, 16);printf("########  #### ##     ## #### ########  ########    ###             ######  ######## ####");
     linhaCol(18, 16);printf("##     ##  ##  ##     ##  ##  ##     ##    ##      ## ##           ##    ## ##       ####");
     linhaCol(19, 16);printf("##     ##  ##  ##     ##  ##  ##     ##    ##     ##   ##          ##       ##       ####");
@@ -473,7 +559,7 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
     linhaCol(23, 16);printf("########  ####    ###    #### ##     ##    ##    ##     ##          ######  ######## ####");
 
     setlocale(LC_ALL, "C");
-    linhaCol(27, 15); printf("%c ", 254);
+    linhaCol(28, 15); printf("%c ", 254);
     setlocale(LC_ALL, "Portuguese");
     printf("DICA: Acompanhe o seu progresso de acertos e erros através da barra situada logo abaixo");
     setlocale(LC_ALL, "C");
@@ -1152,15 +1238,18 @@ void box(int lin1, int col1, int lin2, int col2) {
     }
 
     //Definindo os vértices da caixa
-    linhaCol(lin1, col1);
-    printf("%c", 218);
-    linhaCol(lin1, col2);
-    printf("%c", 191);
-    linhaCol(lin2, col1);
-    printf("%c", 192);
-    linhaCol(lin2, col2);
-    printf("%c", 217);
+    SetConsoleOutputCP(CP_UTF8);
 
+    linhaCol(lin1, col1);
+    printf("\u256d");
+    linhaCol(lin1, col2);
+    printf("\u256e");
+    linhaCol(lin2, col1);
+    printf("\u2570");
+    linhaCol(lin2, col2);
+    printf("\u256f");
+
+    SetConsoleOutputCP(850);
     setlocale(LC_ALL, "Portuguese");
 }
 
@@ -1200,10 +1289,12 @@ void topBannerContent(char titulo[20]) {
     linhaCol(7, refer + 4);printf("%c", 193);
     linhaCol(7, refer + 8);printf("%c", 193);
 
-    linhaCol(4, refer + 6);printf("%c", 30);  //Cima
-    linhaCol(6, refer + 6);printf("%c", 31);  //Baixo
-    linhaCol(6, refer + 2);printf("%c", 17);  //Esquerda
-    linhaCol(6, refer + 10);printf("%c", 16); //Direita
+    SetConsoleOutputCP(CP_UTF8);
+    linhaCol(4, refer + 6); printf("\u25b2");  //Cima
+    linhaCol(6, refer + 6); printf("\u25bc");  //Baixo
+    linhaCol(6, refer + 2); printf("\u25c4");  //Esquerda
+    linhaCol(6, refer + 10); printf("\u25ba"); //Direita
+    SetConsoleOutputCP(850);
     setlocale(LC_ALL, "Portuguese");
 
     linhaCol(6, refer + 13);printf(" ou ");
@@ -1230,14 +1321,18 @@ void topBannerContent(char titulo[20]) {
 
     box(3, refer + 35, 7, refer + 41);
     setlocale(LC_ALL, "C");
-    linhaCol(5, refer + 35); printf("%c", 191);
     linhaCol(5, refer + 34); printf("%c", 196);
-    linhaCol(5, refer + 33); printf("%c", 192);
     linhaCol(4, refer + 33); printf("%c", 179);
-    linhaCol(3, refer + 33); printf("%c", 218);
     linhaCol(3, refer + 34); printf("%c%c", 196, 196);
-    linhaCol(4, refer + 34); printf(" ");
+
+    SetConsoleOutputCP(CP_UTF8);
+    linhaCol(5, refer + 35); printf("\u256e");
+    linhaCol(5, refer + 33); printf("\u2570");
+    linhaCol(3, refer + 33); printf("\u256d");
+    SetConsoleOutputCP(850);
+
     linhaCol(4, refer + 35); printf("Enter");
+
     setlocale(LC_ALL, "Portuguese");
 }
 
@@ -1249,9 +1344,9 @@ void bottomBannerDesign() {
 void bottomBannerTitle(int opt) {
     linhaCol(33, 2);
     if (opt == 0) {
-        printf(" Descrição:           ");
+        printf(" Descrição:");
     } else {
-        printf(" Seu progresso atual:");
+        printf("           ");
     }
 }
 
@@ -1486,6 +1581,7 @@ int modeloMenu(int lin1, int col1, int qtd, char lista[][40]) {
 
 void currentProgressionBanner(char difficulty[8], int currentProgression[26], int acertos, int erros, int pontos) {
     int cont, numColuna, numPerg, numBar, colAtual;
+    bool perguntaAtual = false;
     setlocale(LC_ALL, "C");
     if (strcmp(difficulty, "FÁCIL") == 0) {
         numPerg = 5;
@@ -1511,18 +1607,29 @@ void currentProgressionBanner(char difficulty[8], int currentProgression[26], in
             colAtual = numColuna + ((numBar) * cont);
         }
 
+        SetConsoleOutputCP(CP_UTF8);
         linhaCol(33, colAtual);
 
         if (currentProgression[cont] == 0) {
             textColor(RED, _BLACK);
             printf("X");
+            linhaCol(35, colAtual); printf(" ");
         } else if (currentProgression[cont] == 1) {
             textColor(GREEN, _BLACK);
-            printf("%c", 2);
+            printf("\u2713");
+            linhaCol(35, colAtual); printf(" ");
         } else {
             textColor(WHITE, _BLACK);
-            printf("%c", 4);
+            printf("\u2666");
+            if (perguntaAtual == false) {
+                textColor(BROWN, _BLACK);
+                linhaCol(35, colAtual); printf("\u2302");
+                textColor(WHITE, _BLACK);
+                perguntaAtual = true;
+            }
         }
+
+        SetConsoleOutputCP(850);
 
         if (strcmp(difficulty, "DIFÍCIL") == 0) {
             if (cont == 0) {
@@ -1565,7 +1672,16 @@ void currentProgressionBanner(char difficulty[8], int currentProgression[26], in
     textColor(WHITE, _BLACK);
     box(36, 39, 38, 80);
 
-    linhaCol(37, 40); printf(" ACERTOS: 0%d | ERROS: 0%d | PONTOS: 000%d", acertos, erros, pontos);
+    linhaCol(37, 40);
+    printf(" ACERTOS: ");
+    if (acertos < 10) printf("0");
+    printf("%d | ERROS: ", acertos);
+    if (erros < 10) printf("0");
+    printf("%d | PONTOS: ", erros);
+    if (pontos < 10) printf("000");
+    else if (pontos < 100) printf("00");
+    else if (pontos < 1000) printf("0");
+    printf("%d", pontos);
 
     setlocale(LC_ALL, "C");
     linhaCol(38, 39); printf("%c", 193);
@@ -1580,3 +1696,4 @@ void currentProgressionBanner(char difficulty[8], int currentProgression[26], in
     linhaCol(37, 65); printf("%c", 179);
     setlocale(LC_ALL, "Portuguese");
 }
+
