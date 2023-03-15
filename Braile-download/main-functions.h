@@ -193,11 +193,13 @@ void opcao1(){
 }
 
 /* 2) JOGAR - NÍVEL MÉDIO I */
-void opcao2(){/*
+void opcao2(){
     int cont = 35;
     int conf = 0, pts = 0, acertos = 0;
     int ordem[10];
     int progresso[10] = {2,2,2,2,2,2,2,2,2,2};
+    char letras[10] = {'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M'};
+    char altAtuais[3] = {' ', ' ', ' '};
     size_t totPerguntas = sizeof(ordem)/sizeof(ordem[0]);
     char tituloPergunta[15];
     char numPerguntaChar[3];
@@ -306,7 +308,7 @@ void opcao2(){/*
             break;
         }
     }
-    fimJogo("MÉDIO I", pts, acertos, totPerguntas);*/
+    fimJogo("MÉDIO I", pts, acertos, totPerguntas);
     return;
 }
 

@@ -1,7 +1,7 @@
 /*
  * -> Código-Fonte do Jogo do Braile
  * -> Desenvolvido por: Guilherme Cordeiro
- * -> Ano: 2017, 2022
+ * -> Ano: 2017, 2023
  */
 
 enum {
@@ -26,7 +26,7 @@ enum {
 enum {
     _BLACK=0,
     _BLUE=16,
-    _GREEN=32,
+    _GREEN=32, //32
     _CYAN=48,
     _RED=64,
     _MAGENTA=80,
@@ -152,14 +152,17 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
     textColor(WHITE, _BLACK);
 
     opt = modeloMenu(17, 88, 4, lista);
+    cleanScreen(6);
     if (opt - 1 == posCorreta) {
         acertoCont = true;
         totPts += 150;
         totAcertos ++;
         progresso[questao - 1] = 1;
 
-        textColor(GREEN, BLACK);
-        box(9, 3, 31, 117);
+        PlaySound(TEXT("..\\sounds\\win.wav"), NULL, SND_ASYNC);
+
+        textColor(LIGHTGREEN, _BLACK);
+        box(9, 18, 31, 102);
 
         linhaCol(11, 29); printf("                                                           __ ");
         linhaCol(12, 29); printf(" _____         _                                  _       |  |");
@@ -199,8 +202,10 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
         totErros ++;
         progresso[questao - 1] = 0;
 
-        textColor(RED, BLACK);
-        box(9, 3, 31, 117);
+        PlaySound(TEXT("..\\sounds\\lose.wav"), NULL, SND_ASYNC);
+
+        textColor(LIGHTRED, _BLACK);
+        box(9, 11, 31, 109);
 
         linhaCol(10, 16); printf("                                                          ___                           ");
         linhaCol(11, 16); printf("                                                         / _ \\                          ");
@@ -1148,7 +1153,7 @@ void gerarSeqAlt(char dificuldade[8], char *alt, char letrResp1, char letrResp2)
         altGerada = toupper(gerarLetra(dificuldade));
         //printf("Caractere gerado: %c\n", altGerada);
         if (altGerada == letrResp1 || altGerada == letrResp2) {
-            //printf("Descartado! A letra gerada é igual a da resposta ou foi selecionada na pergunta anterior!\n");
+            //printf("Descartado! A letra gerada é igual a da resposta ou já foi apresentada na pergunta anterior!\n");
             continue;
         }
         for (c = 0; c < 3; c ++) {
@@ -1611,7 +1616,7 @@ void currentProgressionBanner(char difficulty[8], int currentProgression[26], in
         linhaCol(33, colAtual);
 
         if (currentProgression[cont] == 0) {
-            textColor(RED, _BLACK);
+            textColor(LIGHTRED, _BLACK);
             printf("X");
             linhaCol(35, colAtual); printf(" ");
         } else if (currentProgression[cont] == 1) {

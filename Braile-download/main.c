@@ -1,7 +1,7 @@
 /*
  * -> Código-Fonte do Jogo do Braile
  * -> Desenvolvido por: Guilherme Cordeiro
- * -> Ano: 2017, 2022
+ * -> Ano: 2017, 2023
  */
 
 #include <stdio.h>
