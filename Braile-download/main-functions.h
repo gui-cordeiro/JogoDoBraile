@@ -194,7 +194,7 @@ void opcao1(){
 
 /* 2) JOGAR - NÍVEL MÉDIO I */
 void opcao2(){
-    int cont = 35;
+    /*int cont = 35;
     int conf = 0, pts = 0, acertos = 0;
     int ordem[10];
     int progresso[10] = {2,2,2,2,2,2,2,2,2,2};
@@ -308,7 +308,7 @@ void opcao2(){
             break;
         }
     }
-    fimJogo("MÉDIO I", pts, acertos, totPerguntas);
+    fimJogo("MÉDIO I", pts, acertos, totPerguntas);*/
     return;
 }
 
