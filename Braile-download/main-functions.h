@@ -122,31 +122,33 @@ void opcao1(){
     titulo("FÁCIL", "O jogo começará em breve...");
 
     setlocale(LC_ALL, "C");
-    linhaCol(14, 38); printf("%c ", 254);
+    linhaCol(14, 36); printf("%c ", 254);
     setlocale(LC_ALL, "Portuguese");
-    printf("As letras em braile nesta dificuldade são");
+    printf("Tente memorizar as letras abaixo e boa sorte!");
     setlocale(LC_ALL, "C");
     printf(" %c", 254);
     setlocale(LC_ALL, "Portuguese");
 
-    printAlfabeto('A', 18, 37, true);
-    printAlfabeto('E', 18, 48, true);
-    printAlfabeto('I', 18, 59, true);
-    printAlfabeto('O', 18, 70, true);
-    printAlfabeto('U', 18, 81, true);
+    printAlfabeto('A', 19, 37, true);
+    printAlfabeto('E', 19, 48, true);
+    printAlfabeto('I', 19, 59, true);
+    printAlfabeto('O', 19, 70, true);
+    printAlfabeto('U', 19, 81, true);
 
     setlocale(LC_ALL, "C");
-    linhaCol(24, 36); printf("%c ", 254);
+    linhaCol(25, 43); printf("%c ", 254);
     setlocale(LC_ALL, "Portuguese");
-    printf("Tente memorizar as letras acima e boa sorte!");
+    printf("Tempo restante: ");
+    if (cont < 10) printf("0");
+    printf("%d segundo(s)", cont);
     setlocale(LC_ALL, "C");
     printf(" %c", 254);
     setlocale(LC_ALL, "Portuguese");
 
-    linhaCol(26, 45); printf("Tempo restante: %d segundo(s)",cont);
     do{
-        //if (cont < 3) PlaySound(TEXT("..\\sounds\\countdown.wav"), NULL, SND_ASYNC);
-        linhaCol(26, 45); printf("Tempo restante: %d segundo(s) ", cont);
+        linhaCol(25, 61);
+        if (cont < 10) printf("0");
+        printf("%d segundo(s)", cont);
         for (int fast = 0; fast < 78; fast ++) {
             Sleep(10);
             if (GetAsyncKeyState(VK_SHIFT)) {
@@ -156,9 +158,7 @@ void opcao1(){
         }
         cont --;
     }while(cont > 0);
-    fflush(stdin);
     cleanScreen(2);
-    //PlaySound(TEXT("..\\sounds\\start.wav"), NULL, SND_ASYNC);
     gerarSeqPerguntas(ordem, totPerguntas);
     for (int numPergunta = 1; numPergunta <= 5; numPergunta ++) {
         strcpy(tituloPergunta, "Pergunta nº ");
@@ -182,10 +182,7 @@ void opcao1(){
             altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
             altAtuais[2] = letras[ordem[numPergunta] - 1];
         }
-
-        if (newPergunta("FÁCIL", numPergunta, altAtuais[0], altAtuais[1], altAtuais[2], &acertos, &erros, &pts, progresso) == true){
-        } else {
-        }
+        newPergunta("FÁCIL", numPergunta, altAtuais[0], altAtuais[1], altAtuais[2], &acertos, &erros, &pts, progresso);
     }
     system("cls");
     fimJogo("FÁCIL", pts, acertos, totPerguntas);
@@ -194,8 +191,8 @@ void opcao1(){
 
 /* 2) JOGAR - NÍVEL MÉDIO I */
 void opcao2(){
-    /*int cont = 35;
-    int conf = 0, pts = 0, acertos = 0;
+    int cont = 35;
+    int pts = 0, acertos = 0, erros = 0, pontos = 0, tecla = 0;
     int ordem[10];
     int progresso[10] = {2,2,2,2,2,2,2,2,2,2};
     char letras[10] = {'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M'};
@@ -204,38 +201,47 @@ void opcao2(){
     char tituloPergunta[15];
     char numPerguntaChar[3];
     int perguntaEscolhida = 0;
+
     if(confirmarJogo("MÉDIO I", progresso) == 0) return 0;
     topBannerContent("MÉDIO I");
-    currentProgressionBanner("MÉDIO I", progresso);
+    currentProgressionBanner("MÉDIO I", progresso, acertos, erros, pontos);
+
     titulo("MÉDIO I", "O jogo começará em breve...");
+
     setlocale(LC_ALL, "C");
-    linhaCol(12, 37); printf("%c ", 254);
+    linhaCol(11, 36); printf("%c ", 254);
     setlocale(LC_ALL, "Portuguese");
-    printf("As letras em braile nesta dificuldade são");
-    setlocale(LC_ALL, "C");
-    printf(" %c", 254);
-    setlocale(LC_ALL, "Portuguese");
-    linhaCol(15, 37); printf("B          C          D          F          G   ");
-    linhaCol(16, 35); printf("|o   |     |o  o|     |o  o|     |o  o|     |o  o|");
-    linhaCol(17, 35); printf("|o   |     |    |     |   o|     |o   |     |o  o|");
-    linhaCol(18, 35); printf("|    |     |    |     |    |     |    |     |    |");
-    linhaCol(20, 37); printf("H          J          K          L          M   ");
-    linhaCol(21, 35); printf("|o   |     |   o|     |o   |     |o   |     |o  o|");
-    linhaCol(22, 35); printf("|o  o|     |o  o|     |    |     |o   |     |    |");
-    linhaCol(23, 35); printf("|    |     |    |     |o   |     |o   |     |o   |");
-    setlocale(LC_ALL, "C");
-    linhaCol(26, 36); printf("%c ", 254);
-    setlocale(LC_ALL, "Portuguese");
-    printf("Tente memorizar as letras acima e boa sorte!");
+    printf("Tente memorizar as letras abaixo e boa sorte!");
     setlocale(LC_ALL, "C");
     printf(" %c", 254);
     setlocale(LC_ALL, "Portuguese");
-    linhaCol(28, 45); printf("Tempo restante: %d segundo(s)",cont);
-    Sleep(1000);
-    cont --;
+
+    printAlfabeto('B', 16, 37, true);
+    printAlfabeto('C', 16, 48, true);
+    printAlfabeto('D', 16, 59, true);
+    printAlfabeto('F', 16, 70, true);
+    printAlfabeto('G', 16, 81, true);
+
+    printAlfabeto('H', 23, 37, true);
+    printAlfabeto('J', 23, 48, true);
+    printAlfabeto('K', 23, 59, true);
+    printAlfabeto('L', 23, 70, true);
+    printAlfabeto('M', 23, 81, true);
+
+    setlocale(LC_ALL, "C");
+    linhaCol(29, 43); printf("%c ", 254);
+    setlocale(LC_ALL, "Portuguese");
+    printf("Tempo restante: ");
+    if (cont < 10) printf("0");
+    printf("%d segundo(s)", cont);
+    setlocale(LC_ALL, "C");
+    printf(" %c", 254);
+    setlocale(LC_ALL, "Portuguese");
+
     do{
-        //if (cont < 3) PlaySound(TEXT("..\\sounds\\countdown.wav"), NULL, SND_ASYNC);
-        linhaCol(28, 45); printf("Tempo restante: %d segundo(s) ", cont);
+        linhaCol(29, 61);
+        if (cont < 10) printf("0");
+        printf("%d segundo(s)", cont);
         for (int fast = 0; fast < 78; fast ++) {
             Sleep(10);
             if (GetAsyncKeyState(VK_SHIFT)) {
@@ -245,7 +251,7 @@ void opcao2(){
         }
         cont --;
     }while(cont >= 0);
-    system("cls");
+    cleanScreen(2);
     gerarSeqPerguntas(ordem, totPerguntas);
     for (int numPergunta = 1; numPergunta <= 10; numPergunta ++) {
         strcpy(tituloPergunta, "Pergunta nº ");
@@ -255,108 +261,81 @@ void opcao2(){
         titulo("MÉDIO I", tituloPergunta);
 
         perguntaEscolhida = ordem[numPergunta - 1];
-        switch(perguntaEscolhida){
-            case 1:
-                if(newPergunta(2, numPergunta, 'B', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 2:
-                if(newPergunta(2, numPergunta, 'C', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 3:
-                if(newPergunta(2, numPergunta, 'D', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 4:
-                if(newPergunta(2, numPergunta, 'F', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 5:
-                if(newPergunta(2, numPergunta, 'G', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 6:
-                if(newPergunta(2, numPergunta, 'H', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 7:
-                if(newPergunta(2, numPergunta, 'J', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 8:
-                if(newPergunta(2, numPergunta, 'K', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 9:
-                if(newPergunta(2, numPergunta, 'L', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 10:
-                if(newPergunta(2, numPergunta, 'M', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
+
+        if (numPergunta == 1) { // Primeira pergunta
+            altAtuais[0] = '-';
+            altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
+            altAtuais[2] = letras[ordem[numPergunta] - 1];
+        } else if (numPergunta == totPerguntas) {// Última pergunta
+            altAtuais[0] = letras[ordem[numPergunta - 2] - 1];
+            altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
+            altAtuais[2] = '-';
+        } else { // Demais perguntas
+            altAtuais[0] = letras[ordem[numPergunta - 2] - 1];
+            altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
+            altAtuais[2] = letras[ordem[numPergunta] - 1];
         }
+
+        newPergunta("MÉDIO I", numPergunta, altAtuais[0], altAtuais[1], altAtuais[2], &acertos, &erros, &pts, progresso);
     }
-    fimJogo("MÉDIO I", pts, acertos, totPerguntas);*/
+    system("cls");
+    fimJogo("MÉDIO I", pts, acertos, totPerguntas);
     return;
 }
 
 /* 3) JOGAR - NÍVEL MÉDIO II */
-void opcao3(){/*
+void opcao3(){
     int cont = 40;
-    int conf = 0, pts = 0, acertos = 0;
+    int pts = 0, acertos = 0, erros = 0, pontos = 0, tecla = 0;
     int ordem[11];
     int progresso[11] = {2,2,2,2,2,2,2,2,2,2,2};
+    char letras[11] = {'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z'};
+    char altAtuais[3] = {' ', ' ', ' '};
     size_t totPerguntas = sizeof(ordem)/sizeof(ordem[0]);
-    int perguntaEscolhida = 0;
     char tituloPergunta[15];
     char numPerguntaChar[3];
+    int perguntaEscolhida = 0;
+
     if(confirmarJogo("MÉDIO II", progresso) == 0) return 0;
     topBannerContent("MÉDIO II");
+    currentProgressionBanner("MÉDIO II", progresso, acertos, erros, pontos);
+
     titulo("MÉDIO II", "O jogo começará em breve...");
+
     setlocale(LC_ALL, "C");
-    linhaCol(10, 37); printf("%c ", 254);
+    linhaCol(11, 36); printf("%c ", 254);
     setlocale(LC_ALL, "Portuguese");
-    printf("As letras em braile nesta dificuldade são");
+    printf("Tente memorizar as letras abaixo e boa sorte!");
+    setlocale(LC_ALL, "C");
+    printf(" %c", 254);
+    setlocale(LC_ALL, "Portuguese"); //59 - MEIO
+
+    printAlfabeto('N', 16, 31, true);
+    printAlfabeto('P', 16, 42, true);
+    printAlfabeto('Q', 16, 53, true);
+    printAlfabeto('R', 16, 64, true);
+    printAlfabeto('S', 16, 75, true);
+    printAlfabeto('T', 16, 86, true);
+
+    printAlfabeto('V', 23, 37, true);
+    printAlfabeto('W', 23, 48, true);
+    printAlfabeto('X', 23, 59, true);
+    printAlfabeto('Y', 23, 70, true);
+    printAlfabeto('Z', 23, 81, true);
+
+    setlocale(LC_ALL, "C");
+    linhaCol(29, 43); printf("%c ", 254);
+    setlocale(LC_ALL, "Portuguese");
+    printf("Tempo restante: ");
+    if (cont < 10) printf("0");
+    printf("%d segundo(s)", cont);
     setlocale(LC_ALL, "C");
     printf(" %c", 254);
     setlocale(LC_ALL, "Portuguese");
-    linhaCol(12, 37); printf("N          P          Q          R          S");
-    linhaCol(13, 35); printf("|o  o|     |o  o|     |o  o|     |o   |     |   o|");
-    linhaCol(14, 35); printf("|   o|     |o   |     |o  o|     |o  o|     |o   |");
-    linhaCol(15, 35); printf("|o   |     |o   |     |o   |     |o   |     |o   |");
-    linhaCol(17, 37); printf("T          V          W          X          Y ");
-    linhaCol(18, 35); printf("|   o|     |o   |     |   o|     |o  o|     |o  o|");
-    linhaCol(19, 35); printf("|o  o|     |o   |     |o  o|     |    |     |   o|");
-    linhaCol(20, 35); printf("|o   |     |o  o|     |   o|     |o  o|     |o  o|");
-    linhaCol(22, 59); printf("Z");
-    linhaCol(23, 57); printf("|o   |");
-    linhaCol(24, 57); printf("|   o|");
-    linhaCol(25, 57); printf("|o  o|");
-    setlocale(LC_ALL, "C");
-    linhaCol(28, 36); printf("%c ", 254);
-    setlocale(LC_ALL, "Portuguese");
-    printf("Tente memorizar as letras acima e boa sorte!");
-    setlocale(LC_ALL, "C");
-    printf(" %c", 254);
-    setlocale(LC_ALL, "Portuguese");
-    linhaCol(30, 45); printf("Tempo restante: %d segundo(s)",cont);
-    Sleep(1000);
-    cont --;
     do{
-        //if (cont < 3) PlaySound(TEXT("..\\sounds\\countdown.wav"), NULL, SND_ASYNC);
-        linhaCol(30, 45); printf("Tempo restante: %d segundo(s) ", cont);
+        linhaCol(29, 61);
+        if (cont < 10) printf("0");
+        printf("%d segundo(s)", cont);
         for (int fast = 0; fast < 78; fast ++) {
             Sleep(10);
             if (GetAsyncKeyState(VK_SHIFT)) {
@@ -366,7 +345,7 @@ void opcao3(){/*
         }
         cont --;
     }while(cont >= 0);
-    system("cls");
+    cleanScreen(2);
     gerarSeqPerguntas(ordem, totPerguntas);
     for (int numPergunta = 1; numPergunta <= 11; numPergunta ++) {
         strcpy(tituloPergunta, "Pergunta nº ");
@@ -374,117 +353,101 @@ void opcao3(){/*
         sprintf(numPerguntaChar, "%d", numPergunta);
         strcat(tituloPergunta, numPerguntaChar);
         titulo("MÉDIO II", tituloPergunta);
+
         perguntaEscolhida = ordem[numPergunta - 1];
-        switch(perguntaEscolhida){
-            case 1:
-                if(newPergunta(3, numPergunta, 'N', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 2:
-                if(newPergunta(3, numPergunta, 'P', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 3:
-                if(newPergunta(3, numPergunta, 'Q', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 4:
-                if(newPergunta(3, numPergunta, 'R', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 5:
-                if(newPergunta(3, numPergunta, 'S', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 6:
-                if(newPergunta(3, numPergunta, 'T', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 7:
-                if(newPergunta(3, numPergunta, 'V', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 8:
-                if(newPergunta(3, numPergunta, 'W', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 9:
-                if(newPergunta(3, numPergunta, 'X', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 10:
-                if(newPergunta(3, numPergunta, 'Y', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 11:
-                if(newPergunta(3, numPergunta, 'Z', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
+
+        if (numPergunta == 1) { // Primeira pergunta
+            altAtuais[0] = '-';
+            altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
+            altAtuais[2] = letras[ordem[numPergunta] - 1];
+        } else if (numPergunta == totPerguntas) {// Última pergunta
+            altAtuais[0] = letras[ordem[numPergunta - 2] - 1];
+            altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
+            altAtuais[2] = '-';
+        } else { // Demais perguntas
+            altAtuais[0] = letras[ordem[numPergunta - 2] - 1];
+            altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
+            altAtuais[2] = letras[ordem[numPergunta] - 1];
         }
+        newPergunta("MÉDIO II", numPergunta, altAtuais[0], altAtuais[1], altAtuais[2], &acertos, &erros, &pts, progresso);
     }
-    fimJogo("MÉDIO II", pts, acertos, totPerguntas);*/
+    system("cls");
+    fimJogo("MÉDIO II", pts, acertos, totPerguntas);
     return;
 }
 
 /* 4) JOGAR - NÍVEL DIFÍCIL */
-void opcao4(){/*
+void opcao4(){
     int cont = 60;
-    int conf = 0, pts = 0, acertos = 0;
+    int pts = 0, acertos = 0, erros = 0, pontos = 0, tecla = 0;
     int ordem[26];
     int progresso[26] = {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2};
+    char letras[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
+                       'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+                       'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+    char altAtuais[3] = {' ', ' ', ' '};
     size_t totPerguntas = sizeof(ordem)/sizeof(ordem[0]);
-    int perguntaEscolhida = 0;
     char tituloPergunta[15];
     char numPerguntaChar[3];
+    int perguntaEscolhida = 0;
+
     if(confirmarJogo("DIFÍCIL", progresso) == 0) return 0;
-
-
     topBannerContent("DIFÍCIL");
+    currentProgressionBanner("DIFÍCIL", progresso, acertos, erros, pontos);
+
     titulo("DIFÍCIL", "O jogo começará em breve...");
-    setlocale(LC_ALL, "C");
-    linhaCol(10, 37); printf("%c ", 254);
-    setlocale(LC_ALL, "Portuguese");
-    printf("As letras em braile nesta dificuldade são");
-    setlocale(LC_ALL, "C");
-    printf(" %c", 254);
-    setlocale(LC_ALL, "Portuguese");
-    linhaCol(12, 16); printf("A          B          C          D          E          F          G          H          I");
-    linhaCol(13, 14); printf("|o   |     |o   |     |o  o|     |o  o|     |o   |     |o  o|     |o  o|     |o   |     |   o|");
-    linhaCol(14, 14); printf("|    |     |o   |     |    |     |   o|     |   o|     |o   |     |o  o|     |o  o|     |o   |");
-    linhaCol(15, 14); printf("|    |     |    |     |    |     |    |     |    |     |    |     |    |     |    |     |    |");
-    linhaCol(17, 16); printf("J          K          L          M          N          O          P          Q          R");
-    linhaCol(18, 14); printf("|   o|     |o   |     |o   |     |o  o|     |o  o|     |o   |     |o  o|     |o  o|     |o   |");
-    linhaCol(19, 14); printf("|o  o|     |    |     |o   |     |    |     |   o|     |   o|     |o   |     |o  o|     |o  o|");
-    linhaCol(20, 14); printf("|    |     |o   |     |o   |     |o   |     |o   |     |o   |     |o   |     |o   |     |o   |");
-    linhaCol(22, 21); printf("S          T          U          V          W          X          Y          Z");
-    linhaCol(23, 19); printf("|   o|     |   o|     |o   |     |o   |     |   o|     |o  o|     |o  o|     |o   |");
-    linhaCol(24, 19); printf("|o   |     |o  o|     |    |     |o   |     |o  o|     |    |     |   o|     |   o|");
-    linhaCol(25, 19); printf("|o   |     |o   |     |o  o|     |o  o|     |   o|     |o  o|     |o  o|     |o  o|");
 
     setlocale(LC_ALL, "C");
-    linhaCol(28, 36); printf("%c ", 254);
+    linhaCol(10, 36); printf("%c ", 254);
     setlocale(LC_ALL, "Portuguese");
-    printf("Tente memorizar as letras acima e boa sorte!");
+    printf("Tente memorizar as letras abaixo e boa sorte!");
     setlocale(LC_ALL, "C");
     printf(" %c", 254);
     setlocale(LC_ALL, "Portuguese");
-    linhaCol(30, 45); printf("Tempo restante: %d segundo(s)",cont);
-    Sleep(1000);
-    cont --;
+
+    printAlfabeto('A', 14, 9, true);
+    printAlfabeto('B', 14, 20, true);
+    printAlfabeto('C', 14, 31, true);
+    printAlfabeto('D', 14, 42, true);
+    printAlfabeto('E', 14, 53, true);
+    printAlfabeto('F', 14, 64, true);
+    printAlfabeto('G', 14, 75, true);
+    printAlfabeto('H', 14, 86, true);
+    printAlfabeto('I', 14, 97, true);
+    printAlfabeto('J', 14, 108, true);
+
+    printAlfabeto('K', 20, 9, true);
+    printAlfabeto('L', 20, 20, true);
+    printAlfabeto('M', 20, 31, true);
+    printAlfabeto('N', 20, 42, true);
+    printAlfabeto('O', 20, 53, true);
+    printAlfabeto('P', 20, 64, true);
+    printAlfabeto('Q', 20, 75, true);
+    printAlfabeto('R', 20, 86, true);
+    printAlfabeto('S', 20, 97, true);
+    printAlfabeto('T', 20, 108, true);
+
+    printAlfabeto('U', 26, 31, true);
+    printAlfabeto('V', 26, 42, true);
+    printAlfabeto('W', 26, 53, true);
+    printAlfabeto('X', 26, 64, true);
+    printAlfabeto('Y', 26, 75, true);
+    printAlfabeto('Z', 26, 86, true);
+
+    setlocale(LC_ALL, "C");
+    linhaCol(37, 43); printf("%c ", 254);
+    setlocale(LC_ALL, "Portuguese");
+    printf("Tempo restante: ");
+    if (cont < 10) printf("0");
+    printf("%d segundo(s)", cont);
+    setlocale(LC_ALL, "C");
+    printf(" %c", 254);
+    setlocale(LC_ALL, "Portuguese");
+
     do{
-        //if (cont < 3) PlaySound(TEXT("..\\sounds\\countdown.wav"), NULL, SND_ASYNC);
-        linhaCol(30, 45); printf("Tempo restante: %d segundo(s) ", cont);
+        linhaCol(37, 61);
+        if (cont < 10) printf("0");
+        printf("%d segundo(s)", cont);
         for (int fast = 0; fast < 78; fast ++) {
             Sleep(10);
             if (GetAsyncKeyState(VK_SHIFT)) {
@@ -494,7 +457,7 @@ void opcao4(){/*
         }
         cont --;
     }while(cont >= 0);
-    system("cls");
+    cleanScreen(2);
     gerarSeqPerguntas(ordem, totPerguntas);
     for (int numPergunta = 1; numPergunta <= 26; numPergunta ++) {
         strcpy(tituloPergunta, "Pergunta nº ");
@@ -502,141 +465,27 @@ void opcao4(){/*
         sprintf(numPerguntaChar, "%d", numPergunta);
         strcat(tituloPergunta, numPerguntaChar);
         titulo("DIFÍCIL", tituloPergunta);
+
         perguntaEscolhida = ordem[numPergunta - 1];
-        switch(perguntaEscolhida){
-            case 1:
-                if(newPergunta(4, numPergunta, 'A', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 2:
-                if(newPergunta(4, numPergunta, 'B', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 3:
-                if(newPergunta(4, numPergunta, 'C', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 4:
-                if(newPergunta(4, numPergunta, 'D', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 5:
-                if(newPergunta(4, numPergunta, 'E', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 6:
-                if(newPergunta(4, numPergunta, 'F', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 7:
-                if(newPergunta(4, numPergunta, 'G', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 8:
-                if(newPergunta(4, numPergunta, 'H', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 9:
-                if(newPergunta(4, numPergunta, 'I', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 10:
-                if(newPergunta(4, numPergunta, 'J', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 11:
-                if(newPergunta(4, numPergunta, 'K', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 12:
-                if(newPergunta(4, numPergunta, 'L', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 13:
-                if(newPergunta(4, numPergunta, 'M', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 14:
-                if(newPergunta(4, numPergunta, 'N', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 15:
-                if(newPergunta(4, numPergunta, 'O', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 16:
-                if(newPergunta(4, numPergunta, 'P', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 17:
-                if(newPergunta(4, numPergunta, 'Q', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 18:
-                if(newPergunta(4, numPergunta, 'R', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 19:
-                if(newPergunta(4, numPergunta, 'S', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 20:
-                if(newPergunta(4, numPergunta, 'T', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 21:
-                if(newPergunta(4, numPergunta, 'U', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 22:
-                if(newPergunta(4, numPergunta, 'V', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 23:
-                if(newPergunta(4, numPergunta, 'W', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 24:
-                if(newPergunta(4, numPergunta, 'X', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 25:
-                if(newPergunta(4, numPergunta, 'Y', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
-            case 26:
-                if(newPergunta(4, numPergunta, 'Z', pts, acertos) == 1){
-                    pts += 150; acertos ++;
-                }else pts += 50;
-            break;
+
+        if (numPergunta == 1) { // Primeira pergunta
+            altAtuais[0] = '-';
+            altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
+            altAtuais[2] = letras[ordem[numPergunta] - 1];
+        } else if (numPergunta == totPerguntas) {// Última pergunta
+            altAtuais[0] = letras[ordem[numPergunta - 2] - 1];
+            altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
+            altAtuais[2] = '-';
+        } else { // Demais perguntas
+            altAtuais[0] = letras[ordem[numPergunta - 2] - 1];
+            altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
+            altAtuais[2] = letras[ordem[numPergunta] - 1];
         }
+        newPergunta("DIFÍCIL", numPergunta, altAtuais[0], altAtuais[1], altAtuais[2], &acertos, &erros, &pts, progresso);
+
     }
-    fimJogo("DIFÍCIL", pts, acertos, totPerguntas);*/
+    system("cls");
+    fimJogo("DIFÍCIL", pts, acertos, totPerguntas);
     return;
 }
 

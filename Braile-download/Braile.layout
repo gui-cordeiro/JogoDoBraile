@@ -2,14 +2,14 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="433" topLine="14" />
+			<Cursor1 position="433" topLine="29" />
 		</Cursor>
 	</File>
-	<File name="config-functions.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+	<File name="config-functions.h" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-4" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="59354" topLine="57" />
+			<Cursor1 position="22353" topLine="36" />
 		</Cursor>
 		<Folding>
 			<Collapse line="6" />
@@ -18,44 +18,12 @@
 			<Collapse line="73" />
 			<Collapse line="270" />
 			<Collapse line="335" />
-			<Collapse line="485" />
-			<Collapse line="581" />
-			<Collapse line="695" />
-			<Collapse line="703" />
-			<Collapse line="714" />
-			<Collapse line="724" />
-			<Collapse line="734" />
-			<Collapse line="752" />
-			<Collapse line="760" />
-			<Collapse line="773" />
-			<Collapse line="799" />
-			<Collapse line="1009" />
-			<Collapse line="1122" />
-			<Collapse line="1180" />
-			<Collapse line="1189" />
-			<Collapse line="1198" />
-			<Collapse line="1208" />
-			<Collapse line="1212" />
-			<Collapse line="1260" />
-			<Collapse line="1272" />
-			<Collapse line="1343" />
-			<Collapse line="1348" />
-			<Collapse line="1357" />
-			<Collapse line="1394" />
-			<Collapse line="1437" />
-			<Collapse line="1526" />
-			<Collapse line="1586" />
 		</Folding>
 	</File>
-	<File name="main-functions.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+	<File name="main-functions.h" open="1" top="0" tabpos="3" split="2" active="1" splitpos="674" zoom_1="-4" zoom_2="-4">
 		<Cursor>
-			<Cursor1 position="5556" topLine="48" />
+			<Cursor1 position="2700" topLine="60" />
+			<Cursor2 position="7330" topLine="219" />
 		</Cursor>
-		<Folding>
-			<Collapse line="7" />
-			<Collapse line="90" />
-			<Collapse line="830" />
-			<Collapse line="872" />
-		</Folding>
 	</File>
 </CodeBlocks_layout_file>

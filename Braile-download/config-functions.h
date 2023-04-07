@@ -339,140 +339,163 @@ void printAlfabeto(char letra, int lin1, int col, bool isVisible){
     box(lin1 - 1, col - 2, lin1 + 3, col + 4);
     SetConsoleOutputCP(CP_UTF8);
     setlocale(LC_ALL, "C");
+    linhaCol(lin1 - 2, col + 1);
     switch(tolower(letra)){
         case 'a':
-            linhaCol(lin1, col); printf("\u25cf \u25cb");
+            printf("A");
+            linhaCol(lin1, col); printf("\u25cf \u25cb"); //cf de Full, cb de Branco
             linhaCol(lin2, col); printf("\u25cb \u25cb");
             linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'b':
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |    |                      |");Sleep(tempo);
+            printf("B");
+            linhaCol(lin1, col); printf("\u25cf \u25cb");
+            linhaCol(lin2, col); printf("\u25cf \u25cb");
+            linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'c':
-            printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |    |                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |    |                      |");Sleep(tempo);
+            printf("C");
+            linhaCol(lin1, col); printf("\u25cf \u25cf");
+            linhaCol(lin2, col); printf("\u25cb \u25cb");
+            linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'd':
-            printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |   o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |    |                      |");Sleep(tempo);
+            printf("D");
+            linhaCol(lin1, col); printf("\u25cf \u25cf");
+            linhaCol(lin2, col); printf("\u25cb \u25cf");
+            linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'e':
-            linhaCol(lin1 - 2, col + 1); printf("E");
+            printf("E");
             linhaCol(lin1, col); printf("\u25cf \u25cb");
             linhaCol(lin2, col); printf("\u25cb \u25cf");
             linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'f':
-            printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |    |                      |");Sleep(tempo);
+            printf("F");
+            linhaCol(lin1, col); printf("\u25cf \u25cf");
+            linhaCol(lin2, col); printf("\u25cf \u25cb");
+            linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'g':
-            printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |    |                      |");Sleep(tempo);
+            printf("G");
+            linhaCol(lin1, col); printf("\u25cf \u25cf");
+            linhaCol(lin2, col); printf("\u25cf \u25cf");
+            linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'h':
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |    |                      |");Sleep(tempo);
+            printf("H");
+            linhaCol(lin1, col); printf("\u25cf \u25cb");
+            linhaCol(lin2, col); printf("\u25cf \u25cf");
+            linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'i':
-            linhaCol(lin1 - 2, col + 1); printf("I");
+            printf("I");
             linhaCol(lin1, col); printf("\u25cb \u25cf");
             linhaCol(lin2, col); printf("\u25cf \u25cb");
             linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'j':
-            printf("\n\t\t\t\t   |                   |   o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |    |                      |");Sleep(tempo);
+            printf("J");
+            linhaCol(lin1, col); printf("\u25cb \u25cf");
+            linhaCol(lin2, col); printf("\u25cf \u25cf");
+            linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'k':
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |    |                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
+            printf("K");
+            linhaCol(lin1, col); printf("\u25cf \u25cb");
+            linhaCol(lin2, col); printf("\u25cb \u25cb");
+            linhaCol(lin3, col); printf("\u25cf \u25cb");
             break;
         case 'l':
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
+            printf("L");
+            linhaCol(lin1, col); printf("\u25cf \u25cb");
+            linhaCol(lin2, col); printf("\u25cf \u25cb");
+            linhaCol(lin3, col); printf("\u25cf \u25cb");
             break;
         case 'm':
-            printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |    |                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
+            printf("M");
+            linhaCol(lin1, col); printf("\u25cf \u25cf");
+            linhaCol(lin2, col); printf("\u25cb \u25cb");
+            linhaCol(lin3, col); printf("\u25cf \u25cb");
             break;
         case 'n':
-            printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |   o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
+            printf("N");
+            linhaCol(lin1, col); printf("\u25cf \u25cf");
+            linhaCol(lin2, col); printf("\u25cb \u25cf");
+            linhaCol(lin3, col); printf("\u25cf \u25cb");
             break;
         case 'o':
-            linhaCol(lin1 - 2, col + 1); printf("O");
+            printf("O");
             linhaCol(lin1, col); printf("\u25cf \u25cb");
             linhaCol(lin2, col); printf("\u25cb \u25cf");
             linhaCol(lin3, col); printf("\u25cf \u25cb");
             break;
         case 'p':
-            printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
+            printf("P");
+            linhaCol(lin1, col); printf("\u25cf \u25cf");
+            linhaCol(lin2, col); printf("\u25cf \u25cb");
+            linhaCol(lin3, col); printf("\u25cf \u25cb");
             break;
         case 'q':
-            printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
+            printf("Q");
+            linhaCol(lin1, col); printf("\u25cf \u25cf");
+            linhaCol(lin2, col); printf("\u25cf \u25cf");
+            linhaCol(lin3, col); printf("\u25cf \u25cb");
             break;
         case 'r':
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
+            printf("R");
+            linhaCol(lin1, col); printf("\u25cf \u25cb");
+            linhaCol(lin2, col); printf("\u25cf \u25cf");
+            linhaCol(lin3, col); printf("\u25cf \u25cb");
             break;
         case 's':
-            printf("\n\t\t\t\t   |                   |   o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
+            printf("S");
+            linhaCol(lin1, col); printf("\u25cb \u25cf");
+            linhaCol(lin2, col); printf("\u25cf \u25cb");
+            linhaCol(lin3, col); printf("\u25cf \u25cb");
             break;
         case 't':
-            printf("\n\t\t\t\t   |                   |   o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
+            printf("T");
+            linhaCol(lin1, col); printf("\u25cb \u25cf");
+            linhaCol(lin2, col); printf("\u25cf \u25cf");
+            linhaCol(lin3, col); printf("\u25cf \u25cb");
             break;
         case 'u':
-            linhaCol(lin1 - 2, col + 1); printf("U");
+            printf("U");
             linhaCol(lin1, col); printf("\u25cf \u25cb");
             linhaCol(lin2, col); printf("\u25cb \u25cb");
             linhaCol(lin3, col); printf("\u25cf \u25cf");
             break;
         case 'v':
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
+            printf("V");
+            linhaCol(lin1, col); printf("\u25cf \u25cb");
+            linhaCol(lin2, col); printf("\u25cf \u25cb");
+            linhaCol(lin3, col); printf("\u25cf \u25cf");
             break;
         case 'w':
-            printf("\n\t\t\t\t   |                   |   o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |   o|                      |");Sleep(tempo);
+            printf("W");
+            linhaCol(lin1, col); printf("\u25cb \u25cf");
+            linhaCol(lin2, col); printf("\u25cf \u25cf");
+            linhaCol(lin3, col); printf("\u25cb \u25cf");
             break;
         case 'x':
-            printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |    |                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
+            printf("X");
+            linhaCol(lin1, col); printf("\u25cf \u25cf");
+            linhaCol(lin2, col); printf("\u25cb \u25cb");
+            linhaCol(lin3, col); printf("\u25cf \u25cf");
             break;
         case 'y':
-            printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |   o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
+            printf("Y");
+            linhaCol(lin1, col); printf("\u25cf \u25cf");
+            linhaCol(lin2, col); printf("\u25cb \u25cf");
+            linhaCol(lin3, col); printf("\u25cf \u25cf");
             break;
         case 'z':
-            printf("\n\t\t\t\t   |                   |o   |                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |   o|                      |");Sleep(tempo);
-            printf("\n\t\t\t\t   |                   |o  o|                      |");Sleep(tempo);
+            printf("Z");
+            linhaCol(lin1, col); printf("\u25cf \u25cb");
+            linhaCol(lin2, col); printf("\u25cb \u25cf");
+            linhaCol(lin3, col); printf("\u25cf \u25cf");
             break;
     }
     SetConsoleOutputCP(850);
@@ -571,8 +594,30 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
     printf(" %c", 254);
     setlocale(LC_ALL, "Portuguese");
     currentProgressionBanner(nivel, progresso, acertos, erros, pontos);
-    getchar();
-    //PlaySound(TEXT("..\\sounds\\confirm.wav"), NULL, SND_ASYNC);
+
+    int tecla = 0, easter = 0;
+    while(1){
+        tecla = getch();
+        if (tecla == 0 || tecla == 224) tecla = getch();
+
+        if (easter == 0 && (tecla == 118 || tecla == 86)) easter ++;
+        if (easter == 1 && (tecla == 97 || tecla == 65)) easter ++;
+        if (easter == 2 && (tecla == 115 || tecla == 83)) easter ++;
+        if (easter == 3 && (tecla == 99 || tecla == 67)) easter ++;
+        if (easter == 4 && (tecla == 111 || tecla == 79)) easter ++;
+
+        if (easter == 5) {
+            linhaCol(37, 41); printf("CLUB DE REGATAS VASCO DA GAMA, APENAS.");
+            PlaySound(TEXT("..\\sounds\\e1.wav"), NULL, SND_ASYNC);
+            e1();
+            easter = 0;
+        }
+
+        if (tecla == 13) break; // Tecla Enter
+    }
+
+
+    PlaySound(TEXT("..\\sounds\\nosound.wav"), NULL, SND_ASYNC);
     cleanScreen(6);
     titulo(nivel, "Entrando no jogo, prepare-se!");
     return 1;
@@ -1677,7 +1722,23 @@ void currentProgressionBanner(char difficulty[8], int currentProgression[26], in
     textColor(WHITE, _BLACK);
     box(36, 39, 38, 80);
 
-    linhaCol(37, 40);
+    setlocale(LC_ALL, "C");
+    linhaCol(38, 39); printf("%c", 193);
+    linhaCol(38, 80); printf("%c", 193);
+
+    //linhaCol(36, 53); printf("%c", 194);
+    //linhaCol(36, 65); printf("%c", 194);
+    //linhaCol(38, 53); printf("%c", 193);
+    //linhaCol(38, 65); printf("%c", 193);
+
+    //linhaCol(37, 53); printf("%c", 179);
+    //linhaCol(37, 65); printf("%c", 179);
+    setlocale(LC_ALL, "Portuguese");
+
+    linhaCol(37, 41);
+
+
+    /*linhaCol(37, 40);
     printf(" ACERTOS: ");
     if (acertos < 10) printf("0");
     printf("%d | ERROS: ", acertos);
@@ -1686,19 +1747,68 @@ void currentProgressionBanner(char difficulty[8], int currentProgression[26], in
     if (pontos < 10) printf("000");
     else if (pontos < 100) printf("00");
     else if (pontos < 1000) printf("0");
-    printf("%d", pontos);
-
-    setlocale(LC_ALL, "C");
-    linhaCol(38, 39); printf("%c", 193);
-    linhaCol(38, 53); printf("%c", 193);
-    linhaCol(38, 65); printf("%c", 193);
-    linhaCol(38, 80); printf("%c", 193);
-
-    linhaCol(36, 53); printf("%c", 194);
-    linhaCol(36, 65); printf("%c", 194);
-
-    linhaCol(37, 53); printf("%c", 179);
-    linhaCol(37, 65); printf("%c", 179);
-    setlocale(LC_ALL, "Portuguese");
+    printf("%d", pontos);*/
 }
+
+void e1() {
+
+    box(9, 1, 31, 119);
+
+    linhaCol(14, 3); printf("      _____           _____   ");
+    linhaCol(15, 3); printf("  ___|\\    \\      ___|\\    \\  ");
+    linhaCol(16, 3); printf(" /    /\\    \\    |    |\\    \\ ");
+    linhaCol(17, 3); printf("|    |  |    |   |    | |    |");
+    linhaCol(18, 3); printf("|    |  |____|   |    |/____/ ");
+    linhaCol(19, 3); printf("|    |   ____    |    |\\    \\ ");
+    linhaCol(20, 3); printf("|    |  |    |   |    | |    |");
+    linhaCol(21, 3); printf("|\\ ___\\/    /|   |____| |____|");
+    linhaCol(22, 3); printf("| |   /____/ |   |    | |    |");
+    linhaCol(23, 3); printf(" \\|___|    | /   |____| |____|");
+    linhaCol(24, 3); printf("   \\( |____|/      \\(     )/  ");
+    linhaCol(25, 3); printf("    '   )/          '     '   ");
+    linhaCol(26, 3); printf("        '                     ");
+
+
+    textColor(LIGHTRED, _BLACK);
+    linhaCol(11, 35); printf("            ########################            ");
+    linhaCol(12, 35); printf("              ####################              ");
+    linhaCol(13, 35); printf("                ################                ");
+    linhaCol(14, 35); printf("                 ##############                 ");
+    linhaCol(15, 35); printf("#                  ##########                  #");
+    linhaCol(16, 35); printf("####                ########                ####");
+    linhaCol(17, 35); printf("########             ######             ########");
+    linhaCol(18, 35); printf("#############        ######        #############");
+    linhaCol(19, 35); printf("################################################");
+    linhaCol(20, 35); printf("################################################");
+    linhaCol(21, 35); printf("################################################");
+    linhaCol(22, 35); printf("############         ######         ############");
+    linhaCol(23, 35); printf("#######              ######             ########");
+    linhaCol(24, 35); printf("####                ########                ####");
+    linhaCol(25, 35); printf("#                  ##########                  #");
+    linhaCol(26, 35); printf("                 ##############                 ");
+    linhaCol(27, 35); printf("                ################                ");
+    linhaCol(28, 35); printf("              ####################              ");
+    linhaCol(29, 35); printf("            ########################            ");
+    textColor(WHITE, _BLACK);
+
+
+
+
+    linhaCol(14, 85); printf(" ____      ____         _____    ");
+    linhaCol(15, 85); printf("|    |    |    |    ___|\\    \\   ");
+    linhaCol(16, 85); printf("|    |    |    |   /    /\\    \\  ");
+    linhaCol(17, 85); printf("|    |    |    |  |    |  |____| ");
+    linhaCol(18, 85); printf("|    |    |    |  |    |    ____ ");
+    linhaCol(19, 85); printf("|    |    |    |  |    |   |    |");
+    linhaCol(20, 85); printf("|\\    \\  /    /|  |    |   |_,  |");
+    linhaCol(21, 85); printf("| \\ ___\\/___ / |  |\\ ___\\___/  /|");
+    linhaCol(22, 85); printf(" \\ |   ||   | /   | |   /____ / |");
+    linhaCol(23, 85); printf("  \\|___||___|/     \\|___|    | / ");
+    linhaCol(24, 85); printf("    \\(    )/         \\( |____|/  ");
+    linhaCol(25, 85); printf("     '    '           '   )/     ");
+    linhaCol(26, 85); printf("                          '      ");
+
+
+}
+
 
