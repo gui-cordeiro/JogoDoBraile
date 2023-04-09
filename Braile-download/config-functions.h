@@ -119,44 +119,59 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
     exibirBannerPergunta(27);
 
     textColor(BROWN, BLACK);
-    box(17, 11, 27, 61);
+    box(17, 10, 29, 62);
     setlocale(LC_ALL, "C");
     linhaCol(17, 23); printf("%c ", 254);
     setlocale(LC_ALL, "Portuguese");
     printf("Letra escrita em Braile");
     setlocale(LC_ALL, "C");
     printf(" %c", 254);
+
+    linhaCol(29, 17); printf("%c ", 254);
+    setlocale(LC_ALL, "Portuguese");
+    printf("Marque a resposta correta à direita");
+    setlocale(LC_ALL, "C");
+    printf(" %c", 254);
     setlocale(LC_ALL, "Portuguese");
 
-    printAlfabeto(letrResp2, 21, 34, false);
+    printAlfabeto(letrResp2, 22, 35, false);
 
-    linhaCol(25, 33); printf("ATUAL");
+    linhaCol(26, 34); printf("ATUAL");
 
     if (letrResp1 != '-') {
         setlocale(LC_ALL, "C");
-        linhaCol(22, 28); printf("%c", 174);
+        linhaCol(23, 29); printf("%c", 174);
         setlocale(LC_ALL, "Portuguese");
         textColor(DARKGRAY, _BLACK);
 
-        printAlfabeto(letrResp1, 21, 20, true);
+        printAlfabeto(letrResp1, 22, 21, true);
 
-        linhaCol(25, 18); printf("Anterior");
+        linhaCol(26, 19); printf("Anterior");
     }
 
     if (letrResp3 != '-') {
         textColor(BROWN, BLACK);
         setlocale(LC_ALL, "C");
-        linhaCol(22, 42); printf("%c", 175);
+        linhaCol(23, 43); printf("%c", 175);
         setlocale(LC_ALL, "Portuguese");
         textColor(DARKGRAY, _BLACK);
 
-        printAlfabeto(letrResp3, 21, 48, false);
+        printAlfabeto(letrResp3, 22, 49, false);
 
-        linhaCol(25, 46); printf("Próximo");
+        linhaCol(26, 47); printf("Próximo");
     }
     textColor(WHITE, _BLACK);
 
-    opt = modeloMenu(17, 88, 4, lista);
+    setlocale(LC_ALL, "C");
+    SetConsoleOutputCP(CP_UTF8);
+    textColor(WHITE, _BLACK);
+    linhaCol(17, 96); printf("\u25b2");
+    linhaCol(29, 96); printf("\u25bc");
+    textColor(WHITE, _BLUE);
+    SetConsoleOutputCP(850);
+    setlocale(LC_ALL, "Portuguese");
+
+    opt = modeloMenu(18, 88, 4, lista);
     cleanScreen(6);
     if (opt - 1 == posCorreta) {
         acertoCont = true;
@@ -569,7 +584,17 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
     linhaCol(16, 77); printf("|   --| . |   |  _| |  _|     | .'|_|  ");
     linhaCol(17, 77); printf("|_____|___|_|_|_| |_|_| |_|_|_|__,|_|  ");
 
+    setlocale(LC_ALL, "C");
+    SetConsoleOutputCP(CP_UTF8);
+    textColor(WHITE, _BLACK);
+    linhaCol(19, 96); printf("\u25b2");
+    linhaCol(27, 96); printf("\u25bc");
+    textColor(WHITE, _BLUE);
+    SetConsoleOutputCP(850);
+    setlocale(LC_ALL, "Portuguese");
+
     opt = modeloMenu(20, 78, 2, lista);
+
     if (opt == 2) {
         cleanScreen(1);
         return 0;
@@ -588,6 +613,7 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
     printf(" %c", 254);
     setlocale(LC_ALL, "Portuguese");
 
+    textColor(_BLACK, LIGHTCYAN);
     box(15, 13, 25, 107);
     linhaCol(17, 16);printf("########  #### ##     ## #### ########  ########    ###             ######  ######## ####");
     linhaCol(18, 16);printf("##     ##  ##  ##     ##  ##  ##     ##    ##      ## ##           ##    ## ##       ####");
@@ -596,6 +622,7 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
     linhaCol(21, 16);printf("##     ##  ##   ##   ##   ##  ##   ##      ##    #########               ## ##           ");
     linhaCol(22, 16);printf("##     ##  ##    ## ##    ##  ##    ##     ##    ##     ##         ##    ## ##       ####");
     linhaCol(23, 16);printf("########  ####    ###    #### ##     ##    ##    ##     ##          ######  ######## ####");
+    textColor(_BLACK, WHITE);
 
     setlocale(LC_ALL, "C");
     linhaCol(28, 15); printf("%c ", 254);
@@ -831,6 +858,7 @@ void configJogo(){
     hideCursor();
     setlocale(LC_ALL,"Portuguese");
     system("mode con:cols=119 lines=38");
+    system("color 0f");
     //fullScreen();
 
     int x,y;
@@ -1714,7 +1742,7 @@ void currentProgressionBanner(char difficulty[8], int currentProgression[26], in
             linhaCol(35, colAtual); printf(" ");
         } else if (currentProgression[cont] == 1) {
             textColor(GREEN, _BLACK);
-            printf("\u2713");
+            printf("\u263b");
             linhaCol(35, colAtual); printf(" ");
         } else {
             textColor(WHITE, _BLACK);
@@ -1926,8 +1954,8 @@ DWORD WINAPI e1(LPVOID params) {
         linhaCol(21, 63); printf("\u2588\u2588");
 
         textColor(_BLACK, BROWN);
-        linhaCol(10, 96); printf("\u2605    \u2605    \u2605    \u2605");
-        linhaCol(12, 96); printf("\u2605    \u2605    \u2605    \u2605");
+        linhaCol(10, 96); printf("*    *    *    *");
+        linhaCol(12, 96); printf("*    *    *    *");
 
         textColor(_BLACK, WHITE);
         SetConsoleOutputCP(850);
@@ -2014,7 +2042,6 @@ DWORD WINAPI e1(LPVOID params) {
 
     return 0;
 }
-
 
 DWORD WINAPI letra(LPVOID params){
     setlocale(LC_ALL, "Portuguese");

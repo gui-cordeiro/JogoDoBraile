@@ -29,10 +29,12 @@ int menu(int lin1, int col1, int qtd, char lista[][40]) {
 
     box(lin1, col1, lin2, col2);
     setlocale(LC_ALL, "C");
+    SetConsoleOutputCP(CP_UTF8);
     textColor(WHITE, _BLACK);
-    linhaCol(lin1 - 1, col1 + 12); printf("%c", 30);
-    linhaCol(lin2 + 1, col1 + 12); printf("%c", 31);
+    linhaCol(lin1 - 1, col1 + 12); printf("\u25b2");
+    linhaCol(lin2 + 1, col1 + 12); printf("\u25bc");
     textColor(WHITE, _BLUE);
+    SetConsoleOutputCP(850);
     setlocale(LC_ALL, "Portuguese");
 
     //Laço das opções
@@ -105,7 +107,7 @@ int menu(int lin1, int col1, int qtd, char lista[][40]) {
 /* 1) JOGAR - NÍVEL FÁCIL */
 void opcao1(){
     int cont = 20;
-    int pts = 0, acertos = 0, erros = 0, pontos = 0, tecla = 0;
+    int pts = 0, acertos = 0, erros = 0, tecla = 0;
     int ordem[5];
     int progresso[5] = {2,2,2,2,2};
     char letras[5] = {'A', 'E', 'I', 'O', 'U'};
@@ -121,34 +123,44 @@ void opcao1(){
     titulo("FÁCIL", "O jogo começará em breve...");
 
     setlocale(LC_ALL, "C");
-    linhaCol(14, 36); printf("%c ", 254);
+    linhaCol(16, 36); printf("%c ", 254);
     setlocale(LC_ALL, "Portuguese");
     printf("Tente memorizar as letras abaixo e boa sorte!");
     setlocale(LC_ALL, "C");
     printf(" %c", 254);
     setlocale(LC_ALL, "Portuguese");
 
-    printAlfabeto('A', 19, 37, true);
-    printAlfabeto('E', 19, 48, true);
-    printAlfabeto('I', 19, 59, true);
-    printAlfabeto('O', 19, 70, true);
-    printAlfabeto('U', 19, 81, true);
+    printAlfabeto('A', 20, 37, true);
+    printAlfabeto('E', 20, 48, true);
+    printAlfabeto('I', 20, 59, true);
+    printAlfabeto('O', 20, 70, true);
+    printAlfabeto('U', 20, 81, true);
 
     setlocale(LC_ALL, "C");
-    linhaCol(25, 43); printf("%c ", 254);
+    linhaCol(36, 53); printf("%c", 196);
+    linhaCol(36, 65); printf("%c", 196);
+    linhaCol(38, 53); printf("%c", 196);
+    linhaCol(38, 65); printf("%c", 196);
+
+    linhaCol(37, 41); printf("  %c ", 254);
     setlocale(LC_ALL, "Portuguese");
     printf("Tempo restante: ");
     if (cont < 10) printf("0");
     printf("%d segundo(s)", cont);
     setlocale(LC_ALL, "C");
-    printf(" %c", 254);
+    printf(" %c   ", 254);
     setlocale(LC_ALL, "Portuguese");
 
     do{
-        linhaCol(25, 61);
+        if ((cont != 20) && (cont % 10 == 0 || cont <= 5)){
+            textColor(_BLACK, LIGHTRED);
+        } else {
+            textColor(_BLACK, WHITE);
+        }
+        linhaCol(37, 61);
         if (cont < 10) printf("0");
         printf("%d segundo(s)", cont);
-        for (int fast = 0; fast < 78; fast ++) {
+        for (int fast = 0; fast < 70; fast ++) {
             Sleep(10);
             if (GetAsyncKeyState(VK_SHIFT)) {
                 Sleep(80);
@@ -158,6 +170,7 @@ void opcao1(){
         cont --;
     }while(cont > 0);
     cleanScreen(2);
+    currentProgressionBanner("FÁCIL", progresso, acertos, erros, pts);
     gerarSeqPerguntas(ordem, totPerguntas);
     for (int numPergunta = 1; numPergunta <= 5; numPergunta ++) {
         strcpy(tituloPergunta, "Pergunta nº ");
@@ -207,40 +220,50 @@ void opcao2(){
     titulo("MÉDIO I", "O jogo começará em breve...");
 
     setlocale(LC_ALL, "C");
-    linhaCol(11, 36); printf("%c ", 254);
+    linhaCol(12, 36); printf("%c ", 254);
     setlocale(LC_ALL, "Portuguese");
     printf("Tente memorizar as letras abaixo e boa sorte!");
     setlocale(LC_ALL, "C");
     printf(" %c", 254);
     setlocale(LC_ALL, "Portuguese");
 
-    printAlfabeto('B', 16, 37, true);
-    printAlfabeto('C', 16, 48, true);
-    printAlfabeto('D', 16, 59, true);
-    printAlfabeto('F', 16, 70, true);
-    printAlfabeto('G', 16, 81, true);
+    printAlfabeto('B', 17, 37, true);
+    printAlfabeto('C', 17, 48, true);
+    printAlfabeto('D', 17, 59, true);
+    printAlfabeto('F', 17, 70, true);
+    printAlfabeto('G', 17, 81, true);
 
-    printAlfabeto('H', 23, 37, true);
-    printAlfabeto('J', 23, 48, true);
-    printAlfabeto('K', 23, 59, true);
-    printAlfabeto('L', 23, 70, true);
-    printAlfabeto('M', 23, 81, true);
+    printAlfabeto('H', 24, 37, true);
+    printAlfabeto('J', 24, 48, true);
+    printAlfabeto('K', 24, 59, true);
+    printAlfabeto('L', 24, 70, true);
+    printAlfabeto('M', 24, 81, true);
 
     setlocale(LC_ALL, "C");
-    linhaCol(29, 43); printf("%c ", 254);
+    linhaCol(36, 53); printf("%c", 196);
+    linhaCol(36, 65); printf("%c", 196);
+    linhaCol(38, 53); printf("%c", 196);
+    linhaCol(38, 65); printf("%c", 196);
+
+    linhaCol(37, 41); printf("  %c ", 254);
     setlocale(LC_ALL, "Portuguese");
     printf("Tempo restante: ");
     if (cont < 10) printf("0");
     printf("%d segundo(s)", cont);
     setlocale(LC_ALL, "C");
-    printf(" %c", 254);
+    printf(" %c   ", 254);
     setlocale(LC_ALL, "Portuguese");
 
     do{
-        linhaCol(29, 61);
+        if ((cont != 35) && (cont % 10 == 0 || cont <= 5)){
+            textColor(_BLACK, LIGHTRED);
+        } else {
+            textColor(_BLACK, WHITE);
+        }
+        linhaCol(37, 61);
         if (cont < 10) printf("0");
         printf("%d segundo(s)", cont);
-        for (int fast = 0; fast < 78; fast ++) {
+        for (int fast = 0; fast < 70; fast ++) {
             Sleep(10);
             if (GetAsyncKeyState(VK_SHIFT)) {
                 Sleep(80);
@@ -248,8 +271,9 @@ void opcao2(){
             }
         }
         cont --;
-    }while(cont >= 0);
+    }while(cont > 0);
     cleanScreen(2);
+    currentProgressionBanner("MÉDIO I", progresso, acertos, erros, pts);
     gerarSeqPerguntas(ordem, totPerguntas);
     for (int numPergunta = 1; numPergunta <= 10; numPergunta ++) {
         strcpy(tituloPergunta, "Pergunta nº ");
@@ -300,40 +324,51 @@ void opcao3(){
     titulo("MÉDIO II", "O jogo começará em breve...");
 
     setlocale(LC_ALL, "C");
-    linhaCol(11, 36); printf("%c ", 254);
+    linhaCol(12, 36); printf("%c ", 254);
     setlocale(LC_ALL, "Portuguese");
     printf("Tente memorizar as letras abaixo e boa sorte!");
     setlocale(LC_ALL, "C");
     printf(" %c", 254);
-    setlocale(LC_ALL, "Portuguese"); //59 - MEIO
+    setlocale(LC_ALL, "Portuguese");
 
-    printAlfabeto('N', 16, 31, true);
-    printAlfabeto('P', 16, 42, true);
-    printAlfabeto('Q', 16, 53, true);
-    printAlfabeto('R', 16, 64, true);
-    printAlfabeto('S', 16, 75, true);
-    printAlfabeto('T', 16, 86, true);
+    printAlfabeto('N', 17, 31, true);
+    printAlfabeto('P', 17, 42, true);
+    printAlfabeto('Q', 17, 53, true);
+    printAlfabeto('R', 17, 64, true);
+    printAlfabeto('S', 17, 75, true);
+    printAlfabeto('T', 17, 86, true);
 
-    printAlfabeto('V', 23, 37, true);
-    printAlfabeto('W', 23, 48, true);
-    printAlfabeto('X', 23, 59, true);
-    printAlfabeto('Y', 23, 70, true);
-    printAlfabeto('Z', 23, 81, true);
+    printAlfabeto('V', 24, 37, true);
+    printAlfabeto('W', 24, 48, true);
+    printAlfabeto('X', 24, 59, true);
+    printAlfabeto('Y', 24, 70, true);
+    printAlfabeto('Z', 24, 81, true);
 
     setlocale(LC_ALL, "C");
-    linhaCol(29, 43); printf("%c ", 254);
+    linhaCol(36, 53); printf("%c", 196);
+    linhaCol(36, 65); printf("%c", 196);
+    linhaCol(38, 53); printf("%c", 196);
+    linhaCol(38, 65); printf("%c", 196);
+
+    linhaCol(37, 41); printf("  %c ", 254);
     setlocale(LC_ALL, "Portuguese");
     printf("Tempo restante: ");
     if (cont < 10) printf("0");
     printf("%d segundo(s)", cont);
     setlocale(LC_ALL, "C");
-    printf(" %c", 254);
+    printf(" %c   ", 254);
     setlocale(LC_ALL, "Portuguese");
+
     do{
-        linhaCol(29, 61);
+        if ((cont != 40) && (cont % 10 == 0 || cont <= 5)){
+            textColor(_BLACK, LIGHTRED);
+        } else {
+            textColor(_BLACK, WHITE);
+        }
+        linhaCol(37, 61);
         if (cont < 10) printf("0");
         printf("%d segundo(s)", cont);
-        for (int fast = 0; fast < 78; fast ++) {
+        for (int fast = 0; fast < 70; fast ++) {
             Sleep(10);
             if (GetAsyncKeyState(VK_SHIFT)) {
                 Sleep(80);
@@ -341,8 +376,9 @@ void opcao3(){
             }
         }
         cont --;
-    }while(cont >= 0);
+    }while(cont > 0);
     cleanScreen(2);
+    currentProgressionBanner("MÉDIO II", progresso, acertos, erros, pts);
     gerarSeqPerguntas(ordem, totPerguntas);
     for (int numPergunta = 1; numPergunta <= 11; numPergunta ++) {
         strcpy(tituloPergunta, "Pergunta nº ");
@@ -431,20 +467,30 @@ void opcao4(){
     printAlfabeto('Z', 26, 86, true);
 
     setlocale(LC_ALL, "C");
-    linhaCol(37, 43); printf("%c ", 254);
+    linhaCol(36, 53); printf("%c", 196);
+    linhaCol(36, 65); printf("%c", 196);
+    linhaCol(38, 53); printf("%c", 196);
+    linhaCol(38, 65); printf("%c", 196);
+
+    linhaCol(37, 41); printf("  %c ", 254);
     setlocale(LC_ALL, "Portuguese");
     printf("Tempo restante: ");
     if (cont < 10) printf("0");
     printf("%d segundo(s)", cont);
     setlocale(LC_ALL, "C");
-    printf(" %c", 254);
+    printf(" %c   ", 254);
     setlocale(LC_ALL, "Portuguese");
 
     do{
+        if ((cont != 60) && (cont % 10 == 0 || cont <= 5)){
+            textColor(_BLACK, LIGHTRED);
+        } else {
+            textColor(_BLACK, WHITE);
+        }
         linhaCol(37, 61);
         if (cont < 10) printf("0");
         printf("%d segundo(s)", cont);
-        for (int fast = 0; fast < 78; fast ++) {
+        for (int fast = 0; fast < 70; fast ++) {
             Sleep(10);
             if (GetAsyncKeyState(VK_SHIFT)) {
                 Sleep(80);
@@ -452,8 +498,9 @@ void opcao4(){
             }
         }
         cont --;
-    }while(cont >= 0);
+    }while(cont > 0);
     cleanScreen(2);
+    currentProgressionBanner("DIFÍCIL", progresso, acertos, erros, pts);
     gerarSeqPerguntas(ordem, totPerguntas);
     for (int numPergunta = 1; numPergunta <= 26; numPergunta ++) {
         strcpy(tituloPergunta, "Pergunta nº ");
