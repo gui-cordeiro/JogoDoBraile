@@ -4,6 +4,11 @@
  * -> Ano: 2017, 2023
  */
 
+bool mudar = false;
+
+DWORD WINAPI e1(LPVOID params);
+DWORD WINAPI letra(LPVOID params);
+
 enum {
     BLACK,
     BLUE,
@@ -272,7 +277,7 @@ void apresentacao(){
     int tecla;
     system("cls");
     system("title Tela de título - Jogo do Braile 2.0");
-    //PlaySound(TEXT("..\\sounds\\intro.wav"), NULL, SND_ASYNC);
+    PlaySound(TEXT("..\\sounds\\intro.wav"), NULL, SND_ASYNC);
     setlocale(LC_ALL, "C");
     linhaCol(12, 35); printf(" %c ", 254);
     setlocale(LC_ALL, "Portuguese");
@@ -327,8 +332,6 @@ void apresentacao(){
 
     }
     system("cls");
-    topBannerDesign();
-    bottomBannerDesign();
     return;
 }
 
@@ -510,6 +513,13 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
     int opt;
     int acertos = 0, erros = 0, pontos = 0;
     char lista[2][40] = {"SIM, eu quero jogar!", "NÃO, eu quero voltar para o menu."};
+
+    DWORD threadId;
+    DWORD threadId2;
+
+    HANDLE hThread;
+    HANDLE hThread2;
+
     //PlaySound(TEXT("..\\sounds\\confirm-difficulty.wav"), NULL, SND_LOOP | SND_ASYNC);
     cleanScreen(1);
     titulo(nivel, "Confirmar Dificuldade");
@@ -568,6 +578,7 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
     cleanScreen(4);
     topBannerContent(nivel);
     titulo(nivel, "Entrando no jogo, prepare-se!");
+    PlaySound(TEXT("..\\sounds\\getready.wav"), NULL, SND_ASYNC);
     bottomBannerTitle(1);
     setlocale(LC_ALL, "C");
     linhaCol(12, 21); printf("%c ", 254);
@@ -594,30 +605,67 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
     printf(" %c", 254);
     setlocale(LC_ALL, "Portuguese");
     currentProgressionBanner(nivel, progresso, acertos, erros, pontos);
+    //linhaCol(37, 41);
+    //getchar();
 
     int tecla = 0, easter = 0;
     while(1){
         tecla = getch();
         if (tecla == 0 || tecla == 224) tecla = getch();
 
-        if (easter == 0 && (tecla == 118 || tecla == 86)) easter ++;
-        if (easter == 1 && (tecla == 97 || tecla == 65)) easter ++;
-        if (easter == 2 && (tecla == 115 || tecla == 83)) easter ++;
-        if (easter == 3 && (tecla == 99 || tecla == 67)) easter ++;
-        if (easter == 4 && (tecla == 111 || tecla == 79)) easter ++;
-
-        if (easter == 5) {
-            linhaCol(37, 41); printf("CLUB DE REGATAS VASCO DA GAMA, APENAS.");
-            PlaySound(TEXT("..\\sounds\\e1.wav"), NULL, SND_ASYNC);
-            e1();
-            easter = 0;
+        if (easter == 0) {
+            if (tecla == 118 || tecla == 86) easter ++;
+            else easter = 0;
+        } else if (easter == 1){
+            if (tecla == 97 || tecla == 65) easter ++;
+            else easter = 0;
+         }else if (easter == 2) {
+            if (tecla == 115 || tecla == 83) easter ++;
+            else easter = 0;
+        }else if (easter == 3) {
+            if (tecla == 99 || tecla == 67) easter ++;
+            else easter = 0;
+        }else if (easter == 4) {
+            if (tecla == 111 || tecla == 79) easter ++;
+            else easter = 0;
         }
 
+
+
+        if (easter == 5) {
+            titulo("-", "Easter Egg \"VASCO\" desbloqueado!");
+
+            setlocale(LC_ALL, "C");
+            linhaCol(36, 53); printf("%c", 196);
+            linhaCol(36, 65); printf("%c", 196);
+            linhaCol(38, 53); printf("%c", 196);
+            linhaCol(38, 65); printf("%c", 196);
+            setlocale(LC_ALL, "Portuguese");
+
+            textColor(_BLACK, BROWN);
+            linhaCol(37, 40); printf("    Easter Egg \"VASCO\" desbloqueado!    ");
+            textColor(_BLACK, WHITE);
+            hThread = CreateThread(NULL, 0x0, e1, NULL, 0, &threadId);
+            hThread2 = CreateThread(NULL, 0x0, letra, NULL, 0, &threadId2);
+            PlaySound(TEXT("..\\sounds\\e1.wav"), NULL, SND_ASYNC);
+            easter = 0;
+            while(1){
+                tecla = getch();
+                if (tecla == 0 || tecla == 224) tecla = getch();
+                if (tecla == 13) break;
+            }
+            PlaySound(TEXT("..\\sounds\\nosound.wav"), NULL, SND_ASYNC);
+            currentProgressionBanner(nivel, progresso, acertos, erros, pontos);
+        }
         if (tecla == 13) break; // Tecla Enter
     }
 
+    TerminateThread(hThread, 0x0);
+    TerminateThread(hThread2, 0x0);
 
-    PlaySound(TEXT("..\\sounds\\nosound.wav"), NULL, SND_ASYNC);
+    CloseHandle(hThread);
+    CloseHandle(hThread2);
+
     cleanScreen(6);
     titulo(nivel, "Entrando no jogo, prepare-se!");
     return 1;
@@ -1726,89 +1774,392 @@ void currentProgressionBanner(char difficulty[8], int currentProgression[26], in
     linhaCol(38, 39); printf("%c", 193);
     linhaCol(38, 80); printf("%c", 193);
 
-    //linhaCol(36, 53); printf("%c", 194);
-    //linhaCol(36, 65); printf("%c", 194);
-    //linhaCol(38, 53); printf("%c", 193);
-    //linhaCol(38, 65); printf("%c", 193);
+    linhaCol(36, 53); printf("%c", 194);
+    linhaCol(36, 65); printf("%c", 194);
+    linhaCol(38, 53); printf("%c", 193);
+    linhaCol(38, 65); printf("%c", 193);
 
-    //linhaCol(37, 53); printf("%c", 179);
-    //linhaCol(37, 65); printf("%c", 179);
-    setlocale(LC_ALL, "Portuguese");
-
-    linhaCol(37, 41);
-
-
-    /*linhaCol(37, 40);
+    linhaCol(37, 40);
     printf(" ACERTOS: ");
     if (acertos < 10) printf("0");
-    printf("%d | ERROS: ", acertos);
+    printf("%d %c ERROS: ", acertos, 179);
     if (erros < 10) printf("0");
-    printf("%d | PONTOS: ", erros);
+    printf("%d %c PONTOS: ", erros, 179);
     if (pontos < 10) printf("000");
     else if (pontos < 100) printf("00");
     else if (pontos < 1000) printf("0");
-    printf("%d", pontos);*/
+    printf("%d", pontos);
+    setlocale(LC_ALL, "Portuguese");
 }
 
-void e1() {
+DWORD WINAPI e1(LPVOID params) {
+    int contador = 0;
+    cleanScreen(6);
+
+    while(contador < 4){
+        //linhaCol(37, 2); printf("%d", contador);
+        linhaCol(11, 3); printf("       ,lllllllllc:,.           ");
+        linhaCol(12, 3); printf("       ,0MMMMMMMMMWNKd,         ");
+        linhaCol(13, 3); printf("       .dWMNxcllllllool'        ");
+        linhaCol(14, 3); printf("        oWMK;'xOOOOOkxdoc,..    ");
+        linhaCol(15, 3); printf("     ...oWMK;;0XXXXXNWWMMWX0xl,.");
+        linhaCol(16, 3); printf("   .oKx'oWMK; ......';codk0NMWO,");
+        linhaCol(17, 3); printf("  :0WWx'oWMK,        ;kko,.,dx' ");
+        linhaCol(18, 3); printf(" :XMWk'.oWMK,       ;0MM0'      ");
+        linhaCol(19, 3); printf(".kMM0'  oWMXo'''',ckNMWO,       ");
+        linhaCol(20, 3); printf("'0MWx.  oWMMWNNNNWMMNOl.        ");
+        linhaCol(21, 3); printf(".kMM0,  oWMW0xk0XWMNx.          ");
+        linhaCol(22, 3); printf(" ;KMWO;.cKWX;  .'xNMNd.         ");
+        linhaCol(23, 3); printf("  ;0WMXxc:ll.    .lXMWk'  .;xk, ");
+        linhaCol(24, 3); printf("   .l0WMWKkoc;''...cKMW0;.dNMWO'");
+        linhaCol(25, 3); printf("     .;dOXWMMWNNNXO;;0WMKc;odc' ");
+        linhaCol(26, 3); printf("        'cllodxkkkkl.'kWMXl.    ");
+        linhaCol(27, 3); printf("      .oX0d'         .dNMNd.    ");
+        linhaCol(28, 3); printf("      ;0WWNd.         .lXWWOc.  ");
+        linhaCol(29, 3); printf("      '::::;.           ':::;.  ");
+
+        textColor(LIGHTRED, _BLACK);
+        linhaCol(11, 36); printf("            ########################            ");
+        linhaCol(12, 36); printf("              ####################              ");
+        linhaCol(13, 36); printf("                ################                ");
+        linhaCol(14, 36); printf("                 ##############                 ");
+        linhaCol(15, 36); printf("#                  ##########                  #");
+        linhaCol(16, 36); printf("####                ########                ####");
+        linhaCol(17, 36); printf("########             ######             ########");
+        linhaCol(18, 36); printf("#############        ######        #############");
+        linhaCol(19, 36); printf("################################################");
+        linhaCol(20, 36); printf("################################################");
+        linhaCol(21, 36); printf("################################################");
+        linhaCol(22, 36); printf("############         ######         ############");
+        linhaCol(23, 36); printf("#######              ######             ########");
+        linhaCol(24, 36); printf("####                ########                ####");
+        linhaCol(25, 36); printf("#                  ##########                  #");
+        linhaCol(26, 36); printf("                 ##############                 ");
+        linhaCol(27, 36); printf("                ################                ");
+        linhaCol(28, 36); printf("              ####################              ");
+        linhaCol(29, 36); printf("            ########################            ");
+        textColor(WHITE, _BLACK);
+
+        linhaCol(11, 85); printf(" ......                    ...... ");
+        linhaCol(12, 85); printf(".:OXX0:                    lKXKk, ");
+        linhaCol(13, 85); printf("  lNMWd.                  .OMMK;  ");
+        linhaCol(14, 85); printf("  .oNMNl.  .';::ccc::;,'..'lxk:   ");
+        linhaCol(15, 85); printf("   .xWMXc.oKNWWMMMMMWWWNX0kdl:.   ");
+        linhaCol(16, 85); printf("    'kWMK:;xkxolllllodxk0XNWMWKx' ");
+        linhaCol(17, 85); printf("  .:;;0MM0,            ,ccccdKXd. ");
+        linhaCol(18, 85); printf(" .xW0;:KMWk.          ,0WNd. .'   ");
+        linhaCol(19, 85); printf(".dWMX: cXMWx.         :dxo'       ");
+        linhaCol(20, 85); printf("'0MMk.  lNMNo..cllllloooooolllll, ");
+        linhaCol(21, 85); printf(".OMMk.  .dWMXc.dNMMMMMMMMMMMMMMWd.");
+        linhaCol(22, 85); printf(" oNMNo.  .kWMK:.;:cllllc::::dXMWd.");
+        linhaCol(23, 85); printf(" .dNMNk;. 'OWM0, .:kOk:     ,KMWd.");
+        linhaCol(24, 85); printf("  .:0WMNOo';0MWOdxKMWk'..':oOWMWd.");
+        linhaCol(25, 85); printf("    .:kXWMO;:KMMWWMM0;:OXNWMWXOo' ");
+        linhaCol(26, 85); printf("       .:oxc.lNMMMMK:,kK0kdl;..   ");
+        linhaCol(27, 85); printf("             .oNMMXc ....         ");
+        linhaCol(28, 85); printf("              .xXKo.              ");
+        linhaCol(29, 85); printf("               .;'.               ");
+
+        while(mudar == false) {
+            if (mudar == true) {
+                Sleep(1500);
+                break;
+            }
+        }
+        mudar = false;
+        cleanScreen(6);
+
+        linhaCol(10, 2); printf(" .d8888b.  888          888             888            8888888b.                            888                                ");
+        linhaCol(11, 2); printf("d88P  Y88b 888          888             888            888   Y88b                           888                                ");
+        linhaCol(12, 2); printf("888    888 888          888             888            888    888                           888                                ");
+        linhaCol(13, 2); printf("888        888 888  888 88888b.     .d88888  .d88b.    888   d88P .d88b.   .d88b.   8888b.  888888  8888b.  .d8888b            ");
+        linhaCol(14, 2); printf("888        888 888  888 888 \"88b   d88\" 888 d8P  Y8b   8888888P\" d8P  Y8b d88P\"88b     \"88b 888        \"88b 88K          ");
+        linhaCol(15, 2); printf("888    888 888 888  888 888  888   888  888 88888888   888 T88b  88888888 888  888 .d888888 888    .d888888 \"Y8888b.          ");
+        linhaCol(16, 2); printf("Y88b  d88P 888 Y88b 888 888 d88P   Y88b 888 Y8b.       888  T88b Y8b.     Y88b 888 888  888 Y88b.  888  888      X88           ");
+        linhaCol(17, 2); printf(" \"Y8888P\"  888  \"Y88888 88888P\"     \"Y88888  \"Y8888    888   T88b \"Y8888   \"Y88888 \"Y888888  \"Y888 \"Y888888  88888P'");
+        linhaCol(18, 2); printf("                                                                               888                                             ");
+        linhaCol(19, 2); printf("                                                                          Y8b d88P                                             ");
+        linhaCol(20, 2); printf("                                                                           \"Y88P\"                                            ");
+
+        linhaCol(23, 2); printf("888     888                                             888                .d8888b.                                            ");
+        linhaCol(24, 2); printf("888     888                                             888               d88P  Y88b                                           ");
+        linhaCol(25, 2); printf("888     888                                             888               888    888                                           ");
+        linhaCol(26, 2); printf("Y88b   d88P 8888b.  .d8888b   .d8888b .d88b.        .d88888  8888b.       888         8888b.  88888b.d88b.   8888b.            ");
+        linhaCol(27, 2); printf(" Y88b d88P     \"88b 88K      d88P\"   d88\"\"88b      d88\" 888     \"88b      888  88888     \"88b 888 \"888 \"88b     \"88b ");
+        linhaCol(28, 2); printf("  Y88o88P  .d888888 \"Y8888b. 888     888  888      888  888 .d888888      888    888 .d888888 888  888  888 .d888888          ");
+        linhaCol(29, 2); printf("   Y888P   888  888      X88 Y88b.   Y88..88P      Y88b 888 888  888      Y88b  d88P 888  888 888  888  888 888  888           ");
+        linhaCol(30, 2); printf("    Y8P    \"Y888888  88888P'  \"Y8888P \"Y88P\"        \"Y88888 \"Y888888       \"Y8888P88 \"Y888888 888  888  888 \"Y888888  ");
+
+        while(mudar == false) {
+            if (mudar == true) {
+                Sleep(1500);
+                break;
+            }
+        }
+        mudar = false;
+        cleanScreen(6);
+
+        int linha = 9;
+        int col = 9;
+        setlocale(LC_ALL, "C");
+        SetConsoleOutputCP(CP_UTF8);
+        for (int lin = linha; lin <= 31; lin ++) {
+            linhaCol(lin, col);
+            printf("\u2591\u2592\u2593");
+            for (int control = 0; control <= 30; control ++) {
+                printf("\u2588");
+            }
+            printf("\u2593\u2592\u2591");
+            col += 3;
+        }
+        textColor(_WHITE, LIGHTRED);
+        linhaCol(17, 56); printf("\u2588\u2588\u2588\u2588\u2588\u2588");
+        linhaCol(18, 57); printf("\u2588\u2588\u2588\u2588");
+        linhaCol(19, 53); printf("\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588");
+        linhaCol(20, 53); printf("\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588");
+        linhaCol(21, 57); printf("\u2588\u2588\u2588\u2588");
+        linhaCol(22, 56); printf("\u2588\u2588\u2588\u2588\u2588\u2588");
+
+        linhaCol(18, 53); printf("\u2588\u2588");
+        linhaCol(18, 63); printf("\u2588\u2588");
+        linhaCol(21, 53); printf("\u2588\u2588");
+        linhaCol(21, 63); printf("\u2588\u2588");
+
+        textColor(_BLACK, BROWN);
+        linhaCol(10, 96); printf("\u2605    \u2605    \u2605    \u2605");
+        linhaCol(12, 96); printf("\u2605    \u2605    \u2605    \u2605");
+
+        textColor(_BLACK, WHITE);
+        SetConsoleOutputCP(850);
+        setlocale(LC_ALL, "Portuguese");
+
+        while(mudar == false) {
+            if (mudar == true) {
+                Sleep(1500);
+                break;
+            }
+        }
+        mudar = false;
+        cleanScreen(6);
+
+        linhaCol(11, 14); printf(" .d88888b.        .d8888b.  8888888 .d8888b.         d8888 888b    888 88888888888 8888888888 ");
+        linhaCol(12, 14); printf("d88P\" \"Y88b      d88P  Y88b   888  d88P  Y88b       d88888 8888b   888     888     888        ");
+        linhaCol(13, 14); printf("888     888      888    888   888  888    888      d88P888 88888b  888     888     888        ");
+        linhaCol(14, 14); printf("888     888      888          888  888            d88P 888 888Y88b 888     888     8888888    ");
+        linhaCol(15, 14); printf("888     888      888  88888   888  888  88888    d88P  888 888 Y88b888     888     888        ");
+        linhaCol(16, 14); printf("888     888      888    888   888  888    888   d88P   888 888  Y88888     888     888        ");
+        linhaCol(17, 14); printf("Y88b. .d88P      Y88b  d88P   888  Y88b  d88P  d8888888888 888   Y8888     888     888        ");
+        linhaCol(18, 14); printf(" \"Y88888P\"        \"Y8888P88 8888888 \"Y8888P88 d88P     888 888    Y888     888     8888888888");
+        linhaCol(22, 14); printf("8888888b.        d8888       .d8888b.   .d88888b.  888      8888888 888b    888        d8888");
+        linhaCol(23, 14); printf("888  \"Y88b      d88888      d88P  Y88b d88P\" \"Y88b 888        888   8888b   888       d88888");
+        linhaCol(24, 14); printf("888    888     d88P888      888    888 888     888 888        888   88888b  888      d88P888");
+        linhaCol(25, 14); printf("888    888    d88P 888      888        888     888 888        888   888Y88b 888     d88P 888");
+        linhaCol(26, 14); printf("888    888   d88P  888      888        888     888 888        888   888 Y88b888    d88P  888");
+        linhaCol(27, 14); printf("888    888  d88P   888      888    888 888     888 888        888   888  Y88888   d88P   888");
+        linhaCol(28, 14); printf("888  .d88P d8888888888      Y88b  d88P Y88b. .d88P 888        888   888   Y8888  d8888888888");
+        linhaCol(29, 14); printf("8888888P\" d88P     888       \"Y8888P\"   \"Y88888P\"  88888888 8888888 888    Y888 d88P     888");
+
+        while(mudar == false) {
+            if (mudar == true) {
+                Sleep(1500);
+                break;
+            }
+        }
+        mudar = false;
+        cleanScreen(6);
+
+        linhaCol(16, 23); printf("       d8888 8888888b.  8888888888 888b    888        d8888  .d8888b.  888   ");
+        linhaCol(17, 23); printf("      d88888 888   Y88b 888        8888b   888       d88888 d88P  Y88b 888   ");
+        linhaCol(18, 23); printf("     d88P888 888    888 888        88888b  888      d88P888 Y88b.      888   ");
+        linhaCol(19, 23); printf("    d88P 888 888   d88P 8888888    888Y88b 888     d88P 888  \"Y888b.   888  ");
+        linhaCol(20, 23); printf("   d88P  888 8888888P\"  888        888 Y88b888    d88P  888     \"Y88b. 888 ");
+        linhaCol(21, 23); printf("  d88P   888 888        888        888  Y88888   d88P   888       \"888 Y8P  ");
+        linhaCol(22, 23); printf(" d8888888888 888        888        888   Y8888  d8888888888 Y88b  d88P  \"   ");
+        linhaCol(23, 23); printf("d88P     888 888        8888888888 888    Y888 d88P     888  \"Y8888P\"  888 ");
+
+        while(mudar == false) {
+            if (mudar == true) {
+                Sleep(1500);
+                break;
+            }
+        }
+        mudar = false;
+        cleanScreen(6);
+
+
+        contador ++;
+    }
 
     box(9, 1, 31, 119);
 
-    linhaCol(14, 3); printf("      _____           _____   ");
-    linhaCol(15, 3); printf("  ___|\\    \\      ___|\\    \\  ");
-    linhaCol(16, 3); printf(" /    /\\    \\    |    |\\    \\ ");
-    linhaCol(17, 3); printf("|    |  |    |   |    | |    |");
-    linhaCol(18, 3); printf("|    |  |____|   |    |/____/ ");
-    linhaCol(19, 3); printf("|    |   ____    |    |\\    \\ ");
-    linhaCol(20, 3); printf("|    |  |    |   |    | |    |");
-    linhaCol(21, 3); printf("|\\ ___\\/    /|   |____| |____|");
-    linhaCol(22, 3); printf("| |   /____/ |   |    | |    |");
-    linhaCol(23, 3); printf(" \\|___|    | /   |____| |____|");
-    linhaCol(24, 3); printf("   \\( |____|/      \\(     )/  ");
-    linhaCol(25, 3); printf("    '   )/          '     '   ");
-    linhaCol(26, 3); printf("        '                     ");
+    linhaCol(10, 3); printf(" _____         _              _____              _        _____                      _        _____               ");
+    linhaCol(11, 3); printf("|   __|___ ___| |_ ___ ___   |   __|___ ___    _| |___   |  |  |___ ___ ___ ___    _| |___   |   __|___ _____ ___ ");
+    linhaCol(12, 3); printf("|   __| .'|_ -|  _| -_|  _|  |   __| . | . |  | . | . |  |  |  | .'|_ -|  _| . |  | . | .'|  |  |  | .'|     | .'|");
+    linhaCol(13, 3); printf("|_____|__,|___|_| |___|_|    |_____|_  |_  |  |___|___|   \\___/|__,|___|___|___|  |___|__,|  |_____|__,|_|_|_|__,|");
+    linhaCol(14, 3); printf("                                   |___|___|                                                                      ");
 
+    linhaCol(16, 18); printf("Acalme-se, torcedor(a) flamenguista/tricolor/botafoguense ou de qualquer outro time!");
 
-    textColor(LIGHTRED, _BLACK);
-    linhaCol(11, 35); printf("            ########################            ");
-    linhaCol(12, 35); printf("              ####################              ");
-    linhaCol(13, 35); printf("                ################                ");
-    linhaCol(14, 35); printf("                 ##############                 ");
-    linhaCol(15, 35); printf("#                  ##########                  #");
-    linhaCol(16, 35); printf("####                ########                ####");
-    linhaCol(17, 35); printf("########             ######             ########");
-    linhaCol(18, 35); printf("#############        ######        #############");
-    linhaCol(19, 35); printf("################################################");
-    linhaCol(20, 35); printf("################################################");
-    linhaCol(21, 35); printf("################################################");
-    linhaCol(22, 35); printf("############         ######         ############");
-    linhaCol(23, 35); printf("#######              ######             ########");
-    linhaCol(24, 35); printf("####                ########                ####");
-    linhaCol(25, 35); printf("#                  ##########                  #");
-    linhaCol(26, 35); printf("                 ##############                 ");
-    linhaCol(27, 35); printf("                ################                ");
-    linhaCol(28, 35); printf("              ####################              ");
-    linhaCol(29, 35); printf("            ########################            ");
-    textColor(WHITE, _BLACK);
+    linhaCol(19, 12); printf("Isso aqui foi uma brincadeira que eu quis adicionar ao Jogo do Braile! Foi bem divertido criá-lo");
+    linhaCol(20, 13); printf("pois o Vasco da Gama sempre foi muito importante para a minha vida. Por fim, dedico esta minha");
+    linhaCol(21, 15); printf("singela homenagem do Gigante da Colina ao meu pai, um grande vascaíno que me ensinou a ser");
+    linhaCol(22, 33); printf("apaixonado pelo Legítimo Clube do Povo desde criança!");
 
+    linhaCol(25, 3); printf("Espero que tenha gostado, e claro, respeito em primeiro lugar! Pressione Enter para continuar com o Jogo do Braile.");
 
+    textColor(_BLACK, LIGHTRED);
+    box(28, 5, 30, 115);
+    linhaCol(29, 7); printf("O hino do Vasco em 8 bits foi criado pelo canal \"Clubes em 8-Bits\" no YouTube: https://youtu.be/tehFoER2e2E");
+    textColor(_BLACK, WHITE);
 
-
-    linhaCol(14, 85); printf(" ____      ____         _____    ");
-    linhaCol(15, 85); printf("|    |    |    |    ___|\\    \\   ");
-    linhaCol(16, 85); printf("|    |    |    |   /    /\\    \\  ");
-    linhaCol(17, 85); printf("|    |    |    |  |    |  |____| ");
-    linhaCol(18, 85); printf("|    |    |    |  |    |    ____ ");
-    linhaCol(19, 85); printf("|    |    |    |  |    |   |    |");
-    linhaCol(20, 85); printf("|\\    \\  /    /|  |    |   |_,  |");
-    linhaCol(21, 85); printf("| \\ ___\\/___ / |  |\\ ___\\___/  /|");
-    linhaCol(22, 85); printf(" \\ |   ||   | /   | |   /____ / |");
-    linhaCol(23, 85); printf("  \\|___||___|/     \\|___|    | / ");
-    linhaCol(24, 85); printf("    \\(    )/         \\( |____|/  ");
-    linhaCol(25, 85); printf("     '    '           '   )/     ");
-    linhaCol(26, 85); printf("                          '      ");
-
-
+    return 0;
 }
+
+
+DWORD WINAPI letra(LPVOID params){
+    setlocale(LC_ALL, "Portuguese");
+
+    Sleep(3000); //18180
+    mudar = true;
+    Sleep(3250);
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("                . . .                 ");
+    textColor(_BLACK, WHITE);
+    mudar = true;
+    Sleep(3000);
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("                . . .                 ");
+    textColor(_BLACK, WHITE);
+    mudar = true;
+    Sleep(3000);
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("                . . .                 ");
+    textColor(_BLACK, WHITE);
+    mudar = true;
+    Sleep(3000);
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("                . . .                 ");
+    textColor(_BLACK, WHITE);
+    mudar = true;
+    Sleep(2700);
+    textColor(_BLACK, BROWN);
+
+    linhaCol(37, 41); printf("    Vamos todos cantar de coração     ");
+    textColor(_BLACK, WHITE);
+    Sleep(3700); //18100
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("    A Cruz de Malta é o meu pendão    ");
+    textColor(_BLACK, WHITE);
+    mudar = true;
+    Sleep(3820); //21920
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf(" Tu tens o nome do heroico português  ");
+    textColor(_BLACK, WHITE);
+    Sleep(3740); //25660
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("Vasco da Gama, a tua fama assim se fez");
+    textColor(_BLACK, WHITE);
+    mudar = true;
+    Sleep(3980); //29640
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("    Tua imensa torcida é bem feliz    ");
+    textColor(_BLACK, WHITE);
+    Sleep(3750); //33390
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("  Norte-Sul, Norte-Sul deste Brasil   ");
+    textColor(_BLACK, WHITE);
+    mudar = true;
+    Sleep(3730); //37120
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("   Tua estrela, na terra a brilhar    ");
+    textColor(_BLACK, WHITE);
+    Sleep(3600); //40720
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("            Ilumina o mar             ");
+    textColor(_BLACK, WHITE);
+    mudar = true;
+
+
+    Sleep(3750); //44470
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("                . . .                 ");
+    textColor(_BLACK, WHITE);
+    mudar = true;
+    Sleep(2700);
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("                . . .                 ");
+    textColor(_BLACK, WHITE);
+    mudar = true;
+    Sleep(2650);
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("                . . .                 ");
+    textColor(_BLACK, WHITE);
+    mudar = true;
+    Sleep(2650);
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("                . . .                 ");
+    textColor(_BLACK, WHITE);
+    mudar = true;
+
+    Sleep(3050);//56130
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("      No atletismo, és um braço       ");
+    textColor(_BLACK, WHITE);
+    Sleep(3500); //59630
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("         No remo, és imortal          ");
+    textColor(_BLACK, WHITE);
+    mudar = true;
+    Sleep(3750); //63380
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("       No futebol, és um traço        ");
+    textColor(_BLACK, WHITE);
+    Sleep(3270); //66650
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("      De união Brasil-Portugal!       ");
+    textColor(_BLACK, WHITE);
+    mudar = true;
+    Sleep(4500); //71130
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("      No atletismo, és um braço       ");
+    textColor(_BLACK, WHITE);
+    Sleep(3500); //59630
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("         No remo, és imortal          ");
+    textColor(_BLACK, WHITE);
+    mudar = true;
+    Sleep(3750); //63380
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("       No futebol, és um traço        ");
+    textColor(_BLACK, WHITE);
+    Sleep(3270); //66650
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("      De união Brasil-Portugal!       ");
+    textColor(_BLACK, WHITE);
+    mudar = true;
+    Sleep(3970); //86190
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("                . . .                 ");
+    textColor(_BLACK, WHITE);
+    mudar = true;
+    Sleep(3950); //94080
+    mudar = true;
+    Sleep(3890); //94080
+    mudar = true;
+    Sleep(1000); //94080
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf("                VASCO!                ");
+    textColor(_BLACK, WHITE);
+    Sleep(2000); //94080
+    textColor(_BLACK, BROWN);
+    linhaCol(37, 41); printf(" Criado com carinho pelo vascaíno Gui ");
+    textColor(_BLACK, WHITE);
+
+
+    setlocale(LC_ALL, "C");
+    return 0;
+}
+
+
 
 

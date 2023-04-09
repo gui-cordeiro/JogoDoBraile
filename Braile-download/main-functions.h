@@ -117,7 +117,6 @@ void opcao1(){
 
     if(confirmarJogo("FÁCIL", progresso) == 0) return 0;
     topBannerContent("FÁCIL");
-    currentProgressionBanner("FÁCIL", progresso, acertos, erros, pontos);
 
     titulo("FÁCIL", "O jogo começará em breve...");
 
@@ -204,7 +203,6 @@ void opcao2(){
 
     if(confirmarJogo("MÉDIO I", progresso) == 0) return 0;
     topBannerContent("MÉDIO I");
-    currentProgressionBanner("MÉDIO I", progresso, acertos, erros, pontos);
 
     titulo("MÉDIO I", "O jogo começará em breve...");
 
@@ -298,7 +296,6 @@ void opcao3(){
 
     if(confirmarJogo("MÉDIO II", progresso) == 0) return 0;
     topBannerContent("MÉDIO II");
-    currentProgressionBanner("MÉDIO II", progresso, acertos, erros, pontos);
 
     titulo("MÉDIO II", "O jogo começará em breve...");
 
@@ -393,7 +390,6 @@ void opcao4(){
 
     if(confirmarJogo("DIFÍCIL", progresso) == 0) return 0;
     topBannerContent("DIFÍCIL");
-    currentProgressionBanner("DIFÍCIL", progresso, acertos, erros, pontos);
 
     titulo("DIFÍCIL", "O jogo começará em breve...");
 
