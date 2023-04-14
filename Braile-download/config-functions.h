@@ -5,6 +5,7 @@
  */
 
 bool mudar = false;
+bool isFullScreen = false;
 
 DWORD WINAPI e1(LPVOID params);
 DWORD WINAPI letra(LPVOID params);
@@ -104,7 +105,7 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
     sprintf(lista[3], " d) Letra %c ", alt[3]);
 
     cleanScreen(5);
-    topBannerContent("-");
+    topBannerContent("-", 3);
     exibirBannerPergunta(questao);
 
     setlocale(LC_ALL, "C");
@@ -318,12 +319,9 @@ void apresentacao(){
     setlocale(LC_ALL, "C");
     printf(" %c", 254);
     setlocale(LC_ALL, "Portuguese");
-    while(1) {
-        tecla = getch();
-        tecla = (tecla == 0 || tecla == 224) ? getch() : tecla;
-        if (tecla == 13) break;
-    }
-    fflush(stdin);
+
+    pressEnter();
+
     PlaySound(TEXT("..\\sounds\\confirm.wav"), NULL, SND_ASYNC);
     for(int pulses = 0; pulses < 4; pulses ++) {
         textColor(BLACK, _WHITE);
@@ -545,7 +543,7 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
     }
     linhaCol(32,72);printf("%c", 193);
     setlocale(LC_ALL, "Portuguese");
-    topBannerContent(nivel);
+    topBannerContent(nivel, 1);
     exibirLetras(nivel);
     if (strcmp("FÁCIL", nivel) == 0) {
         box(11, 11, 13, 61);
@@ -601,7 +599,7 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
     }
 
     cleanScreen(4);
-    topBannerContent(nivel);
+    topBannerContent(nivel, 1);
     titulo(nivel, "Entrando no jogo, prepare-se!");
     PlaySound(TEXT("..\\sounds\\getready.wav"), NULL, SND_ASYNC);
     bottomBannerTitle(1);
@@ -639,7 +637,6 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
     while(1){
         tecla = getch();
         if (tecla == 0 || tecla == 224) tecla = getch();
-
         if (easter == 0) {
             if (tecla == 118 || tecla == 86) easter ++;
             else easter = 0;
@@ -656,9 +653,6 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
             if (tecla == 111 || tecla == 79) easter ++;
             else easter = 0;
         }
-
-
-
         if (easter == 5) {
             titulo("-", "Easter Egg \"VASCO\" desbloqueado!");
 
@@ -679,7 +673,7 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
             while(1){
                 tecla = getch();
                 if (tecla == 0 || tecla == 224) tecla = getch();
-                if (tecla == 13) break;
+                if (tecla == 13 && mudar == false) break;
             }
             PlaySound(TEXT("..\\sounds\\nosound.wav"), NULL, SND_ASYNC);
             currentProgressionBanner(nivel, progresso, acertos, erros, pontos);
@@ -700,71 +694,67 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
 
 /* H) FIM DO JOGO (TABELA DE ESTATÍSTICAS) */
 void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
+    int tecla = 0;
+    /*
+     * Código do sistema de Ranking - Futuro
+     */
+    cleanScreen(2);
+    titulo(nivel, "Resultado final");
+    topBannerContent("FÁCIL", 2);
 
-    /*Código do sistema de Ranking - Futuro*/
+    setlocale(LC_ALL, "C");
+    linhaCol(13, 37); printf("%c", 254);
+    setlocale(LC_ALL, "Portuguese");
+    printf(" DE ACORDO COM SEU DESEMPENHO, VOCÊ OBTEU O ");
+    setlocale(LC_ALL, "C");
+    printf("%c", 254);
+    linhaCol(26, 45); printf("%c", 254);
+    setlocale(LC_ALL, "Portuguese");
+    printf(" Aguardando resultado final ");
+    setlocale(LC_ALL, "C");
+    printf("%c", 254);
+    setlocale(LC_ALL, "Portuguese");
 
-    titulo(nivel, "Resultado Final");
-    addFade(6, 0, 0);
-    printf("\t\t\t\t\t        * RESULTADO FINAL DO: *\n");Sleep(tempo);
-    exibirBannerDificuldade(nivel);
-    Sleep(1000);
-    addFade(3, tempo, 1);
-    printf("\t\t\t\t       +---------------------------------------+\n");Sleep(tempo);
-    printf("\t\t\t\t       |        QUE RUFEM OS TAMBORES!         |\n");Sleep(tempo);
-    printf("\t\t\t\t       +---------------------------------------+\n");Sleep(tempo);
-    Sleep(1000);
-    printf("\t\t\t\t       |                                       |\n");Sleep(250);
-    if (numPerg < 10) {
-        printf("\t\t\t\t       |        Total de ACERTOS: %d / %d        |\n", acertos, numPerg);
-    } else if (acertos < 10) {
-        printf("\t\t\t\t       |       Total de ACERTOS: %d / %d        |\n", acertos, numPerg);
-    } else {
-        printf("\t\t\t\t       |       Total de ACERTOS: %d / %d       |\n", acertos, numPerg);
-    }
-    Sleep(500);
-    printf("\t\t\t\t       |                                       |\n");Sleep(250);
-    if(pts < 1000){
-    printf("\t\t\t\t       |         Total de PONTOS: %d          |\n", pts);
-    }else{
-    printf("\t\t\t\t       |         Total de PONTOS: %d         |\n", pts);
-    }
-    Sleep(500);
-    printf("\t\t\t\t       |                                       |\n");Sleep(tempo);
-    printf("\t\t\t\t       +---------------------------------------+");Sleep(500);
-    addFade(3, tempo, 1);
+    Sleep(3500);
 
     if(((strcmp(nivel, "FÁCIL") == 0 && acertos <= 2) || (strcmp(nivel, "MÉDIO I") == 0 && acertos <= 3)) || ((strcmp(nivel, "MÉDIO II") == 0 && acertos <= 4) || (strcmp(nivel, "DIFÍCIL") == 0 && acertos <= 8))){
-        printf("\t\t\t+----------------------------------------------------------------------+\n");Sleep(tempo);
-        printf("\t\t\t| Não se frustre! Errar faz parte, e é somente errando que se aprende! |\n");Sleep(tempo);
-        printf("\t\t\t+----------------------------------------------------------------------+\n");Sleep(tempo);
-    }
-
-    else if(((strcmp(nivel, "FÁCIL") == 0 && acertos <= 3) || (strcmp(nivel, "MÉDIO I") == 0 && acertos <= 6)) || ((strcmp(nivel, "MÉDIO II") == 0 && acertos <= 7) || (strcmp(nivel, "DIFÍCIL") == 0 && acertos <= 16))){
-        printf("\t\t\t  +-----------------------------------------------------------------+\n");Sleep(tempo);
-        printf("\t\t\t  | Você está indo no caminho certo! Continue firme, você consegue! |\n");Sleep(tempo);
-        printf("\t\t\t  +-----------------------------------------------------------------+\n");Sleep(tempo);
-    }
-
-    else if(((strcmp(nivel, "FÁCIL") == 0 && acertos <= 4) || (strcmp(nivel, "MÉDIO I") == 0 && acertos <= 9)) || ((strcmp(nivel, "MÉDIO II") == 0 && acertos <= 10) || (strcmp(nivel, "DIFÍCIL") == 0 && acertos <= 25))){
-        printf("\t\t\t   +---------------------------------------------------------------+\n");Sleep(tempo);
-        printf("\t\t\t   | Muito bem! A perseverança é a chave, então continue tentando! |\n");
-        printf("\t\t\t   +---------------------------------------------------------------+\n");Sleep(tempo);
-    }
-
-    else if(((strcmp(nivel, "FÁCIL") == 0 && acertos == 5) || (strcmp(nivel, "MÉDIO I") == 0 && acertos == 10)) || ((strcmp(nivel, "MÉDIO II") == 0 && acertos == 11) || (strcmp(nivel, "DIFÍCIL") == 0 && acertos == 26))){
-        printf("\t\t\t +--------------------------------------------------------------------+\n");Sleep(tempo);
-        printf("\t\t\t | Meus parabéns, você acertou TODAS AS QUESTÕES! É assim que se faz! |\n");Sleep(tempo);
-        printf("\t\t\t +--------------------------------------------------------------------+\n");Sleep(tempo);
+        textColor(_BLACK, LIGHTRED);
+        exibirBannerResultado(0);
+        box(21, 24, 23, 95);
+        linhaCol(22, 26); printf("Não se frustre! Errar faz parte, e é somente errando que se aprende!");
+    } else if(((strcmp(nivel, "FÁCIL") == 0 && acertos <= 3) || (strcmp(nivel, "MÉDIO I") == 0 && acertos <= 6)) || ((strcmp(nivel, "MÉDIO II") == 0 && acertos <= 7) || (strcmp(nivel, "DIFÍCIL") == 0 && acertos <= 16))){
+        textColor(_BLACK, LIGHTBLUE);
+        exibirBannerResultado(1);
+        box(21, 27, 23, 93);
+        linhaCol(22, 29); printf("Você está indo no caminho certo! Continue firme, você consegue!");
+    } else if(((strcmp(nivel, "FÁCIL") == 0 && acertos <= 4) || (strcmp(nivel, "MÉDIO I") == 0 && acertos <= 9)) || ((strcmp(nivel, "MÉDIO II") == 0 && acertos <= 10) || (strcmp(nivel, "DIFÍCIL") == 0 && acertos <= 25))){
+        textColor(_BLACK, LIGHTMAGENTA);
+        exibirBannerResultado(2);
+        box(21, 28, 23, 92);
+        linhaCol(22, 30); printf("Muito bem! A perseverança é a chave, então continue tentando!");
+    } else if(((strcmp(nivel, "FÁCIL") == 0 && acertos == 5) || (strcmp(nivel, "MÉDIO I") == 0 && acertos == 10)) || ((strcmp(nivel, "MÉDIO II") == 0 && acertos == 11) || (strcmp(nivel, "DIFÍCIL") == 0 && acertos == 26))){
+        textColor(_BLACK, LIGHTGREEN);
+        exibirBannerResultado(3);
+        box(21, 24, 23, 93);
+        linhaCol(22, 26); printf("Meus parabéns, você acertou TODAS AS QUESTÕES! É assim que se faz!");
     } else {
-        printf("\t\t\t +--------------------------------------------------------------------+\n");Sleep(tempo);
-        printf("\t\t\t | [ERRO] Dificuldade não condiz com o número de acertos.             |\n");Sleep(tempo);
-        printf("\t\t\t +--------------------------------------------------------------------+\n");Sleep(tempo);
+        exibirBannerResultado(69);
+        box(21, 41, 23, 79);
+        linhaCol(22, 43); printf("[ERRO] Dados informados incorretos.");
     }
-
-    Sleep(1000);
-    addFade(3, tempo, 1);
-    printf("\t\t\t\t   **** Pressione qualquer tecla para continuar **** ");
-    getch();
+    textColor(_BLACK, WHITE);
+    setlocale(LC_ALL, "C");
+    linhaCol(26, 43); printf("%c", 254);
+    setlocale(LC_ALL, "Portuguese");
+    printf(" Pressione ENTER para continuar ");
+    setlocale(LC_ALL, "C");
+    printf("%c", 254);
+    setlocale(LC_ALL, "Portuguese");
+    while(1) {
+        tecla = getch();
+        tecla = (tecla == 0 || tecla == 224) ? getch() : tecla;
+        if (tecla == 13) break;
+    }
     //addFade(12, 0, 0);
     //addFade(18, 30, 1);
     system("cls");
@@ -772,25 +762,25 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
     addFade(8, 0, 0);
     if (strcmp(nivel, "FÁCIL") == 0 && acertos == 5) {
         printf("\t\t  * ESSA FOI FÁCIL! MAS AGORA AS COISAS VÃO DIFICULTAR UM POUCO: EXPERIMENTE AGORA O: *\n");Sleep(1500);
-        exibirBannerDificuldade("MÉDIO I");
+        exibirBannerDificuldade("MÉDIO I", 3);
         addFade(1, 1000, 1);
         printf("\t\t\t\t\t    * Selecione no menu principal! *");Sleep(1000);
     } else if (strcmp(nivel, "MÉDIO I") == 0 && acertos == 10) {
         printf("\t\t\t\t * SIGA ADIANTE! CONTINUE O SEU APRENDIZADO JOGANDO O: *\n");Sleep(2000);
-        exibirBannerDificuldade("MÉDIO II");
+        exibirBannerDificuldade("MÉDIO II", 3);
         addFade(1, 1000, 1);
         printf("\t\t\t\t\t    * Selecione no menu principal! *");Sleep(1000);
     } else if (strcmp(nivel, "MÉDIO II") == 0 && acertos == 11) {
         printf("\t\t  * BOM TRABALHO, AGORA VÁ ADIANTE AO SEU ÚLTIMO DESAFIO! AO INIGUALÁVEL, AO TEMÍVEL: *\n");Sleep(2000);
-        exibirBannerDificuldade("DIFÍCIL");
+        exibirBannerDificuldade("DIFÍCIL", 3);
         addFade(1, 1000, 1);
         printf("\t\t\t\t\t    * Selecione no menu principal! *");Sleep(1000);
     } else if (strcmp(nivel, "DIFÍCIL") == 0 && acertos == 26) {
         printf("\t\t\t  * MEUS PARABÉNS! VOCÊ PROVOU COM MAESTRIA QUE É EXPERT NO BRAILE! *\n");Sleep(2000);
-        exibirBannerDificuldade("AGRADECIMENTO");
+        exibirBannerDificuldade("AGRADECIMENTO", 3);
     } else {
         printf("\t\t\t\t\t  * BOA TENTATIVA. TENTE NOVAMENTE! *\n");Sleep(1000);
-        exibirBannerDificuldade("NÃO DESISTA");
+        exibirBannerDificuldade("NÃO DESISTA", 3);
         addFade(1, 1000, 1);
         printf("\t\t\t       \"A persistência é o caminho do êxito\". Continue tentando! ");Sleep(1500);
     }
@@ -799,8 +789,12 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
     addFade(3, tempo, 1);
     banner();
     addFade(1, tempo, 1);
-    printf("\t\t\t       **** Pressione qualquer tecla para retornar ao menu ****");
-    getch();
+    printf("\t\t\t       **** Pressione ENTER para retornar ao menu ****");
+    while(1) {
+        tecla = getch();
+        tecla = (tecla == 0 || tecla == 224) ? getch() : tecla;
+        if (tecla == 13) break;
+    }
     if (((strcmp(nivel, "FÁCIL") == 0 && acertos == 5) || (strcmp(nivel, "MÉDIO I") == 0 && acertos == 10)) || ((strcmp(nivel, "MÉDIO II") == 0 && acertos == 11) || (strcmp(nivel, "DIFÍCIL") == 0 && acertos == 26))){
         addFade(9, 0, 0);
         addFade(30, 25, 1);
@@ -857,9 +851,21 @@ void configJogo(){
     int altura = 8;
     hideCursor();
     setlocale(LC_ALL,"Portuguese");
-    system("mode con:cols=119 lines=38");
+
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SMALL_RECT windowSize = {0, 0, 118, 37}; // define o tamanho da janela
+    SetConsoleWindowInfo(hConsole, TRUE, &windowSize); // define o tamanho e bloqueia o redimensionamento
+
+
     system("color 0f");
-    //fullScreen();
+    //changeScreenMode();
+
+
+    DWORD consoleMode;
+    GetConsoleMode(hConsole, &consoleMode);
+    consoleMode &= ~ENABLE_MOUSE_INPUT; // desabilita a entrada do mouse
+    SetConsoleMode(hConsole, consoleMode);
+
 
     int x,y;
 
@@ -868,14 +874,27 @@ void configJogo(){
     x = GetSystemMetrics(SM_CXSCREEN);   // quantidade de pixel por linhas da tela
     y = GetSystemMetrics(SM_CYSCREEN);   // quantidade de pixel por coluna da tela
 	SetWindowPos( cW, 0, x/8, y/15, 0, 0, SWP_NOSIZE | SWP_NOZORDER );
+
+
+    CONSOLE_FONT_INFOEX fontInfo = { sizeof(CONSOLE_FONT_INFOEX) };
+    GetCurrentConsoleFontEx(hConsole, FALSE, &fontInfo);
+
+    if (isFullScreen == true) fontInfo.dwFontSize.Y = 16 + 4;  // aumenta o tamanho vertical da fonte em 2 pontos
+    else fontInfo.dwFontSize.Y = 16;  // aumenta o tamanho vertical da fonte em 2 pontos
+
+    SetCurrentConsoleFontEx(hConsole, FALSE, &fontInfo);
+
+
 }
 
 /* N) [AINDA EM DESENVOLVIMENTO] ALTERNA ENTRE MODO "JANELA" E MODO "TELA CHEIA" */
-void fullScreen() {
+void changeScreenMode() {
+    isFullScreen = !isFullScreen;
     keybd_event(VK_MENU  , 0x36, 0, 0);
     keybd_event(VK_RETURN, 0x1C, 0, 0);
     keybd_event(VK_RETURN, 0x1C, KEYEVENTF_KEYUP, 0);
     keybd_event(VK_MENU  , 0x38, KEYEVENTF_KEYUP, 0);
+    configJogo();
 }
 
 /* O) RETORNA TÍTULO DO CONSOLE PERSONALIZADO */
@@ -1128,68 +1147,33 @@ void exibirBannerPergunta(int questao){
 }
 
 /* R) RETORNA O BANNER CORRESPONDENTE À DIFICULDADE */
-void exibirBannerDificuldade(char nivel[20]){
-    if (strcmp(nivel, "MENU") == 0) {
-        setlocale(LC_ALL, "C");
-        linhaCol(2, 28); printf("%c", 254);
-        setlocale(LC_ALL, "Portuguese");
-        printf(" VOCÊ ESTÁ NO ");
+void exibirBannerDificuldade(char nivel[20], int titleMode) { //0) Título 1 (Outros); 1) Título 2 (Nível); 2) Título 3 (Resultados); 3) Sem título
+    setlocale(LC_ALL, "C");
+    if (titleMode >= 0 && titleMode <= 2) {
+        if (titleMode == 0) {
+            linhaCol(2, 28); printf("%c", 254);
+            setlocale(LC_ALL, "Portuguese");
+            printf(" VOCÊ ESTÁ NO ");
+        } else if (titleMode == 1){
+            linhaCol(2, 24); printf("%c", 254);
+            setlocale(LC_ALL, "Portuguese");
+            printf(" DIFICULDADE SELECIONADA ");
+        } else {
+            linhaCol(2, 25); printf("%c", 254);
+            setlocale(LC_ALL, "Portuguese");
+            printf(" RESULTADOS FINAIS DO ");
+        }
         setlocale(LC_ALL, "C");
         printf("%c", 254);
         setlocale(LC_ALL, "Portuguese");
+    }
+
+    if (strcmp(nivel, "MENU") == 0) {
         linhaCol(3, 9); printf(" _____                 _____     _         _         _ ");
         linhaCol(4, 9); printf("|     |___ ___ _ _    |  _  |___|_|___ ___|_|___ ___| |");
         linhaCol(5, 9); printf("| | | | -_|   | | |   |   __|  _| |   |  _| | . | .'| |");
         linhaCol(6, 9); printf("|_|_|_|___|_|_|___|   |__|  |_| |_|_|_|___|_|  _|__,|_|");
         linhaCol(7, 9); printf("                                            |_|        ");
-    } else if (strcmp(nivel, "FÁCIL") == 0) {
-        setlocale(LC_ALL, "C");
-        linhaCol(2, 24); printf("%c", 254);
-        setlocale(LC_ALL, "Portuguese");
-        printf(" DIFICULDADE SELECIONADA ");
-        setlocale(LC_ALL, "C");
-        printf("%c", 254);
-        setlocale(LC_ALL, "Portuguese");
-        linhaCol(3, 17); printf(" _____ _         _    _____         _ _ ");
-        linhaCol(4, 17); printf("|   | |_|_ _ ___| |  |   __|___ ___|_| |");
-        linhaCol(5, 17); printf("| | | | | | | -_| |  |   __| .'|  _| | |");
-        linhaCol(6, 17); printf("|_|___|_|\\_/|___|_|  |__|  |__,|___|_|_|");
-    } else if (strcmp(nivel, "MÉDIO I") == 0) {
-        setlocale(LC_ALL, "C");
-        linhaCol(2, 24); printf("%c", 254);
-        setlocale(LC_ALL, "Portuguese");
-        printf(" DIFICULDADE SELECIONADA ");
-        setlocale(LC_ALL, "C");
-        printf("%c", 254);
-        setlocale(LC_ALL, "Portuguese");
-        linhaCol(3, 11); printf(" _____ _         _    _____       _ _        _____ ");
-        linhaCol(4, 11); printf("|   | |_|_ _ ___| |  |     |___ _| |_|___   |_   _|");
-        linhaCol(5, 11); printf("| | | | | | | -_| |  | | | | -_| . | | . |   _| |_ ");
-        linhaCol(6, 11); printf("|_|___|_|\\_/|___|_|  |_|_|_|___|___|_|___|  |_____|");
-    } else if (strcmp(nivel, "MÉDIO II") == 0) {
-        setlocale(LC_ALL, "C");
-        linhaCol(2, 24); printf("%c", 254);
-        setlocale(LC_ALL, "Portuguese");
-        printf(" DIFICULDADE SELECIONADA ");
-        setlocale(LC_ALL, "C");
-        printf("%c", 254);
-        setlocale(LC_ALL, "Portuguese");
-        linhaCol(3, 8); printf(" _____ _         _    _____       _ _        _____ _____ ");
-        linhaCol(4, 8); printf("|   | |_|_ _ ___| |  |     |___ _| |_|___   |_   _|_   _|");
-        linhaCol(5, 8); printf("| | | | | | | -_| |  | | | | -_| . | | . |   _| |_ _| |_ ");
-        linhaCol(6, 8); printf("|_|___|_|\\_/|___|_|  |_|_|_|___|___|_|___|  |_____|_____|");
-    } else if (strcmp(nivel, "DIFÍCIL") == 0) {
-        setlocale(LC_ALL, "C");
-        linhaCol(2, 24); printf("%c", 254);
-        setlocale(LC_ALL, "Portuguese");
-        printf(" DIFICULDADE SELECIONADA ");
-        setlocale(LC_ALL, "C");
-        printf("%c", 254);
-        setlocale(LC_ALL, "Portuguese");
-        linhaCol(3, 15); printf(" _____ _         _    ____  _ ___ _     _ _ ");
-        linhaCol(4, 15); printf("|   | |_|_ _ ___| |  |    \\|_|  _|_|___|_| |");
-        linhaCol(5, 15); printf("| | | | | | | -_| |  |  |  | |  _| |  _| | |");
-        linhaCol(6, 15); printf("|_|___|_|\\_/|___|_|  |____/|_|_| |_|___|_|_|");
     } else if (strcmp(nivel, "NÃO DESISTA") == 0) {
         linhaCol(3, 9); printf("                                              __   ");
         linhaCol(4, 9); printf(" _____ /\\/        ____          _     _      |  |  ");
@@ -1209,6 +1193,62 @@ void exibirBannerDificuldade(char nivel[20]){
         linhaCol(5, 9); printf("|   __|_'_| -_|     | . | | . |  | . | -_|  | | |     | .'|  |   __| -_|  _| . | | |   |  _| .'|");
         linhaCol(6, 9); printf("|_____|_,_|___|_|_|_|  _|_|___|  |___|___|  |___|_|_|_|__,|  |__|  |___|_| |_  |___|_|_|_| |__,|");
         linhaCol(7, 9); printf("                    |_|                                                    |___|                ");
+    } else if (strcmp(nivel, "FÁCIL") == 0) {
+        linhaCol(3, 17); printf(" _____ _         _    _____         _ _ ");
+        linhaCol(4, 17); printf("|   | |_|_ _ ___| |  |   __|___ ___|_| |");
+        linhaCol(5, 17); printf("| | | | | | | -_| |  |   __| .'|  _| | |");
+        linhaCol(6, 17); printf("|_|___|_|\\_/|___|_|  |__|  |__,|___|_|_|");
+    } else if (strcmp(nivel, "MÉDIO I") == 0) {
+        linhaCol(3, 11); printf(" _____ _         _    _____       _ _        _____ ");
+        linhaCol(4, 11); printf("|   | |_|_ _ ___| |  |     |___ _| |_|___   |_   _|");
+        linhaCol(5, 11); printf("| | | | | | | -_| |  | | | | -_| . | | . |   _| |_ ");
+        linhaCol(6, 11); printf("|_|___|_|\\_/|___|_|  |_|_|_|___|___|_|___|  |_____|");
+    } else if (strcmp(nivel, "MÉDIO II") == 0) {
+        linhaCol(3, 8); printf(" _____ _         _    _____       _ _        _____ _____ ");
+        linhaCol(4, 8); printf("|   | |_|_ _ ___| |  |     |___ _| |_|___   |_   _|_   _|");
+        linhaCol(5, 8); printf("| | | | | | | -_| |  | | | | -_| . | | . |   _| |_ _| |_ ");
+        linhaCol(6, 8); printf("|_|___|_|\\_/|___|_|  |_|_|_|___|___|_|___|  |_____|_____|");
+    } else if (strcmp(nivel, "DIFÍCIL") == 0) {
+        linhaCol(3, 15); printf(" _____ _         _    ____  _ ___ _     _ _ ");
+        linhaCol(4, 15); printf("|   | |_|_ _ ___| |  |    \\|_|  _|_|___|_| |");
+        linhaCol(5, 15); printf("| | | | | | | -_| |  |  |  | |  _| |  _| | |");
+        linhaCol(6, 15); printf("|_|___|_|\\_/|___|_|  |____/|_|_| |_|___|_|_|");
+    }
+
+}
+
+void exibirBannerResultado(int bannerOpt) { //0) 0-25%; 1) 26-50%; 2) 51-75%; 3) 76-100%
+    if (bannerOpt == 1) {
+        linhaCol(14, 12); printf("                                                                                             __ ");
+        linhaCol(15, 12); printf(" _____         _      _____           _____         _   _                            _      |  |");
+        linhaCol(16, 12); printf("| __  |___ ___| |_   | __  |   ___   |     |___ ___| |_|_|___ _ _ ___    ___ ___ ___|_|_____|  |");
+        linhaCol(17, 12); printf("|    -| .'|   | '_|  | __ -|  |___|  |   --| . |   |  _| |   | | | -_|  | .'|_ -|_ -| |     |__|");
+        linhaCol(18, 12); printf("|__|__|__,|_|_|_,_|  |_____|         |_____|___|_|_|_| |_|_|_|___|___|  |__,|___|___|_|_|_|_|__|");
+    } else if(bannerOpt == 2) {
+        linhaCol(14, 21); printf("                                                                           __ ");
+        linhaCol(15, 21); printf(" _____         _      _____           _____     _ _          _            |  |");
+        linhaCol(16, 21); printf("| __  |___ ___| |_   |  _  |   ___   |     |_ _|_| |_ ___   | |_ ___ _____|  |");
+        linhaCol(17, 21); printf("|    -| .'|   | '_|  |     |  |___|  | | | | | | |  _| . |  | . | -_|     |__|");
+        linhaCol(18, 21); printf("|__|__|__,|_|_|_,_|  |__|__|         |_|_|_|___|_|_| |___|  |___|___|_|_|_|__|");
+    } else if (bannerOpt == 3) {
+        linhaCol(14, 13); printf("                                                                                            __ ");
+        linhaCol(15, 13); printf(" _____         _      _____           _____ _____ _____ _____ _____ _____ _____ _____ __   |  |");
+        linhaCol(16, 13); printf("| __  |___ ___| |_   |   __|   ___   |     |     |  _  |   __|     |  _  |  |  |   __|  |  |  |");
+        linhaCol(17, 13); printf("|    -| .'|   | '_|  |__   |  |___|  |-   -| | | |   __|   __|   --|     |  |  |   __|  |__|__|");
+        linhaCol(18, 13); printf("|__|__|__,|_|_|_,_|  |_____|         |_____|_|_|_|__|  |_____|_____|__|__|\\___/|_____|_____|__|");
+    } else if (bannerOpt == 0){
+        linhaCol(15, 9); printf(" _____         _      _____           _____             _                      _ _                         ");
+        linhaCol(16, 9); printf("| __  |___ ___| |_   |     |   ___   |  _  |___ ___ ___|_|___ ___    _____ ___| | |_ ___ ___ ___ ___       ");
+        linhaCol(17, 9); printf("|    -| .'|   | '_|  |   --|  |___|  |   __|  _| -_|  _| |_ -| .'|  |     | -_| |   | . |  _| .'|  _|_ _ _ ");
+        linhaCol(18, 9); printf("|__|__|__,|_|_|_,_|  |_____|         |__|  |_| |___|___|_|___|__,|  |_|_|_|___|_|_|_|___|_| |__,|_| |_|_|_|");
+    } else {
+        linhaCol(14, 8); printf(" ___                         ___                                                                         ");
+        linhaCol(15, 8); printf("|  _|_____ _____ _____ _____|_  |   _____         _      ____                      _           _   _     ");
+        linhaCol(16, 8); printf("| | |   __| __  | __  |     | | |  | __  |___ ___| |_   |    \\ ___ ___ ___ ___ ___| |_ ___ ___|_|_| |___ ");
+        linhaCol(17, 8); printf("| | |   __|    -|    -|  |  | | |  |    -| .'|   | '_|  |  |  | -_|_ -|  _| . |   |   | -_|  _| | . | . |");
+        linhaCol(18, 8); printf("| |_|_____|__|__|__|__|_____|_| |  |__|__|__,|_|_|_,_|  |____/|___|___|___|___|_|_|_|_|___|___|_|___|___|");
+        linhaCol(19, 8); printf("|___|                       |___|                                                                        ");
+
     }
 }
 
@@ -1318,7 +1358,10 @@ void showCursor() {
 }
 
 void linhaCol(int lin, int col) {
-    int colFS = 0, linFS = 0; //16 e 1
+    int colFS, linFS;
+    if (isFullScreen == true) colFS = 16;
+    else colFS = 0;
+    linFS = 0; //16 e 1
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), (COORD){(colFS + col) - 1, (linFS + lin) - 1});
     //Escondendo cursor
     CONSOLE_CURSOR_INFO info;
@@ -1391,8 +1434,8 @@ void topBannerDesign() {
     setlocale(LC_ALL, "Portuguese");
 }
 
-void topBannerContent(char titulo[20]) {
-    exibirBannerDificuldade(titulo);
+void topBannerContent(char titulo[20], int titleMode) {
+    exibirBannerDificuldade(titulo, titleMode);
 
     setlocale(LC_ALL, "C");
     linhaCol(2, 80); printf("%c", 254);
@@ -1647,6 +1690,7 @@ void exibirLetras(char nivel[9]) {
 
 int modeloMenu(int lin1, int col1, int qtd, char lista[][40]) {
     int opt = 1, lin2, col2, linhaSelecionada, i, tamMaxItem, tecla, limpar, espacamento;
+    bool enterPressed = false;
 
     //Calculando as coordenadas
     tamMaxItem = strlen(lista[0]);
@@ -1664,9 +1708,8 @@ int modeloMenu(int lin1, int col1, int qtd, char lista[][40]) {
 
     box(lin1, col1, lin2, col2);
 
-
     //Laço das opções
-    while(1){
+    while(!enterPressed){
         linhaSelecionada = lin1 + 2;
         for(i = 0; i < qtd; i ++) {
             if((i + 1) == opt) {
@@ -1679,12 +1722,15 @@ int modeloMenu(int lin1, int col1, int qtd, char lista[][40]) {
             linhaCol(linhaSelecionada, col1 + 2 + espacamento);
             printf("%s", lista[i]);
             linhaSelecionada += 2;
+            textColor(WHITE, _BLACK);
         }
 
-        textColor(WHITE, _BLACK);
+
+        if (qtd >= 7) {
+            bottomBannerContent(opt);
+        }
 
         //Aguarda teclas
-        linhaCol(1,1);
         tecla = getch();
         if (tecla == 0 || tecla == 224) tecla = getch();
         if (tecla == 72 || (tecla == 119) || (tecla == 87)) { //Seta pra cima
@@ -1693,11 +1739,21 @@ int modeloMenu(int lin1, int col1, int qtd, char lista[][40]) {
         } else if (tecla == 80 || (tecla == 115) || (tecla == 83)) { //Seta pra baixo
             if (opt == qtd) opt = 1;
             else if (opt < qtd) opt ++;
-        } else if (tecla == 13) { //ENTER
-            break;
+        } else if (tecla == 102 || tecla == 70) {
+            isFullScreen = !isFullScreen;
+            changeScreenMode();
         } else if (tecla == 27) { //ESC
-            opt = 2;
+            opt = 9;
             break;
+        }
+
+        if(GetAsyncKeyState(VK_RETURN) & 0x8000) {
+            if (!enterPressed) {
+                enterPressed = true;
+            } else {
+                enterPressed = false;
+            }
+            while(GetAsyncKeyState(VK_RETURN) & 0x8000); //Espera até soltar a tecla Enter
         }
     }
     //PlaySound(TEXT("..\\sounds\\confirm.wav"), NULL, SND_ASYNC);
@@ -1741,7 +1797,7 @@ void currentProgressionBanner(char difficulty[8], int currentProgression[26], in
             printf("X");
             linhaCol(35, colAtual); printf(" ");
         } else if (currentProgression[cont] == 1) {
-            textColor(GREEN, _BLACK);
+            textColor(LIGHTGREEN, _BLACK);
             printf("\u263b");
             linhaCol(35, colAtual); printf(" ");
         } else {
@@ -1809,15 +1865,29 @@ void currentProgressionBanner(char difficulty[8], int currentProgression[26], in
 
     linhaCol(37, 40);
     printf(" ACERTOS: ");
-    if (acertos < 10) printf("0");
+    if (acertos < 10) printf(" ");
     printf("%d %c ERROS: ", acertos, 179);
-    if (erros < 10) printf("0");
+    if (erros < 10) printf(" ");
     printf("%d %c PONTOS: ", erros, 179);
-    if (pontos < 10) printf("000");
-    else if (pontos < 100) printf("00");
-    else if (pontos < 1000) printf("0");
+    if (pontos < 10) printf("   ");
+    else if (pontos < 100) printf("  ");
+    else if (pontos < 1000) printf(" ");
     printf("%d", pontos);
     setlocale(LC_ALL, "Portuguese");
+}
+
+int pressEnter(void) {
+    bool enterPressed = false;
+    while (!enterPressed) {
+        if(GetAsyncKeyState(VK_RETURN) & 0x8000) {
+            if (!enterPressed) {
+                enterPressed = true;
+            } else {
+                enterPressed = false;
+            }
+            while(GetAsyncKeyState(VK_RETURN) & 0x8000); //Espera até soltar a tecla Enter
+        }
+    }
 }
 
 DWORD WINAPI e1(LPVOID params) {

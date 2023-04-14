@@ -23,16 +23,18 @@
 #include "config-functions.h"
 #include "main-functions.h"
 
-int main() {
+int main(void) {
+    ShowCursor(FALSE);
     int opt = 0;
     configJogo();
+    //topBannerDesign();
+    //fimJogo("FÁCIL", 750, 5, 5);
     apresentacao();
     PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
     do {
         topBannerDesign();
         bottomBannerDesign();
-        char lista [8][40] = {"Jogar - NÍVEL FÁCIL","Jogar - NÍVEL MÉDIO I","Jogar - NÍVEL MÉDIO II","Jogar - NÍVEL DIFÍCIL","Ranking dos Jogadores","Instruções do Jogo","Créditos do Jogo","Sair do Jogo"};
-        opt = menu(11, 47, 8, lista);
+        opt = mainMenu();
         fflush(stdin);
         switch(opt){
             case 1:
@@ -70,5 +72,4 @@ int main() {
         };
     } while(opt != 8);
     opcao8();
-    return 0;
 }

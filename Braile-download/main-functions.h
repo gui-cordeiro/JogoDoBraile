@@ -5,102 +5,24 @@
  */
 
 /* 0) MENU PRINCIPAL */
-int menu(int lin1, int col1, int qtd, char lista[][40]) {
-    int opt = 1, lin2, col2, linhaSelecionada, i, tamMaxItem, tecla, limpar, espacamento, popup;
+int mainMenu() {
+    int opt = 0;
+    char lista [8][40] = {"Jogar - NÍVEL FÁCIL","Jogar - NÍVEL MÉDIO I","Jogar - NÍVEL MÉDIO II","Jogar - NÍVEL DIFÍCIL","Ranking dos Jogadores","Instruções do Jogo","Créditos do Jogo","Sair do Jogo"};
+
     titulo("-", "Menu Principal");
+    topBannerContent("MENU", 0);
 
-    topBannerContent("MENU");
-
-    addFade(3, 50, 1);
-
-    //Calculando as coordenadas
-    tamMaxItem = strlen(lista[0]);
-
-    //Tamanho máximo dos itens
-    for(i = 1; i < qtd; i ++) {
-        tamMaxItem = (strlen(lista[i]) > tamMaxItem) ? strlen(lista[i]) : tamMaxItem;
-    }
-
-    lin2 = lin1 + (qtd * 2 + 2);
-    col2 = col1 + tamMaxItem + 3;
-
-    //Montando a tela do menu
-    textColor(WHITE, _BLUE);
-
-    box(lin1, col1, lin2, col2);
     setlocale(LC_ALL, "C");
     SetConsoleOutputCP(CP_UTF8);
     textColor(WHITE, _BLACK);
-    linhaCol(lin1 - 1, col1 + 12); printf("\u25b2");
-    linhaCol(lin2 + 1, col1 + 12); printf("\u25bc");
+    linhaCol(10, 59); printf("\u25b2");
+    linhaCol(30, 59); printf("\u25bc");
     textColor(WHITE, _BLUE);
     SetConsoleOutputCP(850);
     setlocale(LC_ALL, "Portuguese");
 
-    //Laço das opções
-    while(1){
-        linhaSelecionada = lin1 + 2;
-        for(i = 0; i < qtd; i ++) {
-            if((i + 1) == opt) {
-                textColor(BLUE, _WHITE);
-                //PlaySound(TEXT("..\\sounds\\select.wav"), NULL, SND_ASYNC);
-            } else {
-                textColor(WHITE, _BLUE);
-            }
-            espacamento = (tamMaxItem - strlen(lista[i])) / 2; //Criar espaçamento para centralizar opções no menu
-            linhaCol(linhaSelecionada, col1 + 2 + espacamento);
-            printf("%s", lista[i]);
-            linhaSelecionada += 2;
-        }
+    opt = modeloMenu(11, 47, 8, lista);
 
-        textColor(WHITE, _BLACK);
-
-        bottomBannerContent(opt);
-
-        //Aguarda teclas
-        linhaCol(1,1);
-        tecla = getch();
-        if (tecla == 0 || tecla == 224) tecla = getch();
-        /*if (GetAsyncKeyState(VK_UP)&1)
-            printf("Seta pra cima pressionada!");
-        else if (GetAsyncKeyState(VK_DOWN)&1)
-            printf("Seta pra baixo pressionada!");
-        else if (GetAsyncKeyState(VK_LEFT)&1)
-            printf("Seta pra esquerda pressionada!");
-        else if (GetAsyncKeyState(VK_RIGHT)&1)
-            printf("Seta pra direita pressionada!");
-        else if (GetAsyncKeyState(VK_RETURN)&1)
-            printf("Tecla ENTER pressionada!");*/
-        if (tecla == 72 || (tecla == 119) || (tecla == 87)) { //Seta pra cima
-            if(opt == 1) opt = qtd;
-            else if (opt > 1) opt --;
-        } else if (tecla == 80 || (tecla == 115) || (tecla == 83)) { //Seta pra baixo
-            if (opt == qtd) opt = 1;
-            else if (opt < qtd) opt ++;
-        } else if (tecla == 13) { //ENTER
-            break;
-        } else if (tecla == 27) { //ESC
-            opt = 9;
-            break;
-        } else if (tecla == 49) opt = 1;
-        else if (tecla == 50) opt = 2;
-        else if (tecla == 51) opt = 3;
-        else if (tecla == 52) opt = 4;
-        else if (tecla == 53) opt = 5;
-        else if (tecla == 54) opt = 6;
-        else if (tecla == 55) opt = 7;
-        else if (tecla == 56) opt = 8;
-        /*else if (tecla == 112 || tecla == 80) {
-            char popupItens[][40] = {"SIM", "NÃO"};
-            while(popup != 2) {
-                popup = modeloMenu(15, 50, 2, popupItens);
-            }
-            popup = 1;
-            cleanScreen(6);
-        }*/
-    }
-    //PlaySound(TEXT("..\\sounds\\confirm.wav"), NULL, SND_ASYNC);
-    textColor(WHITE, _BLACK);
     return opt;
 }
 
@@ -118,7 +40,7 @@ void opcao1(){
     int perguntaEscolhida = 0;
 
     if(confirmarJogo("FÁCIL", progresso) == 0) return 0;
-    topBannerContent("FÁCIL");
+    topBannerContent("FÁCIL", 1);
 
     titulo("FÁCIL", "O jogo começará em breve...");
 
@@ -137,11 +59,24 @@ void opcao1(){
     printAlfabeto('U', 20, 81, true);
 
     setlocale(LC_ALL, "C");
+    linhaCol(25, 32); printf("%c ", 254);
+    setlocale(LC_ALL, "Portuguese");
+    printf("Cuidado com o ");
+    textColor(_BLACK, BROWN);
+    printf("temporizador");
+    textColor(_BLACK, WHITE);
+    printf(", situado na barra inferior!");
+    setlocale(LC_ALL, "C");
+    printf(" %c", 254);
+    setlocale(LC_ALL, "Portuguese");
+
+    setlocale(LC_ALL, "C");
     linhaCol(36, 53); printf("%c", 196);
     linhaCol(36, 65); printf("%c", 196);
     linhaCol(38, 53); printf("%c", 196);
     linhaCol(38, 65); printf("%c", 196);
 
+    textColor(_BLACK, BROWN);
     linhaCol(37, 41); printf("  %c ", 254);
     setlocale(LC_ALL, "Portuguese");
     printf("Tempo restante: ");
@@ -152,17 +87,23 @@ void opcao1(){
     setlocale(LC_ALL, "Portuguese");
 
     do{
-        if ((cont != 20) && (cont % 10 == 0 || cont <= 5)){
+        if ((cont != 20) && (cont % 10 == 0 || cont <= 3)){
             textColor(_BLACK, LIGHTRED);
         } else {
-            textColor(_BLACK, WHITE);
+            textColor(_BLACK, BROWN);
         }
-        linhaCol(37, 61);
+        setlocale(LC_ALL, "C");
+        linhaCol(37, 43);printf("%c ", 254);
+        setlocale(LC_ALL, "Portuguese");
+        printf("Tempo restante: ");
         if (cont < 10) printf("0");
         printf("%d segundo(s)", cont);
+        setlocale(LC_ALL, "C");
+        printf(" %c", 254);
+        setlocale(LC_ALL, "Portuguese");
         for (int fast = 0; fast < 70; fast ++) {
             Sleep(10);
-            if (GetAsyncKeyState(VK_SHIFT)) {
+            if (GetAsyncKeyState(VK_SPACE)) {
                 Sleep(80);
                 break;
             }
@@ -196,7 +137,6 @@ void opcao1(){
         }
         newPergunta("FÁCIL", numPergunta, altAtuais[0], altAtuais[1], altAtuais[2], &acertos, &erros, &pts, progresso);
     }
-    system("cls");
     fimJogo("FÁCIL", pts, acertos, totPerguntas);
     return;
 }
@@ -215,7 +155,7 @@ void opcao2(){
     int perguntaEscolhida = 0;
 
     if(confirmarJogo("MÉDIO I", progresso) == 0) return 0;
-    topBannerContent("MÉDIO I");
+    topBannerContent("MÉDIO I", 1);
 
     titulo("MÉDIO I", "O jogo começará em breve...");
 
@@ -260,12 +200,12 @@ void opcao2(){
         } else {
             textColor(_BLACK, WHITE);
         }
-        linhaCol(37, 61);
+        linhaCol(37, 45);printf("Tempo restante: ");
         if (cont < 10) printf("0");
         printf("%d segundo(s)", cont);
         for (int fast = 0; fast < 70; fast ++) {
             Sleep(10);
-            if (GetAsyncKeyState(VK_SHIFT)) {
+            if (GetAsyncKeyState(VK_SPACE)) {
                 Sleep(80);
                 break;
             }
@@ -300,7 +240,6 @@ void opcao2(){
 
         newPergunta("MÉDIO I", numPergunta, altAtuais[0], altAtuais[1], altAtuais[2], &acertos, &erros, &pts, progresso);
     }
-    system("cls");
     fimJogo("MÉDIO I", pts, acertos, totPerguntas);
     return;
 }
@@ -319,7 +258,7 @@ void opcao3(){
     int perguntaEscolhida = 0;
 
     if(confirmarJogo("MÉDIO II", progresso) == 0) return 0;
-    topBannerContent("MÉDIO II");
+    topBannerContent("MÉDIO II", 1);
 
     titulo("MÉDIO II", "O jogo começará em breve...");
 
@@ -365,12 +304,12 @@ void opcao3(){
         } else {
             textColor(_BLACK, WHITE);
         }
-        linhaCol(37, 61);
+        linhaCol(37, 45);printf("Tempo restante: ");
         if (cont < 10) printf("0");
         printf("%d segundo(s)", cont);
         for (int fast = 0; fast < 70; fast ++) {
             Sleep(10);
-            if (GetAsyncKeyState(VK_SHIFT)) {
+            if (GetAsyncKeyState(VK_SPACE)) {
                 Sleep(80);
                 break;
             }
@@ -404,7 +343,6 @@ void opcao3(){
         }
         newPergunta("MÉDIO II", numPergunta, altAtuais[0], altAtuais[1], altAtuais[2], &acertos, &erros, &pts, progresso);
     }
-    system("cls");
     fimJogo("MÉDIO II", pts, acertos, totPerguntas);
     return;
 }
@@ -425,7 +363,7 @@ void opcao4(){
     int perguntaEscolhida = 0;
 
     if(confirmarJogo("DIFÍCIL", progresso) == 0) return 0;
-    topBannerContent("DIFÍCIL");
+    topBannerContent("DIFÍCIL", 1);
 
     titulo("DIFÍCIL", "O jogo começará em breve...");
 
@@ -487,12 +425,12 @@ void opcao4(){
         } else {
             textColor(_BLACK, WHITE);
         }
-        linhaCol(37, 61);
+        linhaCol(37, 45);printf("Tempo restante: ");
         if (cont < 10) printf("0");
         printf("%d segundo(s)", cont);
         for (int fast = 0; fast < 70; fast ++) {
             Sleep(10);
-            if (GetAsyncKeyState(VK_SHIFT)) {
+            if (GetAsyncKeyState(VK_SPACE)) {
                 Sleep(80);
                 break;
             }
@@ -527,7 +465,6 @@ void opcao4(){
         newPergunta("DIFÍCIL", numPergunta, altAtuais[0], altAtuais[1], altAtuais[2], &acertos, &erros, &pts, progresso);
 
     }
-    system("cls");
     fimJogo("DIFÍCIL", pts, acertos, totPerguntas);
     return;
 }
@@ -603,7 +540,7 @@ int opcao6(){
     } while (finalopt != 1);
     system("cls");
     addFade(1, tempo, 1);
-    exibirBannerDificuldade("EXEMPLO");
+    exibirBannerDificuldade("EXEMPLO", 3);
     addFade(2, tempo, 1);
     printf("\t     +------------------------------------------------------------------------------------------+\n");Sleep(tempo);
     printf("\t     | Como dito anteriormente, neste jogo cada pergunta é composta por:                        |\n");Sleep(tempo);
@@ -629,7 +566,7 @@ int opcao6(){
     getche();
     system("cls");
     addFade(1, tempo, 1);
-    exibirBannerDificuldade("EXEMPLO");
+    exibirBannerDificuldade("EXEMPLO", 3);
     addFade(2, tempo, 1);
     printf("\t     +------------------------------------------------------------------------------------------+\n");Sleep(tempo);
     printf("\t     | Respondendo a questão corretamente, você ganhará 150 pontos! Veja o exemplo a seguir:    |\n");Sleep(tempo);
@@ -658,7 +595,7 @@ int opcao6(){
     getche();
     system("cls");
     addFade(1, tempo, 1);
-    exibirBannerDificuldade("EXEMPLO");
+    exibirBannerDificuldade("EXEMPLO", 3);
     addFade(2, tempo, 1);
     printf("\t     +------------------------------------------------------------------------------------------+\n");Sleep(tempo);
     printf("\t     | Caso erre a resposta, apenas 50 pontos serão somados à sua pontuação. Veja o exemplo:    |\n");Sleep(tempo);
@@ -687,7 +624,7 @@ int opcao6(){
     getche();
     system("cls");
     addFade(1, tempo, 1);
-    exibirBannerDificuldade("EXEMPLO");
+    exibirBannerDificuldade("EXEMPLO", 3);
     addFade(2, tempo, 1);
     printf("\t     +------------------------------------------------------------------------------------------+\n");Sleep(tempo);
     printf("\t     | Ao encerrar o quiz, será possível analisar o seu desempenho final. Nele você poderá ver: |\n");Sleep(tempo);
@@ -766,7 +703,7 @@ void opcao8(){
     system("cls");
     PlaySound(TEXT("..\\sounds\\ending.wav"), NULL, SND_ASYNC);
     titulo("-", "Obrigado por Jogar!");
-    exibirBannerDificuldade("AGRADECIMENTO");
+    exibirBannerDificuldade("AGRADECIMENTO", 3);
     Sleep(1500);
     addFade(2, 50, 1);
     exibirTelaGitHub();
