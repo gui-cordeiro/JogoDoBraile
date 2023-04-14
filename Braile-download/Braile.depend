@@ -125,3 +125,23 @@
 
 1681017099 c:\users\guilh\onedrive\documentos\github\jogodobraile\braile-download\main-functions.h
 
+1681452238 source:c:\users\everton\documents\github\jogodobraile\braile-download\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<windows.h>
+	<locale.h>
+	<math.h>
+	<string.h>
+	<conio.h>
+	<ctype.h>
+	<stdbool.h>
+	<process.h>
+	<processthreadsapi.h>
+	"config-functions.h"
+	"main-functions.h"
+
+1681454831 c:\users\everton\documents\github\jogodobraile\braile-download\config-functions.h
+
+1681454878 c:\users\everton\documents\github\jogodobraile\braile-download\main-functions.h
+
