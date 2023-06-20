@@ -28,9 +28,10 @@ int main(void) {
     int opt = 0;
     configJogo();
     //topBannerDesign();
+    //bottomBannerDesign();
     //fimJogo("FÁCIL", 750, 5, 5);
     apresentacao();
-    PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
+    //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
     do {
         topBannerDesign();
         bottomBannerDesign();
@@ -50,25 +51,25 @@ int main(void) {
                 opcao4();
                 break;
             case 5:
-                PlaySound(TEXT("..\\sounds\\areyousure.wav"), NULL, SND_LOOP | SND_ASYNC);
+                //PlaySound(TEXT("..\\sounds\\areyousure.wav"), NULL, SND_LOOP | SND_ASYNC);
                 opcao5();
-                PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
+                //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
                 break;
             case 6:
-                PlaySound(TEXT("..\\sounds\\areyousure.wav"), NULL, SND_LOOP | SND_ASYNC);
+                //PlaySound(TEXT("..\\sounds\\areyousure.wav"), NULL, SND_LOOP | SND_ASYNC);
                 opcao6();
-                PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
+                //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
                 break;
             case 7:
-                PlaySound(TEXT("..\\sounds\\areyousure.wav"), NULL, SND_LOOP | SND_ASYNC);
+                //PlaySound(TEXT("..\\sounds\\areyousure.wav"), NULL, SND_LOOP | SND_ASYNC);
                 opcao7();
-                PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
+                //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
                 break;
             case 8:
                 continue;
             default:
                 apresentacao();
-                PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
+                //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
         };
     } while(opt != 8);
     opcao8();

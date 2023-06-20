@@ -5,10 +5,13 @@
  */
 
 bool mudar = false;
+bool mudarRedes = true;
 bool isFullScreen = false;
 
 DWORD WINAPI e1(LPVOID params);
 DWORD WINAPI letra(LPVOID params);
+
+DWORD WINAPI redes(LPVOID params);
 
 enum {
     BLACK,
@@ -49,30 +52,44 @@ enum {
 };
 
 /* A) TELA DO GITHUB */
-void exibirTelaGitHub(){
-    //int tempo = 50;
-    printf("\n\t\t\t   **** O código-fonte deste jogo está disponível gratuitamente **** "); Sleep(tempo);
-    printf("\n\t\t\t        no repositório do GitHub de Guilherme Cordeiro. Acesse:  \n\n"); Sleep(tempo);
-    printf("\n\t\t\t                          @@@@@@@@@@@@@@@@@@@                        "); Sleep(tempo);
-    printf("\n\t\t\t                      @@@@@@@@@@@@@@@@@@@@@@@@@@@                    "); Sleep(tempo);
-    printf("\n\t\t\t                   @@@@@@  @@@@@@@@@@@@@@@@@  @@@@@@                 "); Sleep(tempo);
-    printf("\n\t\t\t                 @@@@@@@    @@@@@@@@@@@@@@@    @@@@@@@               "); Sleep(tempo);
-    printf("\n\t\t\t               @@@@@@@@                         @@@@@@@@             "); Sleep(tempo);
-    printf("\n\t\t\t              @@@@@@@@@                         @@@@@@@@@            "); Sleep(tempo);
-    printf("\n\t\t\t             @@@@@@@@@                           @@@@@@@@@           "); Sleep(tempo);
-    printf("\n\t\t\t             @@@@@@@@                             @@@@@@@@           "); Sleep(tempo);
-    printf("\n\t\t\t             @@@@@@@@                             @@@@@@@@           "); Sleep(tempo);
-    printf("\n\t\t\t             @@@@@@@@                             @@@@@@@@           "); Sleep(tempo);
-    printf("\n\t\t\t             @@@@@@@@@                           @@@@@@@@@           "); Sleep(tempo);
-    printf("\n\t\t\t              @@@@@@@@@@                       @@@@@@@@@@            "); Sleep(tempo);
-    printf("\n\t\t\t               @@@@   @@@@@@@@           @@@@@@@@@@@@@@@             "); Sleep(tempo);
-    printf("\n\t\t\t                @@@@@   @@@@@@           @@@@@@@@@@@@@@              "); Sleep(tempo);
-    printf("\n\t\t\t                  @@@@@                  @@@@@@@@@@@@                "); Sleep(tempo);
-    printf("\n\t\t\t                     @@@@@@@@@           @@@@@@@@@                   "); Sleep(tempo);
-    printf("\n\t\t\t                        @@@@@@           @@@@@@                  \n\n"); Sleep(tempo);
-    printf("\n\t\t\t                +-------------------------------------+              "); Sleep(tempo);
-    printf("\n\t\t\t                |   https://github.com/gui-cordeiro   |              "); Sleep(tempo);
-    printf("\n\t\t\t                +-------------------------------------+            \n"); Sleep(tempo);
+void exibirTelaRedes(int endOfGame){
+
+    DWORD threadId;
+    HANDLE hThread;
+
+    if (endOfGame == 0) {
+        textColor(BROWN, _BLACK);
+        setlocale(LC_ALL, "C");
+        linhaCol(35, 36); printf("%c ", 254);
+        setlocale(LC_ALL, "Portuguese");
+        printf("Pressione Enter para retornar ao Menu Principal");
+        setlocale(LC_ALL, "C");
+        printf(" %c", 254);
+        setlocale(LC_ALL, "Portuguese");
+        textColor(WHITE, _BLACK);
+    }
+
+    hThread = CreateThread(NULL, 0x0, redes, NULL, 0, &threadId);
+
+    if (endOfGame == 1){
+        Sleep(2750);
+        textColor(BROWN, _BLACK);
+        setlocale(LC_ALL, "C");
+        linhaCol(35, 38); printf("%c ", 254);
+        setlocale(LC_ALL, "Portuguese");
+        printf("Pressione Enter para sair do Jogo do Braile");
+        setlocale(LC_ALL, "C");
+        printf(" %c", 254);
+        setlocale(LC_ALL, "Portuguese");
+        textColor(WHITE, _BLACK);
+
+    }
+    pressEnter();
+
+    if (mudarRedes != true) Sleep(100);
+    TerminateThread(hThread, 0x0);
+    CloseHandle(hThread);
+
     return;
 }
 
@@ -105,7 +122,7 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
     sprintf(lista[3], " d) Letra %c ", alt[3]);
 
     cleanScreen(5);
-    topBannerContent("-", 3);
+    topBannerContent("-", 0);
     exibirBannerPergunta(questao);
 
     setlocale(LC_ALL, "C");
@@ -293,9 +310,9 @@ void apresentacao(){
     int tecla;
     system("cls");
     system("title Tela de título - Jogo do Braile 2.0");
-    PlaySound(TEXT("..\\sounds\\intro.wav"), NULL, SND_ASYNC);
+    //PlaySound(TEXT("..\\sounds\\intro.wav"), NULL, SND_ASYNC);
     setlocale(LC_ALL, "C");
-    linhaCol(12, 35); printf(" %c ", 254);
+    linhaCol(12, 36); printf(" %c ", 254);
     setlocale(LC_ALL, "Portuguese");
     printf("Criado por Guilherme Cordeiro (2017, 2023)");
     setlocale(LC_ALL, "C");
@@ -313,7 +330,7 @@ void apresentacao(){
     linhaCol(22, 2); printf(" ######   #######   ######    #######     ########   #######     ########  ##     ## ##     ## #### ######## ########");
     Sleep(900);
     setlocale(LC_ALL, "C");
-    linhaCol(26, 39); printf("%c ", 254);
+    linhaCol(26, 40); printf("%c ", 254);
     setlocale(LC_ALL, "Portuguese");
     printf("Pressione a tecla ENTER para iniciar");
     setlocale(LC_ALL, "C");
@@ -326,7 +343,7 @@ void apresentacao(){
     for(int pulses = 0; pulses < 4; pulses ++) {
         textColor(BLACK, _WHITE);
         setlocale(LC_ALL, "C");
-        linhaCol(26, 38); printf(" %c ", 254);
+        linhaCol(26, 39); printf(" %c ", 254);
         setlocale(LC_ALL, "Portuguese");
         printf("Pressione a tecla ENTER para iniciar");
         setlocale(LC_ALL, "C");
@@ -335,7 +352,7 @@ void apresentacao(){
         Sleep(80);
         textColor(WHITE, _BLACK);
         setlocale(LC_ALL, "C");
-        linhaCol(26, 38); printf(" %c ", 254);
+        linhaCol(26, 39); printf(" %c ", 254);
         setlocale(LC_ALL, "Portuguese");
         printf("Pressione a tecla ENTER para iniciar");
         setlocale(LC_ALL, "C");
@@ -543,7 +560,7 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
     }
     linhaCol(32,72);printf("%c", 193);
     setlocale(LC_ALL, "Portuguese");
-    topBannerContent(nivel, 1);
+    topBannerContent(nivel, 2);
     exibirLetras(nivel);
     if (strcmp("FÁCIL", nivel) == 0) {
         box(11, 11, 13, 61);
@@ -593,15 +610,15 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
 
     opt = modeloMenu(20, 78, 2, lista);
 
-    if (opt == 2) {
+    if (opt == 2 || opt == 9) {
         cleanScreen(1);
         return 0;
     }
 
     cleanScreen(4);
-    topBannerContent(nivel, 1);
+    topBannerContent(nivel, 2);
     titulo(nivel, "Entrando no jogo, prepare-se!");
-    PlaySound(TEXT("..\\sounds\\getready.wav"), NULL, SND_ASYNC);
+    //PlaySound(TEXT("..\\sounds\\getready.wav"), NULL, SND_ASYNC);
     bottomBannerTitle(1);
     setlocale(LC_ALL, "C");
     linhaCol(12, 21); printf("%c ", 254);
@@ -668,7 +685,7 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
             textColor(_BLACK, WHITE);
             hThread = CreateThread(NULL, 0x0, e1, NULL, 0, &threadId);
             hThread2 = CreateThread(NULL, 0x0, letra, NULL, 0, &threadId2);
-            PlaySound(TEXT("..\\sounds\\e1.wav"), NULL, SND_ASYNC);
+            //PlaySound(TEXT("..\\sounds\\e1.wav"), NULL, SND_ASYNC);
             easter = 0;
             while(1){
                 tecla = getch();
@@ -700,7 +717,7 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
      */
     cleanScreen(2);
     titulo(nivel, "Resultado final");
-    topBannerContent("FÁCIL", 2);
+    topBannerContent("FÁCIL", 3);
 
     setlocale(LC_ALL, "C");
     linhaCol(13, 37); printf("%c", 254);
@@ -735,8 +752,8 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
     } else if(((strcmp(nivel, "FÁCIL") == 0 && acertos == 5) || (strcmp(nivel, "MÉDIO I") == 0 && acertos == 10)) || ((strcmp(nivel, "MÉDIO II") == 0 && acertos == 11) || (strcmp(nivel, "DIFÍCIL") == 0 && acertos == 26))){
         textColor(_BLACK, LIGHTGREEN);
         exibirBannerResultado(3);
-        box(21, 24, 23, 93);
-        linhaCol(22, 26); printf("Meus parabéns, você acertou TODAS AS QUESTÕES! É assim que se faz!");
+        box(21, 26, 23, 95);
+        linhaCol(22, 28); printf("Meus parabéns, você acertou TODAS AS QUESTÕES! É assim que se faz!");
     } else {
         exibirBannerResultado(69);
         box(21, 41, 23, 79);
@@ -750,59 +767,129 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
     setlocale(LC_ALL, "C");
     printf("%c", 254);
     setlocale(LC_ALL, "Portuguese");
-    while(1) {
-        tecla = getch();
-        tecla = (tecla == 0 || tecla == 224) ? getch() : tecla;
-        if (tecla == 13) break;
+    pressEnter();
+    //cleanScreen(2);
+
+    if(acertos == numPerg) { // Todas as respostas respondidas corretamente
+        int linCad = 10, colCad = 33;
+
+        box(9, 28, 31, 92);
+
+        textColor(LIGHTRED, _BLACK);
+        linhaCol(linCad, colCad); printf("                                 ");
+        linhaCol(linCad + 1, colCad); printf("                                 ");
+        linhaCol(linCad + 2, colCad); printf("                                 ");
+        linhaCol(linCad + 3, colCad); printf("          #############           ");
+        linhaCol(linCad + 4, colCad); printf("       ##################        ");
+        linhaCol(linCad + 5, colCad); printf("     ######          ######      ");
+        linhaCol(linCad + 6, colCad); printf("    #####              #####     ");
+        linhaCol(linCad + 7, colCad); printf("    #####               ####     ");
+        linhaCol(linCad + 8, colCad); printf("    ####/               ####     ");
+        linhaCol(linCad + 9, colCad); printf("                                 ");
+        linhaCol(linCad + 10, colCad); printf("  #########.         ##(#(##(##  ");
+        linhaCol(linCad + 11, colCad); printf(" ##############################  ");
+        linhaCol(linCad + 12, colCad); printf(" ############################### ");
+        linhaCol(linCad + 13, colCad); printf(",##############  ############### ");
+        linhaCol(linCad + 14, colCad); printf(" #############    #############  ");
+        linhaCol(linCad + 15, colCad); printf(" ##############  ##############  ");
+        linhaCol(linCad + 16, colCad); printf("  (############  #############   ");
+        linhaCol(linCad + 17, colCad); printf("    ########################     ");
+        linhaCol(linCad + 18, colCad); printf("      ####################       ");
+        linhaCol(linCad + 19, colCad); printf("          (###########           ");
+        textColor(WHITE, _BLACK);
+        exibirBannerDificuldade("-", 0, 0, "OH", 17, 71);
+        setlocale(LC_ALL, "C");
+        linhaCol(21, 77); printf("%c", 254);
+        setlocale(LC_ALL, "Portuguese");
+        printf(" Pressione Enter ");
+        setlocale(LC_ALL, "C");
+        printf("%c", 254);
+        pressEnter();
+
+        textColor(LIGHTGREEN, _BLACK);
+        linhaCol(linCad, colCad); printf("               ############      ");
+        linhaCol(linCad + 1, colCad); printf("            ##################   ");
+        linhaCol(linCad + 2, colCad); printf("           #####          ###### ");
+        linhaCol(linCad + 3, colCad); printf("                            #####");
+        linhaCol(linCad + 4, colCad); printf("                            .####");
+        linhaCol(linCad + 5, colCad); printf("                            #####");
+        linhaCol(linCad + 6, colCad); printf("                           ##### ");
+        linhaCol(linCad + 7, colCad); printf("                         ######  ");
+        linhaCol(linCad + 8, colCad); printf("                          ###    ");
+        linhaCol(linCad + 9, colCad); printf("                                 ");
+        linhaCol(linCad + 10, colCad); printf("  ((#(#(####         ##########  ");
+        linhaCol(linCad + 11, colCad); printf(" (###(###(#(##(################# ");
+        linhaCol(linCad + 12, colCad); printf(" ############################### ");
+        linhaCol(linCad + 13, colCad); printf(" ##############( .############## ");
+        linhaCol(linCad + 14, colCad); printf(" #############     ############# ");
+        linhaCol(linCad + 15, colCad); printf("  #############(  #############  ");
+        linhaCol(linCad + 16, colCad); printf("   ############(  ############   ");
+        linhaCol(linCad + 17, colCad); printf("    ,########################    ");
+        linhaCol(linCad + 18, colCad); printf("       ###################       ");
+        linhaCol(linCad + 19, colCad); printf("           ###########           ");
+        PlaySound(TEXT("..\\sounds\\padlock.wav"), NULL, SND_ASYNC);
+        Sleep(500);
+
+        textColor(WHITE, _BLACK);
+        box(9, 7, 31, 113);
+        colCad -= 18;
+        PlaySound(TEXT("..\\sounds\\unlocked.wav"), NULL, SND_ASYNC);
+        textColor(LIGHTGREEN, _BLACK);
+        linhaCol(linCad, colCad); printf("               ############      ");
+        linhaCol(linCad + 1, colCad); printf("            ##################   ");
+        linhaCol(linCad + 2, colCad); printf("           #####          ###### ");
+        linhaCol(linCad + 3, colCad); printf("                            #####");
+        linhaCol(linCad + 4, colCad); printf("                            .####");
+        linhaCol(linCad + 5, colCad); printf("                            #####");
+        linhaCol(linCad + 6, colCad); printf("                           ##### ");
+        linhaCol(linCad + 7, colCad); printf("                         ######  ");
+        linhaCol(linCad + 8, colCad); printf("                          ###    ");
+        linhaCol(linCad + 9, colCad); printf("                                 ");
+        linhaCol(linCad + 10, colCad); printf("  ((#(#(####         ##########  ");
+        linhaCol(linCad + 11, colCad); printf(" (###(###(#(##(################# ");
+        linhaCol(linCad + 12, colCad); printf(" ############################### ");
+        linhaCol(linCad + 13, colCad); printf(" ##############( .############## ");
+        linhaCol(linCad + 14, colCad); printf(" #############     ############# ");
+        linhaCol(linCad + 15, colCad); printf("  #############(  #############  ");
+        linhaCol(linCad + 16, colCad); printf("   ############(  ############   ");
+        linhaCol(linCad + 17, colCad); printf("    ,########################    ");
+        linhaCol(linCad + 18, colCad); printf("       ###################       ");
+        linhaCol(linCad + 19, colCad); printf("           ###########           ");
+
+        textColor(WHITE, _BLACK);
+        setlocale(LC_ALL, "C");
+        linhaCol(13, 71); printf("%c", 254);
+        setlocale(LC_ALL, "Portuguese");
+        printf(" MEUS PARABÉNS! ");
+        setlocale(LC_ALL, "C");
+        printf("%c", 254);
+
+        if (strcmp(nivel, "FÁCIL") == 0) {
+            exibirBannerDificuldade("-", 0, 0, "MÉDIO I", 15, 52);
+        } else if (strcmp(nivel, "MÉDIO I") == 0 && acertos == 10) {
+            exibirBannerDificuldade("-", 0, 0, "MÉDIO II", 15, 51);
+        } else if (strcmp(nivel, "MÉDIO II") == 0 && acertos == 11) {
+            exibirBannerDificuldade("-", 0, 0, "DIFÍCIL", 15, 58);
+        } else if (strcmp(nivel, "DIFÍCIL") == 0 && acertos == 26) {
+            exibirBannerDificuldade("-", 0, 0, "AGRADECIMENTO", 15, 50);
+        }
+
+        Sleep(1700);
+        linhaCol(27, 63); printf("%c", 254);
+        setlocale(LC_ALL, "Portuguese");
+        printf(" Pressione ENTER para continuar ");
+        setlocale(LC_ALL, "C");
+        printf("%c", 254);
+        setlocale(LC_ALL, "Portuguese");
+        pressEnter();
     }
-    //addFade(12, 0, 0);
-    //addFade(18, 30, 1);
-    system("cls");
-    titulo("-", "Obrigado por Jogar!");
-    addFade(8, 0, 0);
-    if (strcmp(nivel, "FÁCIL") == 0 && acertos == 5) {
-        printf("\t\t  * ESSA FOI FÁCIL! MAS AGORA AS COISAS VÃO DIFICULTAR UM POUCO: EXPERIMENTE AGORA O: *\n");Sleep(1500);
-        exibirBannerDificuldade("MÉDIO I", 3);
-        addFade(1, 1000, 1);
-        printf("\t\t\t\t\t    * Selecione no menu principal! *");Sleep(1000);
-    } else if (strcmp(nivel, "MÉDIO I") == 0 && acertos == 10) {
-        printf("\t\t\t\t * SIGA ADIANTE! CONTINUE O SEU APRENDIZADO JOGANDO O: *\n");Sleep(2000);
-        exibirBannerDificuldade("MÉDIO II", 3);
-        addFade(1, 1000, 1);
-        printf("\t\t\t\t\t    * Selecione no menu principal! *");Sleep(1000);
-    } else if (strcmp(nivel, "MÉDIO II") == 0 && acertos == 11) {
-        printf("\t\t  * BOM TRABALHO, AGORA VÁ ADIANTE AO SEU ÚLTIMO DESAFIO! AO INIGUALÁVEL, AO TEMÍVEL: *\n");Sleep(2000);
-        exibirBannerDificuldade("DIFÍCIL", 3);
-        addFade(1, 1000, 1);
-        printf("\t\t\t\t\t    * Selecione no menu principal! *");Sleep(1000);
-    } else if (strcmp(nivel, "DIFÍCIL") == 0 && acertos == 26) {
-        printf("\t\t\t  * MEUS PARABÉNS! VOCÊ PROVOU COM MAESTRIA QUE É EXPERT NO BRAILE! *\n");Sleep(2000);
-        exibirBannerDificuldade("AGRADECIMENTO", 3);
-    } else {
-        printf("\t\t\t\t\t  * BOA TENTATIVA. TENTE NOVAMENTE! *\n");Sleep(1000);
-        exibirBannerDificuldade("NÃO DESISTA", 3);
-        addFade(1, 1000, 1);
-        printf("\t\t\t       \"A persistência é o caminho do êxito\". Continue tentando! ");Sleep(1500);
-    }
-    addFade(4, tempo, 1);
-    printf("\t\t\t\t\t\t\t  ***");Sleep(tempo);
-    addFade(3, tempo, 1);
-    banner();
-    addFade(1, tempo, 1);
-    printf("\t\t\t       **** Pressione ENTER para retornar ao menu ****");
-    while(1) {
-        tecla = getch();
-        tecla = (tecla == 0 || tecla == 224) ? getch() : tecla;
-        if (tecla == 13) break;
-    }
-    if (((strcmp(nivel, "FÁCIL") == 0 && acertos == 5) || (strcmp(nivel, "MÉDIO I") == 0 && acertos == 10)) || ((strcmp(nivel, "MÉDIO II") == 0 && acertos == 11) || (strcmp(nivel, "DIFÍCIL") == 0 && acertos == 26))){
-        addFade(9, 0, 0);
-        addFade(30, 25, 1);
-    } else {
-        addFade(8, 0, 0);
-        addFade(31, 25, 1);
-    }
-    system("cls");
+    cleanScreen(1);
+    topBannerContent("AGRADECIMENTO", 4);
+
+
+
+    exibirTelaRedes(0);
+    cleanScreen(1);
     return;
 }
 
@@ -847,54 +934,44 @@ int obterAnoAtual(){
 
 /* M) CONFIGURAÇÕES INICIAIS DO JOGO  */
 void configJogo(){
-    int largura = 89;
-    int altura = 8;
+    int colunas = 119;
+    int linhas = 38;
     hideCursor();
     setlocale(LC_ALL,"Portuguese");
 
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    SMALL_RECT windowSize = {0, 0, 118, 37}; // define o tamanho da janela
-    SetConsoleWindowInfo(hConsole, TRUE, &windowSize); // define o tamanho e bloqueia o redimensionamento
-
-
     system("color 0f");
-    //changeScreenMode();
 
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-    DWORD consoleMode;
-    GetConsoleMode(hConsole, &consoleMode);
-    consoleMode &= ~ENABLE_MOUSE_INPUT; // desabilita a entrada do mouse
-    SetConsoleMode(hConsole, consoleMode);
-
-
-    int x,y;
-
+    //Definindo as dimensões e o posicionamento da janela do console
     HWND cW = GetConsoleWindow();
-
-    x = GetSystemMetrics(SM_CXSCREEN);   // quantidade de pixel por linhas da tela
-    y = GetSystemMetrics(SM_CYSCREEN);   // quantidade de pixel por coluna da tela
-	SetWindowPos( cW, 0, x/8, y/15, 0, 0, SWP_NOSIZE | SWP_NOZORDER );
+    int x = GetSystemMetrics(SM_CXSCREEN); // quantidade de pixel por linhas da tela
+    int y = GetSystemMetrics(SM_CYSCREEN); // quantidade de pixel por coluna da tela
+	SetWindowPos( cW, 0, x/8, y/15, colunas-1, linhas-1, SWP_NOSIZE | SWP_NOZORDER );
 
 
     CONSOLE_FONT_INFOEX fontInfo = { sizeof(CONSOLE_FONT_INFOEX) };
     GetCurrentConsoleFontEx(hConsole, FALSE, &fontInfo);
-
     if (isFullScreen == true) fontInfo.dwFontSize.Y = 16 + 4;  // aumenta o tamanho vertical da fonte em 2 pontos
     else fontInfo.dwFontSize.Y = 16;  // aumenta o tamanho vertical da fonte em 2 pontos
-
     SetCurrentConsoleFontEx(hConsole, FALSE, &fontInfo);
 
+    LONG_PTR style = GetWindowLongPtr(cW, GWL_STYLE);
 
+    // Remove as flags que permitem o redimensionamento
+    style &= ~WS_SIZEBOX;
+    style &= ~WS_MAXIMIZEBOX;
+
+    // Define o novo estilo da janela
+    SetWindowLongPtr(cW, GWL_STYLE, style);
 }
 
 /* N) [AINDA EM DESENVOLVIMENTO] ALTERNA ENTRE MODO "JANELA" E MODO "TELA CHEIA" */
 void changeScreenMode() {
-    isFullScreen = !isFullScreen;
     keybd_event(VK_MENU  , 0x36, 0, 0);
     keybd_event(VK_RETURN, 0x1C, 0, 0);
     keybd_event(VK_RETURN, 0x1C, KEYEVENTF_KEYUP, 0);
     keybd_event(VK_MENU  , 0x38, KEYEVENTF_KEYUP, 0);
-    configJogo();
 }
 
 /* O) RETORNA TÍTULO DO CONSOLE PERSONALIZADO */
@@ -1147,72 +1224,121 @@ void exibirBannerPergunta(int questao){
 }
 
 /* R) RETORNA O BANNER CORRESPONDENTE À DIFICULDADE */
-void exibirBannerDificuldade(char nivel[20], int titleMode) { //0) Título 1 (Outros); 1) Título 2 (Nível); 2) Título 3 (Resultados); 3) Sem título
+void exibirBannerDificuldade(char titulo1[40], int lin1, int col1, char nivel[20], int lin2, int col2) { //"lin1" e "col1" são coordenadas relacionadas ao "titulo1"; "lin2" e "col2", ao "titulo2".
     setlocale(LC_ALL, "C");
-    if (titleMode >= 0 && titleMode <= 2) {
-        if (titleMode == 0) {
+    linhaCol(lin1, col1); printf("%c ", 254);
+    setlocale(LC_ALL, "Portuguese");
+    printf("%s", titulo1);
+    setlocale(LC_ALL, "C");
+    printf(" %c", 254);
+    setlocale(LC_ALL, "Portuguese");
+    int linha = lin2, coluna = col2;
+    /*if ((titleMode >= 0 && titleMode <= 4) || (titleMode == 7 || titleMode == 8)) {
+        linha = lin2;
+        coluna = col2;
+        if (titleMode == 1) {
             linhaCol(2, 28); printf("%c", 254);
             setlocale(LC_ALL, "Portuguese");
             printf(" VOCÊ ESTÁ NO ");
-        } else if (titleMode == 1){
+        } else if (titleMode == 2){
             linhaCol(2, 24); printf("%c", 254);
             setlocale(LC_ALL, "Portuguese");
             printf(" DIFICULDADE SELECIONADA ");
-        } else {
+        } else if (titleMode == 3){
             linhaCol(2, 25); printf("%c", 254);
             setlocale(LC_ALL, "Portuguese");
             printf(" RESULTADOS FINAIS DO ");
+        } else if (titleMode == 8) {
+            linhaCol(2, 25); printf("%c", 254);
+            setlocale(LC_ALL, "Portuguese");
+            printf(" VOCÊ ESTÁ CONSULTANDO ");
+        } else if (titleMode == 4 || titleMode == 7){
+            if(titleMode == 7) {
+                linhaCol(2, 47);
+                linha = 3;
+                coluna = 33;
+            } else linhaCol(2, 22);
+            printf("%c", 254);
+            setlocale(LC_ALL, "Portuguese");
+            printf(" MUITO OBRIGADO POR JOGAR O ");
         }
-        setlocale(LC_ALL, "C");
-        printf("%c", 254);
-        setlocale(LC_ALL, "Portuguese");
-    }
+        if (titleMode != 0 && titleMode != 5) {
+            setlocale(LC_ALL, "C");
+            printf("%c", 254);
+            setlocale(LC_ALL, "Portuguese");
+        }
+    } else if (titleMode >= 4 && titleMode <= 6){
+        linha = 15;
+        coluna = 52;
+    }*/
 
     if (strcmp(nivel, "MENU") == 0) {
-        linhaCol(3, 9); printf(" _____                 _____     _         _         _ ");
-        linhaCol(4, 9); printf("|     |___ ___ _ _    |  _  |___|_|___ ___|_|___ ___| |");
-        linhaCol(5, 9); printf("| | | | -_|   | | |   |   __|  _| |   |  _| | . | .'| |");
-        linhaCol(6, 9); printf("|_|_|_|___|_|_|___|   |__|  |_| |_|_|_|___|_|  _|__,|_|");
-        linhaCol(7, 9); printf("                                            |_|        ");
+        linhaCol(linha, coluna); printf(" _____                 _____     _         _         _ ");
+        linhaCol(linha, coluna); printf("|     |___ ___ _ _    |  _  |___|_|___ ___|_|___ ___| |");
+        linhaCol(linha, coluna); printf("| | | | -_|   | | |   |   __|  _| |   |  _| | . | .'| |");
+        linhaCol(linha, coluna); printf("|_|_|_|___|_|_|___|   |__|  |_| |_|_|_|___|_|  _|__,|_|");
+        linhaCol(linha, coluna); printf("                                            |_|        ");
+    } else if (strcmp(nivel, "COMO JOGAR") == 0){
+        linhaCol(linha, coluna); printf(" _____                     __                 ");
+        linhaCol(linha, coluna); printf("|     |___ _____ ___    __|  |___ ___ ___ ___ ");
+        linhaCol(linha, coluna); printf("|   --| . |     | . |  |  |  | . | . | .'|  _|");
+        linhaCol(linha, coluna); printf("|_____|___|_|_|_|___|  |_____|___|_  |__,|_|   (o Jogo do Braile)");
+        linhaCol(linha, coluna); printf("                                 |___|        ");
     } else if (strcmp(nivel, "NÃO DESISTA") == 0) {
-        linhaCol(3, 9); printf("                                              __   ");
-        linhaCol(4, 9); printf(" _____ /\\/        ____          _     _      |  |  ");
-        linhaCol(5, 9); printf("|   | |___ ___   |    \\ ___ ___|_|___| |_ ___|  |  ");
-        linhaCol(6, 9); printf("| | | | .'| . |  |  |  | -_|_ -| |_ -|  _| .'|__|  ");
-        linhaCol(7, 9); printf("|_|___|__,|___|  |____/|___|___|_|___|_| |__,|__|  ");
+        linhaCol(linha, coluna); printf("                                              __ ");
+        linhaCol(linha, coluna); printf(" _____ /\\/        ____          _     _      |  |");
+        linhaCol(linha, coluna); printf("|   | |___ ___   |    \\ ___ ___|_|___| |_ ___|  |");
+        linhaCol(linha, coluna); printf("| | | | .'| . |  |  |  | -_|_ -| |_ -|  _| .'|__|");
+        linhaCol(linha, coluna); printf("|_|___|__,|___|  |____/|___|___|_|___|_| |__,|__|");
     } else if (strcmp(nivel, "AGRADECIMENTO") == 0) {
-        linhaCol(3, 9); printf("                                                                         __ ");
-        linhaCol(4, 9); printf(" _____ _       _           _                          __                |  |");
-        linhaCol(5, 9); printf("|     | |_ ___|_|___ ___ _| |___    ___ ___ ___    __|  |___ ___ ___ ___|  |");
-        linhaCol(6, 9); printf("|  |  | . |  _| | . | .'| . | . |  | . | . |  _|  |  |  | . | . | .'|  _|__|");
-        linhaCol(7, 9); printf("|_____|___|_| |_|_  |__,|___|___|  |  _|___|_|    |_____|___|_  |__,|_| |__|");
-        linhaCol(8, 9); printf("                |___|              |_|                      |___|           ");
+        linhaCol(linha, coluna + 55); printf("__");
+        linhaCol(linha, coluna); printf("    __                  _        _____         _ _    |  | ");
+        linhaCol(linha, coluna); printf(" __|  |___ ___ ___    _| |___   | __  |___ ___|_| |___|  |");
+        linhaCol(linha, coluna); printf("|  |  | . | . | . |  | . | . |  | __ -|  _| .'| | | -_|__|");
+        linhaCol(linha, coluna); printf("|_____|___|_  |___|  |___|___|  |_____|_| |__,|_|_|___|__|");
+        linhaCol(linha, coluna); printf("          |___|                                        ");
+
     } else if (strcmp(nivel, "EXEMPLO") == 0) {
-        linhaCol(3, 9); printf(" _____                   _          _                         _____                     _       ");
-        linhaCol(4, 9); printf("|   __|_ _ ___ _____ ___| |___    _| |___    _ _ _____ ___   |  _  |___ ___ ___ _ _ ___| |_ ___ ");
-        linhaCol(5, 9); printf("|   __|_'_| -_|     | . | | . |  | . | -_|  | | |     | .'|  |   __| -_|  _| . | | |   |  _| .'|");
-        linhaCol(6, 9); printf("|_____|_,_|___|_|_|_|  _|_|___|  |___|___|  |___|_|_|_|__,|  |__|  |___|_| |_  |___|_|_|_| |__,|");
-        linhaCol(7, 9); printf("                    |_|                                                    |___|                ");
+        linhaCol(linha, coluna);     printf(" _____                   _     ");
+        linhaCol(linha, coluna); printf("|   __|_ _ ___ _____ ___| |___ ");
+        linhaCol(linha, coluna); printf("|   __|_'_| -_|     | . | | . |");
+        linhaCol(linha, coluna); printf("|_____|_,_|___|_|_|_|  _|_|___|");
+        linhaCol(linha, coluna); printf("                    |_|        ");
+    } else if (strcmp(nivel, "OH") == 0) {
+        linhaCol(17, 71); printf("         _____ ");
+        linhaCol(linha, coluna); printf(" _____  |___  |");
+        linhaCol(linha, coluna); printf("|  _  |___|  _|");
+        linhaCol(linha, coluna); printf("|     |   |_|  ");
+        linhaCol(linha, coluna); printf("|__|__|_|_|_|  ");
     } else if (strcmp(nivel, "FÁCIL") == 0) {
-        linhaCol(3, 17); printf(" _____ _         _    _____         _ _ ");
-        linhaCol(4, 17); printf("|   | |_|_ _ ___| |  |   __|___ ___|_| |");
-        linhaCol(5, 17); printf("| | | | | | | -_| |  |   __| .'|  _| | |");
-        linhaCol(6, 17); printf("|_|___|_|\\_/|___|_|  |__|  |__,|___|_|_|");
+        linhaCol(linha, coluna); printf(" _____ _         _    _____         _ _ ");
+        linhaCol(linha, coluna); printf("|   | |_|_ _ ___| |  |   __|___ ___|_| |");
+        linhaCol(linha, coluna); printf("| | | | | | | -_| |  |   __| .'|  _| | |");
+        linhaCol(linha, coluna); printf("|_|___|_|\\_/|___|_|  |__|  |__,|___|_|_|");
     } else if (strcmp(nivel, "MÉDIO I") == 0) {
-        linhaCol(3, 11); printf(" _____ _         _    _____       _ _        _____ ");
-        linhaCol(4, 11); printf("|   | |_|_ _ ___| |  |     |___ _| |_|___   |_   _|");
-        linhaCol(5, 11); printf("| | | | | | | -_| |  | | | | -_| . | | . |   _| |_ ");
-        linhaCol(6, 11); printf("|_|___|_|\\_/|___|_|  |_|_|_|___|___|_|___|  |_____|");
+        linhaCol(linha, coluna); printf(" _____ _         _    _____       _ _        _____ ");
+        linhaCol(linha, coluna); printf("|   | |_|_ _ ___| |  |     |___ _| |_|___   |_   _|");
+        linhaCol(linha, coluna); printf("| | | | | | | -_| |  | | | | -_| . | | . |   _| |_ ");
+        linhaCol(linha, coluna); printf("|_|___|_|\\_/|___|_|  |_|_|_|___|___|_|___|  |_____|");
     } else if (strcmp(nivel, "MÉDIO II") == 0) {
-        linhaCol(3, 8); printf(" _____ _         _    _____       _ _        _____ _____ ");
-        linhaCol(4, 8); printf("|   | |_|_ _ ___| |  |     |___ _| |_|___   |_   _|_   _|");
-        linhaCol(5, 8); printf("| | | | | | | -_| |  | | | | -_| . | | . |   _| |_ _| |_ ");
-        linhaCol(6, 8); printf("|_|___|_|\\_/|___|_|  |_|_|_|___|___|_|___|  |_____|_____|");
+        linhaCol(linha, coluna); printf(" _____ _         _    _____       _ _        _____ _____ ");
+        linhaCol(linha, coluna); printf("|   | |_|_ _ ___| |  |     |___ _| |_|___   |_   _|_   _|");
+        linhaCol(linha, coluna); printf("| | | | | | | -_| |  | | | | -_| . | | . |   _| |_ _| |_ ");
+        linhaCol(linha, coluna); printf("|_|___|_|\\_/|___|_|  |_|_|_|___|___|_|___|  |_____|_____|");
     } else if (strcmp(nivel, "DIFÍCIL") == 0) {
-        linhaCol(3, 15); printf(" _____ _         _    ____  _ ___ _     _ _ ");
-        linhaCol(4, 15); printf("|   | |_|_ _ ___| |  |    \\|_|  _|_|___|_| |");
-        linhaCol(5, 15); printf("| | | | | | | -_| |  |  |  | |  _| |  _| | |");
-        linhaCol(6, 15); printf("|_|___|_|\\_/|___|_|  |____/|_|_| |_|___|_|_|");
+        linhaCol(linha, coluna); printf(" _____ _         _    ____  _ ___ _     _ _ ");
+        linhaCol(linha, coluna); printf("|   | |_|_ _ ___| |  |    \\|_|  _|_|___|_| |");
+        linhaCol(linha, coluna); printf("| | | | | | | -_| |  |  |  | |  _| |  _| | |");
+        linhaCol(linha, coluna); printf("|_|___|_|\\_/|___|_|  |____/|_|_| |_|___|_|_|");
+    } else if(strcmp(nivel, "DESBLOQUEADA") == 0) {
+        textColor(LIGHTGREEN, _BLACK);
+        linhaCol(linha, coluna); printf("                                                 __ ");
+        linhaCol(linha, coluna); printf(" ____          _   _                       _    |  |");
+        linhaCol(linha, coluna); printf("|    \\ ___ ___| |_| |___ ___ _ _ ___ ___ _| |___|  |");
+        linhaCol(linha, coluna); printf("|  |  | -_|_ -| . | | . | . | | | -_| .'| . | . |__|");
+        linhaCol(linha, coluna); printf("|____/|___|___|___|_|___|_  |___|___|__,|___|___|__|");
+        linhaCol(linha, coluna); printf("                          |_|                       ");
+        textColor(WHITE, _BLACK);
     }
 
 }
@@ -1435,7 +1561,7 @@ void topBannerDesign() {
 }
 
 void topBannerContent(char titulo[20], int titleMode) {
-    exibirBannerDificuldade(titulo, titleMode);
+    //exibirBannerDificuldade(titulo, titleMode);
 
     setlocale(LC_ALL, "C");
     linhaCol(2, 80); printf("%c", 254);
@@ -1587,7 +1713,7 @@ void cleanScreen(int opt) { // 1) Tudo; 2) Superior + Meio; 3) Superior + Inferi
 
     //Banner Inferior (Rodapé)
     if ((opt == 1 || opt == 3) || (opt == 4 || opt == 7)) {
-        for (linha = 33; linha < 37; linha ++) {
+        for (linha = 33; linha < 38; linha ++) {
             for (coluna = 2; coluna < 119; coluna ++) {
                 if (linha == 33 && coluna < 23) { // Título do Banner
                     continue;
@@ -1596,6 +1722,12 @@ void cleanScreen(int opt) { // 1) Tudo; 2) Superior + Meio; 3) Superior + Inferi
                 }
             }
         }
+        setlocale(LC_ALL, "C");
+        linhaCol(38, 39); printf("%c", 196);
+        linhaCol(38, 53); printf("%c", 196);
+        linhaCol(38, 65); printf("%c", 196);
+        linhaCol(38, 80); printf("%c", 196);
+        setlocale(LC_ALL, "Portuguese");
     }
 }
 
@@ -1716,7 +1848,11 @@ int modeloMenu(int lin1, int col1, int qtd, char lista[][40]) {
                 textColor(BLUE, _WHITE);
                 //PlaySound(TEXT("..\\sounds\\select.wav"), NULL, SND_ASYNC);
             } else {
-                textColor(WHITE, _BLUE);
+                if (strcmp(lista[i], "???") == 0) {
+                    textColor(DARKGRAY, _BLUE);
+                } else {
+                    textColor(WHITE, _BLUE);
+                }
             }
             espacamento = (tamMaxItem - strlen(lista[i])) / 2; //Criar espaçamento para centralizar opções no menu
             linhaCol(linhaSelecionada, col1 + 2 + espacamento);
@@ -1730,13 +1866,23 @@ int modeloMenu(int lin1, int col1, int qtd, char lista[][40]) {
             bottomBannerContent(opt);
         }
 
+        //linhaCol(35, 10); printf("Opção selecionada: %d", opt);
+
+
+
         //Aguarda teclas
         tecla = getch();
         if (tecla == 0 || tecla == 224) tecla = getch();
         if (tecla == 72 || (tecla == 119) || (tecla == 87)) { //Seta pra cima
+            while (strcmp(lista[opt - 2], "???") == 0) {
+                opt --;
+            }
             if(opt == 1) opt = qtd;
             else if (opt > 1) opt --;
         } else if (tecla == 80 || (tecla == 115) || (tecla == 83)) { //Seta pra baixo
+            while (strcmp(lista[opt], "???") == 0) {
+                opt ++;
+            }
             if (opt == qtd) opt = 1;
             else if (opt < qtd) opt ++;
         } else if (tecla == 102 || tecla == 70) {
@@ -2257,6 +2403,120 @@ DWORD WINAPI letra(LPVOID params){
     return 0;
 }
 
+DWORD WINAPI redes(LPVOID params){
+    int linha = 10, coluna = 9;
+    textColor(WHITE, _BLACK);
+    box(9, coluna - 2, 12, coluna + 56);
+    linhaCol(linha, coluna + 1); printf("O código-fonte do jogo está disponível no repositório");
+    linhaCol(linha + 1, coluna + 4); printf("\"https://github.com/gui-cordeiro/JogoDoBraile\"");
+    linhaCol(linha + 4, coluna); printf("                  @@@@@@@@@@@@@@@@@@@                  ");
+    linhaCol(linha + 5, coluna); printf("              @@@@@@@@@@@@@@@@@@@@@@@@@@@              ");
+    linhaCol(linha + 6, coluna); printf("           @@@@@@  @@@@@@@@@@@@@@@@@  @@@@@@           ");
+    linhaCol(linha + 7, coluna); printf("         @@@@@@@    @@@@@@@@@@@@@@@    @@@@@@@         ");
+    linhaCol(linha + 8, coluna); printf("       @@@@@@@@                         @@@@@@@@       ");
+    linhaCol(linha + 9, coluna); printf("      @@@@@@@@@                         @@@@@@@@@      ");
+    linhaCol(linha + 10, coluna); printf("     @@@@@@@@@                           @@@@@@@@@     ");
+    linhaCol(linha + 11, coluna); printf("     @@@@@@@@                             @@@@@@@@     ");
+    linhaCol(linha + 12, coluna); printf("     @@@@@@@@                             @@@@@@@@     ");
+    linhaCol(linha + 13, coluna); printf("     @@@@@@@@                             @@@@@@@@     ");
+    linhaCol(linha + 14, coluna); printf("     @@@@@@@@@                           @@@@@@@@@     ");
+    linhaCol(linha + 15, coluna); printf("      @@@@@@@@@@                       @@@@@@@@@@      ");
+    linhaCol(linha + 16, coluna); printf("       @@@@   @@@@@@@@           @@@@@@@@@@@@@@@       ");
+    linhaCol(linha + 17, coluna); printf("        @@@@@   @@@@@@           @@@@@@@@@@@@@@        ");
+    linhaCol(linha + 18, coluna); printf("          @@@@@                  @@@@@@@@@@@@          ");
+    linhaCol(linha + 19, coluna); printf("             @@@@@@@@@           @@@@@@@@@             ");
+    linhaCol(linha + 20, coluna); printf("                @@@@@@           @@@@@@                ");
+
+    while(1) {
+        textColor(LIGHTBLUE, _BLACK);
+        box(9, coluna + 68, 12, coluna + 100);
+        linhaCol(linha, coluna + 70); printf("Siga as minhas redes sociais!");
+        linhaCol(linha + 1, coluna + 73); printf("Twitter: @guis_cordeiro");
+        linhaCol(linha + 4, coluna + 65); printf("                         ..::.          ");
+        linhaCol(linha + 5, coluna + 65); printf("  :.                  ~G&@@@@@@#?..:75^ ");
+        linhaCol(linha + 6, coluna + 65); printf(" .@@P:              :&@@@@@@@@@@@@@@&7:.");
+        linhaCol(linha + 7, coluna + 65); printf(" ~@@@@#7.          .@@@@@@@@@@@@@@@@&#J ");
+        linhaCol(linha + 8, coluna + 65); printf("  @@@@@@@&5~.      ?@@@@@@@@@@@@@@@@?   ");
+        linhaCol(linha + 9, coluna + 65); printf("  .&@@@@@@@@@@&BPY?G@@@@@@@@@@@@@@@&    ");
+        linhaCol(linha + 10, coluna + 65); printf(" :P?B@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@B    ");
+        linhaCol(linha + 11, coluna + 65); printf("  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@~    ");
+        linhaCol(linha + 12, coluna + 65); printf("  .B@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@B     ");
+        linhaCol(linha + 13, coluna + 65); printf("    ^5&@@@@@@@@@@@@@@@@@@@@@@@@@@&.     ");
+        linhaCol(linha + 14, coluna + 65); printf("    .G&@@@@@@@@@@@@@@@@@@@@@@@@@&.      ");
+        linhaCol(linha + 15, coluna + 65); printf("     :B@@@@@@@@@@@@@@@@@@@@@@@@P        ");
+        linhaCol(linha + 16, coluna + 65); printf("       .!5B&@@@@@@@@@@@@@@@@@#^         ");
+        linhaCol(linha + 17, coluna + 65); printf("        .~5&@@@@@@@@@@@@@@@B^           ");
+        linhaCol(linha + 18, coluna + 65); printf(".~?YPB#@@@@@@@@@@@@@@@@@B7.             ");
+        linhaCol(linha + 19, coluna + 65); printf("  :!5B&@@@@@@@@@@@&#P7:                 ");
+        linhaCol(linha + 20, coluna + 65); printf("        ...::::..                       ");
+        textColor(WHITE, _BLACK);
+
+        mudarRedes = true;
+        Sleep(3000);
+        mudarRedes = false;
+
+        textColor(LIGHTMAGENTA, _BLACK);
+        box(9, coluna + 68, 12, coluna + 100);
+
+        textColor(BROWN, _BLACK);
+        linhaCol(linha, coluna + 70); printf("Siga as minhas redes sociais!");
+        linhaCol(linha + 1, coluna + 72); printf("Instagram: @gui.scordeiro");
+
+        textColor(BLUE, _BLACK);
+        linhaCol(linha + 4, coluna + 62); printf("           .~?Y55555555555555Y?~.           ");textColor(MAGENTA, _BLACK);
+        linhaCol(linha + 5, coluna + 62); printf("        :P@@@@&&&&&&&&&&&&&&&&@@@@P:        ");
+        linhaCol(linha + 6, coluna + 62); printf("      .B@@G~.                   ^G@@B.      ");
+        linhaCol(linha + 7, coluna + 62); printf("     .&@&:                   7BB~ :&@&.     ");
+        linhaCol(linha + 8, coluna + 62); printf("     G@@:        .~YGBBGY!.  B@@G  :@@G     ");
+        linhaCol(linha + 9, coluna + 62); printf("     &@&       ^B@@@#GGB&@@#! ..    &@&     ");
+        linhaCol(linha + 10, coluna + 62); printf("     &@&      5@@G:      .Y@@B      &@&     ");
+        linhaCol(linha + 11, coluna + 62); printf("     &@&     7@@?          ^@@P     &@&     ");textColor(LIGHTMAGENTA, _BLACK);
+        linhaCol(linha + 12, coluna + 62); printf("     &@&     B@@            &@&     &@&     ");
+        linhaCol(linha + 13, coluna + 62); printf("     &@&     ?@@7          ^@@G     &@&     ");
+        linhaCol(linha + 14, coluna + 62); printf("     &@&      P@@P.      .J@@#      &@&     ");
+        linhaCol(linha + 15, coluna + 62); printf("     &@&       ~#@@&BPPG&@@&7       &@&     ");
+        linhaCol(linha + 16, coluna + 62); printf("     G@@:        .!5B##BP7:        :@@G     ");textColor(RED, _BLACK);
+        linhaCol(linha + 17, coluna + 62); printf("     .&@&:                        :&@&.     ");
+        linhaCol(linha + 18, coluna + 62); printf("      .B@@G~.                  .~G@@B.      ");
+        linhaCol(linha + 19, coluna + 62); printf("        :P@@@@&&&&&&&&&&&&&&&&@@@@P:        ");textColor(BROWN, _BLACK);
+        linhaCol(linha + 20, coluna + 62); printf("           .~?Y55555555555555Y?~.           ");
+        textColor(WHITE, _BLACK);
+
+        mudarRedes = true;
+        Sleep(3000);
+        mudarRedes = false;
+
+        textColor(BLUE, _BLACK);
+        box(9, coluna + 68, 12, coluna + 100);
+
+        textColor(BLUE, _BLACK);
+        linhaCol(linha, coluna + 70); printf("Siga as minhas redes sociais!");
+        linhaCol(linha + 1, coluna + 73); printf("LinkedIn: @gui-cordeiro");
+
+        linhaCol(linha + 4, coluna + 66); printf(" .YB##P^                            ");
+        linhaCol(linha + 5, coluna + 66); printf("~@@@@@@@Y                           ");
+        linhaCol(linha + 6, coluna + 66); printf("?@@@@@@@#                           ");
+        linhaCol(linha + 7, coluna + 66); printf(" J&@@@@P.                           ");
+        linhaCol(linha + 8, coluna + 66); printf("   ...                              ");
+        linhaCol(linha + 9, coluna + 66); printf(" ^^^^^^~     ^~^^^~:   ^7Y55Y?~.    ");
+        linhaCol(linha + 10, coluna + 66); printf(" @@@@@@@~   .@@@@@@&:G@@@@@@@@@@#~  ");
+        linhaCol(linha + 11, coluna + 66); printf(" @@@@@@@^   .@@@@@@@@@@@@@@@@@@@@@Y ");
+        linhaCol(linha + 12, coluna + 66); printf(" @@@@@@@^   .@@@@@@@@@GJ?JB@@@@@@@@:");
+        linhaCol(linha + 13, coluna + 66); printf(" @@@@@@@^   .@@@@@@@B      ^@@@@@@@?");
+        linhaCol(linha + 14, coluna + 66); printf(" @@@@@@@^   .@@@@@@@:       #@@@@@@5");
+        linhaCol(linha + 15, coluna + 66); printf(" @@@@@@@^   .@@@@@@@.       B@@@@@@5");
+        linhaCol(linha + 16, coluna + 66); printf(" @@@@@@@^   .@@@@@@@.       B@@@@@@5");
+        linhaCol(linha + 17, coluna + 66); printf(" @@@@@@@^   .@@@@@@@.       B@@@@@@5");
+        linhaCol(linha + 18, coluna + 66); printf(" @@@@@@@^   .@@@@@@@.       B@@@@@@5");
+        linhaCol(linha + 19, coluna + 66); printf(" @@@@@@@^   .@@@@@@@.       B@@@@@@5");
+        linhaCol(linha + 20, coluna + 66); printf(" B&####&:   .#&###&#.       Y&####&?");
+        textColor(WHITE, _BLACK);
+
+        mudarRedes = true;
+        Sleep(3000);
+        mudarRedes = false;
+    }
+}
 
 
 
