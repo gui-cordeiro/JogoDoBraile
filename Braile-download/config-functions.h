@@ -672,7 +672,7 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
         strncpy(secretCode, seqTeclas, 10);
         linhaCol(7, 10); printf("Tecla: %s", secretCode);
     }
-    Sleep(4000);
+    Sleep(3000);
     if (strcmp(seqTeclas, "vasco") == 0) {
         titulo("-", "Easter Egg \"VASCO\" desbloqueado!");
 
