@@ -650,59 +650,63 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
     //linhaCol(37, 41);
     //getchar();
 
-    int tecla = 0, easter = 0;
+
+    int tecla = 0, cont = 0;
+    char seqTeclas[10];
+    char secretCode[10];
+    int len = sizeof(seqTeclas)/sizeof(seqTeclas[0]);
+    for (int index = 0; index < len; index ++) {
+        seqTeclas[index] = ' ';
+        secretCode[index] = ' ';
+    }
     while(1){
+        setlocale(LC_ALL, "C");
         tecla = getch();
         if (tecla == 0 || tecla == 224) tecla = getch();
-        if (easter == 0) {
-            if (tecla == 118 || tecla == 86) easter ++;
-            else easter = 0;
-        } else if (easter == 1){
-            if (tecla == 97 || tecla == 65) easter ++;
-            else easter = 0;
-         }else if (easter == 2) {
-            if (tecla == 115 || tecla == 83) easter ++;
-            else easter = 0;
-        }else if (easter == 3) {
-            if (tecla == 99 || tecla == 67) easter ++;
-            else easter = 0;
-        }else if (easter == 4) {
-            if (tecla == 111 || tecla == 79) easter ++;
-            else easter = 0;
+        setlocale(LC_ALL, "Portuguese");
+        if (cont > 9) {
+            cont --;
         }
-        if (easter == 5) {
-            titulo("-", "Easter Egg \"VASCO\" desbloqueado!");
-
-            setlocale(LC_ALL, "C");
-            linhaCol(36, 53); printf("%c", 196);
-            linhaCol(36, 65); printf("%c", 196);
-            linhaCol(38, 53); printf("%c", 196);
-            linhaCol(38, 65); printf("%c", 196);
-            setlocale(LC_ALL, "Portuguese");
-
-            textColor(_BLACK, BROWN);
-            linhaCol(37, 40); printf("    Easter Egg \"VASCO\" desbloqueado!    ");
-            textColor(_BLACK, WHITE);
-            hThread = CreateThread(NULL, 0x0, e1, NULL, 0, &threadId);
-            hThread2 = CreateThread(NULL, 0x0, letra, NULL, 0, &threadId2);
-            //PlaySound(TEXT("..\\sounds\\e1.wav"), NULL, SND_ASYNC);
-            easter = 0;
-            while(1){
-                tecla = getch();
-                if (tecla == 0 || tecla == 224) tecla = getch();
-                if (tecla == 13 && mudar == false) break;
-            }
-            PlaySound(TEXT("..\\sounds\\nosound.wav"), NULL, SND_ASYNC);
-            currentProgressionBanner(nivel, progresso, acertos, erros, pontos);
-        }
-        if (tecla == 13) break; // Tecla Enter
+        seqTeclas[cont] = tecla;
+        cont ++;
+        strncpy(secretCode, seqTeclas, 10);
+        linhaCol(7, 10); printf("Tecla: %s", secretCode);
     }
+    Sleep(4000);
+    if (strcmp(seqTeclas, "vasco") == 0) {
+        titulo("-", "Easter Egg \"VASCO\" desbloqueado!");
 
-    TerminateThread(hThread, 0x0);
-    TerminateThread(hThread2, 0x0);
+        setlocale(LC_ALL, "C");
+        linhaCol(36, 53); printf("%c", 196);
+        linhaCol(36, 65); printf("%c", 196);
+        linhaCol(38, 53); printf("%c", 196);
+        linhaCol(38, 65); printf("%c", 196);
+        setlocale(LC_ALL, "Portuguese");
 
-    CloseHandle(hThread);
-    CloseHandle(hThread2);
+        textColor(_BLACK, BROWN);
+        linhaCol(37, 40); printf("    Easter Egg \"VASCO\" desbloqueado!    ");
+        textColor(_BLACK, WHITE);
+        hThread = CreateThread(NULL, 0x0, e1, NULL, 0, &threadId);
+        hThread2 = CreateThread(NULL, 0x0, letra, NULL, 0, &threadId2);
+        PlaySound(TEXT("..\\sounds\\e1.wav"), NULL, SND_ASYNC);
+        while(1){
+            tecla = getch();
+            if (tecla == 0 || tecla == 224) tecla = getch();
+            if (tecla == 13 && mudar == false) break;
+        }
+        PlaySound(TEXT("..\\sounds\\nosound.wav"), NULL, SND_ASYNC);
+        currentProgressionBanner(nivel, progresso, acertos, erros, pontos);
+
+        TerminateThread(hThread, 0x0);
+        TerminateThread(hThread2, 0x0);
+
+        CloseHandle(hThread);
+        CloseHandle(hThread2);
+    }
+    else if (strcmp(seqTeclas, "kasino") == 0) {
+        linhaCol(4, 10); printf("KASINOOOOOO!");
+        Sleep(3000);
+    }
 
     cleanScreen(6);
     titulo(nivel, "Entrando no jogo, prepare-se!");
@@ -797,7 +801,7 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
         linhaCol(linCad + 18, colCad); printf("      ####################       ");
         linhaCol(linCad + 19, colCad); printf("          (###########           ");
         textColor(WHITE, _BLACK);
-        exibirBannerDificuldade("-", 0, 0, "OH", 17, 71);
+        exibirBannerDificuldade("-", 0, 0, "OH", 14, 71);
         setlocale(LC_ALL, "C");
         linhaCol(21, 77); printf("%c", 254);
         setlocale(LC_ALL, "Portuguese");
@@ -873,6 +877,8 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
         } else if (strcmp(nivel, "DIFÍCIL") == 0 && acertos == 26) {
             exibirBannerDificuldade("-", 0, 0, "AGRADECIMENTO", 15, 50);
         }
+
+        exibirBannerDificuldade("-", 0, 0, "DESBLOQUEADA", 20, 35);
 
         Sleep(1700);
         linhaCol(27, 63); printf("%c", 254);
@@ -983,7 +989,7 @@ void titulo(char nivel[9], char frase[50]){
         strcat(comando, "] ");
     }
     strcat(comando, frase);
-    strcat(comando, " - Jogo do Braile 2.0");
+    strcat(comando, " - Jogo do Braile 3.0");
     system(comando);
 }
 
@@ -1225,13 +1231,15 @@ void exibirBannerPergunta(int questao){
 
 /* R) RETORNA O BANNER CORRESPONDENTE À DIFICULDADE */
 void exibirBannerDificuldade(char titulo1[40], int lin1, int col1, char nivel[20], int lin2, int col2) { //"lin1" e "col1" são coordenadas relacionadas ao "titulo1"; "lin2" e "col2", ao "titulo2".
-    setlocale(LC_ALL, "C");
-    linhaCol(lin1, col1); printf("%c ", 254);
-    setlocale(LC_ALL, "Portuguese");
-    printf("%s", titulo1);
-    setlocale(LC_ALL, "C");
-    printf(" %c", 254);
-    setlocale(LC_ALL, "Portuguese");
+    if (strcmp(titulo, "-") != 0) {
+        setlocale(LC_ALL, "C");
+        linhaCol(lin1, col1); printf("%c ", 254);
+        setlocale(LC_ALL, "Portuguese");
+        printf("%s", titulo1);
+        setlocale(LC_ALL, "C");
+        printf(" %c", 254);
+        setlocale(LC_ALL, "Portuguese");
+    }
     int linha = lin2, coluna = col2;
     /*if ((titleMode >= 0 && titleMode <= 4) || (titleMode == 7 || titleMode == 8)) {
         linha = lin2;
@@ -1274,16 +1282,16 @@ void exibirBannerDificuldade(char titulo1[40], int lin1, int col1, char nivel[20
 
     if (strcmp(nivel, "MENU") == 0) {
         linhaCol(linha, coluna); printf(" _____                 _____     _         _         _ ");
-        linhaCol(linha, coluna); printf("|     |___ ___ _ _    |  _  |___|_|___ ___|_|___ ___| |");
-        linhaCol(linha, coluna); printf("| | | | -_|   | | |   |   __|  _| |   |  _| | . | .'| |");
-        linhaCol(linha, coluna); printf("|_|_|_|___|_|_|___|   |__|  |_| |_|_|_|___|_|  _|__,|_|");
-        linhaCol(linha, coluna); printf("                                            |_|        ");
+        linhaCol(linha + 1, coluna); printf("|     |___ ___ _ _    |  _  |___|_|___ ___|_|___ ___| |");
+        linhaCol(linha + 2, coluna); printf("| | | | -_|   | | |   |   __|  _| |   |  _| | . | .'| |");
+        linhaCol(linha + 3, coluna); printf("|_|_|_|___|_|_|___|   |__|  |_| |_|_|_|___|_|  _|__,|_|");
+        linhaCol(linha + 4, coluna); printf("                                            |_|        ");
     } else if (strcmp(nivel, "COMO JOGAR") == 0){
         linhaCol(linha, coluna); printf(" _____                     __                 ");
-        linhaCol(linha, coluna); printf("|     |___ _____ ___    __|  |___ ___ ___ ___ ");
-        linhaCol(linha, coluna); printf("|   --| . |     | . |  |  |  | . | . | .'|  _|");
-        linhaCol(linha, coluna); printf("|_____|___|_|_|_|___|  |_____|___|_  |__,|_|   (o Jogo do Braile)");
-        linhaCol(linha, coluna); printf("                                 |___|        ");
+        linhaCol(linha + 1, coluna); printf("|     |___ _____ ___    __|  |___ ___ ___ ___ ");
+        linhaCol(linha + 2, coluna); printf("|   --| . |     | . |  |  |  | . | . | .'|  _|");
+        linhaCol(linha + 3, coluna); printf("|_____|___|_|_|_|___|  |_____|___|_  |__,|_|   (o Jogo do Braile)");
+        linhaCol(linha + 4, coluna); printf("                                 |___|        ");
     } else if (strcmp(nivel, "NÃO DESISTA") == 0) {
         linhaCol(linha, coluna); printf("                                              __ ");
         linhaCol(linha, coluna); printf(" _____ /\\/        ____          _     _      |  |");
@@ -1292,52 +1300,52 @@ void exibirBannerDificuldade(char titulo1[40], int lin1, int col1, char nivel[20
         linhaCol(linha, coluna); printf("|_|___|__,|___|  |____/|___|___|_|___|_| |__,|__|");
     } else if (strcmp(nivel, "AGRADECIMENTO") == 0) {
         linhaCol(linha, coluna + 55); printf("__");
-        linhaCol(linha, coluna); printf("    __                  _        _____         _ _    |  | ");
-        linhaCol(linha, coluna); printf(" __|  |___ ___ ___    _| |___   | __  |___ ___|_| |___|  |");
-        linhaCol(linha, coluna); printf("|  |  | . | . | . |  | . | . |  | __ -|  _| .'| | | -_|__|");
-        linhaCol(linha, coluna); printf("|_____|___|_  |___|  |___|___|  |_____|_| |__,|_|_|___|__|");
-        linhaCol(linha, coluna); printf("          |___|                                        ");
+        linhaCol(linha + 1, coluna); printf("    __                  _        _____         _ _    |  | ");
+        linhaCol(linha + 2, coluna); printf(" __|  |___ ___ ___    _| |___   | __  |___ ___|_| |___|  |");
+        linhaCol(linha + 3, coluna); printf("|  |  | . | . | . |  | . | . |  | __ -|  _| .'| | | -_|__|");
+        linhaCol(linha + 4, coluna); printf("|_____|___|_  |___|  |___|___|  |_____|_| |__,|_|_|___|__|");
+        linhaCol(linha + 5, coluna); printf("          |___|                                        ");
 
     } else if (strcmp(nivel, "EXEMPLO") == 0) {
         linhaCol(linha, coluna);     printf(" _____                   _     ");
-        linhaCol(linha, coluna); printf("|   __|_ _ ___ _____ ___| |___ ");
-        linhaCol(linha, coluna); printf("|   __|_'_| -_|     | . | | . |");
-        linhaCol(linha, coluna); printf("|_____|_,_|___|_|_|_|  _|_|___|");
-        linhaCol(linha, coluna); printf("                    |_|        ");
+        linhaCol(linha + 1, coluna); printf("|   __|_ _ ___ _____ ___| |___ ");
+        linhaCol(linha + 2, coluna); printf("|   __|_'_| -_|     | . | | . |");
+        linhaCol(linha + 3, coluna); printf("|_____|_,_|___|_|_|_|  _|_|___|");
+        linhaCol(linha + 4, coluna); printf("                    |_|        ");
     } else if (strcmp(nivel, "OH") == 0) {
-        linhaCol(17, 71); printf("         _____ ");
-        linhaCol(linha, coluna); printf(" _____  |___  |");
-        linhaCol(linha, coluna); printf("|  _  |___|  _|");
-        linhaCol(linha, coluna); printf("|     |   |_|  ");
-        linhaCol(linha, coluna); printf("|__|__|_|_|_|  ");
+        linhaCol(linha, coluna);     printf("         _____ ");
+        linhaCol(linha + 1, coluna); printf(" _____  |___  |");
+        linhaCol(linha + 2, coluna); printf("|  _  |___|  _|");
+        linhaCol(linha + 3, coluna); printf("|     |   |_|  ");
+        linhaCol(linha + 4, coluna); printf("|__|__|_|_|_|  ");
     } else if (strcmp(nivel, "FÁCIL") == 0) {
         linhaCol(linha, coluna); printf(" _____ _         _    _____         _ _ ");
-        linhaCol(linha, coluna); printf("|   | |_|_ _ ___| |  |   __|___ ___|_| |");
-        linhaCol(linha, coluna); printf("| | | | | | | -_| |  |   __| .'|  _| | |");
-        linhaCol(linha, coluna); printf("|_|___|_|\\_/|___|_|  |__|  |__,|___|_|_|");
+        linhaCol(linha + 1, coluna); printf("|   | |_|_ _ ___| |  |   __|___ ___|_| |");
+        linhaCol(linha + 2, coluna); printf("| | | | | | | -_| |  |   __| .'|  _| | |");
+        linhaCol(linha + 3, coluna); printf("|_|___|_|\\_/|___|_|  |__|  |__,|___|_|_|");
     } else if (strcmp(nivel, "MÉDIO I") == 0) {
         linhaCol(linha, coluna); printf(" _____ _         _    _____       _ _        _____ ");
-        linhaCol(linha, coluna); printf("|   | |_|_ _ ___| |  |     |___ _| |_|___   |_   _|");
-        linhaCol(linha, coluna); printf("| | | | | | | -_| |  | | | | -_| . | | . |   _| |_ ");
-        linhaCol(linha, coluna); printf("|_|___|_|\\_/|___|_|  |_|_|_|___|___|_|___|  |_____|");
+        linhaCol(linha + 1, coluna); printf("|   | |_|_ _ ___| |  |     |___ _| |_|___   |_   _|");
+        linhaCol(linha + 2, coluna); printf("| | | | | | | -_| |  | | | | -_| . | | . |   _| |_ ");
+        linhaCol(linha + 3, coluna); printf("|_|___|_|\\_/|___|_|  |_|_|_|___|___|_|___|  |_____|");
     } else if (strcmp(nivel, "MÉDIO II") == 0) {
         linhaCol(linha, coluna); printf(" _____ _         _    _____       _ _        _____ _____ ");
-        linhaCol(linha, coluna); printf("|   | |_|_ _ ___| |  |     |___ _| |_|___   |_   _|_   _|");
-        linhaCol(linha, coluna); printf("| | | | | | | -_| |  | | | | -_| . | | . |   _| |_ _| |_ ");
-        linhaCol(linha, coluna); printf("|_|___|_|\\_/|___|_|  |_|_|_|___|___|_|___|  |_____|_____|");
+        linhaCol(linha + 1, coluna); printf("|   | |_|_ _ ___| |  |     |___ _| |_|___   |_   _|_   _|");
+        linhaCol(linha + 2, coluna); printf("| | | | | | | -_| |  | | | | -_| . | | . |   _| |_ _| |_ ");
+        linhaCol(linha + 3, coluna); printf("|_|___|_|\\_/|___|_|  |_|_|_|___|___|_|___|  |_____|_____|");
     } else if (strcmp(nivel, "DIFÍCIL") == 0) {
         linhaCol(linha, coluna); printf(" _____ _         _    ____  _ ___ _     _ _ ");
-        linhaCol(linha, coluna); printf("|   | |_|_ _ ___| |  |    \\|_|  _|_|___|_| |");
-        linhaCol(linha, coluna); printf("| | | | | | | -_| |  |  |  | |  _| |  _| | |");
-        linhaCol(linha, coluna); printf("|_|___|_|\\_/|___|_|  |____/|_|_| |_|___|_|_|");
+        linhaCol(linha + 1, coluna); printf("|   | |_|_ _ ___| |  |    \\|_|  _|_|___|_| |");
+        linhaCol(linha + 2, coluna); printf("| | | | | | | -_| |  |  |  | |  _| |  _| | |");
+        linhaCol(linha + 3, coluna); printf("|_|___|_|\\_/|___|_|  |____/|_|_| |_|___|_|_|");
     } else if(strcmp(nivel, "DESBLOQUEADA") == 0) {
         textColor(LIGHTGREEN, _BLACK);
         linhaCol(linha, coluna); printf("                                                 __ ");
-        linhaCol(linha, coluna); printf(" ____          _   _                       _    |  |");
-        linhaCol(linha, coluna); printf("|    \\ ___ ___| |_| |___ ___ _ _ ___ ___ _| |___|  |");
-        linhaCol(linha, coluna); printf("|  |  | -_|_ -| . | | . | . | | | -_| .'| . | . |__|");
-        linhaCol(linha, coluna); printf("|____/|___|___|___|_|___|_  |___|___|__,|___|___|__|");
-        linhaCol(linha, coluna); printf("                          |_|                       ");
+        linhaCol(linha + 1, coluna); printf(" ____          _   _                       _    |  |");
+        linhaCol(linha + 2, coluna); printf("|    \\ ___ ___| |_| |___ ___ _ _ ___ ___ _| |___|  |");
+        linhaCol(linha + 3, coluna); printf("|  |  | -_|_ -| . | | . | . | | | -_| .'| . | . |__|");
+        linhaCol(linha + 4, coluna); printf("|____/|___|___|___|_|___|_  |___|___|__,|___|___|__|");
+        linhaCol(linha + 5, coluna); printf("                          |_|                       ");
         textColor(WHITE, _BLACK);
     }
 
