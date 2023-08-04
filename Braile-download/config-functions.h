@@ -938,37 +938,41 @@ int obterAnoAtual(){
     return anoAtual;
 }
 
-/* M) CONFIGURAÇÕES INICIAIS DO JOGO  */
+/* M) CONFIGURAÇÕES INICIAIS DA JANELA DO CONSOLE (BUFFER, DIMENSÕES, CORES E ENTRE OUTROS) */
 void configJogo(){
     int colunas = 119;
     int linhas = 38;
     hideCursor();
     setlocale(LC_ALL,"Portuguese");
 
+    //Definindo as cores e as dimensões da janela do console
     system("color 0f");
+    system("mode con:cols=119 lines=38");
 
+    //Definindo o tamanho do buffer do console (definido APÓS o redimensionamento da janela do console)
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    COORD bufferSize;
+    bufferSize.Y = 120;
+    bufferSize.X = 39;
+    SetConsoleScreenBufferSize(hConsole, bufferSize);
 
-    //Definindo as dimensões e o posicionamento da janela do console
+    //Definindo o posicionamento central da janela do console
     HWND cW = GetConsoleWindow();
     int x = GetSystemMetrics(SM_CXSCREEN); // quantidade de pixel por linhas da tela
     int y = GetSystemMetrics(SM_CYSCREEN); // quantidade de pixel por coluna da tela
 	SetWindowPos( cW, 0, x/8, y/15, colunas-1, linhas-1, SWP_NOSIZE | SWP_NOZORDER );
 
-
+    //Definindo o tamanho da fonte das informações do console
     CONSOLE_FONT_INFOEX fontInfo = { sizeof(CONSOLE_FONT_INFOEX) };
     GetCurrentConsoleFontEx(hConsole, FALSE, &fontInfo);
     if (isFullScreen == true) fontInfo.dwFontSize.Y = 16 + 4;  // aumenta o tamanho vertical da fonte em 2 pontos
     else fontInfo.dwFontSize.Y = 16;  // aumenta o tamanho vertical da fonte em 2 pontos
     SetCurrentConsoleFontEx(hConsole, FALSE, &fontInfo);
 
+    //Bloqueando o redimensionamento da janela do console
     LONG_PTR style = GetWindowLongPtr(cW, GWL_STYLE);
-
-    // Remove as flags que permitem o redimensionamento
     style &= ~WS_SIZEBOX;
     style &= ~WS_MAXIMIZEBOX;
-
-    // Define o novo estilo da janela
     SetWindowLongPtr(cW, GWL_STYLE, style);
 }
 
