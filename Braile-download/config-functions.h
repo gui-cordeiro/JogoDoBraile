@@ -8,9 +8,9 @@ bool mudar = false;
 bool mudarRedes = true;
 bool isFullScreen = false;
 
+//Declaração das threads
 DWORD WINAPI e1(LPVOID params);
 DWORD WINAPI letra(LPVOID params);
-
 DWORD WINAPI redes(LPVOID params);
 
 enum {
@@ -122,7 +122,7 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
     sprintf(lista[3], " d) Letra %c ", alt[3]);
 
     cleanScreen(5);
-    topBannerContent("-", 0);
+    topBannerContent("-", 0, 0, "-", 0, 0);
     exibirBannerPergunta(questao);
 
     setlocale(LC_ALL, "C");
@@ -542,13 +542,19 @@ void printAlfabeto(char letra, int lin1, int col, bool isVisible){
 int confirmarJogo(char nivel[9], int progresso[26]) {
     int opt;
     int acertos = 0, erros = 0, pontos = 0;
+    int colBanner = 0;
     char lista[2][40] = {"SIM, eu quero jogar!", "NÃO, eu quero voltar para o menu."};
+    int tecla = 0, i = 0;
+    char seqTeclas[10];
+    char stringCopiada[10];
+    int seqTeclasLength = 0;
 
     DWORD threadId;
     DWORD threadId2;
 
     HANDLE hThread;
     HANDLE hThread2;
+
 
     //PlaySound(TEXT("..\\sounds\\confirm-difficulty.wav"), NULL, SND_LOOP | SND_ASYNC);
     cleanScreen(1);
@@ -559,8 +565,14 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
         linhaCol(divisoria,72); printf("%c", 179);
     }
     linhaCol(32,72);printf("%c", 193);
+
+    if (strcmp("FÁCIL", nivel) == 0) colBanner = 17;
+    else if (strcmp("MÉDIO I", nivel) == 0) colBanner = 11;
+    else if (strcmp("MÉDIO II", nivel) == 0) colBanner = 8;
+    else if (strcmp("DIFÍCIL", nivel) == 0) colBanner = 15;
+    topBannerContent("DIFICULDADE SELECIONADA:", 2, 23, nivel, 3, colBanner);
+
     setlocale(LC_ALL, "Portuguese");
-    topBannerContent(nivel, 2);
     exibirLetras(nivel);
     if (strcmp("FÁCIL", nivel) == 0) {
         box(11, 11, 13, 61);
@@ -616,7 +628,7 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
     }
 
     cleanScreen(4);
-    topBannerContent(nivel, 2);
+    topBannerContent("DIFICULDADE SELECIONADA:", 2, 23, nivel, 3, colBanner);
     titulo(nivel, "Entrando no jogo, prepare-se!");
     //PlaySound(TEXT("..\\sounds\\getready.wav"), NULL, SND_ASYNC);
     bottomBannerTitle(1);
@@ -651,29 +663,7 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
     //getchar();
 
 
-    int tecla = 0, cont = 0;
-    char seqTeclas[10];
-    char secretCode[10];
-    int len = sizeof(seqTeclas)/sizeof(seqTeclas[0]);
-    for (int index = 0; index < len; index ++) {
-        seqTeclas[index] = ' ';
-        secretCode[index] = ' ';
-    }
-    while(1){
-        setlocale(LC_ALL, "C");
-        tecla = getch();
-        if (tecla == 0 || tecla == 224) tecla = getch();
-        setlocale(LC_ALL, "Portuguese");
-        if (cont > 9) {
-            cont --;
-        }
-        seqTeclas[cont] = tecla;
-        cont ++;
-        strncpy(secretCode, seqTeclas, 10);
-        linhaCol(7, 10); printf("Tecla: %s", secretCode);
-    }
-    Sleep(4000);
-    if (strcmp(seqTeclas, "vasco") == 0) {
+    /*if (strcmp(stringCopiada, "vasco") == 0) {
         titulo("-", "Easter Egg \"VASCO\" desbloqueado!");
 
         setlocale(LC_ALL, "C");
@@ -703,11 +693,11 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
         CloseHandle(hThread);
         CloseHandle(hThread2);
     }
-    else if (strcmp(seqTeclas, "kasino") == 0) {
-        linhaCol(4, 10); printf("KASINOOOOOO!");
+    else if (strcmp(stringCopiada, "kasino") == 0) {
+        linhaCol(4, 10); printf("KASINO!");
         Sleep(3000);
-    }
-
+    }*/
+    pressEnter();
     cleanScreen(6);
     titulo(nivel, "Entrando no jogo, prepare-se!");
     return 1;
@@ -721,7 +711,7 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
      */
     cleanScreen(2);
     titulo(nivel, "Resultado final");
-    topBannerContent("FÁCIL", 3);
+    topBannerContent("RESULTADO FINAL DO: ", 2, 20, nivel, 5, 20);
 
     setlocale(LC_ALL, "C");
     linhaCol(13, 37); printf("%c", 254);
@@ -890,7 +880,7 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
         pressEnter();
     }
     cleanScreen(1);
-    topBannerContent("AGRADECIMENTO", 4);
+    topBannerContent("OBRIGADO POR JOGAR O:", 2, 20, "AGRADECIMENTO", 5, 20);
 
 
 
@@ -1572,8 +1562,8 @@ void topBannerDesign() {
     setlocale(LC_ALL, "Portuguese");
 }
 
-void topBannerContent(char titulo[20], int titleMode) {
-    //exibirBannerDificuldade(titulo, titleMode);
+void topBannerContent(char titulo1[40], int lin1, int col1, char nivel[20], int lin2, int col2) { //"lin1" e "col1" são coordenadas relacionadas ao "titulo1"; "lin2" e "col2", ao "titulo2".
+    exibirBannerDificuldade(titulo1, lin1, col1, nivel, lin2, col2);
 
     setlocale(LC_ALL, "C");
     linhaCol(2, 80); printf("%c", 254);
@@ -2037,7 +2027,7 @@ void currentProgressionBanner(char difficulty[8], int currentProgression[26], in
 int pressEnter(void) {
     bool enterPressed = false;
     while (!enterPressed) {
-        if(GetAsyncKeyState(VK_RETURN) & 0x8000) {
+        if(GetAsyncKeyState(VK_RETURN) & 0x8000) { //Retirar o enterPressed = false, talvez
             if (!enterPressed) {
                 enterPressed = true;
             } else {
@@ -2529,6 +2519,3 @@ DWORD WINAPI redes(LPVOID params){
         mudarRedes = false;
     }
 }
-
-
-

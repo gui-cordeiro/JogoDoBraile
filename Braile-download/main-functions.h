@@ -7,12 +7,12 @@
 /* 0) MENU PRINCIPAL */
 int mainMenu() {
     int opt = 0;
-    //char lista [8][40] = {"Jogar - NÍVEL FÁCIL","Jogar - NÍVEL MÉDIO I","Jogar - NÍVEL MÉDIO II","Jogar - NÍVEL DIFÍCIL","Ranking dos Jogadores","Instruções do Jogo","Créditos do Jogo","Sair do Jogo"};
-    char lista [8][40] = {"Jogar - NÍVEL FÁCIL","???","???","???","Ranking dos Jogadores","Instruções do Jogo","Créditos do Jogo","Sair do Jogo"};
+    char lista [8][40] = {"Jogar - NÍVEL FÁCIL","Jogar - NÍVEL MÉDIO I","Jogar - NÍVEL MÉDIO II","Jogar - NÍVEL DIFÍCIL","Ranking dos Jogadores","Instruções do Jogo","Créditos do Jogo","Sair do Jogo"};
+    //char lista [8][40] = {"Jogar - NÍVEL FÁCIL","???","???","???","Ranking dos Jogadores","Instruções do Jogo","Créditos do Jogo","Sair do Jogo"};
 
 
     titulo("-", "Menu Principal");
-    topBannerContent("MENU", 1);
+    topBannerContent("VOCÊ ESTÁ NO:", 2, 28, "MENU", 3, 9);
 
     setlocale(LC_ALL, "C");
     SetConsoleOutputCP(CP_UTF8);
@@ -42,7 +42,7 @@ void opcao1(){
     int perguntaEscolhida = 0;
 
     if(confirmarJogo("FÁCIL", progresso) == 0) return 0;
-    topBannerContent("FÁCIL", 2);
+    topBannerContent("DIFICULDADE SELECIONADA:", 2, 23, "FÁCIL", 3, 15);
 
     titulo("FÁCIL", "O jogo começará em breve...");
 
@@ -157,7 +157,7 @@ void opcao2(){
     int perguntaEscolhida = 0;
 
     if(confirmarJogo("MÉDIO I", progresso) == 0) return 0;
-    topBannerContent("MÉDIO I", 2);
+    topBannerContent("DIFICULDADE SELECIONADA:", 2, 20, "MÉDIO I", 5, 20);
 
     titulo("MÉDIO I", "O jogo começará em breve...");
 
@@ -260,7 +260,7 @@ void opcao3(){
     int perguntaEscolhida = 0;
 
     if(confirmarJogo("MÉDIO II", progresso) == 0) return 0;
-    topBannerContent("MÉDIO II", 2);
+    topBannerContent("DIFICULDADE SELECIONADA:", 2, 20, "MÉDIO II", 5, 20);
 
     titulo("MÉDIO II", "O jogo começará em breve...");
 
@@ -365,7 +365,7 @@ void opcao4(){
     int perguntaEscolhida = 0;
 
     if(confirmarJogo("DIFÍCIL", progresso) == 0) return 0;
-    topBannerContent("DIFÍCIL", 2);
+    topBannerContent("DIFICULDADE SELECIONADA:", 2, 20, "DIFÍCIL", 5, 20);
 
     titulo("DIFÍCIL", "O jogo começará em breve...");
 
@@ -493,7 +493,7 @@ int opcao6(){
     char lista[2][40] = {"SIM, eu quero ver um exemplo!", "NÃO, eu quero voltar para o menu."};
     cleanScreen(1);
 
-    topBannerContent("COMO JOGAR", 8);
+    topBannerContent("COMO JOGAR O:", 2, 20, "COMO JOGAR", 5, 20);
 
     setlocale(LC_ALL, "C");
     linhaCol(8,72);printf("%c", 197);

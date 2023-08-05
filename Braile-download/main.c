@@ -23,7 +23,7 @@
 #include "config-functions.h"
 #include "main-functions.h"
 
-int main(void) {
+int main(int argc, char **argv) {
     ShowCursor(FALSE);
     int opt = 0;
     configJogo();
