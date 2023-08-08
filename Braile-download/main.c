@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
     configJogo();
     //topBannerDesign();
     //bottomBannerDesign();
-    //fimJogo("FÁCIL", 750, 5, 5);
+    //fimJogo("DIFÍCIL", 3900, 26, 26);
     apresentacao();
     //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
     do {
