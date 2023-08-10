@@ -194,14 +194,12 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
     setlocale(LC_ALL, "Portuguese");
 
     opt = modeloMenu(18, 88, 4, lista);
-    cleanScreen(6);
+    //cleanScreen(6);
     if (opt - 1 == posCorreta) {
         acertoCont = true;
         totPts += 150;
         totAcertos ++;
         progresso[questao - 1] = 1;
-
-        PlaySound(TEXT("..\\sounds\\win.wav"), NULL, SND_ASYNC);
 
         textColor(LIGHTGREEN, _BLACK);
         box(9, 18, 31, 102);
@@ -239,12 +237,12 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
         printf(" %c", 254);
         setlocale(LC_ALL, "Portuguese");
         linhaCol(22, 62); printf("+1 ACERTO  E  +150 PONTOS!");
+
+        PlaySound(TEXT("..\\sounds\\win.wav"), NULL, SND_ASYNC);
     } else {
         totPts += 50;
         totErros ++;
         progresso[questao - 1] = 0;
-
-        PlaySound(TEXT("..\\sounds\\lose.wav"), NULL, SND_ASYNC);
 
         textColor(LIGHTRED, _BLACK);
         box(9, 11, 31, 109);
@@ -291,6 +289,8 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
         printf(" %c", 254);
         setlocale(LC_ALL, "Portuguese");
         linhaCol(22, 78); printf("+1 ERRO  E  +50 PONTOS.");
+
+        PlaySound(TEXT("..\\sounds\\lose.wav"), NULL, SND_ASYNC);
     }
 
     currentProgressionBanner(dificuldade, progresso, totAcertos, totErros, totPts);
@@ -2662,7 +2662,7 @@ DWORD WINAPI antiCheat(LPVOID params) {
         GetConsoleMode(hConsole, &consoleMode);
         if (consoleMode & ENABLE_QUICK_EDIT_MODE) {
             if (!isTextEditingEnabled) {
-                cleanScreen(6);
+                //cleanScreen(6);
                 isTextEditingEnabled = true;
                 mostrarLetras = false;
             }
