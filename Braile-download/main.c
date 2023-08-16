@@ -27,9 +27,9 @@ int main(int argc, char **argv) {
     ShowCursor(FALSE);
     int opt = 0;
     configJogo();
-    //topBannerDesign();
-    //bottomBannerDesign();
-    //fimJogo("DIFÍCIL", 3900, 26, 26);
+    topBannerDesign();
+    bottomBannerDesign();
+    fimJogo("DIFÍCIL", 3900, 26, 26);
     apresentacao();
     //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
     do {
@@ -51,9 +51,9 @@ int main(int argc, char **argv) {
                 opcao4();
                 break;
             case 5:
-                PlaySound(TEXT("..\\sounds\\areyousure.wav"), NULL, SND_LOOP | SND_ASYNC);
+                //PlaySound(TEXT("..\\sounds\\areyousure.wav"), NULL, SND_LOOP | SND_ASYNC);
                 opcao5();
-                PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
+                //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
                 break;
             case 6:
                 //PlaySound(TEXT("..\\sounds\\areyousure.wav"), NULL, SND_LOOP | SND_ASYNC);

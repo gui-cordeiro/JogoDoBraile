@@ -19,6 +19,7 @@ DWORD WINAPI e1(LPVOID params);
 DWORD WINAPI letra(LPVOID params);
 DWORD WINAPI redes(LPVOID params);
 DWORD WINAPI antiCheat(LPVOID params);
+DWORD WINAPI bannerParabens(LPVOID params);
 
 enum {
     BLACK,
@@ -64,7 +65,10 @@ void exibirTelaRedes(int endOfGame){
     DWORD threadId;
     HANDLE hThread;
 
+    hThread = CreateThread(NULL, 0x0, redes, NULL, 0, &threadId);
+
     if (endOfGame == 0) {
+        Sleep(500);
         textColor(BROWN, _BLACK);
         setlocale(LC_ALL, "C");
         linhaCol(35, 36); printf("%c ", 254);
@@ -76,11 +80,11 @@ void exibirTelaRedes(int endOfGame){
         textColor(WHITE, _BLACK);
     }
 
-    hThread = CreateThread(NULL, 0x0, redes, NULL, 0, &threadId);
 
     if (endOfGame == 1){
-        Sleep(2750);
+        Sleep(2450);
         textColor(BROWN, _BLACK);
+        box(34, 36, 36, 86);
         setlocale(LC_ALL, "C");
         linhaCol(35, 38); printf("%c ", 254);
         setlocale(LC_ALL, "Portuguese");
@@ -128,7 +132,7 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
     sprintf(lista[2], " c) Letra %c ", alt[2]);
     sprintf(lista[3], " d) Letra %c ", alt[3]);
 
-    cleanScreen(5);
+    cleanScreen(5, false);
     topBannerContent("-", 0, 0, "-", 0, 0);
     exibirBannerPergunta(questao);
 
@@ -156,7 +160,7 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
     printf(" %c", 254);
 
 
-    printAlfabeto(letrResp2, 22, 35, false);
+    printAlfabeto(letrResp2, 22, 35, 0);
 
     linhaCol(26, 34); printf("ATUAL");
 
@@ -166,7 +170,7 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
         setlocale(LC_ALL, "Portuguese");
         textColor(DARKGRAY, _BLACK);
 
-        printAlfabeto(letrResp1, 22, 21, true);
+        printAlfabeto(letrResp1, 22, 21, 1);
 
         linhaCol(26, 19); printf("Anterior");
     }
@@ -178,7 +182,7 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
         setlocale(LC_ALL, "Portuguese");
         textColor(DARKGRAY, _BLACK);
 
-        printAlfabeto(letrResp3, 22, 49, false);
+        printAlfabeto(letrResp3, 22, 49, 0);
 
         linhaCol(26, 47); printf("Próximo");
     }
@@ -194,7 +198,7 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
     setlocale(LC_ALL, "Portuguese");
 
     opt = modeloMenu(18, 88, 4, lista);
-    //cleanScreen(6);
+    //cleanScreen(6, false);
     if (opt - 1 == posCorreta) {
         acertoCont = true;
         totPts += 150;
@@ -221,7 +225,7 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
 
         box(18, 29, 25, 90);
         linhaCol(21, 32); printf(" Sua resposta: ");
-        printAlfabeto(letrResp2, 21, 51, true);
+        printAlfabeto(letrResp2, 21, 51, 1);
         setlocale(LC_ALL, "C");
 
         linhaCol(18, 59); printf("%c", 194);
@@ -265,7 +269,7 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
 
         box(18, 14, 25, 104);
         linhaCol(21, 17); printf("Você escolheu: ");
-        printAlfabeto(alt[opt - 1], 21, 36, true);
+        printAlfabeto(alt[opt - 1], 21, 36, 1);
         setlocale(LC_ALL, "C");
 
         linhaCol(18, 44); printf("%c", 194);
@@ -279,7 +283,7 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
 
         linhaCol(21, 48); printf(" A resposta");
         linhaCol(22, 48); printf("correta era:");
-        printAlfabeto(letrResp2, 21, 66, true);
+        printAlfabeto(letrResp2, 21, 66, 1);
 
         setlocale(LC_ALL, "C");
         linhaCol(20, 81); printf("%c ", 254);
@@ -304,7 +308,7 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
         tecla = (tecla == 0 || tecla == 224) ? getch() : tecla;
         if (tecla == 13) break;
     }
-    cleanScreen(6);
+    cleanScreen(6, false);
     textColor(WHITE, _BLACK);
     return acertoCont;
 }
@@ -313,7 +317,6 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
 void apresentacao(){
     int tecla;
     system("cls");
-    //system("title Tela de título - Jogo do Braile 2.0");
     titulo("-", "Tela de título");
     //PlaySound(TEXT("..\\sounds\\intro.wav"), NULL, SND_ASYNC);
     setlocale(LC_ALL, "C");
@@ -371,176 +374,150 @@ void apresentacao(){
 }
 
 /* D) ALFABETO EM BRAILE */
-void printAlfabeto(char letra, int lin1, int col, bool isVisible){
+void printAlfabeto(char letra, int lin1, int col, int isVisible){ //0) Insere "?"; 1) Insere letra correspondente; 2) Não insere nada
     //int tempo = 50;
     int lin2 = lin1 + 1, lin3 = lin1 + 2;
     box(lin1 - 1, col - 2, lin1 + 3, col + 4);
+    if (isVisible >= 0 && isVisible <= 1) {
+        linhaCol(lin1 - 2, col + 1);
+        if (isVisible == 1) printf("%c", letra);
+        else printf("?");
+    }
     SetConsoleOutputCP(CP_UTF8);
     setlocale(LC_ALL, "C");
-    linhaCol(lin1 - 2, col + 1);
     switch(tolower(letra)){
         case 'a':
-            printf("A");
-            linhaCol(lin1, col); printf("\u25cf \u25cb"); //cf de Full, cb de Branco
+            linhaCol(lin1, col); printf("\u25cf \u25cb"); //cf de círculo cheio (full), cb de círculo vazio (em "branco", vazio)
             linhaCol(lin2, col); printf("\u25cb \u25cb");
             linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'b':
-            printf("B");
             linhaCol(lin1, col); printf("\u25cf \u25cb");
             linhaCol(lin2, col); printf("\u25cf \u25cb");
             linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'c':
-            printf("C");
             linhaCol(lin1, col); printf("\u25cf \u25cf");
             linhaCol(lin2, col); printf("\u25cb \u25cb");
             linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'd':
-            printf("D");
             linhaCol(lin1, col); printf("\u25cf \u25cf");
             linhaCol(lin2, col); printf("\u25cb \u25cf");
             linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'e':
-            printf("E");
             linhaCol(lin1, col); printf("\u25cf \u25cb");
             linhaCol(lin2, col); printf("\u25cb \u25cf");
             linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'f':
-            printf("F");
             linhaCol(lin1, col); printf("\u25cf \u25cf");
             linhaCol(lin2, col); printf("\u25cf \u25cb");
             linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'g':
-            printf("G");
             linhaCol(lin1, col); printf("\u25cf \u25cf");
             linhaCol(lin2, col); printf("\u25cf \u25cf");
             linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'h':
-            printf("H");
             linhaCol(lin1, col); printf("\u25cf \u25cb");
             linhaCol(lin2, col); printf("\u25cf \u25cf");
             linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'i':
-            printf("I");
             linhaCol(lin1, col); printf("\u25cb \u25cf");
             linhaCol(lin2, col); printf("\u25cf \u25cb");
             linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'j':
-            printf("J");
             linhaCol(lin1, col); printf("\u25cb \u25cf");
             linhaCol(lin2, col); printf("\u25cf \u25cf");
             linhaCol(lin3, col); printf("\u25cb \u25cb");
             break;
         case 'k':
-            printf("K");
             linhaCol(lin1, col); printf("\u25cf \u25cb");
             linhaCol(lin2, col); printf("\u25cb \u25cb");
             linhaCol(lin3, col); printf("\u25cf \u25cb");
             break;
         case 'l':
-            printf("L");
             linhaCol(lin1, col); printf("\u25cf \u25cb");
             linhaCol(lin2, col); printf("\u25cf \u25cb");
             linhaCol(lin3, col); printf("\u25cf \u25cb");
             break;
         case 'm':
-            printf("M");
             linhaCol(lin1, col); printf("\u25cf \u25cf");
             linhaCol(lin2, col); printf("\u25cb \u25cb");
             linhaCol(lin3, col); printf("\u25cf \u25cb");
             break;
         case 'n':
-            printf("N");
             linhaCol(lin1, col); printf("\u25cf \u25cf");
             linhaCol(lin2, col); printf("\u25cb \u25cf");
             linhaCol(lin3, col); printf("\u25cf \u25cb");
             break;
         case 'o':
-            printf("O");
             linhaCol(lin1, col); printf("\u25cf \u25cb");
             linhaCol(lin2, col); printf("\u25cb \u25cf");
             linhaCol(lin3, col); printf("\u25cf \u25cb");
             break;
         case 'p':
-            printf("P");
             linhaCol(lin1, col); printf("\u25cf \u25cf");
             linhaCol(lin2, col); printf("\u25cf \u25cb");
             linhaCol(lin3, col); printf("\u25cf \u25cb");
             break;
         case 'q':
-            printf("Q");
             linhaCol(lin1, col); printf("\u25cf \u25cf");
             linhaCol(lin2, col); printf("\u25cf \u25cf");
             linhaCol(lin3, col); printf("\u25cf \u25cb");
             break;
         case 'r':
-            printf("R");
             linhaCol(lin1, col); printf("\u25cf \u25cb");
             linhaCol(lin2, col); printf("\u25cf \u25cf");
             linhaCol(lin3, col); printf("\u25cf \u25cb");
             break;
         case 's':
-            printf("S");
             linhaCol(lin1, col); printf("\u25cb \u25cf");
             linhaCol(lin2, col); printf("\u25cf \u25cb");
             linhaCol(lin3, col); printf("\u25cf \u25cb");
             break;
         case 't':
-            printf("T");
             linhaCol(lin1, col); printf("\u25cb \u25cf");
             linhaCol(lin2, col); printf("\u25cf \u25cf");
             linhaCol(lin3, col); printf("\u25cf \u25cb");
             break;
         case 'u':
-            printf("U");
             linhaCol(lin1, col); printf("\u25cf \u25cb");
             linhaCol(lin2, col); printf("\u25cb \u25cb");
             linhaCol(lin3, col); printf("\u25cf \u25cf");
             break;
         case 'v':
-            printf("V");
             linhaCol(lin1, col); printf("\u25cf \u25cb");
             linhaCol(lin2, col); printf("\u25cf \u25cb");
             linhaCol(lin3, col); printf("\u25cf \u25cf");
             break;
         case 'w':
-            printf("W");
             linhaCol(lin1, col); printf("\u25cb \u25cf");
             linhaCol(lin2, col); printf("\u25cf \u25cf");
             linhaCol(lin3, col); printf("\u25cb \u25cf");
             break;
         case 'x':
-            printf("X");
             linhaCol(lin1, col); printf("\u25cf \u25cf");
             linhaCol(lin2, col); printf("\u25cb \u25cb");
             linhaCol(lin3, col); printf("\u25cf \u25cf");
             break;
         case 'y':
-            printf("Y");
             linhaCol(lin1, col); printf("\u25cf \u25cf");
             linhaCol(lin2, col); printf("\u25cb \u25cf");
             linhaCol(lin3, col); printf("\u25cf \u25cf");
             break;
         case 'z':
-            printf("Z");
             linhaCol(lin1, col); printf("\u25cf \u25cb");
             linhaCol(lin2, col); printf("\u25cb \u25cf");
             linhaCol(lin3, col); printf("\u25cf \u25cf");
             break;
     }
     SetConsoleOutputCP(850);
-    setlocale(LC_ALL, "Portuguese");
-    linhaCol(lin1 - 2, col + 1);
-    if (isVisible == true) printf("%c", letra);
-    else printf("?");
 }
 
 /* E) TELA DE CONFIRMAÇÃO DE DIFICULDADE */
@@ -562,7 +539,7 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
 
 
     //PlaySound(TEXT("..\\sounds\\confirm-difficulty.wav"), NULL, SND_LOOP | SND_ASYNC);
-    cleanScreen(1);
+    cleanScreen(1, false);
     titulo(nivel, "Confirmar Dificuldade");
     setlocale(LC_ALL, "C");
     linhaCol(8,72);printf("%c", 197);
@@ -628,11 +605,11 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
     opt = modeloMenu(20, 78, 2, lista);
 
     if (opt == 2 || opt == 9) {
-        cleanScreen(1);
+        cleanScreen(1, false);
         return 0;
     }
 
-    cleanScreen(4);
+    cleanScreen(4, false);
 
     //Iniciando a thread anti-trapaça para próxima tela
     aCHandle = CreateThread(NULL, 0x0, antiCheat, NULL, 0, &aCThreadId);
@@ -708,7 +685,7 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
     }*/
 
     pressEnter();
-    cleanScreen(6);
+    cleanScreen(6, false);
     titulo(nivel, "Entrando no jogo, prepare-se!");
     return 1;
 }
@@ -717,9 +694,13 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
 void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
     int tecla = 0, colNivel = 0;
     /*
-     * Código do sistema de Ranking - Futuro
+     * Código do sistema de Ranking - Futuro (sem previsão no momento)
      */
-    cleanScreen(2);
+    //Banner "animado" do Parabéns
+    DWORD threadId;
+    HANDLE hThread;
+
+    cleanScreen(2, false);
     titulo(nivel, "Resultado final");
 
     if (strcmp(nivel, "FÁCIL") == 0) {
@@ -746,7 +727,7 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
     printf("%c", 254);
     setlocale(LC_ALL, "Portuguese");
 
-    Sleep(3500);
+    Sleep(500); //3500
 
     if(((strcmp(nivel, "FÁCIL") == 0 && acertos <= 2) || (strcmp(nivel, "MÉDIO I") == 0 && acertos <= 3)) || ((strcmp(nivel, "MÉDIO II") == 0 && acertos <= 4) || (strcmp(nivel, "DIFÍCIL") == 0 && acertos <= 8))){
         textColor(_BLACK, LIGHTRED);
@@ -782,7 +763,7 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
     printf("%c", 254);
     setlocale(LC_ALL, "Portuguese");
     pressEnter();
-    //cleanScreen(2);
+    //cleanScreen(2, false);
 
     if(acertos == numPerg && strcmp(nivel, "DIFÍCIL") != 0) { // Todas as respostas respondidas corretamente
         int linCad = 10, colCad = 33;
@@ -899,17 +880,101 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
         setlocale(LC_ALL, "Portuguese");
         pressEnter();
     } else if (acertos == numPerg && strcmp(nivel, "DIFÍCIL") == 0){
-        box(9, 28, 31, 92);
-        linhaCol(18, 50); printf("Parabéns, Jogo do Braile completado.");
+        cleanScreen(4, true);
+        titulo("-", "Parabéns por completar o Jogo do Braile");
+        topBannerContent("VOCÊ ACABOU DE COMPLETAR O", 2, 22, "AGRADECIMENTO", 2, 8);
+        PlaySound(TEXT("..\\sounds\\gamecomplete.wav"), NULL, SND_ASYNC);
+
+        textColor(BROWN, _BLACK);
+        linhaCol(10, 19); printf("                                      7:^?YP                                      "); Sleep(50);
+        linhaCol(11, 19); printf("                                     5JJJY5GB                                     "); Sleep(50);
+        linhaCol(12, 19); printf("                                      GGGGBB                                      "); Sleep(50);
+        linhaCol(13, 19); printf("                                       7JJ7                                       "); Sleep(50);
+        linhaCol(14, 19); printf("               7~~?YP                  JJJJ                  7~~?YP               "); Sleep(50);
+        linhaCol(15, 19); printf("              YJ77J5GB                7JJJJ7                YJ77J5GB              "); Sleep(50);
+        linhaCol(16, 19); printf("               PPPGBB                7JJJJJ?7                PPPGBB               "); Sleep(50);
+        linhaCol(17, 19); printf("  JJ5              ^:               7?JJJJJ??!               ..              JJ5  "); Sleep(50);
+        linhaCol(18, 19); printf("?^:!J5G            ^:...          !???JJJJJ????!          :::..            J~:!J5G"); Sleep(50);
+        linhaCol(19, 19); printf("5YYY5GB           :^:..::^~~!7777?????JJJJJ?????77777!!~^^:::..:           5YYY5GB"); Sleep(50);
+        linhaCol(20, 19); printf(" BBBBB##         :^^:..::^~~!7777?????JJJJJ?????77777!!~^^:::..::         BBBBBBB "); Sleep(50);
+        linhaCol(21, 19); printf("     ###BBGP5Y?7!~^^:..::^~~!7777?????JJJJJ?????77777!!~^^:::..:^~!7JY5PGBBBB     "); Sleep(50);
+        linhaCol(22, 19); printf("      ##BBGP5Y?7!~^^:..::^~~!7777?????JJJJJ?????77777!!~^^:::..:^~!7JY5PGBBB      "); Sleep(50);
+        linhaCol(23, 19); printf("       #BBGP5Y?7!~^^:..::^~~!7777?????JJJJJ?????77777!!~^^:::..:^~!7JY5PGBB       "); Sleep(50);
+        linhaCol(24, 19); printf("        BBGP5Y?7!~^^:..::^~~!7777?????JJJJJ?????77777!!~^^:::..:^~!7JY5PGB        "); Sleep(50);
+        linhaCol(25, 19); printf("         BGP5Y?7!~^^:..::^~~!7777?????JJJJJ?????77777!!~^^:::..:^~!7JY5PG         "); Sleep(50);
+        linhaCol(26, 19); printf("          GP^^^^^^^^^..::^~~!77777????JJJJJJ?????77777!~~^^:::^^~~~~~~5P          "); Sleep(50);
+        linhaCol(27, 19); printf("          #BGG5Y?7!^:..::^~~!77777????JJJJJJ?????77777!~~^^::.:^!7JYPGBB          "); Sleep(50);
+        linhaCol(28, 19); printf("          #BGG5Y?7!^:..::^~~!7~~~!!!!7777777!!!!~~~~77!~~^^::.:^!7JYPGBB          "); Sleep(50);
+        linhaCol(29, 19); printf("          ~PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP~          "); Sleep(50);
+        textColor(WHITE, _BLACK);
+
+        printAlfabeto('P', 34, 31, 2); Sleep(50);
+        printAlfabeto('A', 34, 39, 2); Sleep(50);
+        printAlfabeto('R', 34, 47, 2); Sleep(50);
+        printAlfabeto('A', 34, 55, 2); Sleep(50);
+        printAlfabeto('B', 34, 63, 2); Sleep(50);
+        printAlfabeto('E', 34, 71, 2); Sleep(50);
+        printAlfabeto('N', 34, 79, 2); Sleep(50);
+        printAlfabeto('S', 34, 87, 2); Sleep(350);
+
+        linhaCol(33, 29); printf(" _____ ");
+        linhaCol(34, 29); printf("|  _  |");
+        linhaCol(35, 29); printf("|   __|");
+        linhaCol(36, 29); printf("|__|   ");
+        linhaCol(37, 29); printf("       ");
+        Sleep(500);
+        linhaCol(33, 37); printf(" _____ ");
+        linhaCol(34, 37); printf("|  _  |");
+        linhaCol(35, 37); printf("|     |");
+        linhaCol(36, 37); printf("|__|__|");
+        linhaCol(37, 37); printf("       ");
+        Sleep(500);
+        linhaCol(33, 45); printf(" _____ ");
+        linhaCol(34, 45); printf("| __  |");
+        linhaCol(35, 45); printf("|    -|");
+        linhaCol(36, 45); printf("|__|__|");
+        linhaCol(37, 45); printf("       ");
+        Sleep(500);
+        linhaCol(33, 53); printf(" _____ ");
+        linhaCol(34, 53); printf("|  _  |");
+        linhaCol(35, 53); printf("|     |");
+        linhaCol(36, 53); printf("|__|__|");
+        linhaCol(37, 53); printf("       ");
+        Sleep(500);
+        linhaCol(33, 61); printf(" _____ ");
+        linhaCol(34, 61); printf("| __  |");
+        linhaCol(35, 61); printf("| __ -|");
+        linhaCol(36, 61); printf("|_____|");
+        linhaCol(37, 61); printf("       ");
+        Sleep(500);
+        linhaCol(33, 69); printf(" _____ ");
+        linhaCol(34, 69); printf("|   __|");
+        linhaCol(35, 69); printf("|   __|");
+        linhaCol(36, 69); printf("|_____|");
+        linhaCol(37, 69); printf("       ");
+        Sleep(500);
+        linhaCol(33, 77); printf(" _____ ");
+        linhaCol(34, 77); printf("|   | |");
+        linhaCol(35, 77); printf("| | | |");
+        linhaCol(36, 77); printf("|_|___|");
+        linhaCol(37, 77); printf("       ");
+        Sleep(500);
+        linhaCol(33, 85); printf(" _____ ");
+        linhaCol(34, 85); printf("|   __|");
+        linhaCol(35, 85); printf("|__   |");
+        linhaCol(36, 85); printf("|_____|");
+        linhaCol(37, 85); printf("       ");
+        Sleep(500);
+        hThread = CreateThread(NULL, 0x0, bannerParabens, NULL, 0, &threadId);
         pressEnter();
+        TerminateThread(hThread, 0x0);
+        CloseHandle(hThread);
+        textColor(WHITE, _BLACK);
     }
-    cleanScreen(1);
+    cleanScreen(1, true);
     topBannerContent("OBRIGADO POR JOGAR O", 2, 25, "AGRADECIMENTO", 2, 8);
-
-
-
     exibirTelaRedes(0);
-    cleanScreen(1);
+    cleanScreen(1, false);
     return;
 }
 
@@ -980,7 +1045,7 @@ void configJogo(){
     HWND cW = GetConsoleWindow();
     int x = GetSystemMetrics(SM_CXSCREEN); // quantidade de pixel por linhas da tela
     int y = GetSystemMetrics(SM_CYSCREEN); // quantidade de pixel por coluna da tela
-	SetWindowPos( cW, 0, x/8, y/15, colunas-1, linhas-1, SWP_NOSIZE | SWP_NOZORDER );
+	SetWindowPos( cW, 0, x/7.02, y/20, colunas-1, linhas-1, SWP_NOSIZE | SWP_NOZORDER );
 
     //Definindo o tamanho da fonte das informações do console
     CONSOLE_FONT_INFOEX fontInfo = { sizeof(CONSOLE_FONT_INFOEX) };
@@ -1329,7 +1394,6 @@ void exibirBannerDificuldade(char titulo1[40], int lin1, int col1, char nivel[20
         linhaCol(linha + 3, coluna); printf("|  |  | . | . | . |  | . | . |  | __ -|  _| .'| | | -_|__|");
         linhaCol(linha + 4, coluna); printf("|_____|___|_  |___|  |___|___|  |_____|_| |__,|_|_|___|__|");
         linhaCol(linha + 5, coluna); printf("          |___|                                        ");
-
     } else if (strcmp(nivel, "EXEMPLO") == 0) {
         linhaCol(linha, coluna);     printf(" _____                   _     ");
         linhaCol(linha + 1, coluna); printf("|   __|_ _ ___ _____ ___| |___ ");
@@ -1714,7 +1778,7 @@ void bottomBannerContent(int opt) {
     }
 }
 
-void cleanScreen(int opt) { // 1) Tudo; 2) Superior + Meio; 3) Superior + Inferior; 4) Meio + Inferior; 5) Superior; 6) Meio; 7) Inferior
+void cleanScreen(int opt, bool inferiorCompleto) { // 1) Tudo; 2) Superior + Meio; 3) Superior + Inferior; 4) Meio + Inferior; 5) Superior; 6) Meio; 7) Inferior
     int linha, coluna;
 
     //Banner Superior
@@ -1747,7 +1811,7 @@ void cleanScreen(int opt) { // 1) Tudo; 2) Superior + Meio; 3) Superior + Inferi
     if ((opt == 1 || opt == 3) || (opt == 4 || opt == 7)) {
         for (linha = 33; linha < 38; linha ++) {
             for (coluna = 2; coluna < 119; coluna ++) {
-                if (linha == 33 && coluna < 23) { // Título do Banner
+                if ((linha == 33 && coluna < 23) && !inferiorCompleto) { // Título do Banner
                     continue;
                 } else {
                     linhaCol(linha, coluna); printf(" ");
@@ -2091,7 +2155,7 @@ void cheatBanner() {
     textColor(WHITE, _BLACK);
     Sleep(3500);
 
-    cleanScreen(6);
+    cleanScreen(6, false);
     PlaySound(TEXT("..\\sounds\\cheat.wav"), NULL, SND_LOOP | SND_ASYNC);
 
     box(21, 16, 30, 104);
@@ -2150,7 +2214,7 @@ void cheatBanner() {
 
 DWORD WINAPI e1(LPVOID params) {
     int contador = 0;
-    cleanScreen(6);
+    cleanScreen(6, false);
 
     while(contador < 4){
         //linhaCol(37, 2); printf("%d", contador);
@@ -2223,7 +2287,7 @@ DWORD WINAPI e1(LPVOID params) {
             }
         }
         mudar = false;
-        cleanScreen(6);
+        cleanScreen(6, false);
 
         linhaCol(10, 2); printf(" .d8888b.  888          888             888            8888888b.                            888                                ");
         linhaCol(11, 2); printf("d88P  Y88b 888          888             888            888   Y88b                           888                                ");
@@ -2253,7 +2317,7 @@ DWORD WINAPI e1(LPVOID params) {
             }
         }
         mudar = false;
-        cleanScreen(6);
+        cleanScreen(6, false);
 
         int linha = 9;
         int col = 9;
@@ -2296,7 +2360,7 @@ DWORD WINAPI e1(LPVOID params) {
             }
         }
         mudar = false;
-        cleanScreen(6);
+        cleanScreen(6, false);
 
         linhaCol(11, 14); printf(" .d88888b.        .d8888b.  8888888 .d8888b.         d8888 888b    888 88888888888 8888888888 ");
         linhaCol(12, 14); printf("d88P\" \"Y88b      d88P  Y88b   888  d88P  Y88b       d88888 8888b   888     888     888        ");
@@ -2322,7 +2386,7 @@ DWORD WINAPI e1(LPVOID params) {
             }
         }
         mudar = false;
-        cleanScreen(6);
+        cleanScreen(6, false);
 
         linhaCol(16, 23); printf("       d8888 8888888b.  8888888888 888b    888        d8888  .d8888b.  888   ");
         linhaCol(17, 23); printf("      d88888 888   Y88b 888        8888b   888       d88888 d88P  Y88b 888   ");
@@ -2340,7 +2404,7 @@ DWORD WINAPI e1(LPVOID params) {
             }
         }
         mudar = false;
-        cleanScreen(6);
+        cleanScreen(6, false);
 
 
         contador ++;
@@ -2662,7 +2726,6 @@ DWORD WINAPI antiCheat(LPVOID params) {
         GetConsoleMode(hConsole, &consoleMode);
         if (consoleMode & ENABLE_QUICK_EDIT_MODE) {
             if (!isTextEditingEnabled) {
-                //cleanScreen(6);
                 isTextEditingEnabled = true;
                 mostrarLetras = false;
             }
@@ -2673,5 +2736,19 @@ DWORD WINAPI antiCheat(LPVOID params) {
             }
         }
         Sleep(100); // Aguarda meio segundo antes de verificar novamente
+    }
+}
+
+DWORD WINAPI bannerParabens(LPVOID params) {
+    bool corTrocada = false;
+    while(1) {
+        if (!corTrocada) textColor(LIGHTGREEN, _BLACK);
+        else textColor(WHITE, _BLACK);
+        linhaCol(33, 29); printf(" _____   _____   _____   _____   _____   _____   _____   _____ ");
+        linhaCol(34, 29); printf("|  _  | |  _  | | __  | |  _  | | __  | |   __| |   | | |   __|");
+        linhaCol(35, 29); printf("|   __| |     | |    -| |     | | __ -| |   __| | | | | |__   |");
+        linhaCol(36, 29); printf("|__|    |__|__| |__|__| |__|__| |_____| |_____| |_|___| |_____|");
+        Sleep(350);
+        corTrocada = !corTrocada;
     }
 }

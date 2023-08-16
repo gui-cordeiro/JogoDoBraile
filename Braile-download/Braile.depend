@@ -105,7 +105,7 @@
 
 1676562911 c:\users\guilh\onedrive\documentos\github\jogodobraile\braile-download\funcopts.h
 
-1691617644 source:c:\users\guilh\onedrive\documentos\github\jogodobraile\braile-download\main.c
+1692069219 source:c:\users\guilh\onedrive\documentos\github\jogodobraile\braile-download\main.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -121,9 +121,9 @@
 	"config-functions.h"
 	"main-functions.h"
 
-1691642742 c:\users\guilh\onedrive\documentos\github\jogodobraile\braile-download\config-functions.h
+1692140664 c:\users\guilh\onedrive\documentos\github\jogodobraile\braile-download\config-functions.h
 
-1691639328 c:\users\guilh\onedrive\documentos\github\jogodobraile\braile-download\main-functions.h
+1692070486 c:\users\guilh\onedrive\documentos\github\jogodobraile\braile-download\main-functions.h
 
 1681452238 source:c:\users\everton\documents\github\jogodobraile\braile-download\main.c
 	<stdio.h>
@@ -164,4 +164,6 @@
 1691524016 c:\users\guilh\documents\github\jogodobraile\braile-download\config-functions.h
 
 1691524176 c:\users\guilh\documents\github\jogodobraile\braile-download\main-functions.h
+
+1691726465 source:c:\users\guilh\onedrive\documentos\github\jogodobraile\braile-download\resources.rc
 

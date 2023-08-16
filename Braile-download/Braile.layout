@@ -2,74 +2,75 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="main-functions.h" open="1" top="0" tabpos="3" split="2" active="1" splitpos="674" zoom_1="-2" zoom_2="-2">
+	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-4" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="5118" topLine="97" />
-			<Cursor2 position="23214" topLine="276" />
+			<Cursor1 position="2208" topLine="49" />
+		</Cursor>
+	</File>
+	<File name="resources.rc" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="96" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="config-functions.h" open="1" top="1" tabpos="2" split="0" active="1" splitpos="674" zoom_1="-4" zoom_2="-4">
+		<Cursor>
+			<Cursor1 position="37331" topLine="218" />
+		</Cursor>
+		<Folding>
+			<Collapse line="23" />
+			<Collapse line="42" />
+			<Collapse line="62" />
+			<Collapse line="107" />
+			<Collapse line="305" />
+			<Collapse line="316" />
+			<Collapse line="376" />
+			<Collapse line="387" />
+			<Collapse line="523" />
+			<Collapse line="1010" />
+			<Collapse line="1020" />
+			<Collapse line="1064" />
+			<Collapse line="1072" />
+			<Collapse line="1085" />
+			<Collapse line="1111" />
+			<Collapse line="1321" />
+			<Collapse line="1441" />
+			<Collapse line="1477" />
+			<Collapse line="1505" />
+			<Collapse line="1528" />
+			<Collapse line="1563" />
+			<Collapse line="1572" />
+			<Collapse line="1581" />
+			<Collapse line="1594" />
+			<Collapse line="1598" />
+			<Collapse line="1646" />
+			<Collapse line="1658" />
+			<Collapse line="1729" />
+			<Collapse line="1734" />
+			<Collapse line="1743" />
+			<Collapse line="1780" />
+			<Collapse line="1829" />
+			<Collapse line="1918" />
+			<Collapse line="2005" />
+			<Collapse line="2120" />
+			<Collapse line="2134" />
+			<Collapse line="2214" />
+			<Collapse line="2437" />
+			<Collapse line="2581" />
+			<Collapse line="2721" />
+			<Collapse line="2741" />
+		</Folding>
+	</File>
+	<File name="main-functions.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="674" zoom_1="-2" zoom_2="-2">
+		<Cursor>
+			<Cursor1 position="32819" topLine="678" />
 		</Cursor>
 		<Folding>
 			<Collapse line="7" />
-			<Collapse line="320" />
-			<Collapse line="355" />
-			<Collapse line="408" />
 			<Collapse line="439" />
-			<Collapse line="566" />
 			<Collapse line="597" />
 			<Collapse line="627" />
+			<Collapse line="826" />
+			<Collapse line="868" />
 		</Folding>
-	</File>
-	<File name="config-functions.h" open="1" top="1" tabpos="2" split="0" active="1" splitpos="674" zoom_1="-2" zoom_2="-4">
-		<Cursor>
-			<Cursor1 position="127278" topLine="228" />
-		</Cursor>
-		<Folding>
-			<Collapse line="22" />
-			<Collapse line="41" />
-			<Collapse line="61" />
-			<Collapse line="103" />
-			<Collapse line="301" />
-			<Collapse line="312" />
-			<Collapse line="347" />
-			<Collapse line="373" />
-			<Collapse line="380" />
-			<Collapse line="546" />
-			<Collapse line="716" />
-			<Collapse line="916" />
-			<Collapse line="924" />
-			<Collapse line="935" />
-			<Collapse line="945" />
-			<Collapse line="999" />
-			<Collapse line="1007" />
-			<Collapse line="1020" />
-			<Collapse line="1046" />
-			<Collapse line="1256" />
-			<Collapse line="1377" />
-			<Collapse line="1413" />
-			<Collapse line="1441" />
-			<Collapse line="1464" />
-			<Collapse line="1499" />
-			<Collapse line="1508" />
-			<Collapse line="1517" />
-			<Collapse line="1530" />
-			<Collapse line="1534" />
-			<Collapse line="1582" />
-			<Collapse line="1594" />
-			<Collapse line="1665" />
-			<Collapse line="1670" />
-			<Collapse line="1679" />
-			<Collapse line="1716" />
-			<Collapse line="1765" />
-			<Collapse line="1854" />
-			<Collapse line="1941" />
-			<Collapse line="2056" />
-			<Collapse line="2150" />
-			<Collapse line="2373" />
-			<Collapse line="2517" />
-		</Folding>
-	</File>
-	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1365" topLine="42" />
-		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

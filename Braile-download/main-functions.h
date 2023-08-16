@@ -74,11 +74,11 @@ void opcao1(){
             printf(" %c", 254);
             setlocale(LC_ALL, "Portuguese");
 
-            printAlfabeto('A', 20, 37, true);
-            printAlfabeto('E', 20, 48, true);
-            printAlfabeto('I', 20, 59, true);
-            printAlfabeto('O', 20, 70, true);
-            printAlfabeto('U', 20, 81, true);
+            printAlfabeto('A', 20, 37, 1);
+            printAlfabeto('E', 20, 48, 1);
+            printAlfabeto('I', 20, 59, 1);
+            printAlfabeto('O', 20, 70, 1);
+            printAlfabeto('U', 20, 81, 1);
 
             setlocale(LC_ALL, "C");
             linhaCol(25, 32); printf("%c ", 254);
@@ -112,16 +112,16 @@ void opcao1(){
         }
         for (int fast = 0; fast < 70; fast ++) {
             if (isTextEditingEnabled) { //Se a edição de texto do console estiver ativada, um loop será ativo até que a edição seja desativada
-                cleanScreen(6);
+                cleanScreen(6, false);
                 titulo("-", "Modo de Edição Rápida detectada");
                 textColor(WHITE, _BLACK);
                 cheatBanner();
                 while (isTextEditingEnabled){}
-                cleanScreen(6);
+                cleanScreen(6, false);
                 cont ++;
                 linhaCol(20, 30); printf("[ATENÇÃO] Modo de Edição Rápida desativado. Voltando ao jogo...");
                 PlaySound(TEXT("..\\sounds\\cheatDeactivated.wav"), NULL, SND_SYNC);
-                cleanScreen(6);
+                cleanScreen(6, false);
                 PlaySound(TEXT("..\\sounds\\nosound.wav"), NULL, SND_LOOP | SND_ASYNC);
                 titulo("FÁCIL", "O jogo começará em breve...");
             }
@@ -138,7 +138,7 @@ void opcao1(){
     TerminateThread(aCHandle, 0x0);
     CloseHandle(aCHandle);
 
-    cleanScreen(2);
+    cleanScreen(2, false);
     currentProgressionBanner("FÁCIL", progresso, acertos, erros, pts);
     gerarSeqPerguntas(ordem, totPerguntas);
     for (int numPergunta = 1; numPergunta <= 5; numPergunta ++) {
@@ -215,17 +215,17 @@ void opcao2(){
             printf(" %c", 254);
             setlocale(LC_ALL, "Portuguese");
 
-            printAlfabeto('B', 16, 37, true);
-            printAlfabeto('C', 16, 48, true);
-            printAlfabeto('D', 16, 59, true);
-            printAlfabeto('F', 16, 70, true);
-            printAlfabeto('G', 16, 81, true);
+            printAlfabeto('B', 16, 37, 1);
+            printAlfabeto('C', 16, 48, 1);
+            printAlfabeto('D', 16, 59, 1);
+            printAlfabeto('F', 16, 70, 1);
+            printAlfabeto('G', 16, 81, 1);
 
-            printAlfabeto('H', 23, 37, true);
-            printAlfabeto('J', 23, 48, true);
-            printAlfabeto('K', 23, 59, true);
-            printAlfabeto('L', 23, 70, true);
-            printAlfabeto('M', 23, 81, true);
+            printAlfabeto('H', 23, 37, 1);
+            printAlfabeto('J', 23, 48, 1);
+            printAlfabeto('K', 23, 59, 1);
+            printAlfabeto('L', 23, 70, 1);
+            printAlfabeto('M', 23, 81, 1);
 
             setlocale(LC_ALL, "C");
             linhaCol(28, 32); printf("%c ", 254);
@@ -259,16 +259,16 @@ void opcao2(){
         }
         for (int fast = 0; fast < 70; fast ++) {
             if (isTextEditingEnabled) { //Se a edição de texto do console estiver ativada, um loop será ativo até que a edição seja desativada
-                cleanScreen(6);
+                cleanScreen(6, false);
                 titulo("-", "Modo de Edição Rápida detectada");
                 textColor(WHITE, _BLACK);
                 cheatBanner();
                 while (isTextEditingEnabled){}
-                cleanScreen(6);
+                cleanScreen(6, false);
                 cont ++;
                 linhaCol(20, 30); printf("[ATENÇÃO] Modo de Edição Rápida desativado. Voltando ao jogo...");
                 PlaySound(TEXT("..\\sounds\\cheatDeactivated.wav"), NULL, SND_SYNC);
-                cleanScreen(6);
+                cleanScreen(6, false);
                 PlaySound(TEXT("..\\sounds\\nosound.wav"), NULL, SND_LOOP | SND_ASYNC);
                 titulo("MÉDIO I", "O jogo começará em breve...");
             }
@@ -285,7 +285,7 @@ void opcao2(){
     TerminateThread(aCHandle, 0x0);
     CloseHandle(aCHandle);
 
-    cleanScreen(2);
+    cleanScreen(2, false);
     currentProgressionBanner("MÉDIO I", progresso, acertos, erros, pts);
     gerarSeqPerguntas(ordem, totPerguntas);
     for (int numPergunta = 1; numPergunta <= 10; numPergunta ++) {
@@ -363,18 +363,18 @@ void opcao3(){
             printf(" %c", 254);
             setlocale(LC_ALL, "Portuguese");
 
-            printAlfabeto('N', 16, 31, true);
-            printAlfabeto('P', 16, 42, true);
-            printAlfabeto('Q', 16, 53, true);
-            printAlfabeto('R', 16, 64, true);
-            printAlfabeto('S', 16, 75, true);
-            printAlfabeto('T', 16, 86, true);
+            printAlfabeto('N', 16, 31, 1);
+            printAlfabeto('P', 16, 42, 1);
+            printAlfabeto('Q', 16, 53, 1);
+            printAlfabeto('R', 16, 64, 1);
+            printAlfabeto('S', 16, 75, 1);
+            printAlfabeto('T', 16, 86, 1);
 
-            printAlfabeto('V', 23, 37, true);
-            printAlfabeto('W', 23, 48, true);
-            printAlfabeto('X', 23, 59, true);
-            printAlfabeto('Y', 23, 70, true);
-            printAlfabeto('Z', 23, 81, true);
+            printAlfabeto('V', 23, 37, 1);
+            printAlfabeto('W', 23, 48, 1);
+            printAlfabeto('X', 23, 59, 1);
+            printAlfabeto('Y', 23, 70, 1);
+            printAlfabeto('Z', 23, 81, 1);
 
             setlocale(LC_ALL, "C");
             linhaCol(28, 32); printf("%c ", 254);
@@ -408,16 +408,16 @@ void opcao3(){
         }
         for (int fast = 0; fast < 70; fast ++) {
             if (isTextEditingEnabled) { //Se a edição de texto do console estiver ativada, um loop será ativo até que a edição seja desativada
-                cleanScreen(6);
+                cleanScreen(6, false);
                 titulo("-", "Modo de Edição Rápida detectada");
                 textColor(WHITE, _BLACK);
                 cheatBanner();
                 while (isTextEditingEnabled){}
-                cleanScreen(6);
+                cleanScreen(6, false);
                 cont ++;
                 linhaCol(20, 30); printf("[ATENÇÃO] Modo de Edição Rápida desativado. Voltando ao jogo...");
                 PlaySound(TEXT("..\\sounds\\cheatDeactivated.wav"), NULL, SND_SYNC);
-                cleanScreen(6);
+                cleanScreen(6, false);
                 PlaySound(TEXT("..\\sounds\\nosound.wav"), NULL, SND_LOOP | SND_ASYNC);
                 titulo("MÉDIO II", "O jogo começará em breve...");
             }
@@ -434,7 +434,7 @@ void opcao3(){
     TerminateThread(aCHandle, 0x0);
     CloseHandle(aCHandle);
 
-    cleanScreen(2);
+    cleanScreen(2, false);
     currentProgressionBanner("MÉDIO II", progresso, acertos, erros, pts);
     gerarSeqPerguntas(ordem, totPerguntas);
     for (int numPergunta = 1; numPergunta <= 11; numPergunta ++) {
@@ -517,34 +517,34 @@ void opcao4(){
             printf(" %c", 254);
             setlocale(LC_ALL, "Portuguese");
 
-            printAlfabeto('A', 14, 9, true);
-            printAlfabeto('B', 14, 20, true);
-            printAlfabeto('C', 14, 31, true);
-            printAlfabeto('D', 14, 42, true);
-            printAlfabeto('E', 14, 53, true);
-            printAlfabeto('F', 14, 64, true);
-            printAlfabeto('G', 14, 75, true);
-            printAlfabeto('H', 14, 86, true);
-            printAlfabeto('I', 14, 97, true);
-            printAlfabeto('J', 14, 108, true);
+            printAlfabeto('A', 14, 9, 1);
+            printAlfabeto('B', 14, 20, 1);
+            printAlfabeto('C', 14, 31, 1);
+            printAlfabeto('D', 14, 42, 1);
+            printAlfabeto('E', 14, 53, 1);
+            printAlfabeto('F', 14, 64, 1);
+            printAlfabeto('G', 14, 75, 1);
+            printAlfabeto('H', 14, 86, 1);
+            printAlfabeto('I', 14, 97, 1);
+            printAlfabeto('J', 14, 108, 1);
 
-            printAlfabeto('K', 20, 9, true);
-            printAlfabeto('L', 20, 20, true);
-            printAlfabeto('M', 20, 31, true);
-            printAlfabeto('N', 20, 42, true);
-            printAlfabeto('O', 20, 53, true);
-            printAlfabeto('P', 20, 64, true);
-            printAlfabeto('Q', 20, 75, true);
-            printAlfabeto('R', 20, 86, true);
-            printAlfabeto('S', 20, 97, true);
-            printAlfabeto('T', 20, 108, true);
+            printAlfabeto('K', 20, 9, 1);
+            printAlfabeto('L', 20, 20, 1);
+            printAlfabeto('M', 20, 31, 1);
+            printAlfabeto('N', 20, 42, 1);
+            printAlfabeto('O', 20, 53, 1);
+            printAlfabeto('P', 20, 64, 1);
+            printAlfabeto('Q', 20, 75, 1);
+            printAlfabeto('R', 20, 86, 1);
+            printAlfabeto('S', 20, 97, 1);
+            printAlfabeto('T', 20, 108, 1);
 
-            printAlfabeto('U', 26, 31, true);
-            printAlfabeto('V', 26, 42, true);
-            printAlfabeto('W', 26, 53, true);
-            printAlfabeto('X', 26, 64, true);
-            printAlfabeto('Y', 26, 75, true);
-            printAlfabeto('Z', 26, 86, true);
+            printAlfabeto('U', 26, 31, 1);
+            printAlfabeto('V', 26, 42, 1);
+            printAlfabeto('W', 26, 53, 1);
+            printAlfabeto('X', 26, 64, 1);
+            printAlfabeto('Y', 26, 75, 1);
+            printAlfabeto('Z', 26, 86, 1);
             mostrarLetras = false;
         }
         if (!isTextEditingEnabled) {
@@ -566,16 +566,16 @@ void opcao4(){
         }
         for (int fast = 0; fast < 70; fast ++) {
             if (isTextEditingEnabled) { //Se a edição de texto do console estiver ativada, um loop será ativo até que a edição seja desativada
-                cleanScreen(6);
+                cleanScreen(6, false);
                 titulo("-", "Modo de Edição Rápida detectada");
                 textColor(WHITE, _BLACK);
                 cheatBanner();
                 while (isTextEditingEnabled){}
-                cleanScreen(6);
+                cleanScreen(6, false);
                 cont ++;
                 linhaCol(20, 30); printf("[ATENÇÃO] Modo de Edição Rápida desativado. Voltando ao jogo...");
                 PlaySound(TEXT("..\\sounds\\cheatDeactivated.wav"), NULL, SND_SYNC);
-                cleanScreen(6);
+                cleanScreen(6, false);
                 PlaySound(TEXT("..\\sounds\\nosound.wav"), NULL, SND_LOOP | SND_ASYNC);
                 titulo("DIFÍCIL", "O jogo começará em breve...");
             }
@@ -592,7 +592,7 @@ void opcao4(){
     TerminateThread(aCHandle, 0x0);
     CloseHandle(aCHandle);
 
-    cleanScreen(2);
+    cleanScreen(2, false);
     currentProgressionBanner("DIFÍCIL", progresso, acertos, erros, pts);
     gerarSeqPerguntas(ordem, totPerguntas);
     for (int numPergunta = 1; numPergunta <= 26; numPergunta ++) {
@@ -628,7 +628,7 @@ void opcao4(){
 void opcao5(){
     int tecla;
     titulo("-", "Ranking dos Jogadores");
-    cleanScreen(1);
+    cleanScreen(1, false);
     linhaCol(35, 7); printf("Essa aqui é a futura tela do ranking de jogadores, que está em desenvolvimento. Aproveite a musiquinha! :D");
     linhaCol(36, 41); printf("Pressione a tecla ENTER pra sair daqui.");
     while(1) {
@@ -636,7 +636,7 @@ void opcao5(){
         tecla = (tecla == 0 || tecla == 224) ? getch() : tecla;
         if (tecla == 13) break;
     }
-    cleanScreen(1);
+    cleanScreen(1, false);
 }
 
 /* 6) INSTRUÇÕES DO JOGO */
@@ -644,7 +644,7 @@ int opcao6(){
     titulo("-", "Tela de Instruções");
     int finalopt = 0;
     char lista[2][40] = {"SIM, eu quero ver um exemplo!", "NÃO, eu quero voltar para o menu."};
-    cleanScreen(1);
+    cleanScreen(1, false);
 
     topBannerContent("COMO JOGAR O:", 2, 20, "COMO JOGAR", 5, 20);
 
@@ -701,7 +701,7 @@ int opcao6(){
     int opt = modeloMenu(20, 78, 2, lista);
 
     if (opt == 2) {
-        cleanScreen(1);
+        cleanScreen(1, false);
         return 0;
     }
 
@@ -720,7 +720,7 @@ int opcao6(){
     printf("\t\t\t\t   |     Letra escrita em Braile (EM DESTAQUE)     |\n");Sleep(tempo);
     printf("\t\t\t\t   +-----------------------------------------------+\n");Sleep(tempo);
     printf("\t\t\t\t   |                                               |");Sleep(tempo);
-    printAlfabeto('E', 21, 34, true);
+    printAlfabeto('E', 21, 34, 1);
     printf("\n\t\t\t\t   |                                               |\n");Sleep(tempo);
     printf("\t\t\t\t   +-----------------------------------------------+");Sleep(tempo);
     addFade(2, tempo, 1);
@@ -743,7 +743,7 @@ int opcao6(){
     printf("\t\t\t\t   |     Letra escrita em Braile (EM DESTAQUE)     |\n");Sleep(tempo);
     printf("\t\t\t\t   +-----------------------------------------------+\n");Sleep(tempo);
     printf("\t\t\t\t   |                                               |");Sleep(tempo);
-    printAlfabeto('E', 21, 34, true);
+    printAlfabeto('E', 21, 34, 1);
     printf("\n\t\t\t\t   |                                               |\n");Sleep(tempo);
     printf("\t\t\t\t   +-----------------------------------------------+");Sleep(tempo);
     addFade(2, tempo, 1);
@@ -772,7 +772,7 @@ int opcao6(){
     printf("\t\t\t\t   |     Letra escrita em Braile (EM DESTAQUE)     |\n");Sleep(tempo);
     printf("\t\t\t\t   +-----------------------------------------------+\n");Sleep(tempo);
     printf("\t\t\t\t   |                                               |");Sleep(tempo);
-    printAlfabeto('E', 21, 34, true);
+    printAlfabeto('E', 21, 34, 1);
     printf("\n\t\t\t\t   |                                               |\n");Sleep(tempo);
     printf("\t\t\t\t   +-----------------------------------------------+");Sleep(tempo);
     addFade(2, tempo, 1);
@@ -870,8 +870,12 @@ void opcao8(){
     system("cls");
     PlaySound(TEXT("..\\sounds\\ending.wav"), NULL, SND_ASYNC);
     titulo("-", "Obrigado por Jogar!");
+    exibirBannerDificuldade("MUITO OBRIGADO POR JOGAR O", 15, 47, "AGRADECIMENTO", 15, 33);
+    Sleep(1100);
+    system("cls");
     exibirBannerDificuldade("MUITO OBRIGADO POR JOGAR O", 2, 47, "AGRADECIMENTO", 2, 33);
-    Sleep(1800);
+    Sleep(600);
+    box(8, 3, 32, 117);
     exibirTelaRedes(1);
     PlaySound(TEXT("..\\sounds\\intro.wav"), NULL, SND_ASYNC);
     titulo("-", "Saindo do Jogo...");
