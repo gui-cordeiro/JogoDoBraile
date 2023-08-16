@@ -27,9 +27,9 @@ int main(int argc, char **argv) {
     ShowCursor(FALSE);
     int opt = 0;
     configJogo();
-    topBannerDesign();
-    bottomBannerDesign();
-    fimJogo("DIFÍCIL", 3900, 26, 26);
+    //topBannerDesign();
+    //bottomBannerDesign();
+    //fimJogo("DIFÍCIL", 3900, 26, 26);
     apresentacao();
     //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
     do {

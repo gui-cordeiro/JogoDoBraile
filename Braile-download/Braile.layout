@@ -2,19 +2,32 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-4" zoom_2="0">
+	<File name="main-functions.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="674" zoom_1="-2" zoom_2="-2">
 		<Cursor>
-			<Cursor1 position="2208" topLine="49" />
+			<Cursor1 position="40188" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="7" />
+			<Collapse line="31" />
+			<Collapse line="172" />
+			<Collapse line="320" />
+			<Collapse line="439" />
+			<Collapse line="468" />
+			<Collapse line="597" />
+			<Collapse line="627" />
+			<Collapse line="642" />
+			<Collapse line="826" />
+			<Collapse line="868" />
+		</Folding>
+	</File>
+	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="777" topLine="22" />
 		</Cursor>
 	</File>
-	<File name="resources.rc" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="config-functions.h" open="1" top="1" tabpos="2" split="0" active="1" splitpos="674" zoom_1="0" zoom_2="-4">
 		<Cursor>
-			<Cursor1 position="96" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="config-functions.h" open="1" top="1" tabpos="2" split="0" active="1" splitpos="674" zoom_1="-4" zoom_2="-4">
-		<Cursor>
-			<Cursor1 position="37331" topLine="218" />
+			<Cursor1 position="30006" topLine="345" />
 		</Cursor>
 		<Folding>
 			<Collapse line="23" />
@@ -26,51 +39,45 @@
 			<Collapse line="376" />
 			<Collapse line="387" />
 			<Collapse line="523" />
-			<Collapse line="1010" />
-			<Collapse line="1020" />
-			<Collapse line="1064" />
-			<Collapse line="1072" />
-			<Collapse line="1085" />
-			<Collapse line="1111" />
-			<Collapse line="1321" />
-			<Collapse line="1441" />
-			<Collapse line="1477" />
-			<Collapse line="1505" />
-			<Collapse line="1528" />
-			<Collapse line="1563" />
-			<Collapse line="1572" />
-			<Collapse line="1581" />
-			<Collapse line="1594" />
-			<Collapse line="1598" />
-			<Collapse line="1646" />
-			<Collapse line="1658" />
-			<Collapse line="1729" />
-			<Collapse line="1734" />
-			<Collapse line="1743" />
-			<Collapse line="1780" />
-			<Collapse line="1829" />
-			<Collapse line="1918" />
-			<Collapse line="2005" />
-			<Collapse line="2120" />
-			<Collapse line="2134" />
-			<Collapse line="2214" />
-			<Collapse line="2437" />
-			<Collapse line="2581" />
-			<Collapse line="2721" />
-			<Collapse line="2741" />
+			<Collapse line="996" />
+			<Collapse line="1004" />
+			<Collapse line="1015" />
+			<Collapse line="1025" />
+			<Collapse line="1035" />
+			<Collapse line="1079" />
+			<Collapse line="1087" />
+			<Collapse line="1100" />
+			<Collapse line="1126" />
+			<Collapse line="1336" />
+			<Collapse line="1456" />
+			<Collapse line="1492" />
+			<Collapse line="1520" />
+			<Collapse line="1543" />
+			<Collapse line="1578" />
+			<Collapse line="1587" />
+			<Collapse line="1596" />
+			<Collapse line="1609" />
+			<Collapse line="1613" />
+			<Collapse line="1661" />
+			<Collapse line="1673" />
+			<Collapse line="1744" />
+			<Collapse line="1749" />
+			<Collapse line="1758" />
+			<Collapse line="1795" />
+			<Collapse line="1844" />
+			<Collapse line="1933" />
+			<Collapse line="2020" />
+			<Collapse line="2135" />
+			<Collapse line="2149" />
+			<Collapse line="2229" />
+			<Collapse line="2452" />
+			<Collapse line="2596" />
+			<Collapse line="2736" />
 		</Folding>
 	</File>
-	<File name="main-functions.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="674" zoom_1="-2" zoom_2="-2">
+	<File name="resources.rc" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="32819" topLine="678" />
+			<Cursor1 position="96" topLine="0" />
 		</Cursor>
-		<Folding>
-			<Collapse line="7" />
-			<Collapse line="439" />
-			<Collapse line="597" />
-			<Collapse line="627" />
-			<Collapse line="826" />
-			<Collapse line="868" />
-		</Folding>
 	</File>
 </CodeBlocks_layout_file>

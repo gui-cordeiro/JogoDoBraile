@@ -879,7 +879,7 @@ void opcao8(){
     exibirTelaRedes(1);
     PlaySound(TEXT("..\\sounds\\intro.wav"), NULL, SND_ASYNC);
     titulo("-", "Saindo do Jogo...");
-    addFade(8, 0, 0);
+    addFade(4, 0, 0);
     addFade(37, 175, 1);
     system("cls");
     system("mode con:cols=120 lines=30");

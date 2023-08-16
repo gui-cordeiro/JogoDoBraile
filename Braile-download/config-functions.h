@@ -727,7 +727,7 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
     printf("%c", 254);
     setlocale(LC_ALL, "Portuguese");
 
-    Sleep(500); //3500
+    Sleep(3500);
 
     if(((strcmp(nivel, "FÁCIL") == 0 && acertos <= 2) || (strcmp(nivel, "MÉDIO I") == 0 && acertos <= 3)) || ((strcmp(nivel, "MÉDIO II") == 0 && acertos <= 4) || (strcmp(nivel, "DIFÍCIL") == 0 && acertos <= 8))){
         textColor(_BLACK, LIGHTRED);
@@ -763,7 +763,6 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
     printf("%c", 254);
     setlocale(LC_ALL, "Portuguese");
     pressEnter();
-    //cleanScreen(2, false);
 
     if(acertos == numPerg && strcmp(nivel, "DIFÍCIL") != 0) { // Todas as respostas respondidas corretamente
         int linCad = 10, colCad = 33;
@@ -880,92 +879,108 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
         setlocale(LC_ALL, "Portuguese");
         pressEnter();
     } else if (acertos == numPerg && strcmp(nivel, "DIFÍCIL") == 0){
-        cleanScreen(4, true);
+        cleanScreen(6, false);
         titulo("-", "Parabéns por completar o Jogo do Braile");
-        topBannerContent("VOCÊ ACABOU DE COMPLETAR O", 2, 22, "AGRADECIMENTO", 2, 8);
+        topBannerContent("VOCÊ ACABOU DE COMPLETAR O", 13, 66, "AGRADECIMENTO", 14, 53);
         PlaySound(TEXT("..\\sounds\\gamecomplete.wav"), NULL, SND_ASYNC);
 
+
+        linhaCol(9, 15); printf("    .5~  :Y:      J?  .5J     ");
+        linhaCol(10, 15); printf("     .Y^  .J:    J?  .5J      ");
+        linhaCol(11, 15); printf("      .Y^  .J:  J7   J?       ");
+        linhaCol(12, 15); printf("       .5^  .Y~?7   ?7        ");
+        linhaCol(13, 15); printf("        :P~  ~G!   ?7         ");
+        linhaCol(14, 15); printf("         :G7^Y7  .?7          ");
+        linhaCol(15, 15); printf("          ^?YY^::?J.          ");
         textColor(BROWN, _BLACK);
-        linhaCol(10, 19); printf("                                      7:^?YP                                      "); Sleep(50);
-        linhaCol(11, 19); printf("                                     5JJJY5GB                                     "); Sleep(50);
-        linhaCol(12, 19); printf("                                      GGGGBB                                      "); Sleep(50);
-        linhaCol(13, 19); printf("                                       7JJ7                                       "); Sleep(50);
-        linhaCol(14, 19); printf("               7~~?YP                  JJJJ                  7~~?YP               "); Sleep(50);
-        linhaCol(15, 19); printf("              YJ77J5GB                7JJJJ7                YJ77J5GB              "); Sleep(50);
-        linhaCol(16, 19); printf("               PPPGBB                7JJJJJ?7                PPPGBB               "); Sleep(50);
-        linhaCol(17, 19); printf("  JJ5              ^:               7?JJJJJ??!               ..              JJ5  "); Sleep(50);
-        linhaCol(18, 19); printf("?^:!J5G            ^:...          !???JJJJJ????!          :::..            J~:!J5G"); Sleep(50);
-        linhaCol(19, 19); printf("5YYY5GB           :^:..::^~~!7777?????JJJJJ?????77777!!~^^:::..:           5YYY5GB"); Sleep(50);
-        linhaCol(20, 19); printf(" BBBBB##         :^^:..::^~~!7777?????JJJJJ?????77777!!~^^:::..::         BBBBBBB "); Sleep(50);
-        linhaCol(21, 19); printf("     ###BBGP5Y?7!~^^:..::^~~!7777?????JJJJJ?????77777!!~^^:::..:^~!7JY5PGBBBB     "); Sleep(50);
-        linhaCol(22, 19); printf("      ##BBGP5Y?7!~^^:..::^~~!7777?????JJJJJ?????77777!!~^^:::..:^~!7JY5PGBBB      "); Sleep(50);
-        linhaCol(23, 19); printf("       #BBGP5Y?7!~^^:..::^~~!7777?????JJJJJ?????77777!!~^^:::..:^~!7JY5PGBB       "); Sleep(50);
-        linhaCol(24, 19); printf("        BBGP5Y?7!~^^:..::^~~!7777?????JJJJJ?????77777!!~^^:::..:^~!7JY5PGB        "); Sleep(50);
-        linhaCol(25, 19); printf("         BGP5Y?7!~^^:..::^~~!7777?????JJJJJ?????77777!!~^^:::..:^~!7JY5PG         "); Sleep(50);
-        linhaCol(26, 19); printf("          GP^^^^^^^^^..::^~~!77777????JJJJJJ?????77777!~~^^:::^^~~~~~~5P          "); Sleep(50);
-        linhaCol(27, 19); printf("          #BGG5Y?7!^:..::^~~!77777????JJJJJJ?????77777!~~^^::.:^!7JYPGBB          "); Sleep(50);
-        linhaCol(28, 19); printf("          #BGG5Y?7!^:..::^~~!7~~~!!!!7777777!!!!~~~~77!~~^^::.:^!7JYPGBB          "); Sleep(50);
-        linhaCol(29, 19); printf("          ~PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP~          "); Sleep(50);
+        linhaCol(16, 15); printf("          : .    ...          ");
+        linhaCol(17, 15); printf("        ..:........:.         ");
+        linhaCol(18, 15); printf("     .:^^:...........:..      ");
+        linhaCol(19, 15); printf("   .^^^::::::.:::^^^^::::.    ");
+        linhaCol(20, 15); printf("  :^::^^^^^:::::::::^^^^:::.  ");
+        linhaCol(21, 15); printf(" :^::~~^^^^^^:::::::::^^::::. ");
+        linhaCol(22, 15); printf(".^..~^^~^^^^^^^^^::::::::::::.");
+        linhaCol(23, 15); printf(".^..~~~~~~~^^^^^^^^^^::^:::^::");
+        linhaCol(24, 15); printf(".^..~~~~~~~~~~~^^^^^^^^^^::^^.");
+        linhaCol(25, 15); printf(" ::.^^~~~~~~~~~~~~~~^^^^^::^^ ");
+        linhaCol(26, 15); printf(" .::.:^^~~^~~~~~~~~^~~^^:.:^. ");
+        linhaCol(27, 15); printf("   :::::^^^^^~^~~^~~~^:..::.  ");
+        linhaCol(28, 15); printf("    .:^^::::::::^^^^::.::.    ");
+        linhaCol(29, 15); printf("      .::^^:::::::::::.       ");
+        linhaCol(30, 15); printf("           .......            ");
+
         textColor(WHITE, _BLACK);
 
-        printAlfabeto('P', 34, 31, 2); Sleep(50);
-        printAlfabeto('A', 34, 39, 2); Sleep(50);
-        printAlfabeto('R', 34, 47, 2); Sleep(50);
-        printAlfabeto('A', 34, 55, 2); Sleep(50);
-        printAlfabeto('B', 34, 63, 2); Sleep(50);
-        printAlfabeto('E', 34, 71, 2); Sleep(50);
-        printAlfabeto('N', 34, 79, 2); Sleep(50);
-        printAlfabeto('S', 34, 87, 2); Sleep(350);
+        printAlfabeto('P', 22, 56, 2); Sleep(50);
+        printAlfabeto('A', 22, 63, 2); Sleep(50);
+        printAlfabeto('R', 22, 70, 2); Sleep(50);
+        printAlfabeto('A', 22, 77, 2); Sleep(50);
+        printAlfabeto('B', 22, 84, 2); Sleep(50);
+        printAlfabeto('E', 22, 91, 2); Sleep(50);
+        printAlfabeto('N', 22, 98, 2); Sleep(50);
+        printAlfabeto('S', 22, 105, 2); Sleep(900);
 
-        linhaCol(33, 29); printf(" _____ ");
-        linhaCol(34, 29); printf("|  _  |");
-        linhaCol(35, 29); printf("|   __|");
-        linhaCol(36, 29); printf("|__|   ");
-        linhaCol(37, 29); printf("       ");
+        linhaCol(21, 54); printf(" _____ ");
+        linhaCol(22, 54); printf("|  _  |");
+        linhaCol(23, 54); printf("|   __|");
+        linhaCol(24, 54); printf("|__|   ");
+        linhaCol(25, 54); printf("       ");
         Sleep(500);
-        linhaCol(33, 37); printf(" _____ ");
-        linhaCol(34, 37); printf("|  _  |");
-        linhaCol(35, 37); printf("|     |");
-        linhaCol(36, 37); printf("|__|__|");
-        linhaCol(37, 37); printf("       ");
+        linhaCol(21, 61); printf(" _____ ");
+        linhaCol(22, 61); printf("|  _  |");
+        linhaCol(23, 61); printf("|     |");
+        linhaCol(24, 61); printf("|__|__|");
+        linhaCol(25, 61); printf("       ");
         Sleep(500);
-        linhaCol(33, 45); printf(" _____ ");
-        linhaCol(34, 45); printf("| __  |");
-        linhaCol(35, 45); printf("|    -|");
-        linhaCol(36, 45); printf("|__|__|");
-        linhaCol(37, 45); printf("       ");
+        linhaCol(21, 68); printf(" _____ ");
+        linhaCol(22, 68); printf("| __  |");
+        linhaCol(23, 68); printf("|    -|");
+        linhaCol(24, 68); printf("|__|__|");
+        linhaCol(25, 68); printf("       ");
         Sleep(500);
-        linhaCol(33, 53); printf(" _____ ");
-        linhaCol(34, 53); printf("|  _  |");
-        linhaCol(35, 53); printf("|     |");
-        linhaCol(36, 53); printf("|__|__|");
-        linhaCol(37, 53); printf("       ");
+        linhaCol(21, 75); printf(" _____ ");
+        linhaCol(22, 75); printf("|  _  |");
+        linhaCol(23, 75); printf("|     |");
+        linhaCol(24, 75); printf("|__|__|");
+        linhaCol(25, 75); printf("       ");
         Sleep(500);
-        linhaCol(33, 61); printf(" _____ ");
-        linhaCol(34, 61); printf("| __  |");
-        linhaCol(35, 61); printf("| __ -|");
-        linhaCol(36, 61); printf("|_____|");
-        linhaCol(37, 61); printf("       ");
+        linhaCol(21, 82); printf(" _____ ");
+        linhaCol(22, 82); printf("| __  |");
+        linhaCol(23, 82); printf("| __ -|");
+        linhaCol(24, 82); printf("|_____|");
+        linhaCol(25, 82); printf("       ");
         Sleep(500);
-        linhaCol(33, 69); printf(" _____ ");
-        linhaCol(34, 69); printf("|   __|");
-        linhaCol(35, 69); printf("|   __|");
-        linhaCol(36, 69); printf("|_____|");
-        linhaCol(37, 69); printf("       ");
+        linhaCol(19, 91); printf(" __");
+        linhaCol(20, 91); printf("/_/");
+        linhaCol(21, 89); printf(" _____ ");
+        linhaCol(22, 89); printf("|   __|");
+        linhaCol(23, 89); printf("|   __|");
+        linhaCol(24, 89); printf("|_____|");
+        linhaCol(25, 89); printf("       ");
         Sleep(500);
-        linhaCol(33, 77); printf(" _____ ");
-        linhaCol(34, 77); printf("|   | |");
-        linhaCol(35, 77); printf("| | | |");
-        linhaCol(36, 77); printf("|_|___|");
-        linhaCol(37, 77); printf("       ");
+        linhaCol(21, 96); printf(" _____ ");
+        linhaCol(22, 96); printf("|   | |");
+        linhaCol(23, 96); printf("| | | |");
+        linhaCol(24, 96); printf("|_|___|");
+        linhaCol(25, 96); printf("       ");
         Sleep(500);
-        linhaCol(33, 85); printf(" _____ ");
-        linhaCol(34, 85); printf("|   __|");
-        linhaCol(35, 85); printf("|__   |");
-        linhaCol(36, 85); printf("|_____|");
-        linhaCol(37, 85); printf("       ");
+        linhaCol(21, 103); printf(" _____ ");
+        linhaCol(22, 103); printf("|   __|");
+        linhaCol(23, 103); printf("|__   |");
+        linhaCol(24, 103); printf("|_____|");
+        linhaCol(25, 103); printf("       ");
         Sleep(500);
+
+        setlocale(LC_ALL, "C");
+        linhaCol(27, 65); printf("%c", 254);
+        setlocale(LC_ALL, "Portuguese");
+        printf(" Pressione ENTER para continuar ");
+        setlocale(LC_ALL, "C");
+        printf("%c", 254);
+        setlocale(LC_ALL, "Portuguese");
+
         hThread = CreateThread(NULL, 0x0, bannerParabens, NULL, 0, &threadId);
+
         pressEnter();
         TerminateThread(hThread, 0x0);
         CloseHandle(hThread);
@@ -2744,10 +2759,12 @@ DWORD WINAPI bannerParabens(LPVOID params) {
     while(1) {
         if (!corTrocada) textColor(LIGHTGREEN, _BLACK);
         else textColor(WHITE, _BLACK);
-        linhaCol(33, 29); printf(" _____   _____   _____   _____   _____   _____   _____   _____ ");
-        linhaCol(34, 29); printf("|  _  | |  _  | | __  | |  _  | | __  | |   __| |   | | |   __|");
-        linhaCol(35, 29); printf("|   __| |     | |    -| |     | | __ -| |   __| | | | | |__   |");
-        linhaCol(36, 29); printf("|__|    |__|__| |__|__| |__|__| |_____| |_____| |_|___| |_____|");
+        linhaCol(19, 89); printf(" __                    ");
+        linhaCol(20, 89); printf("/_/                 __ ");
+        linhaCol(21, 52); printf(" _____  _____  _____  _____  _____  _____  _____  _____ |  |");
+        linhaCol(22, 52); printf("|  _  ||  _  || __  ||  _  || __  ||   __||   | ||   __||  |");
+        linhaCol(23, 52); printf("|   __||     ||    -||     || __ -||   __|| | | ||__   ||__|");
+        linhaCol(24, 52); printf("|__|   |__|__||__|__||__|__||_____||_____||_|___||_____||__|");
         Sleep(350);
         corTrocada = !corTrocada;
     }
