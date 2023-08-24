@@ -4,32 +4,66 @@
  * -> Ano: 2017, 2023
  */
 
-/* 0) MENU PRINCIPAL */
+/* MENU PRINCIPAL */
 int mainMenu() {
     int opt = 0;
-    char lista [8][40] = {"Jogar - NÍVEL FÁCIL","Jogar - NÍVEL MÉDIO I","Jogar - NÍVEL MÉDIO II","Jogar - NÍVEL DIFÍCIL","Ranking dos Jogadores","Instruções do Jogo","Créditos do Jogo","Sair do Jogo"};
-    //char lista [8][40] = {"Jogar - NÍVEL FÁCIL","???","???","???","Ranking dos Jogadores","Instruções do Jogo","Créditos do Jogo","Sair do Jogo"};
-
+    char lista [6][40] = {"Jogar - JOGO DO BRAILE","Ranking dos Jogadores","Instruções do Jogo","Configurações do Jogo","Créditos do Jogo","Sair do Jogo"};
 
     titulo("-", "Menu Principal");
-    topBannerContent("VOCÊ ESTÁ NO", 2, 29, "MENU", 3, 9);
+
+    // 0) Todas as teclas, Enter e Esc; 1) Todas as teclas e Enter; 2) Teclas CIMA e BAIXO, Enter e Esc; 3) Teclas CIMA e BAIXO e Enter; 4) Somente Enter; 5) Somente Barra de Espaço (2x); 6) Nenhuma ação ou botão.
+    topBannerContent("VOCÊ ESTÁ NO", 2, 29, "MENU", 3, 9, 2);
 
     setlocale(LC_ALL, "C");
     SetConsoleOutputCP(CP_UTF8);
     textColor(WHITE, _BLACK);
-    linhaCol(10, 59); printf("\u25b2");
-    linhaCol(30, 59); printf("\u25bc");
+    linhaCol(12, 59); printf("\u25b2");
+    linhaCol(28, 59); printf("\u25bc");
     textColor(WHITE, _BLUE);
     SetConsoleOutputCP(850);
     setlocale(LC_ALL, "Portuguese");
 
-    opt = modeloMenu(11, 47, 8, lista);
+    opt = modeloMenu(13, 47, 6, 1, lista);
+    cleanScreen(1, false);
 
     return opt;
 }
 
+/* MENU DOS MODOS DE JOGO */
+int modeSelect() {
+    int opt = 0;
+    //char lista [6][40] = {"Jogar - NÍVEL FÁCIL","Jogar - NÍVEL MÉDIO I","Jogar - NÍVEL MÉDIO II","Jogar - NÍVEL DIFÍCIL","Jogar - MODO LIVRE","Voltar ao Menu Principal"};
+    char lista [6][40];
+
+    strcpy(lista[0], "Jogar - NÍVEL FÁCIL");
+    if (modosDisponiveis >= 1 && modosDisponiveis <= 4) strcpy(lista[1], "Jogar - NÍVEL MÉDIO I");
+    else strcpy(lista[1], "???");
+    if (modosDisponiveis >= 2 && modosDisponiveis <= 4) strcpy(lista[2], "Jogar - NÍVEL MÉDIO II");
+    else strcpy(lista[2], "???");
+    if (modosDisponiveis >= 3 && modosDisponiveis <= 4) strcpy(lista[3], "Jogar - NÍVEL DIFÍCIL");
+    else strcpy(lista[3], "???");
+    if (modosDisponiveis == 4) strcpy(lista[4], "Jogar - MODO LIVRE");
+    else strcpy(lista[4], "???");
+    strcpy(lista[5], "Voltar ao Menu Principal");
+
+    titulo("-", "Menu Principal");
+    topBannerContent("VOCÊ ESTÁ NAVEGANDO NOS", 2, 23, "MODOS", 3, 9, 2);
+
+    setlocale(LC_ALL, "C");
+    SetConsoleOutputCP(CP_UTF8);
+    textColor(WHITE, _BLACK);
+    linhaCol(12, 59); printf("\u25b2");
+    linhaCol(28, 59); printf("\u25bc");
+    textColor(WHITE, _BLUE);
+    SetConsoleOutputCP(850);
+    setlocale(LC_ALL, "Portuguese");
+
+    opt = modeloMenu(13, 46, 6, 2, lista);
+    return opt;
+}
+
 /* 1) JOGAR - NÍVEL FÁCIL */
-void opcao1(){
+void opcaoB1() {
     int cont = 20;
     int pts = 0, acertos = 0, erros = 0, tecla = 0;
     int ordem[5];
@@ -43,7 +77,7 @@ void opcao1(){
     mostrarLetras = true;
 
     if(confirmarJogo("FÁCIL", progresso) == 0) return 0;
-    topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "FÁCIL", 3, 17);
+    topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "FÁCIL", 3, 17, 5);
 
     titulo("FÁCIL", "O jogo começará em breve...");
 
@@ -113,6 +147,7 @@ void opcao1(){
         for (int fast = 0; fast < 70; fast ++) {
             if (isTextEditingEnabled) { //Se a edição de texto do console estiver ativada, um loop será ativo até que a edição seja desativada
                 cleanScreen(6, false);
+                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "FÁCIL", 3, 17, 6);
                 titulo("-", "Modo de Edição Rápida detectada");
                 textColor(WHITE, _BLACK);
                 cheatBanner();
@@ -124,6 +159,7 @@ void opcao1(){
                 cleanScreen(6, false);
                 PlaySound(TEXT("..\\sounds\\nosound.wav"), NULL, SND_LOOP | SND_ASYNC);
                 titulo("FÁCIL", "O jogo começará em breve...");
+                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "FÁCIL", 3, 17, 5);
             }
             Sleep(10);
             if (GetAsyncKeyState(VK_SPACE)) {
@@ -163,14 +199,14 @@ void opcao1(){
             altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
             altAtuais[2] = letras[ordem[numPergunta] - 1];
         }
-        newPergunta("FÁCIL", numPergunta, altAtuais[0], altAtuais[1], altAtuais[2], &acertos, &erros, &pts, progresso);
+        newPergunta("FÁCIL", numPergunta, '-', altAtuais[0], altAtuais[1], altAtuais[2], '-', &acertos, &erros, &pts, progresso);
     }
     fimJogo("FÁCIL", pts, acertos, totPerguntas);
     return;
 }
 
 /* 2) JOGAR - NÍVEL MÉDIO I */
-void opcao2(){
+void opcaoB2() {
     int cont = 35;
     int pts = 0, acertos = 0, erros = 0, pontos = 0, tecla = 0;
     int ordem[10];
@@ -184,7 +220,7 @@ void opcao2(){
     mostrarLetras = true;
 
     if(confirmarJogo("MÉDIO I", progresso) == 0) return 0;
-    topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "MÉDIO I", 3, 11);
+    topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "MÉDIO I", 3, 11, 5);
 
     titulo("MÉDIO I", "O jogo começará em breve...");
 
@@ -260,6 +296,7 @@ void opcao2(){
         for (int fast = 0; fast < 70; fast ++) {
             if (isTextEditingEnabled) { //Se a edição de texto do console estiver ativada, um loop será ativo até que a edição seja desativada
                 cleanScreen(6, false);
+                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "MÉDIO I", 3, 11, 6);
                 titulo("-", "Modo de Edição Rápida detectada");
                 textColor(WHITE, _BLACK);
                 cheatBanner();
@@ -271,6 +308,7 @@ void opcao2(){
                 cleanScreen(6, false);
                 PlaySound(TEXT("..\\sounds\\nosound.wav"), NULL, SND_LOOP | SND_ASYNC);
                 titulo("MÉDIO I", "O jogo começará em breve...");
+                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "MÉDIO I", 3, 11, 5);
             }
             Sleep(10);
             if (GetAsyncKeyState(VK_SPACE)) {
@@ -311,14 +349,14 @@ void opcao2(){
             altAtuais[2] = letras[ordem[numPergunta] - 1];
         }
 
-        newPergunta("MÉDIO I", numPergunta, altAtuais[0], altAtuais[1], altAtuais[2], &acertos, &erros, &pts, progresso);
+        newPergunta("MÉDIO I", numPergunta, '-', altAtuais[0], altAtuais[1], altAtuais[2], '-', &acertos, &erros, &pts, progresso);
     }
     fimJogo("MÉDIO I", pts, acertos, totPerguntas);
     return;
 }
 
 /* 3) JOGAR - NÍVEL MÉDIO II */
-void opcao3(){
+void opcaoB3() {
     int cont = 40;
     int pts = 0, acertos = 0, erros = 0, pontos = 0, tecla = 0;
     int ordem[11];
@@ -332,7 +370,7 @@ void opcao3(){
     mostrarLetras = true;
 
     if(confirmarJogo("MÉDIO II", progresso) == 0) return 0;
-    topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "MÉDIO II", 3, 8);
+    topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "MÉDIO II", 3, 8, 5);
 
     titulo("MÉDIO II", "O jogo começará em breve...");
 
@@ -409,6 +447,7 @@ void opcao3(){
         for (int fast = 0; fast < 70; fast ++) {
             if (isTextEditingEnabled) { //Se a edição de texto do console estiver ativada, um loop será ativo até que a edição seja desativada
                 cleanScreen(6, false);
+                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "MÉDIO II", 3, 8, 6);
                 titulo("-", "Modo de Edição Rápida detectada");
                 textColor(WHITE, _BLACK);
                 cheatBanner();
@@ -420,6 +459,7 @@ void opcao3(){
                 cleanScreen(6, false);
                 PlaySound(TEXT("..\\sounds\\nosound.wav"), NULL, SND_LOOP | SND_ASYNC);
                 titulo("MÉDIO II", "O jogo começará em breve...");
+                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "MÉDIO II", 3, 8, 5);
             }
             Sleep(10);
             if (GetAsyncKeyState(VK_SPACE)) {
@@ -459,14 +499,14 @@ void opcao3(){
             altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
             altAtuais[2] = letras[ordem[numPergunta] - 1];
         }
-        newPergunta("MÉDIO II", numPergunta, altAtuais[0], altAtuais[1], altAtuais[2], &acertos, &erros, &pts, progresso);
+        newPergunta("MÉDIO II", numPergunta, '-', altAtuais[0], altAtuais[1], altAtuais[2], '-', &acertos, &erros, &pts, progresso);
     }
     fimJogo("MÉDIO II", pts, acertos, totPerguntas);
     return;
 }
 
 /* 4) JOGAR - NÍVEL DIFÍCIL */
-void opcao4(){
+void opcaoB4() {
     int cont = 60;
     int pts = 0, acertos = 0, erros = 0, pontos = 0, tecla = 0;
     int ordem[26];
@@ -482,7 +522,7 @@ void opcao4(){
     mostrarLetras = true;
 
     if(confirmarJogo("DIFÍCIL", progresso) == 0) return 0;
-    topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "DIFÍCIL", 3, 15);
+    topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "DIFÍCIL", 3, 15, 5);
 
     titulo("DIFÍCIL", "O jogo começará em breve...");
 
@@ -566,6 +606,7 @@ void opcao4(){
         }
         for (int fast = 0; fast < 70; fast ++) {
             if (isTextEditingEnabled) { //Se a edição de texto do console estiver ativada, um loop será ativo até que a edição seja desativada
+                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "DIFÍCIL", 3, 15, 6);
                 cleanScreen(6, false);
                 titulo("-", "Modo de Edição Rápida detectada");
                 textColor(WHITE, _BLACK);
@@ -578,6 +619,7 @@ void opcao4(){
                 cleanScreen(6, false);
                 PlaySound(TEXT("..\\sounds\\nosound.wav"), NULL, SND_LOOP | SND_ASYNC);
                 titulo("DIFÍCIL", "O jogo começará em breve...");
+                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "DIFÍCIL", 3, 15, 5);
             }
             Sleep(10);
             if (GetAsyncKeyState(VK_SPACE)) {
@@ -617,15 +659,20 @@ void opcao4(){
             altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
             altAtuais[2] = letras[ordem[numPergunta] - 1];
         }
-        newPergunta("DIFÍCIL", numPergunta, altAtuais[0], altAtuais[1], altAtuais[2], &acertos, &erros, &pts, progresso);
+        newPergunta("DIFÍCIL", numPergunta, '-', altAtuais[0], altAtuais[1], altAtuais[2], '-', &acertos, &erros, &pts, progresso);
 
     }
     fimJogo("DIFÍCIL", pts, acertos, totPerguntas);
     return;
 }
 
-/* 5) Ranking dos Jogadores*/
-void opcao5(){
+/* 5) JOGAR - MODO LIVRE */
+void opcaoB5() {
+
+}
+
+/* 6) Ranking dos Jogadores*/
+void opcaoA2() {
     int tecla;
     titulo("-", "Ranking dos Jogadores");
     cleanScreen(1, false);
@@ -639,14 +686,13 @@ void opcao5(){
     cleanScreen(1, false);
 }
 
-/* 6) INSTRUÇÕES DO JOGO */
-int opcao6(){
+/* 7) INSTRUÇÕES DO JOGO */
+int opcaoA3() {
     titulo("-", "Tela de Instruções");
     int finalopt = 0;
     char lista[2][40] = {"SIM, eu quero ver um exemplo!", "NÃO, eu quero voltar para o menu."};
-    cleanScreen(1, false);
 
-    topBannerContent("COMO JOGAR O:", 2, 20, "COMO JOGAR", 5, 20);
+    topBannerContent("COMO JOGAR O:", 2, 20, "COMO JOGAR", 5, 20, 0);
 
     setlocale(LC_ALL, "C");
     linhaCol(8,72);printf("%c", 197);
@@ -698,7 +744,7 @@ int opcao6(){
     SetConsoleOutputCP(850);
     setlocale(LC_ALL, "Portuguese");
 
-    int opt = modeloMenu(20, 78, 2, lista);
+    int opt = modeloMenu(20, 78, 2, 0, lista);
 
     if (opt == 2) {
         cleanScreen(1, false);
@@ -823,8 +869,13 @@ int opcao6(){
     return 0;
 }
 
-/* 7) CRÉDITOS DO JOGO */
-void opcao7(){
+/* 8) CONFIGURAÇÕES DO JOGO */
+void opcaoA4() {
+
+}
+
+/* 9) CRÉDITOS DO JOGO */
+void opcaoA5() {
     system("cls");
     titulo("-", "Créditos do Jogo");
     printf("\t\t\t\t\t                __                  \n");Sleep(tempo);
@@ -858,15 +909,15 @@ void opcao7(){
     getch();
     system("cls");
     addFade(4, 50, 0);
-    exibirTelaRedes(0);
+    exibirTelaRedes(0, "-");
     printf("\n\t\t\t       **** Pressione qualquer tecla para retornar ao menu ****");
     getch();
     addFade(39, 25, 1);
     system("cls");
 }
 
-/* 8) SAIR DO JOGO */
-void opcao8(){
+/* 10) SAIR DO JOGO */
+void opcaoA6() {
     system("cls");
     PlaySound(TEXT("..\\sounds\\ending.wav"), NULL, SND_ASYNC);
     titulo("-", "Obrigado por Jogar!");
@@ -876,10 +927,10 @@ void opcao8(){
     exibirBannerDificuldade("MUITO OBRIGADO POR JOGAR O", 2, 47, "AGRADECIMENTO", 2, 33);
     Sleep(600);
     box(8, 3, 32, 117);
-    exibirTelaRedes(1);
+    exibirTelaRedes(1, "-");
     PlaySound(TEXT("..\\sounds\\intro.wav"), NULL, SND_ASYNC);
     titulo("-", "Saindo do Jogo...");
-    addFade(4, 0, 0);
+    addFade(8, 0, 0);
     addFade(37, 175, 1);
     system("cls");
     system("mode con:cols=120 lines=30");

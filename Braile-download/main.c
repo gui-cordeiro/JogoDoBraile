@@ -25,52 +25,69 @@
 
 int main(int argc, char **argv) {
     ShowCursor(FALSE);
-    int opt = 0;
     configJogo();
     //topBannerDesign();
     //bottomBannerDesign();
     //fimJogo("DIFÍCIL", 3900, 26, 26);
-    apresentacao();
+    //apresentacao();
     //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
+    topBannerDesign();
+    bottomBannerDesign();
+    int opt = 0;
     do {
-        topBannerDesign();
-        bottomBannerDesign();
         opt = mainMenu();
-        fflush(stdin);
         switch(opt){
             case 1:
-                opcao1();
+                do {
+                    opt = modeSelect();
+                    switch (opt) {
+                        case 1:
+                            opcaoB1();
+                        break;
+                        case 2:
+                            opcaoB2();
+                        break;
+                        case 3:
+                            opcaoB3();
+                        break;
+                        case 4:
+                            opcaoB4();
+                        break;
+                        case 5:
+                            opcaoB5();
+                        break;
+                        default:
+                            cleanScreen(2, false);
+                    }
+                } while(opt != 6);
+                opt = 0;
                 break;
             case 2:
-                opcao2();
+                //PlaySound(TEXT("..\\sounds\\areyousure.wav"), NULL, SND_LOOP | SND_ASYNC);
+                opcaoA2();
+                //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
                 break;
             case 3:
-                opcao3();
+                //PlaySound(TEXT("..\\sounds\\areyousure.wav"), NULL, SND_LOOP | SND_ASYNC);
+                opcaoA3();
+                //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
                 break;
             case 4:
-                opcao4();
+                //PlaySound(TEXT("..\\sounds\\areyousure.wav"), NULL, SND_LOOP | SND_ASYNC);
+                opcaoA4();
+                //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
                 break;
             case 5:
-                //PlaySound(TEXT("..\\sounds\\areyousure.wav"), NULL, SND_LOOP | SND_ASYNC);
-                opcao5();
-                //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
+                opcaoA5();
                 break;
             case 6:
-                //PlaySound(TEXT("..\\sounds\\areyousure.wav"), NULL, SND_LOOP | SND_ASYNC);
-                opcao6();
-                //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
-                break;
-            case 7:
-                //PlaySound(TEXT("..\\sounds\\areyousure.wav"), NULL, SND_LOOP | SND_ASYNC);
-                opcao7();
-                //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
-                break;
-            case 8:
                 continue;
             default:
                 apresentacao();
+                topBannerDesign();
+                bottomBannerDesign();
                 //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
         };
-    } while(opt != 8);
-    opcao8();
+    } while(opt != 6);
+    //opcaoA6();
 }
