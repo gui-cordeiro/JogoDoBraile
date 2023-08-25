@@ -64,7 +64,7 @@ int modeSelect() {
 
 /* 1) JOGAR - NÍVEL FÁCIL */
 void opcaoB1() {
-    int cont = 20;
+    int cont = 15;
     int pts = 0, acertos = 0, erros = 0, tecla = 0;
     int ordem[5];
     int progresso[5] = {2,2,2,2,2};
@@ -207,7 +207,7 @@ void opcaoB1() {
 
 /* 2) JOGAR - NÍVEL MÉDIO I */
 void opcaoB2() {
-    int cont = 35;
+    int cont = 25;
     int pts = 0, acertos = 0, erros = 0, pontos = 0, tecla = 0;
     int ordem[10];
     int progresso[10] = {2,2,2,2,2,2,2,2,2,2};
@@ -357,7 +357,7 @@ void opcaoB2() {
 
 /* 3) JOGAR - NÍVEL MÉDIO II */
 void opcaoB3() {
-    int cont = 40;
+    int cont = 30;
     int pts = 0, acertos = 0, erros = 0, pontos = 0, tecla = 0;
     int ordem[11];
     int progresso[11] = {2,2,2,2,2,2,2,2,2,2,2};
@@ -507,18 +507,17 @@ void opcaoB3() {
 
 /* 4) JOGAR - NÍVEL DIFÍCIL */
 void opcaoB4() {
-    int cont = 60;
+    int cont = 50;
     int pts = 0, acertos = 0, erros = 0, pontos = 0, tecla = 0;
     int ordem[26];
     int progresso[26] = {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2};
     char letras[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
                        'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
                        'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
-    char altAtuais[3] = {' ', ' ', ' '};
+    char altAtuais[5] = {' ', ' ', ' ', ' ', ' '};
     size_t totPerguntas = sizeof(ordem)/sizeof(ordem[0]);
     char tituloPergunta[15];
     char numPerguntaChar[3];
-    int perguntaEscolhida = 0;
     mostrarLetras = true;
 
     if(confirmarJogo("DIFÍCIL", progresso) == 0) return 0;
@@ -644,22 +643,38 @@ void opcaoB4() {
         strcat(tituloPergunta, numPerguntaChar);
         titulo("DIFÍCIL", tituloPergunta);
 
-        perguntaEscolhida = ordem[numPergunta - 1];
-
         if (numPergunta == 1) { // Primeira pergunta
             altAtuais[0] = '-';
-            altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
-            altAtuais[2] = letras[ordem[numPergunta] - 1];
+            altAtuais[1] = '-';
+            altAtuais[2] = letras[ordem[numPergunta - 1] - 1];
+            altAtuais[3] = letras[ordem[numPergunta - 0] - 1];
+            altAtuais[4] = letras[ordem[numPergunta + 1] - 1];
+        } else if (numPergunta == 2) { // Segunda pergunta
+            altAtuais[0] = '-';
+            altAtuais[1] = letras[ordem[numPergunta - 2] - 1];
+            altAtuais[2] = letras[ordem[numPergunta - 1] - 1];
+            altAtuais[3] = letras[ordem[numPergunta + 0] - 1];
+            altAtuais[4] = letras[ordem[numPergunta + 1] - 1];
+        } else if (numPergunta == totPerguntas - 1) {// Penúltima pergunta
+            altAtuais[0] = letras[ordem[numPergunta - 3] - 1];
+            altAtuais[1] = letras[ordem[numPergunta - 2] - 1];
+            altAtuais[2] = letras[ordem[numPergunta - 1] - 1];
+            altAtuais[3] = letras[ordem[numPergunta - 0] - 1];
+            altAtuais[4] = '-';
         } else if (numPergunta == totPerguntas) {// Última pergunta
-            altAtuais[0] = letras[ordem[numPergunta - 2] - 1];
-            altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
-            altAtuais[2] = '-';
+            altAtuais[0] = letras[ordem[numPergunta - 3] - 1];
+            altAtuais[1] = letras[ordem[numPergunta - 2] - 1];
+            altAtuais[2] = letras[ordem[numPergunta - 1] - 1];
+            altAtuais[3] = '-';
+            altAtuais[4] = '-';
         } else { // Demais perguntas
-            altAtuais[0] = letras[ordem[numPergunta - 2] - 1];
-            altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
-            altAtuais[2] = letras[ordem[numPergunta] - 1];
+            altAtuais[0] = letras[ordem[numPergunta - 3] - 1];
+            altAtuais[1] = letras[ordem[numPergunta - 2] - 1];
+            altAtuais[2] = letras[ordem[numPergunta - 1] - 1];
+            altAtuais[3] = letras[ordem[numPergunta + 0] - 1];
+            altAtuais[4] = letras[ordem[numPergunta + 1] - 1];
         }
-        newPergunta("DIFÍCIL", numPergunta, '-', altAtuais[0], altAtuais[1], altAtuais[2], '-', &acertos, &erros, &pts, progresso);
+        newPergunta("DIFÍCIL", numPergunta, altAtuais[0], altAtuais[1], altAtuais[2], altAtuais[3], altAtuais[4], &acertos, &erros, &pts, progresso);
 
     }
     fimJogo("DIFÍCIL", pts, acertos, totPerguntas);

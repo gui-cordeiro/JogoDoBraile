@@ -110,14 +110,21 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
     char altResposta;
     bool acertoCont = false;
     int tecla = 0;
+    int posCorreta;
     char opt;
-    char lista[4][40];
-    char alt[4] = {' ', ' ', ' ', ' '};
-    int posCorreta = rand() % 4;
+
+    char lista[5][40];
+    char alt[5] = {' ', ' ', ' ', ' ', ' '};
+    if (strcmp(dificuldade, "DIFÍCIL") != 0) {
+        alt[4] = '-';
+        posCorreta = rand() % 4;
+    } else {
+        posCorreta = rand() % 5;
+    }
+    alt[posCorreta] = letrResp3;
     int totAcertos = *acertos;
     int totErros = *erros;
     int totPts = *pts;
-    alt[posCorreta] = letrResp3;
     if (posCorreta == 0) {
         altResposta = 'a';
     } else if (posCorreta == 1) {
@@ -126,12 +133,15 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
         altResposta = 'c';
     } else if (posCorreta == 3) {
         altResposta = 'd';
+    } else if (posCorreta == 4) {
+        altResposta = 'e';
     }
     gerarSeqAlt(dificuldade, alt, letrResp3, letrResp2);
     sprintf(lista[0], " a) Letra %c ", alt[0]);
     sprintf(lista[1], " b) Letra %c ", alt[1]);
     sprintf(lista[2], " c) Letra %c ", alt[2]);
     sprintf(lista[3], " d) Letra %c ", alt[3]);
+    if (strcmp(dificuldade, "DIFÍCIL") == 0) sprintf(lista[4], " e) Letra %c ", alt[4]);
 
     cleanScreen(5, false);
     topBannerContent("-", 0, 0, "-", 0, 0, 3);
@@ -156,7 +166,8 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
     linhaCol(15, 77); printf("(Use as ações especificadas logo acima)");
 
     textColor(BROWN, BLACK);
-    box(18, 5, 28, 67);
+    if (strcmp(dificuldade, "DIFÍCIL") != 0) box(18, 12, 28, 60);
+    else box(18, 5, 28, 67);
     setlocale(LC_ALL, "C");
     linhaCol(18, 22); printf("%c ", 254);
     setlocale(LC_ALL, "Portuguese");
@@ -169,13 +180,13 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
     linhaCol(26, 34); printf("ATUAL");
 
     // Letras anteriores à atual
-    if (letrResp1 != '-') {
+    if (letrResp1 != '-' && strcmp(dificuldade, "DIFÍCIL") == 0) {
         setlocale(LC_ALL, "C");
         textColor(DARKGRAY, _BLACK);
         linhaCol(23, 18); printf("%c", 174);
         setlocale(LC_ALL, "Portuguese");
 
-        printAlfabeto('A', 22, 11, 1);
+        printAlfabeto(letrResp1, 22, 11, 1);
         linhaCol(26, 11); printf("-2");
     }
     if (letrResp2 != '-') {
@@ -201,13 +212,13 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
         setlocale(LC_ALL, "Portuguese");
         linhaCol(26, 45); printf("Próximo");
     }
-    if (letrResp5 != '-') {
+    if (letrResp5 != '-' && strcmp(dificuldade, "DIFÍCIL") == 0) {
         setlocale(LC_ALL, "C");
         textColor(DARKGRAY, _BLACK);
         linhaCol(23, 54); printf("%c", 175);
         setlocale(LC_ALL, "Portuguese");
 
-        printAlfabeto('U', 22, 59, 0);
+        printAlfabeto(letrResp5, 22, 59, 0);
         linhaCol(26, 59); printf("+2");
     }
 
@@ -216,13 +227,22 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
     setlocale(LC_ALL, "C");
     SetConsoleOutputCP(CP_UTF8);
     textColor(WHITE, _BLACK);
-    linhaCol(17, 96); printf("\u25b2");
-    linhaCol(29, 96); printf("\u25bc");
-    textColor(WHITE, _BLUE);
-    SetConsoleOutputCP(850);
-    setlocale(LC_ALL, "Portuguese");
+    if (strcmp(dificuldade, "DIFÍCIL") != 0) {
+        linhaCol(17, 95); printf("\u25b2");
+        linhaCol(29, 95); printf("\u25bc");
+        textColor(WHITE, _BLUE);
+        SetConsoleOutputCP(850);
+        setlocale(LC_ALL, "Portuguese");
+        opt = modeloMenu(18, 88, 4, 0, lista);
+    } else {
+        linhaCol(16, 95); printf("\u25b2");
+        linhaCol(30, 95); printf("\u25bc");
+        textColor(WHITE, _BLUE);
+        SetConsoleOutputCP(850);
+        setlocale(LC_ALL, "Portuguese");
+        opt = modeloMenu(17, 88, 5, 0, lista);
+    }
 
-    opt = modeloMenu(18, 88, 4, 0, lista);
     //cleanScreen(6, false);
     if (opt - 1 == posCorreta) {
         acertoCont = true;
@@ -346,7 +366,7 @@ void apresentacao(){
     int tecla;
     system("cls");
     titulo("-", "Tela de título");
-    //PlaySound(TEXT("..\\sounds\\intro.wav"), NULL, SND_ASYNC);
+    PlaySound(TEXT("..\\sounds\\intro.wav"), NULL, SND_ASYNC);
     setlocale(LC_ALL, "C");
     linhaCol(12, 36); printf(" %c ", 254);
     setlocale(LC_ALL, "Portuguese");
@@ -720,8 +740,8 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
     //getchar();
 
 
-    /*if (strcmp(stringCopiada, "vasco") == 0) {
-        titulo("-", "Easter Egg \"VASCO\" desbloqueado!");
+    /*if (strcmp(stringCopiada, "vasco") == 0) {*/
+        /*titulo("-", "Easter Egg \"VASCO\" desbloqueado!");
 
         setlocale(LC_ALL, "C");
         linhaCol(36, 53); printf("%c", 196);
@@ -748,9 +768,9 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
         TerminateThread(hThread2, 0x0);
 
         CloseHandle(hThread);
-        CloseHandle(hThread2);
-    }
-    else if (strcmp(stringCopiada, "kasino") == 0) {
+        CloseHandle(hThread2);*/
+    /*}
+    /*else if (strcmp(stringCopiada, "kasino") == 0) {
         linhaCol(4, 10); printf("KASINO!");
         Sleep(3000);
     }*/
@@ -758,6 +778,7 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
     pressEnter();
     cleanScreen(6, false);
     titulo(nivel, "Entrando no jogo, prepare-se!");
+    PlaySound(TEXT("..\\sounds\\nosound.wav"), NULL, SND_ASYNC);
     return 1;
 }
 
@@ -1071,7 +1092,7 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
     }
 
     cleanScreen(1, true);
-    topBannerContent("OBRIGADO POR JOGAR O", 2, 25, "AGRADECIMENTO", 2, 4);
+    topBannerContent("OBRIGADO POR JOGAR O", 2, 25, "AGRADECIMENTO", 2, 8);
     if (acertos == numPerg) exibirTelaRedes(0, nivel);
     else exibirTelaRedes(2, nivel);
     cleanScreen(1, false);
@@ -1637,6 +1658,9 @@ void gerarSeqAlt(char dificuldade[8], char *alt, char letrResp1, char letrResp2)
     int cont = 0;
     int controle = 0;
     int pos = 0;
+    int totOpt;
+    if (strcmp(dificuldade, "DIFÍCIL") != 0) totOpt = 3;
+    else totOpt = 4;
     do {
         altGerada = toupper(gerarLetra(dificuldade));
         //printf("Caractere gerado: %c\n", altGerada);
@@ -1644,13 +1668,13 @@ void gerarSeqAlt(char dificuldade[8], char *alt, char letrResp1, char letrResp2)
             //printf("Descartado! A letra gerada é igual a da resposta ou já foi apresentada na pergunta anterior!\n");
             continue;
         }
-        for (c = 0; c < 3; c ++) {
+        for (c = 0; c < totOpt; c ++) {
             if (alt[c] == toupper(altGerada)) {
                 //printf("Descartado! A letra gerada já existe no vetor!\n");
                 break;
             }
         }
-        if (c == 3) {
+        if (c == totOpt) {
             controle = 0;
             pos = 0;
             do{
@@ -1663,7 +1687,7 @@ void gerarSeqAlt(char dificuldade[8], char *alt, char letrResp1, char letrResp2)
             }while(controle < 1);
             cont ++;
         }
-    }while(cont < 3);
+    }while(cont < totOpt);
 }
 
 void hideCursor() {
