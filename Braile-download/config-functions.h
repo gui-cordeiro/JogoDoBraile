@@ -9,7 +9,7 @@ bool mudarRedes = true;
 bool isFullScreen = false;
 
 // Variável que irá controlar os modos disponíveis no jogo
-int modosDisponiveis = 3;
+int modosDisponiveis = 4;
 
 // Variáveis globais que serão utilizadas na thread anti-trapaça
 bool isTextEditingEnabled = false;
@@ -75,7 +75,18 @@ void exibirTelaRedes(int endOfGame, char nivel[8]){
 
     if (endOfGame == 0) {
         Sleep(350);
-        hThread2 = CreateThread(NULL, 0x0, bannerEncerramento, NULL, 0, &threadId2);
+        if (strcmp(nivel, "DIFÍCIL") != 0) hThread2 = CreateThread(NULL, 0x0, bannerEncerramento, NULL, 0, &threadId2);
+        else {
+            textColor(BROWN, _BLACK);
+            setlocale(LC_ALL, "C");
+            linhaCol(35, 35); printf("%c ", 254);
+            setlocale(LC_ALL, "Portuguese");
+            printf("Pressione Enter para retornar ao Menu Principal");
+            setlocale(LC_ALL, "C");
+            printf(" %c", 254);
+            setlocale(LC_ALL, "Portuguese");
+            textColor(WHITE, _BLACK);
+        }
     } else if (endOfGame == 1){
         Sleep(2450);
         textColor(BROWN, _BLACK);
@@ -281,13 +292,17 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
         }
         linhaCol(25, 59); printf("%c", 193);
 
-        linhaCol(20, 67); printf("%c ", 254);
+        /*linhaCol(19, 67); printf("%c ", 254);
         setlocale(LC_ALL, "Portuguese");
         printf("Você recebeu");
         setlocale(LC_ALL, "C");
         printf(" %c", 254);
-        setlocale(LC_ALL, "Portuguese");
-        linhaCol(22, 62); printf("+1 ACERTO  E  +150 PONTOS!");
+        setlocale(LC_ALL, "Portuguese");*/
+        linhaCol(19, 64); printf("   _   ___   ___ ___ ");
+        linhaCol(20, 64); printf(" _| |_|_  | |  _|   |");
+        linhaCol(21, 64); printf("|_   _|_| |_|_  | | |");
+        linhaCol(22, 64); printf("  |_| |_____|___|___|");
+        linhaCol(24, 66); printf("PONTOS ADICIONADOS");
 
         topBannerContent("-", 0, 0, "-", 0, 0, 4);
         PlaySound(TEXT("..\\sounds\\win.wav"), NULL, SND_ASYNC);
@@ -335,14 +350,20 @@ bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp
         linhaCol(22, 49); printf("correta era:");
         printAlfabeto(letrResp3, 21, 67, 1);
 
-        setlocale(LC_ALL, "C");
+        /*setlocale(LC_ALL, "C");
         linhaCol(20, 82); printf("%c ", 254);
         setlocale(LC_ALL, "Portuguese");
         printf("Você recebeu");
         setlocale(LC_ALL, "C");
         printf(" %c", 254);
         setlocale(LC_ALL, "Portuguese");
-        linhaCol(22, 79); printf("+1 ERRO  E  +50 PONTOS.");
+        linhaCol(22, 79); printf("+1 ERRO  E  +50 PONTOS.");*/
+
+        linhaCol(19, 82); printf("   _    ___ ___ ");
+        linhaCol(20, 82); printf(" _| |_ |  _|   |");
+        linhaCol(21, 82); printf("|_   _||_  | | |");
+        linhaCol(22, 82); printf("  |_|  |___|___|");
+        linhaCol(24, 81); printf("PONTOS ADICIONADOS");
 
         topBannerContent("-", 0, 0, "-", 0, 0, 4);
         PlaySound(TEXT("..\\sounds\\lose.wav"), NULL, SND_ASYNC);
@@ -1096,6 +1117,7 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
     if (acertos == numPerg) exibirTelaRedes(0, nivel);
     else exibirTelaRedes(2, nivel);
     cleanScreen(1, false);
+    PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
     return;
 }
 

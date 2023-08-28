@@ -42,7 +42,7 @@ int modeSelect() {
     else strcpy(lista[2], "???");
     if (modosDisponiveis >= 3 && modosDisponiveis <= 4) strcpy(lista[3], "Jogar - NÍVEL DIFÍCIL");
     else strcpy(lista[3], "???");
-    if (modosDisponiveis == 4) strcpy(lista[4], "Jogar - MODO LIVRE");
+    if (modosDisponiveis == 4) strcpy(lista[4], "Jogar - MODO ???");
     else strcpy(lista[4], "???");
     strcpy(lista[5], "Voltar ao Menu Principal");
 
@@ -681,9 +681,15 @@ void opcaoB4() {
     return;
 }
 
-/* 5) JOGAR - MODO LIVRE */
+/* 5) JOGAR - MODO ??? */
 void opcaoB5() {
-
+    int tecla;
+    titulo("-", "Modo ???");
+    cleanScreen(1, false);
+    linhaCol(35, 12); printf("Essa aqui é a futura tela do modo livre, que está em desenvolvimento. Aproveite a musiquinha! :D");
+    linhaCol(36, 41); printf("Pressione a tecla ENTER pra sair daqui.");
+    pressEnter();
+    cleanScreen(1, false);
 }
 
 /* 6) Ranking dos Jogadores*/
@@ -693,11 +699,7 @@ void opcaoA2() {
     cleanScreen(1, false);
     linhaCol(35, 7); printf("Essa aqui é a futura tela do ranking de jogadores, que está em desenvolvimento. Aproveite a musiquinha! :D");
     linhaCol(36, 41); printf("Pressione a tecla ENTER pra sair daqui.");
-    while(1) {
-        tecla = getch();
-        tecla = (tecla == 0 || tecla == 224) ? getch() : tecla;
-        if (tecla == 13) break;
-    }
+    pressEnter();
     cleanScreen(1, false);
 }
 
@@ -886,7 +888,13 @@ int opcaoA3() {
 
 /* 8) CONFIGURAÇÕES DO JOGO */
 void opcaoA4() {
-
+    int tecla;
+    titulo("-", "Configurações");
+    cleanScreen(1, false);
+    linhaCol(35, 10); printf("Essa aqui é a futura tela das configurações, que está em desenvolvimento. Aproveite a musiquinha! :D");
+    linhaCol(36, 41); printf("Pressione a tecla ENTER pra sair daqui.");
+    pressEnter();
+    cleanScreen(1, false);
 }
 
 /* 9) CRÉDITOS DO JOGO */
