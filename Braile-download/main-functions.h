@@ -63,7 +63,7 @@ int modeSelect() {
 }
 
 /* 1) JOGAR - NÍVEL FÁCIL */
-void opcaoB1() {
+int opcaoB1() {
     int cont = 15;
     int pts = 0, acertos = 0, erros = 0, tecla = 0;
     int ordem[5];
@@ -202,7 +202,7 @@ void opcaoB1() {
         newPergunta("FÁCIL", numPergunta, '-', altAtuais[0], altAtuais[1], altAtuais[2], '-', &acertos, &erros, &pts, progresso);
     }
     fimJogo("FÁCIL", pts, acertos, totPerguntas);
-    return;
+    return 0;
 }
 
 /* 2) JOGAR - NÍVEL MÉDIO I */
@@ -683,13 +683,56 @@ void opcaoB4() {
 
 /* 5) JOGAR - MODO ??? */
 void opcaoB5() {
-    int tecla;
-    titulo("-", "Modo ???");
-    cleanScreen(1, false);
-    linhaCol(35, 12); printf("Essa aqui é a futura tela do modo livre, que está em desenvolvimento. Aproveite a musiquinha! :D");
-    linhaCol(36, 41); printf("Pressione a tecla ENTER pra sair daqui.");
+    DWORD threadId;
+    DWORD threadId2;
+
+    HANDLE hThread;
+    HANDLE hThread2;
+
+    cleanScreen(1, true);
+
+    titulo("-", "Você recebeu um \"Rickroll\"!");
+
+    setlocale(LC_ALL, "C");
+    linhaCol(36, 53); printf("%c", 196);
+    linhaCol(36, 65); printf("%c", 196);
+    linhaCol(38, 53); printf("%c", 196);
+    linhaCol(38, 65); printf("%c", 196);
+    setlocale(LC_ALL, "Portuguese");
+
+    box(36, 39, 38, 80);
+
+    setlocale(LC_ALL, "C");
+    linhaCol(38, 39); printf("%c", 193);
+    linhaCol(38, 80); printf("%c", 193);
+
+    linhaCol(36, 53); printf("%c", 196);
+    linhaCol(36, 65); printf("%c", 196);
+    linhaCol(38, 53); printf("%c", 196);
+    linhaCol(38, 65); printf("%c", 196);
+
+    topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "???", 2, 19, 4);
+
+    textColor(_BLACK, BROWN);
+    //linhaCol(37, 40); printf("    Easter Egg \"VASCO\" desbloqueado!    ");
+    linhaCol(37, 40); printf("   Rickroll! Modo em desenvolvimento.   ");
+    textColor(_BLACK, WHITE);
+
+    hThread = CreateThread(NULL, 0x0, nicetry, NULL, 0, &threadId);
+    hThread2 = CreateThread(NULL, 0x0, ricklyrics, NULL, 0, &threadId2);
+    PlaySound(TEXT("..\\sounds\\nicetry.wav"), NULL, SND_ASYNC);
     pressEnter();
-    cleanScreen(1, false);
+    PlaySound(TEXT("..\\sounds\\nosound.wav"), NULL, SND_ASYNC);
+
+    TerminateThread(hThread, 0x0);
+    TerminateThread(hThread2, 0x0);
+
+    CloseHandle(hThread);
+    CloseHandle(hThread2);
+
+    cleanScreen(4, true);
+
+    PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
 }
 
 /* 6) Ranking dos Jogadores*/

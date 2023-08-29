@@ -20,6 +20,8 @@
 #define _WIN32_WINNT 0x0500
 #define tempo 50
 
+#include "declarations.h"
+#include "aux-threads.h"
 #include "config-functions.h"
 #include "main-functions.h"
 
@@ -29,6 +31,7 @@ int main(int argc, char **argv) {
     //topBannerDesign();
     //bottomBannerDesign();
     //fimJogo("DIFÍCIL", 3900, 26, 26);
+    //opcaoB5();
     apresentacao();
     PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
     topBannerDesign();
@@ -86,7 +89,7 @@ int main(int argc, char **argv) {
                 apresentacao();
                 topBannerDesign();
                 bottomBannerDesign();
-                PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
+                //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
         };
     } while(opt != 6);
     opcaoA6();

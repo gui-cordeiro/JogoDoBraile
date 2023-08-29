@@ -34,7 +34,9 @@
 		<Linker>
 			<Add option="-lwinmm" />
 		</Linker>
+		<Unit filename="aux-threads.h" />
 		<Unit filename="config-functions.h" />
+		<Unit filename="declarations.h" />
 		<Unit filename="main-functions.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
