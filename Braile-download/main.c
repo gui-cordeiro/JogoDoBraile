@@ -32,6 +32,7 @@ int main(int argc, char **argv) {
     //bottomBannerDesign();
     //fimJogo("DIFÍCIL", 3900, 26, 26);
     //opcaoB5();
+    changeScreenMode();
     apresentacao();
     PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
     topBannerDesign();
@@ -89,7 +90,7 @@ int main(int argc, char **argv) {
                 apresentacao();
                 topBannerDesign();
                 bottomBannerDesign();
-                //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
+                PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
         };
     } while(opt != 6);
     opcaoA6();

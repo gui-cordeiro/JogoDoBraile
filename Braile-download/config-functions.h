@@ -328,7 +328,7 @@ void apresentacao(){
     int tecla;
     system("cls");
     titulo("-", "Tela de título");
-    //PlaySound(TEXT("..\\sounds\\intro.wav"), NULL, SND_ASYNC);
+    PlaySound(TEXT("..\\sounds\\intro.wav"), NULL, SND_ASYNC);
     setlocale(LC_ALL, "C");
     linhaCol(12, 36); printf(" %c ", 254);
     setlocale(LC_ALL, "Portuguese");
@@ -926,9 +926,6 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
             } else if (strcmp(nivel, "MÉDIO II") == 0 && acertos == 11) {
                 exibirBannerDificuldade("-", 0, 0, "DIFÍCIL", 15, 59);
                 if (modosDisponiveis < 3) modosDisponiveis = 3;
-            } else if (strcmp(nivel, "DIFÍCIL") == 0 && acertos == 26) {
-                exibirBannerDificuldade("-", 0, 0, "AGRADECIMENTO", 15, 50);
-                //if (modosDisponiveis < 4) modosDisponiveis = 4; // Futuro Modo Livre
             }
 
             exibirBannerDificuldade("-", 0, 0, "DESBLOQUEADA", 19, 55);
@@ -946,6 +943,7 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
             cleanScreen(6, false);
             titulo("-", "Parabéns por completar o Jogo do Braile");
             topBannerContent("VOCÊ ACABOU DE COMPLETAR O", 13, 66, "AGRADECIMENTO", 14, 53, 6);
+            if (modosDisponiveis < 4) modosDisponiveis = 4;
             PlaySound(TEXT("..\\sounds\\gamecomplete.wav"), NULL, SND_ASYNC);
 
             linhaCol(9, 15); printf("    .5~  :Y:      J?  .5J     ");
@@ -1058,7 +1056,7 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
     if (acertos == numPerg) exibirTelaRedes(0, nivel);
     else exibirTelaRedes(2, nivel);
     cleanScreen(1, false);
-    //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
+    PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
     return;
 }
 

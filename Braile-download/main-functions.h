@@ -691,7 +691,7 @@ void opcaoB5() {
 
     cleanScreen(1, true);
 
-    titulo("-", "Você recebeu um \"Rickroll\"!");
+    titulo("-", "Você caiu em um \"Rickroll\"");
 
     setlocale(LC_ALL, "C");
     linhaCol(36, 53); printf("%c", 196);
@@ -714,15 +714,13 @@ void opcaoB5() {
     topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "???", 2, 19, 4);
 
     textColor(_BLACK, BROWN);
-    //linhaCol(37, 40); printf("    Easter Egg \"VASCO\" desbloqueado!    ");
-    linhaCol(37, 40); printf("   Rickroll! Modo em desenvolvimento.   ");
+    linhaCol(37, 40); printf("               Rickroll!                ");
     textColor(_BLACK, WHITE);
 
     hThread = CreateThread(NULL, 0x0, nicetry, NULL, 0, &threadId);
     hThread2 = CreateThread(NULL, 0x0, ricklyrics, NULL, 0, &threadId2);
     PlaySound(TEXT("..\\sounds\\nicetry.wav"), NULL, SND_ASYNC);
     pressEnter();
-    PlaySound(TEXT("..\\sounds\\nosound.wav"), NULL, SND_ASYNC);
 
     TerminateThread(hThread, 0x0);
     TerminateThread(hThread2, 0x0);

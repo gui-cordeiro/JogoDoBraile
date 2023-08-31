@@ -505,6 +505,7 @@ DWORD WINAPI nicetry(LPVOID params) {
         mudar = false;
         cleanScreen(6, false);
 
+        textColor(DARKGRAY, _BLACK);
         for (int cont = 0; cont <= 4; cont ++) {
             if (cont % 2 == 0 && mudar != true) {
                 linhaCol(9, 1); printf("                                                       .^G#BP~                                 ");
@@ -557,6 +558,7 @@ DWORD WINAPI nicetry(LPVOID params) {
             }
             Sleep(250);
         }
+        textColor(WHITE, _BLACK);
 
         while(mudar == false) {
             if (mudar == true) {

@@ -6,7 +6,7 @@
 
 bool mudar = false;
 bool mudarRedes = true;
-bool isFullScreen = false;
+bool isFullScreen = true;
 
 // Variável que irá controlar os modos disponíveis no jogo
 int modosDisponiveis = 4;
