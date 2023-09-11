@@ -7,9 +7,26 @@
 /* MENU PRINCIPAL */
 int mainMenu() {
     int opt = 0;
-    char lista [6][40] = {"Jogar - JOGO DO BRAILE","Ranking dos Jogadores","Instruções do Jogo","Configurações do Jogo","Créditos do Jogo","Sair do Jogo"};
+    char lista [6][40] = {"Iniciar Jogo do Braile","Ranking Local","Instruções","Configurações","Créditos","Sair do Jogo"};
 
     titulo("-", "Menu Principal");
+
+    if (isFullScreen) {
+        /*for (int linha = 1; linha <= 38; linha ++) {
+            for (int coluna = 1; coluna <= 151; coluna ++) {
+                if (coluna <= 16 || coluna >= 136) {
+                    textColor(WHITE, _DARKGRAY);
+                    linhaCol(linha, coluna - 16); printf(" ");
+                }
+            }
+        }
+        textColor(WHITE, _BLACK);
+        Sleep(50);*/
+        //textColor(WHITE, _DARKGRAY);
+        box(1,-15,38,0);
+        box(1,120,38,135);
+        textColor(WHITE, _BLACK);
+    }
 
     // 0) Todas as teclas, Enter e Esc; 1) Todas as teclas e Enter; 2) Teclas CIMA e BAIXO, Enter e Esc; 3) Teclas CIMA e BAIXO e Enter; 4) Somente Enter; 5) Somente Barra de Espaço (2x); 6) Nenhuma ação ou botão.
     topBannerContent("VOCÊ ESTÁ NO", 2, 29, "MENU", 3, 9, 2);
@@ -740,6 +757,7 @@ void opcaoA2() {
     cleanScreen(1, false);
     linhaCol(35, 7); printf("Essa aqui é a futura tela do ranking de jogadores, que está em desenvolvimento. Aproveite a musiquinha! :D");
     linhaCol(36, 41); printf("Pressione a tecla ENTER pra sair daqui.");
+
     pressEnter();
     cleanScreen(1, false);
 }

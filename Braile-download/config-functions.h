@@ -1130,11 +1130,16 @@ void configJogo(){
 	SetWindowPos( cW, 0, x/7.02, y/20, colunas-1, linhas-1, SWP_NOSIZE | SWP_NOZORDER );
 
     //Definindo o tamanho da fonte das informações do console
-    CONSOLE_FONT_INFOEX fontInfo = { sizeof(CONSOLE_FONT_INFOEX) };
-    GetCurrentConsoleFontEx(hConsole, FALSE, &fontInfo);
-    if (isFullScreen == true) fontInfo.dwFontSize.Y = 16 + 4;  // aumenta o tamanho vertical da fonte em 2 pontos
-    else fontInfo.dwFontSize.Y = 16;  // aumenta o tamanho vertical da fonte em 2 pontos
-    SetCurrentConsoleFontEx(hConsole, FALSE, &fontInfo);
+    /*CONSOLE_FONT_INFOEX fontInfo;
+    fontInfo.cbSize = sizeof fontInfo;
+    fontInfo.nFont = 0;
+    fontInfo.dwFontSize.X = 0;
+    if (isFullScreen == true) fontInfo.dwFontSize.Y = 20;
+    else fontInfo.dwFontSize.Y = 16;
+    fontInfo.FontFamily = FF_DONTCARE;
+    fontInfo.FontWeight = FW_NORMAL;
+    wcscpy(fontInfo.FaceName, L"Consolas");
+    SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &fontInfo);*/
 
     //Bloqueando o redimensionamento da janela do console
     LONG_PTR style = GetWindowLongPtr(cW, GWL_STYLE);
