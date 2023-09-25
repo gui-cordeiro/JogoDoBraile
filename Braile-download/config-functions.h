@@ -328,7 +328,7 @@ void apresentacao(){
     int tecla;
     system("cls");
     titulo("-", "Tela de título");
-    PlaySound(TEXT("..\\sounds\\intro.wav"), NULL, SND_ASYNC);
+    //PlaySound(TEXT("..\\sounds\\intro.wav"), NULL, SND_ASYNC);
     setlocale(LC_ALL, "C");
     linhaCol(12, 36); printf(" %c ", 254);
     setlocale(LC_ALL, "Portuguese");
@@ -1101,59 +1101,91 @@ int obterAnoAtual(){
 
 /* M) CONFIGURAÇÕES INICIAIS DA JANELA DO CONSOLE (BUFFER, DIMENSÕES, CORES E ENTRE OUTROS) */
 void configJogo(){
-    int colunas = 119;
-    int linhas = 38;
     hideCursor();
     setlocale(LC_ALL,"Portuguese");
-
-    //Bloqueando a seleção de texto do console (para fins de anti-trapaça no momento da memorização das letras em Braile)
-    HANDLE hConsole = GetStdHandle(STD_INPUT_HANDLE);
-    DWORD consoleMode;
-    GetConsoleMode(hConsole, &consoleMode);
-    consoleMode &= ~ENABLE_QUICK_EDIT_MODE;
-    SetConsoleMode(hConsole, consoleMode);
-
-    //Definindo as cores e as dimensões da janela do console
-    system("color 0f");
-    system("mode con:cols=119 lines=38");
-
-    //Definindo o tamanho do buffer do console (definido APÓS o redimensionamento da janela do console)
-    COORD bufferSize;
-    bufferSize.Y = 120;
-    bufferSize.X = 39;
-    SetConsoleScreenBufferSize(hConsole, bufferSize);
-
-    //Definindo o posicionamento central da janela do console
-    HWND cW = GetConsoleWindow();
-    int x = GetSystemMetrics(SM_CXSCREEN); // quantidade de pixel por linhas da tela
-    int y = GetSystemMetrics(SM_CYSCREEN); // quantidade de pixel por coluna da tela
-	SetWindowPos( cW, 0, x/7.02, y/20, colunas-1, linhas-1, SWP_NOSIZE | SWP_NOZORDER );
-
-    //Definindo o tamanho da fonte das informações do console
-    /*CONSOLE_FONT_INFOEX fontInfo;
-    fontInfo.cbSize = sizeof fontInfo;
-    fontInfo.nFont = 0;
-    fontInfo.dwFontSize.X = 0;
-    if (isFullScreen == true) fontInfo.dwFontSize.Y = 20;
-    else fontInfo.dwFontSize.Y = 16;
-    fontInfo.FontFamily = FF_DONTCARE;
-    fontInfo.FontWeight = FW_NORMAL;
-    wcscpy(fontInfo.FaceName, L"Consolas");
-    SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &fontInfo);*/
-
-    //Bloqueando o redimensionamento da janela do console
-    LONG_PTR style = GetWindowLongPtr(cW, GWL_STYLE);
-    style &= ~WS_SIZEBOX;
-    style &= ~WS_MAXIMIZEBOX;
-    SetWindowLongPtr(cW, GWL_STYLE, style);
+    setScreenMode(false);
 }
 
-/* N) [AINDA EM DESENVOLVIMENTO] ALTERNA ENTRE MODO "JANELA" E MODO "TELA CHEIA" */
-void changeScreenMode() {
-    keybd_event(VK_MENU  , 0x36, 0, 0);
-    keybd_event(VK_RETURN, 0x1C, 0, 0);
-    keybd_event(VK_RETURN, 0x1C, KEYEVENTF_KEYUP, 0);
-    keybd_event(VK_MENU  , 0x38, KEYEVENTF_KEYUP, 0);
+/* N) ALTERA EXIBIÇÃO DA TELA E FAZ OS AJUSTES NECESSÁRIOS*/
+void setScreenMode(bool changeMode) {
+    int fontsizeY = 16;
+
+    if(changeMode) isFullScreen = !isFullScreen;
+
+    //Armazenando coordenadas atuais do mouse ANTES de ir para tela cheia
+    if(isFullScreen) {
+        POINT cursorPos;
+        if(GetCursorPos(&cursorPos)){
+            mouseX = cursorPos.x;
+            mouseY = cursorPos.y;
+        }
+    }
+
+    //Definindo comandos referentes ao pressionar dos botões "Alt+Enter" para alteração de exibição do jogo
+    if(changeMode || (!changeMode && isFullScreen)) {
+        keybd_event(VK_MENU  , 0x36, 0, 0);
+        keybd_event(VK_RETURN, 0x1C, 0, 0);
+        keybd_event(VK_RETURN, 0x1C, KEYEVENTF_KEYUP, 0);
+        keybd_event(VK_MENU  , 0x38, KEYEVENTF_KEYUP, 0);
+    }
+
+    if (!isFullScreen) {
+        if(changeMode) SetCursorPos(mouseX, mouseY);
+
+        //Definindo as cores e as dimensões da janela do console
+        system("color 0f");
+        system("mode con:cols=119 lines=38");
+
+        HWND hwnd = GetConsoleWindow(); // Obtém o identificador da janela do console
+        int x = GetSystemMetrics(SM_CXSCREEN); // quantidade de pixel por linhas da tela
+        int y = GetSystemMetrics(SM_CYSCREEN); // quantidade de pixel por coluna da tela
+        SetWindowPos(hwnd, HWND_TOPMOST, x/7.02, y/20, 970, 647, SWP_NOZORDER | SWP_ASYNCWINDOWPOS);
+
+        //Definindo o tamanho do buffer do console (definido APÓS o redimensionamento da janela do console)
+        HANDLE hConsole = GetStdHandle(STD_INPUT_HANDLE);
+        COORD bufferSize;
+        bufferSize.X = 39;
+        bufferSize.Y = 120;
+        SetConsoleScreenBufferSize(hConsole, bufferSize);
+
+        //Definindo o tamanho da fonte das informações do console para o modo janela
+        CONSOLE_FONT_INFOEX fontInfo;
+        fontInfo.cbSize = sizeof fontInfo;
+        fontInfo.nFont = 0;
+        fontInfo.dwFontSize.X = 0;
+        fontInfo.dwFontSize.Y = fontsizeY;
+        fontInfo.FontFamily = TMPF_TRUETYPE;
+        fontInfo.FontWeight = 400;
+        wcscpy(fontInfo.FaceName, L"Consolas");
+        SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &fontInfo);
+
+        //Bloqueando o redimensionamento da janela do console
+        HWND cW = GetConsoleWindow();
+        LONG_PTR style = GetWindowLongPtr(cW, GWL_STYLE);
+        style &= ~WS_SIZEBOX;
+        style &= ~WS_MAXIMIZEBOX;
+        SetWindowLongPtr(cW, GWL_STYLE, style);
+    } else {
+        //Movimentando cursor do mouse para "escondê-lo"
+        SetCursorPos(2000, 2000);
+
+        //Definindo o tamanho da fonte das informações do console para o modo tela cheia
+        CONSOLE_FONT_INFOEX fontInfo;
+        fontInfo.cbSize = sizeof fontInfo;
+        fontInfo.nFont = 0;
+        fontInfo.dwFontSize.X = 0;
+        fontInfo.dwFontSize.Y = fontsizeY + 4;
+        fontInfo.FontFamily = TMPF_TRUETYPE;
+        fontInfo.FontWeight = 400;
+        wcscpy(fontInfo.FaceName, L"Consolas");
+        SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &fontInfo);
+    }
+
+    if(changeMode) {
+        system("cls");
+        topBannerDesign();
+        bottomBannerDesign();
+    }
 }
 
 /* O) RETORNA TÍTULO DO CONSOLE PERSONALIZADO */
@@ -2002,27 +2034,48 @@ void bottomBannerContent(int opt, int menuAtual) {
                 printf(" de como jogar).");
                 break;
             case 4:
-                linhaCol(35, 23); printf("Acesse as ");
-                textColor(BROWN, _BLACK);
-                printf("configurações");
-                textColor(WHITE, _BLACK);
-                printf(" do Jogo do Braile para modificar a sua experiência.");
-                break;
-            case 5:
                 linhaCol(35, 7); printf("Acesse os ");
                 textColor(BROWN, _BLACK);
                 printf("créditos");
                 textColor(WHITE, _BLACK);
                 printf(" do projeto \"Jogo do Braile\" e descubra:");
                 textColor(LIGHTBLUE, _BLACK);
-                linhaCol(34, 68); printf("1) O motivo inicial do projeto; ");
+                linhaCol(34, 68); printf("1) O motivo inicial do projeto");
+                textColor(WHITE, _BLACK);
+                printf(";");
                 textColor(LIGHTCYAN, _BLACK);
-                linhaCol(35, 68); printf("2) As pessoas envolvidas no inicio do projeto;");
+                linhaCol(35, 68); printf("2) As pessoas envolvidas no inicio do projeto");
                 textColor(WHITE, _BLACK);
-                printf(" e ");
+                printf("; e ");
                 textColor(LIGHTRED, _BLACK);
-                linhaCol(36, 68); printf("3) O contato do desenvolvedor do projeto.");
+                linhaCol(36, 68); printf("3) O contato do desenvolvedor do projeto");
                 textColor(WHITE, _BLACK);
+                printf(".");
+                break;
+            case 5:
+                if (!isFullScreen) {
+                    linhaCol(35, 18); printf("Selecione esta opção para definir a exibição do Jogo do Braile no modo ");
+                    textColor(BROWN, _BLACK);
+                    printf("\"Tela Cheia\"");
+                } else {
+                    linhaCol(35, 20); printf("Selecione esta opção para definir a exibição do Jogo do Braile no modo ");
+                    textColor(BROWN, _BLACK);
+                    printf("\"Janela\"");
+                }
+                textColor(WHITE, _BLACK);
+                printf(".");
+                textColor(LIGHTRED, _BLACK);
+                linhaCol(36, 7); printf("[ATENÇÃO]");
+                textColor(WHITE, _BLACK);
+                printf(" Não use o ");
+                textColor(BROWN, _BLACK);
+                printf("\"Alt+Enter\"");
+                textColor(WHITE, _BLACK);
+                printf("! Use ");
+                textColor(BROWN, _BLACK);
+                printf("esta opção");
+                textColor(WHITE, _BLACK);
+                printf(" para que a mudança de exibição seja aplicada corretamente.");
                 break;
             case 6:
                 linhaCol(35, 38);
@@ -2031,8 +2084,9 @@ void bottomBannerContent(int opt, int menuAtual) {
                 textColor(WHITE, _BLACK);
                 printf(" o Jogo do Braile. ");
                 textColor(LIGHTGREEN, _BLACK);
-                printf("Obrigado por jogar!");
+                printf("Obrigado por jogar");
                 textColor(WHITE, _BLACK);
+                printf("!");
                 break;
         }
     } else if (menuAtual == 2){
@@ -2294,8 +2348,7 @@ int modeloMenu(int lin1, int col1, int qtd, int menuAtual, char lista[][40]) {
             if (opt == qtd) opt = 1;
             else if (opt < qtd) opt ++;
         } else if (tecla == 102 || tecla == 70) {
-            isFullScreen = !isFullScreen;
-            changeScreenMode();
+            setScreenMode(true);
         } else if (tecla == 27) { //ESC
             if (menuAtual == 2) opt = 6;
             else opt = 9;

@@ -9,7 +9,10 @@ bool mudarRedes = true;
 bool isFullScreen = false;
 
 // Variável que irá controlar os modos disponíveis no jogo
-int modosDisponiveis = 4;
+int modosDisponiveis = 0;
+
+int mouseX = 0;
+int mouseY = 0;
 
 enum {
     BLACK,
@@ -49,7 +52,7 @@ enum {
     _WHITE=240
 };
 
-/* 1) FUNÇÕES DO ARQUIVO "config-functions.h" */
+/* 1) ASSINATURAS DAS FUNÇÕES DO ARQUIVO "config-functions.h" */
 
 void exibirTelaRedes(int endOfGame, char nivel[8]);
 bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp2, char letrResp3, char letrResp4, char letrResp5, int *acertos, int *erros, int *pts, int progresso[26]);
@@ -62,7 +65,7 @@ void banner();
 void telaErro();
 int obterAnoAtual();
 void configJogo();
-void changeScreenMode() ;
+void setScreenMode(bool changeMode);
 void titulo(char nivel[9], char frase[50]);
 int verifyOpt(char opt[100], int mode);
 void exibirBannerPergunta(int questao);
@@ -88,7 +91,7 @@ void currentProgressionBanner(char difficulty[8], int currentProgression[26], in
 int pressEnter(void);
 void cheatBanner();
 
-/* 2) FUNÇÕES DO ARQUIVO "main-functions.h" */
+/* 2) ASSINATURAS DAS FUNÇÕES DO ARQUIVO "main-functions.h" */
 
 int mainMenu();
 int modeSelect();
@@ -103,7 +106,7 @@ void opcaoA4();
 void opcaoA5();
 void opcaoA6();
 
-/* 3) CONFIGURAÇÕES GLOBAIS DAS THREADS AUXILIARES DE "aux-threads.h" */
+/* 3) CONFIGURAÇÕES GLOBAIS DAS THREADS AUXILIARES DO ARQUIVO "aux-threads.h" */
 
 // Variáveis globais que serão utilizadas na thread anti-trapaça
 bool isTextEditingEnabled = false;
@@ -111,7 +114,7 @@ bool mostrarLetras = true;
 DWORD aCThreadId;
 HANDLE aCHandle;
 
-//Declaração das threads
+// Assinaturas das threads
 DWORD WINAPI e1(LPVOID params);
 DWORD WINAPI letra(LPVOID params);
 

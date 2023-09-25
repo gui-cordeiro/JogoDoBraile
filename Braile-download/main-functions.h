@@ -6,27 +6,15 @@
 
 /* MENU PRINCIPAL */
 int mainMenu() {
-    int opt = 0;
-    char lista [6][40] = {"Iniciar Jogo do Braile","Ranking Local","Instruções","Configurações","Créditos","Sair do Jogo"};
-
-    titulo("-", "Menu Principal");
+    int opt = 0, ajusteMenu = 44;
+    char lista [6][40] = {"Iniciar Jogo do Braile","Ranking Local","Instruções do Jogo","Créditos do Projeto","Mudar para modo \"Tela Cheia\"","Sair do Jogo do Braile"};
 
     if (isFullScreen) {
-        /*for (int linha = 1; linha <= 38; linha ++) {
-            for (int coluna = 1; coluna <= 151; coluna ++) {
-                if (coluna <= 16 || coluna >= 136) {
-                    textColor(WHITE, _DARKGRAY);
-                    linhaCol(linha, coluna - 16); printf(" ");
-                }
-            }
-        }
-        textColor(WHITE, _BLACK);
-        Sleep(50);*/
-        //textColor(WHITE, _DARKGRAY);
-        box(1,-15,38,0);
-        box(1,120,38,135);
-        textColor(WHITE, _BLACK);
+        strcpy(lista[4], "Mudar para modo \"Janela\"");
+        ajusteMenu = 45;
     }
+
+    titulo("-", "Menu Principal");
 
     // 0) Todas as teclas, Enter e Esc; 1) Todas as teclas e Enter; 2) Teclas CIMA e BAIXO, Enter e Esc; 3) Teclas CIMA e BAIXO e Enter; 4) Somente Enter; 5) Somente Barra de Espaço (2x); 6) Nenhuma ação ou botão.
     topBannerContent("VOCÊ ESTÁ NO", 2, 29, "MENU", 3, 9, 2);
@@ -40,7 +28,7 @@ int mainMenu() {
     SetConsoleOutputCP(850);
     setlocale(LC_ALL, "Portuguese");
 
-    opt = modeloMenu(13, 47, 6, 1, lista);
+    opt = modeloMenu(13, ajusteMenu, 6, 1, lista);
     cleanScreen(1, false);
 
     return opt;
@@ -945,19 +933,8 @@ int opcaoA3() {
     return 0;
 }
 
-/* 8) CONFIGURAÇÕES DO JOGO */
+/* 8) CRÉDITOS DO JOGO */
 void opcaoA4() {
-    int tecla;
-    titulo("-", "Configurações");
-    cleanScreen(1, false);
-    linhaCol(35, 10); printf("Essa aqui é a futura tela das configurações, que está em desenvolvimento. Aproveite a musiquinha! :D");
-    linhaCol(36, 41); printf("Pressione a tecla ENTER pra sair daqui.");
-    pressEnter();
-    cleanScreen(1, false);
-}
-
-/* 9) CRÉDITOS DO JOGO */
-void opcaoA5() {
     system("cls");
     titulo("-", "Créditos do Jogo");
     printf("\t\t\t\t\t                __                  \n");Sleep(tempo);
@@ -998,6 +975,11 @@ void opcaoA5() {
     system("cls");
 }
 
+/* 9) ALTERAR EXIBIÇÃO DO JOGO */
+void opcaoA5() {
+    setScreenMode(true);
+}
+
 /* 10) SAIR DO JOGO */
 void opcaoA6() {
     system("cls");
@@ -1012,7 +994,8 @@ void opcaoA6() {
     exibirTelaRedes(1, "-");
     PlaySound(TEXT("..\\sounds\\intro.wav"), NULL, SND_ASYNC);
     titulo("-", "Saindo do Jogo...");
-    addFade(8, 0, 0);
+    if(!isFullScreen) addFade(8, 0, 0);
+    else addFade(18, 0, 0);
     addFade(37, 175, 1);
     system("cls");
     system("mode con:cols=120 lines=30");

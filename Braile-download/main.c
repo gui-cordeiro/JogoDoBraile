@@ -31,8 +31,6 @@ int main(int argc, char **argv) {
     //topBannerDesign();
     //bottomBannerDesign();
     //fimJogo("DIFÍCIL", 3900, 26, 26);
-    //opcaoB5();
-    //changeScreenMode();
     apresentacao();
     //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
     topBannerDesign();
