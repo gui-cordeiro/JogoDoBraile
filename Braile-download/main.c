@@ -26,15 +26,10 @@
 #include "main-functions.h"
 
 int main(int argc, char **argv) {
-    ShowCursor(FALSE);
     configJogo();
-    //topBannerDesign();
-    //bottomBannerDesign();
-    //fimJogo("DIFÍCIL", 3900, 26, 26);
-    apresentacao();
+    ShowCursor(TRUE);
+    //apresentacao();
     //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
-    topBannerDesign();
-    bottomBannerDesign();
     int opt = 0;
     do {
         opt = mainMenu();
@@ -86,8 +81,6 @@ int main(int argc, char **argv) {
                 continue;
             default:
                 apresentacao();
-                topBannerDesign();
-                bottomBannerDesign();
                 //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
         };
     } while(opt != 6);

@@ -380,6 +380,8 @@ void apresentacao(){
 
     }
     system("cls");
+    topBannerDesign();
+    bottomBannerDesign();
     return;
 }
 
@@ -1129,7 +1131,8 @@ void setScreenMode(bool changeMode) {
         keybd_event(VK_MENU  , 0x38, KEYEVENTF_KEYUP, 0);
     }
 
-    if (!isFullScreen) {
+
+    if (!isFullScreen) { //Referente ao modo Janela
         if(changeMode) SetCursorPos(mouseX, mouseY);
 
         //Definindo as cores e as dimensões da janela do console
@@ -1165,7 +1168,7 @@ void setScreenMode(bool changeMode) {
         style &= ~WS_SIZEBOX;
         style &= ~WS_MAXIMIZEBOX;
         SetWindowLongPtr(cW, GWL_STYLE, style);
-    } else {
+    } else { //Referente ao modo Tela Cheia
         //Movimentando cursor do mouse para "escondê-lo"
         SetCursorPos(2000, 2000);
 
@@ -2347,14 +2350,11 @@ int modeloMenu(int lin1, int col1, int qtd, int menuAtual, char lista[][40]) {
             }
             if (opt == qtd) opt = 1;
             else if (opt < qtd) opt ++;
-        } else if (tecla == 102 || tecla == 70) {
-            setScreenMode(true);
         } else if (tecla == 27) { //ESC
             if (menuAtual == 2) opt = 6;
             else opt = 9;
             break;
         }
-
         if(GetAsyncKeyState(VK_RETURN) & 0x8000) {
             if (!enterPressed) {
                 enterPressed = true;
