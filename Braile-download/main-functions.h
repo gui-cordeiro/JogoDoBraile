@@ -29,7 +29,8 @@ int mainMenu() {
     setlocale(LC_ALL, "Portuguese");
 
     opt = modeloMenu(13, ajusteMenu, 6, 1, lista);
-    cleanScreen(1, false);
+    if (opt == 3) cleanScreen(1, true);
+    else cleanScreen(1, false);
 
     return opt;
 }
@@ -756,7 +757,7 @@ int opcaoA3() {
     int finalopt = 0;
     char lista[2][40] = {"SIM, eu quero ver um exemplo!", "NÃO, eu quero voltar para o menu."};
 
-    topBannerContent("COMO JOGAR O:", 2, 20, "COMO JOGAR", 5, 20, 0);
+    topBannerContent("VOCÊ ESTÁ VENDO AS", 2, 25, "INSTRUÇÕES", 3, 15, 6);
 
     setlocale(LC_ALL, "C");
     linhaCol(8,72);printf("%c", 197);
@@ -766,22 +767,7 @@ int opcaoA3() {
     linhaCol(32,72);printf("%c", 193);
     setlocale(LC_ALL, "Portuguese");
 
-    box(11, 19, 13, 52);
-    box(15, 5, 27, 67);
-
-    linhaCol(12, 21); printf("1) O QUE É O \"JOGO DO BRAILE\"?");
-
-    linhaCol(17, 8); printf("     O \"Jogo do Braile\" é um simples jogo de memória sob");
-    linhaCol(19, 8); printf("a forma de quiz, cujo objetivo é acertar o máximo de per-");
-    linhaCol(21, 8); printf("guntas possíveis. Ele tem o intuito de ensinar o sistema");
-    linhaCol(23, 8); printf("de escrita tátil \"Braile\" de forma simples e lúdica, para");
-    linhaCol(25, 8); printf("pessoas sem deficiência visual.");
-
-    SetConsoleOutputCP(CP_UTF8);
-    setlocale(LC_ALL, "C");
-    linhaCol(29, 30); printf("\u25c4  \u25cf  \u25cb  \u25ba"); //cf de Full, cb de Branco
-    setlocale(LC_ALL, "Portuguese");
-    SetConsoleOutputCP(850);
+    //
 
     /*linhaCol(17, 2); printf("+------------------------------------------------------------------------------------------+");
     linhaCol(18, 2); printf("|                                  COMO O JOGO FUNCIONA?                                   |");
@@ -799,19 +785,22 @@ int opcaoA3() {
 
     //exibirBannerDificuldade("EXEMPLO", 0);
 
+    textColor(WHITE, _BLACK);
+
     setlocale(LC_ALL, "C");
     SetConsoleOutputCP(CP_UTF8);
-    textColor(WHITE, _BLACK);
     linhaCol(19, 96); printf("\u25b2");
     linhaCol(27, 96); printf("\u25bc");
-    textColor(WHITE, _BLUE);
     SetConsoleOutputCP(850);
     setlocale(LC_ALL, "Portuguese");
 
-    int opt = modeloMenu(20, 78, 2, 0, lista);
+    topBannerContent("Deseja ver um", 12, 87, "EXEMPLO", 13, 79, 6);
 
-    if (opt == 2) {
-        cleanScreen(1, false);
+    int opt = modeloMenu(20, 78, 2, 3, lista);
+
+    if (opt == 2 || opt == 9) {
+        cleanScreen(1, true);
+        bottomBannerTitle(0);
         return 0;
     }
 
