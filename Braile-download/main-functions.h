@@ -1,13 +1,13 @@
 /*
  * -> Código-Fonte do Jogo do Braile
  * -> Desenvolvido por: Guilherme Cordeiro
- * -> Ano: 2017, 2023
+ * -> Ano: 2017, 2024
  */
 
 /* MENU PRINCIPAL */
 int mainMenu() {
     int opt = 0, ajusteMenu = 44;
-    char lista [6][40] = {"Iniciar Jogo do Braile","Ranking Local","Instruções do Jogo","Créditos do Projeto","Mudar para modo \"Tela Cheia\"","Sair do Jogo do Braile"};
+    char lista [6][40] = {"Iniciar Jogo do Braile","Ranking Local","Instruções do Jogo","Créditos do Jogo","Mudar para modo \"Tela Cheia\"","Sair do Jogo do Braile"};
 
     if (isFullScreen) {
         strcpy(lista[4], "Mudar para modo \"Janela\"");
@@ -205,7 +205,7 @@ int opcaoB1() {
             altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
             altAtuais[2] = letras[ordem[numPergunta] - 1];
         }
-        newPergunta("FÁCIL", numPergunta, '-', altAtuais[0], altAtuais[1], altAtuais[2], '-', &acertos, &erros, &pts, progresso);
+        newPergunta(false, "FÁCIL", numPergunta, '-', altAtuais[0], altAtuais[1], altAtuais[2], '-', &acertos, &erros, &pts, progresso);
     }
     fimJogo("FÁCIL", pts, acertos, totPerguntas);
     return 0;
@@ -355,7 +355,7 @@ void opcaoB2() {
             altAtuais[2] = letras[ordem[numPergunta] - 1];
         }
 
-        newPergunta("MÉDIO I", numPergunta, '-', altAtuais[0], altAtuais[1], altAtuais[2], '-', &acertos, &erros, &pts, progresso);
+        newPergunta(false, "MÉDIO I", numPergunta, '-', altAtuais[0], altAtuais[1], altAtuais[2], '-', &acertos, &erros, &pts, progresso);
     }
     fimJogo("MÉDIO I", pts, acertos, totPerguntas);
     return;
@@ -505,7 +505,7 @@ void opcaoB3() {
             altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
             altAtuais[2] = letras[ordem[numPergunta] - 1];
         }
-        newPergunta("MÉDIO II", numPergunta, '-', altAtuais[0], altAtuais[1], altAtuais[2], '-', &acertos, &erros, &pts, progresso);
+        newPergunta(false, "MÉDIO II", numPergunta, '-', altAtuais[0], altAtuais[1], altAtuais[2], '-', &acertos, &erros, &pts, progresso);
     }
     fimJogo("MÉDIO II", pts, acertos, totPerguntas);
     return;
@@ -680,7 +680,7 @@ void opcaoB4() {
             altAtuais[3] = letras[ordem[numPergunta + 0] - 1];
             altAtuais[4] = letras[ordem[numPergunta + 1] - 1];
         }
-        newPergunta("DIFÍCIL", numPergunta, altAtuais[0], altAtuais[1], altAtuais[2], altAtuais[3], altAtuais[4], &acertos, &erros, &pts, progresso);
+        newPergunta(false, "DIFÍCIL", numPergunta, altAtuais[0], altAtuais[1], altAtuais[2], altAtuais[3], altAtuais[4], &acertos, &erros, &pts, progresso);
 
     }
     fimJogo("DIFÍCIL", pts, acertos, totPerguntas);
@@ -754,8 +754,8 @@ void opcaoA2() {
 /* 7) INSTRUÇÕES DO JOGO */
 int opcaoA3() {
     titulo("-", "Tela de Instruções");
-    int finalopt = 0;
-    char lista[2][40] = {"SIM, eu quero ver um exemplo!", "NÃO, eu quero voltar para o menu."};
+    int opt = 0, finalopt = 0;
+    char lista[2][40] = {"SIM, eu quero ver o exemplo!", "NÃO, eu quero voltar para o menu."};
 
     topBannerContent("VOCÊ ESTÁ VENDO AS", 2, 25, "INSTRUÇÕES", 3, 15, 6);
 
@@ -766,24 +766,6 @@ int opcaoA3() {
     }
     linhaCol(32,72);printf("%c", 193);
     setlocale(LC_ALL, "Portuguese");
-
-    //
-
-    /*linhaCol(17, 2); printf("+------------------------------------------------------------------------------------------+");
-    linhaCol(18, 2); printf("|                                  COMO O JOGO FUNCIONA?                                   |");
-    linhaCol(19, 2); printf("+------------------------------------------------------------------------------------------+");
-    linhaCol(20, 2); printf("| Neste jogo, cada pergunta é composta por:                                                |");
-    linhaCol(21, 2); printf("|                                                                                          |");
-    linhaCol(22, 2); printf("| * Uma letra exibida em destaque e de acordo com o sistema 'Braile' de escrita; e         |");
-    linhaCol(23, 2); printf("| * Quatro letras referentes às alternativas, exibidas de acordo com o alfabeto latino.    |");
-    linhaCol(24, 2); printf("|                                                                                          |");
-    linhaCol(25, 2); printf("| Para responder tais perguntas, é necessário memorizar as letras que aparecerão na tela   |");
-    linhaCol(26, 2); printf("| por alguns segundos.                                                                     |");
-    linhaCol(27, 2); printf("+-----------------------------------------------------------------------------------------");*/
-    //printf("\t\t        DESEJA VER UM EXEMPLO DO JOGO? (Digite 'S' para Sim ou 'N' para Não): ");
-
-
-    //exibirBannerDificuldade("EXEMPLO", 0);
 
     textColor(WHITE, _BLACK);
 
@@ -796,7 +778,7 @@ int opcaoA3() {
 
     topBannerContent("Deseja ver um", 12, 87, "EXEMPLO", 13, 79, 6);
 
-    int opt = modeloMenu(20, 78, 2, 3, lista);
+    opt = modeloMenu(20, 78, 2, 3, lista);
 
     if (opt == 2 || opt == 9) {
         cleanScreen(1, true);
@@ -804,164 +786,128 @@ int opcaoA3() {
         return 0;
     }
 
-    system("cls");
-    addFade(1, tempo, 1);
-    exibirBannerDificuldade("VEJA SÓ ESTE", 2, 15, "EXEMPLO", 4, 10);
-    addFade(2, tempo, 1);
-    printf("\t     +------------------------------------------------------------------------------------------+\n");Sleep(tempo);
-    printf("\t     | Como dito anteriormente, neste jogo cada pergunta é composta por:                        |\n");Sleep(tempo);
-    printf("\t     |                                                                                          |\n");Sleep(tempo);
-    printf("\t     | * Uma letra exibida em destaque e de acordo com o sistema 'Braile' de escrita; e         |\n");Sleep(tempo);
-    printf("\t     | * Quatro letras referentes às alternativas, exibidas de acordo com o alfabeto latino.    |\n");Sleep(tempo);
-    printf("\t     +------------------------------------------------------------------------------------------+");Sleep(tempo);
-    addFade(3, tempo, 1);
-    printf("\t\t\t\t   +-----------------------------------------------+\n");Sleep(tempo);
-    printf("\t\t\t\t   |     Letra escrita em Braile (EM DESTAQUE)     |\n");Sleep(tempo);
-    printf("\t\t\t\t   +-----------------------------------------------+\n");Sleep(tempo);
-    printf("\t\t\t\t   |                                               |");Sleep(tempo);
-    printAlfabeto('E', 21, 34, 1);
-    printf("\n\t\t\t\t   |                                               |\n");Sleep(tempo);
-    printf("\t\t\t\t   +-----------------------------------------------+");Sleep(tempo);
-    addFade(2, tempo, 1);
-    printf("\n\t\t\t\t\t     * Alternativas propostas *\n\n");Sleep(tempo);
-    printf("\n\t\t\t\t\t      a) --> A        c) --> E");Sleep(tempo);
-    addFade(1, tempo, 1);
-    printf("\n\t\t\t\t\t      b) --> I        d) --> O");Sleep(tempo);
-    addFade(4, tempo, 1);
-    printf("\t\t\t\t   **** Pressione qualquer tecla para continuar ****");
-    getche();
-    system("cls");
-    addFade(1, tempo, 1);
-    exibirBannerDificuldade("VEJA SÓ ESTE", 2, 15, "EXEMPLO", 4, 10);
-    addFade(2, tempo, 1);
-    printf("\t     +------------------------------------------------------------------------------------------+\n");Sleep(tempo);
-    printf("\t     | Respondendo a questão corretamente, você ganhará 150 pontos! Veja o exemplo a seguir:    |\n");Sleep(tempo);
-    printf("\t     +------------------------------------------------------------------------------------------+");Sleep(tempo);
-    addFade(2, tempo, 1);
-    printf("\t\t\t\t   +-----------------------------------------------+\n");Sleep(tempo);
-    printf("\t\t\t\t   |     Letra escrita em Braile (EM DESTAQUE)     |\n");Sleep(tempo);
-    printf("\t\t\t\t   +-----------------------------------------------+\n");Sleep(tempo);
-    printf("\t\t\t\t   |                                               |");Sleep(tempo);
-    printAlfabeto('E', 21, 34, 1);
-    printf("\n\t\t\t\t   |                                               |\n");Sleep(tempo);
-    printf("\t\t\t\t   +-----------------------------------------------+");Sleep(tempo);
-    addFade(2, tempo, 1);
-    printf("\n\t\t\t\t\t      a) --> A        c) --> E");Sleep(tempo);
-    addFade(1, tempo, 1);
-    printf("\n\t\t\t\t\t      b) --> I        d) --> O");Sleep(tempo);
-    printf("\n\n\t\t\t\t\t       +--------------------+\n");Sleep(tempo);
-    printf("\n\t\t\t\t\t\tInsira sua opção : c");Sleep(tempo);
-    addFade(2, tempo, 1);
-    printf("\t\t\t\t   +-----------------------------------------------+");Sleep(tempo);
-    printf("\n\t\t\t\t   |                CERTA RESPOSTA!                | ");Sleep(tempo);
-    printf("\n\t\t\t\t   |           VOCÊ GANHOU: +150 PONTOS!           | ");Sleep(tempo);
-    printf("\n\t\t\t\t   +----------------------------------------------+");Sleep(tempo);
-    addFade(3, tempo, 1);
-    printf("\t\t\t\t   **** Pressione qualquer tecla para continuar ****");
-    getche();
-    system("cls");
-    addFade(1, tempo, 1);
-    exibirBannerDificuldade("VEJA SÓ ESTE", 2, 15, "EXEMPLO", 4, 10);
-    addFade(2, tempo, 1);
-    printf("\t     +------------------------------------------------------------------------------------------+\n");Sleep(tempo);
-    printf("\t     | Caso erre a resposta, apenas 50 pontos serão somados à sua pontuação. Veja o exemplo:    |\n");Sleep(tempo);
-    printf("\t     +------------------------------------------------------------------------------------------+");Sleep(tempo);
-    addFade(2, tempo, 1);
-    printf("\t\t\t\t   +-----------------------------------------------+\n");Sleep(tempo);
-    printf("\t\t\t\t   |     Letra escrita em Braile (EM DESTAQUE)     |\n");Sleep(tempo);
-    printf("\t\t\t\t   +-----------------------------------------------+\n");Sleep(tempo);
-    printf("\t\t\t\t   |                                               |");Sleep(tempo);
-    printAlfabeto('E', 21, 34, 1);
-    printf("\n\t\t\t\t   |                                               |\n");Sleep(tempo);
-    printf("\t\t\t\t   +-----------------------------------------------+");Sleep(tempo);
-    addFade(2, tempo, 1);
-    printf("\n\t\t\t\t\t      a) --> A        c) --> E");Sleep(tempo);
-    addFade(1, tempo, 1);
-    printf("\n\t\t\t\t\t      b) --> I        d) --> O");Sleep(tempo);
-    printf("\n\n\t\t\t\t\t       +--------------------+\n");Sleep(tempo);
-    printf("\n\t\t\t\t\t\tInsira sua opção : a");Sleep(tempo);
-    addFade(2, tempo, 1);
-    printf("\t\t\t\t   +-----------------------------------------------+");Sleep(tempo);
-    printf("\n\t\t\t\t   |     VOCÊ ERROU... RESPOSTA CORRETA: \"c)\"      | ");Sleep(tempo);
-    printf("\n\t\t\t\t   |           VOCÊ GANHOU: +50 PONTOS!            | ");Sleep(tempo);
-    printf("\n\t\t\t\t   +----------------------------------------------+");Sleep(tempo);
-    addFade(3, tempo, 1);
-    printf("\t\t\t\t   **** Pressione qualquer tecla para continuar ****");
-    getche();
-    system("cls");
-    addFade(1, tempo, 1);
-    exibirBannerDificuldade("VEJA SÓ ESTE", 2, 15, "EXEMPLO", 4, 10);
-    addFade(2, tempo, 1);
-    printf("\t     +------------------------------------------------------------------------------------------+\n");Sleep(tempo);
-    printf("\t     | Ao encerrar o quiz, será possível analisar o seu desempenho final. Nele você poderá ver: |\n");Sleep(tempo);
-    printf("\t     |                                                                                          |\n");Sleep(tempo);
-    printf("\t     | * O \"Número de perguntas respondidas corretamente\" / \"Número total de perguntas\"; e      |\n");Sleep(tempo);
-    printf("\t     | * A pontuação total com base nos acertos e erros cometidos durante o quiz.               |\n");Sleep(tempo);
-    printf("\t     |                                                                                          |\n");Sleep(tempo);
-    printf("\t     | Divirta-se com o \"Jogo do Braile\"!                                                       |\n");Sleep(tempo);
-    printf("\t     +------------------------------------------------------------------------------------------+");Sleep(tempo);
-    addFade(3, tempo, 1);
-    printf("\t\t\t\t       +---------------------------------------+\n");Sleep(tempo);
-    printf("\t\t\t\t       |       EXEMPLO DAS ESTATÍSTICAS        |\n");Sleep(tempo);
-    printf("\t\t\t\t       +---------------------------------------+\n");Sleep(tempo);
-    printf("\t\t\t\t       |                                       |\n");Sleep(tempo);
-    printf("\t\t\t\t       |        Total de ACERTOS: 5 / 5        |\n");
-    printf("\t\t\t\t       |                                       |\n");Sleep(tempo);
-    printf("\t\t\t\t       |         Total de PONTOS: 750          |\n");
-    printf("\t\t\t\t       |                                       |\n");Sleep(tempo);
-    printf("\t\t\t\t       +---------------------------------------+");Sleep(tempo);
-    addFade(2, tempo, 1);
-    printf("\t\t\t\t\t\t\t *****");Sleep(tempo);
-    addFade(1, tempo, 1);
-    banner();
-    addFade(2, 50, 1);
-    printf("\t\t\t       **** Pressione qualquer tecla para retornar ao menu ****");
-    getche();
-    addFade(39, 25, 1);
-    system("cls");
+    int pts, acertos, erros, tecla;
+    int progresso[5] = {2,2,2,2,2};
+
+    do{
+        pts = 0, acertos = 0, erros = 0, tecla = 0;
+        cleanScreen(1, false);
+        newPergunta(true, "FÁCIL", 1, '-', '-', 'A', 'E', '-', &acertos, &erros, &pts, progresso);
+        cleanScreen(1, true);
+        topBannerContent("VOCÊ ESTÁ VENDO AS", 2, 25, "INSTRUÇÕES", 3, 15, 2);
+        linhaCol(33, 14); printf("          __ _____ _____ _____    ____  _____    _____ _____ _____ _____ __    _____        ");
+        linhaCol(34, 14); printf("       __|  |     |   __|     |  |    \\|     |  | __  | __  |  _  |_   _|  |  |   __|       ");
+        linhaCol(35, 14); printf("      |  |  |  |  |  |  |  |  |  |  |  |  |  |  | __ -|    -|     |_| |_|  |__|   __|       ");
+        linhaCol(36, 14); printf("      |_____|_____|_____|_____|  |____/|_____|  |_____|__|__|__|__|_____|_____|_____|       ");
+        linhaCol(37, 45); printf("Feito com ");
+        textColor(LIGHTRED, _BLACK);
+        SetConsoleOutputCP(CP_UTF8);
+        setlocale(LC_ALL, "C");
+        printf("\u2665");
+        setlocale(LC_ALL, "Portuguese");
+        SetConsoleOutputCP(850);
+        textColor(WHITE, _BLACK);
+        printf(" por Guilherme Cordeiro");
+        Sleep(50);
+        box(13, 35, 27, 85);
+        linhaCol(16, 43); printf("Deseja ver este exemplo novamente?");
+        opt = modeloMenu(18, 42, 2, 0, lista);
+    }while(opt != 2 && opt != 9);
+
+    cleanScreen(1, true);
+    bottomBannerTitle(0);
     return 0;
 }
 
 /* 8) CRÉDITOS DO JOGO */
 void opcaoA4() {
-    system("cls");
+    cleanScreen(1, true);
     titulo("-", "Créditos do Jogo");
-    printf("\t\t\t\t\t                __                  \n");Sleep(tempo);
-    printf("\t\t\t\t\t    _____      /_/  _ _ _           \n");Sleep(tempo);
-    printf("\t\t\t\t\t   |     |___ ___ _| |_| |_ ___ ___ \n");Sleep(tempo);
-    printf("\t\t\t\t\t   |   --|  _| -_| . | |  _| . |_ -|\n");Sleep(tempo);
-    printf("\t\t\t\t\t   |_____|_| |___|___|_|_| |___|___|");Sleep(tempo);
-    addFade(2, tempo, 1);
-    printf("\t\t +-----------------------------------------------------------------------------------+ ");Sleep(tempo);
-    printf("\n\t\t | Este jogo foi originalmente desenvolvido como forma de uma avaliação parcial do   | ");Sleep(tempo);
-    printf("\n\t\t | trabalho final do 1º ano do Curso Técnico em Informática, ofertado pelo Instituto | ");Sleep(tempo);
-    printf("\n\t\t | Federal do Paraná - Campus Colombo. Tal trabalho foi apresentado no ano de 2017   | ");Sleep(tempo);
-    printf("\n\t\t | sob o nome 'Acessibilidade das pessoas com deficiência visual na atualidade'.     | ");Sleep(tempo);
-    printf("\n\t\t +-----------------------------------------------------------------------------------+ \n");Sleep(tempo);
 
+    topBannerContent("VOCÊ ESTÁ VENDO OS", 2, 25, "CRÉDITOS", 3, 4, 6);
 
-    printf("\t\t\t      _____               _         _               _           \n");Sleep(tempo);
-    printf("\t\t\t     |  _  |___ ___ ___ _| |___ ___|_|_____ ___ ___| |_ ___ ___ \n");Sleep(tempo);
-    printf("\t\t\t     |     | . |  _| .'| . | -_|  _| |     | -_|   |  _| . |_ -|\n");Sleep(tempo);
-    printf("\t\t\t     |__|__|_  |_| |__,|___|___|___|_|_|_|_|___|_|_|_| |___|___|\n");Sleep(tempo);
-    printf("\t\t\t           |___|                                                \n");Sleep(tempo);
-    printf("\t\t\t(Membros da equipe do trabalho original - Obrigado por todo o apoio!) \n");Sleep(tempo);
-    addFade(1, tempo, 1);
-    printf("\n     -> Arthur Ogg - 'https://github.com/Arthur-Diesel'\n");Sleep(tempo);
-    printf("\n     -> Guilherme Cordeiro - 'https://github.com/gui-cordeiro'\n");Sleep(tempo);
-    printf("\n     -> João Lucas - Nenhum contato dele foi encontrado, mas fica aqui registrado o agradecimento a ele!\n");Sleep(tempo);
-    printf("\n     -> Lucas Pereira - 'https://github.com/Luc45-Pereira'\n");Sleep(tempo);
-    printf("\n     -> Matheus Delay - 'https://twitter.com/DelayMath'\n");Sleep(tempo);
-    banner();
-    printf("\n\t\t\t\t   **** Pressione qualquer tecla para continuar ****");
-    getch();
-    system("cls");
-    addFade(4, 50, 0);
+    textColor(LIGHTBLUE, _BLACK);
+    box(10, 3, 30, 53);
+    textColor(LIGHTCYAN, _BLACK);
+    box(11, 55, 29, 117);
+    textColor(WHITE, _BLACK);
+
+    textColor(LIGHTBLUE, _BLACK);
+    linhaCol(11, 12); printf(" _____                 _ _       ");
+    linhaCol(12, 12); printf("|     |___ ___ ___ ___|_| |_ ___ ");
+    linhaCol(13, 12); printf("|   --| . |   |  _| -_| |  _| . |");
+    linhaCol(14, 12); printf("|_____|___|_|_|___|___|_|_| |___|");
+    linhaCol(15, 19); printf("original do projeto");
+    textColor(WHITE, _BLACK);
+
+    linhaCol(18, 6); printf("     Este jogo foi originalmente desenvolvido");
+    linhaCol(20, 6); printf("como forma de ");
+    textColor(BROWN, _BLACK);
+    printf("avaliação parcial do trabalho fi-"); //Amarelo
+    linhaCol(22, 6); printf("nal do 1º ano do Curso Técnico em Informática"); //Amarelo
+    textColor(WHITE, _BLACK);
+    printf(",");
+    linhaCol(24, 6); printf("ofertado pelo ");
+    textColor(LIGHTGREEN, _BLACK);
+    printf("IFPR - Campus Colombo"); //Verde
+    textColor(WHITE, _BLACK);
+    printf(". Tal tra-");
+    linhaCol(26, 6); printf("balho foi apresentado no ano de 2017 sob o nome");
+    textColor(BROWN, _BLACK);
+    linhaCol(28, 6); printf("'Acessibilidade das PcD visual na atualidade'"); //Amarelo
+    textColor(WHITE, _BLACK);
+    printf(".");
+
+    //linhaCol(10, 65); printf("Obrigado pelo apoio!");
+    textColor(LIGHTCYAN, _BLACK);
+    linhaCol(12, 57); printf(" _____               _         _               _           ");
+    linhaCol(13, 57); printf("|  _  |___ ___ ___ _| |___ ___|_|_____ ___ ___| |_ ___ ___ ");
+    linhaCol(14, 57); printf("|     | . |  _| .'| . | -_|  _| |     | -_|   |  _| . |_ -|");
+    linhaCol(15, 57); printf("|__|__|_  |_| |__,|___|___|___|_|_|_|_|___|_|_|_| |___|___|");
+    linhaCol(16, 57); printf("      |___|                                                ");
+    //textColor(WHITE, _BLACK);
+    linhaCol(16, 71); printf("aos membros da equipe do trabalho original!");
+    textColor(WHITE, _BLACK);
+
+    setlocale(LC_ALL, "C");
+    SetConsoleOutputCP(CP_UTF8);
+    linhaCol(19, 58); printf("\u2022");
+    linhaCol(21, 58); printf("\u2022");
+    linhaCol(23, 58); printf("\u2022");
+    linhaCol(25, 58); printf("\u2022");
+    linhaCol(27, 58); printf("\u2022");
+    SetConsoleOutputCP(850);
+    setlocale(LC_ALL, "Portuguese");
+
+    linhaCol(19, 60); printf("Arthur Ogg - ");
+    textColor(LIGHTGREEN, _BLACK);
+    printf("'https://github.com/Arthur-Diesel'"); //Verde
+    textColor(WHITE, _BLACK);
+    linhaCol(21, 60); printf("Guilherme Cordeiro (vulgo eu) - ");
+    textColor(LIGHTGREEN, _BLACK);
+    printf("Contatos na próx. tela!"); //Verde
+    textColor(WHITE, _BLACK);
+    linhaCol(23, 60); printf("João Lucas - ");
+    textColor(LIGHTGREEN, _BLACK);
+    printf("Não achei nenhuma rede social dele, perdão!"); //Verde
+    textColor(WHITE, _BLACK);
+    linhaCol(25, 60); printf("Lucas Pereira - ");
+    textColor(LIGHTGREEN, _BLACK);
+    printf("'https://github.com/Luc45-Pereira'"); //Verde
+    textColor(WHITE, _BLACK);
+    linhaCol(27, 60); printf("Matheus Delay - ");
+    textColor(LIGHTGREEN, _BLACK);
+    printf("'https://twitter.com/DelayMath'"); //Verde
+    textColor(WHITE, _BLACK);
+
+    exibirBannerAnimado();
+    topBannerContent("VOCÊ ESTÁ VENDO OS", 2, 25, "CRÉDITOS", 3, 4, 4);
+
+    pressEnter();
+    cleanScreen(4, true);
     exibirTelaRedes(0, "-");
-    printf("\n\t\t\t       **** Pressione qualquer tecla para retornar ao menu ****");
-    getch();
-    addFade(39, 25, 1);
-    system("cls");
+    cleanScreen(1, true);
+    textColor(WHITE, _BLACK);
 }
 
 /* 9) ALTERAR EXIBIÇÃO DO JOGO */
@@ -981,7 +927,7 @@ void opcaoA6() {
     Sleep(600);
     box(8, 3, 32, 117);
     exibirTelaRedes(1, "-");
-    PlaySound(TEXT("..\\sounds\\intro.wav"), NULL, SND_ASYNC);
+    PlaySound(TEXT("..\\sounds\\closing.wav"), NULL, SND_ASYNC);
     titulo("-", "Saindo do Jogo...");
     if(!isFullScreen) addFade(8, 0, 0);
     else addFade(18, 0, 0);

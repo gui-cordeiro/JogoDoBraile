@@ -1,7 +1,7 @@
 /*
  * -> Código-Fonte do Jogo do Braile
  * -> Desenvolvido por: Guilherme Cordeiro
- * -> Ano: 2017, 2023
+ * -> Ano: 2017, 2024
  */
 
 DWORD WINAPI e1(LPVOID params) {

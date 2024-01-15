@@ -1,7 +1,7 @@
 /*
  * -> Código-Fonte do Jogo do Braile
  * -> Desenvolvido por: Guilherme Cordeiro
- * -> Ano: 2017, 2023
+ * -> Ano: 2017, 2024
  */
 
 #include <stdio.h>
@@ -17,6 +17,9 @@
 #include <process.h>
 #include <processthreadsapi.h>
 
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
+
 #define _WIN32_WINNT 0x0500
 #define tempo 50
 
@@ -25,12 +28,10 @@
 #include "config-functions.h"
 #include "main-functions.h"
 
-int main(int argc, char **argv) {
+int main(int argc, char *args[]) {
     configJogo();
-    //apresentacao();
-    //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
-    topBannerDesign();
-    bottomBannerDesign();
+    opcaoA4();
+    apresentacao();
     int opt = 0;
     do {
         opt = mainMenu();
@@ -61,19 +62,13 @@ int main(int argc, char **argv) {
                 opt = 0;
                 break;
             case 2:
-                //PlaySound(TEXT("..\\sounds\\areyousure.wav"), NULL, SND_LOOP | SND_ASYNC);
                 opcaoA2();
-                //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
                 break;
             case 3:
-                //PlaySound(TEXT("..\\sounds\\areyousure.wav"), NULL, SND_LOOP | SND_ASYNC);
                 opcaoA3();
-                //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
                 break;
             case 4:
-                //PlaySound(TEXT("..\\sounds\\areyousure.wav"), NULL, SND_LOOP | SND_ASYNC);
                 opcaoA4();
-                //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
                 break;
             case 5:
                 opcaoA5();
@@ -82,9 +77,9 @@ int main(int argc, char **argv) {
                 continue;
             default:
                 apresentacao();
-                //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
         };
     } while(opt != 6);
     //opcaoA6();
     system("cls");
+    return 0;
 }

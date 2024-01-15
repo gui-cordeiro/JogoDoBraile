@@ -1,15 +1,18 @@
 /*
  * -> Código-Fonte do Jogo do Braile
  * -> Desenvolvido por: Guilherme Cordeiro
- * -> Ano: 2017, 2023
+ * -> Ano: 2017, 2024
  */
 
 bool mudar = false;
 bool mudarRedes = true;
 bool isFullScreen = false;
+bool isInOpeningScene = true;
 
-// Variável que irá controlar os modos disponíveis no jogo
-int modosDisponiveis = 0;
+char caminho[50] = "../sounds/";
+
+// Variável que controla os modos disponíveis
+int modosDisponiveis = 4;
 
 int mouseX = 0;
 int mouseY = 0;
@@ -55,7 +58,7 @@ enum {
 /* 1) ASSINATURAS DAS FUNÇÕES DO ARQUIVO "config-functions.h" */
 
 void exibirTelaRedes(int endOfGame, char nivel[8]);
-bool newPergunta(char dificuldade[8], int questao, char letrResp1, char letrResp2, char letrResp3, char letrResp4, char letrResp5, int *acertos, int *erros, int *pts, int progresso[26]);
+bool newPergunta(bool isDemo, char dificuldade[8], int questao, char letrResp1, char letrResp2, char letrResp3, char letrResp4, char letrResp5, int *acertos, int *erros, int *pts, int progresso[26]);
 void apresentacao();
 void printAlfabeto(char letra, int lin1, int col, int isVisible);
 int confirmarJogo(char nivel[9], int progresso[26]) ;
