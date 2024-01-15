@@ -821,7 +821,6 @@ int opcaoA3() {
 
 /* 8) CRÉDITOS DO JOGO */
 void opcaoA4() {
-    cleanScreen(1, true);
     titulo("-", "Créditos do Jogo");
 
     topBannerContent("VOCÊ ESTÁ VENDO OS", 2, 25, "CRÉDITOS", 3, 4, 6);

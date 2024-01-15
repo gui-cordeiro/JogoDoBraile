@@ -9,7 +9,7 @@ bool mudarRedes = true;
 bool isFullScreen = false;
 bool isInOpeningScene = true;
 
-char caminho[50] = "../sounds/";
+char caminho[50] = "sounds/";
 
 // Variável que controla os modos disponíveis
 int modosDisponiveis = 4;

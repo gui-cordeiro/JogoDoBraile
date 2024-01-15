@@ -30,7 +30,6 @@
 
 int main(int argc, char *args[]) {
     configJogo();
-    opcaoA4();
     apresentacao();
     int opt = 0;
     do {
