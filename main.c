@@ -31,6 +31,7 @@
 int main(int argc, char *args[]) {
     configJogo();
     apresentacao();
+    fimJogo("FÁCIL", 750, 5, 5);
     int opt = 0;
     do {
         opt = mainMenu();

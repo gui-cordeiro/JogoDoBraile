@@ -28,7 +28,7 @@ int mainMenu() {
     SetConsoleOutputCP(850);
     setlocale(LC_ALL, "Portuguese");
 
-    opt = modeloMenu(13, ajusteMenu, 6, 1, lista);
+    opt = modeloMenu(13, ajusteMenu, 6, 1, lista, 1);
     if (opt == 3) cleanScreen(1, true);
     else cleanScreen(1, false);
 
@@ -64,7 +64,7 @@ int modeSelect() {
     SetConsoleOutputCP(850);
     setlocale(LC_ALL, "Portuguese");
 
-    opt = modeloMenu(13, 46, 6, 2, lista);
+    opt = modeloMenu(13, 46, 6, 2, lista, 1);
     return opt;
 }
 
@@ -741,13 +741,100 @@ void opcaoB5() {
 
 /* 6) Ranking dos Jogadores*/
 void opcaoA2() {
-    int tecla;
+    int opt = 1, lastOpt;
+    bool menuTitle = true;
+    char lista [6][40] = {"Ranking - NÍVEL FÁCIL","Ranking - NÍVEL MÉDIO I","Ranking - NÍVEL MÉDIO II","Ranking - NÍVEL DIFÍCIL","Resetar registros","Voltar ao Menu Principal"};
+    char lista2 [2][40] = {"SIM, eu quero resetar tudo", "NÃO, eu quero cancelar"};
     titulo("-", "Ranking dos Jogadores");
-    cleanScreen(1, false);
-    linhaCol(35, 7); printf("Essa aqui é a futura tela do ranking de jogadores, que está em desenvolvimento. Aproveite a musiquinha! :D");
-    linhaCol(36, 41); printf("Pressione a tecla ENTER pra sair daqui.");
+    topBannerContent("VOCÊ ESTÁ VISUALIZANDO O", 2, 23, "RANKING", 3, 11, 2);
 
-    pressEnter();
+    do {
+        if (opt == 1) exibirBannerDificuldade("-", 0, 0, "FÁCIL", 9, 16);
+        else if (opt == 2) exibirBannerDificuldade("-", 0, 0, "MÉDIO I", 9, 11);
+        else if (opt == 3) exibirBannerDificuldade("-", 0, 0, "MÉDIO II", 9, 8);
+        else if (opt == 4) exibirBannerDificuldade("-", 0, 0, "DIFÍCIL", 9, 14);
+
+        //box(13, 2, 31, 70);
+        // Esta tabela de pontuação trata-se de um mero placeholder
+        linhaCol(14, 4); printf("    Posição \t      Nome \t Rank \t Pontuação \t Tempo");
+        linhaCol(17, 4); printf("\t 1st \t      GUI \t  S \t   0650 \t02m37seg");
+        linhaCol(19, 4); printf("\t 2nd \t      GUI \t  S \t   0650 \t02m37seg");
+        linhaCol(21, 4); printf("\t 3rd \t      GUI \t  S \t   0650 \t02m37seg");
+        linhaCol(23, 4); printf("\t 4th \t      GUI \t  S \t   0650 \t02m37seg");
+        linhaCol(25, 4); printf("\t 5th \t      GUI \t  A \t   0650 \t02m37seg");
+        linhaCol(27, 4); printf("\t 6th \t      GUI \t  B \t   0650 \t02m37seg");
+        linhaCol(29, 4); printf("\t 7th \t      GUI \t  B \t   0650 \t02m37seg");
+
+        if (menuTitle) {
+            setlocale(LC_ALL, "C");
+            linhaCol(8,72);printf("%c", 197);
+            for (int divisoria = 9; divisoria < 32; divisoria ++) {
+                linhaCol(divisoria,72); printf("%c", 179);
+            }
+            linhaCol(32,72); printf("%c", 193);
+            setlocale(LC_ALL, "Portuguese");
+
+            /*linhaCol(9, 79); printf(" _____     _         _             ");
+            linhaCol(10, 79); printf("|   __|___| |___ ___|_|___ ___ ___ ");
+            linhaCol(11, 79); printf("|__   | -_| | -_|  _| | . |   | -_|");
+            linhaCol(12, 79); printf("|_____|___|_|___|___|_|___|_|_|___|");
+
+            setlocale(LC_ALL, "C");
+            linhaCol(13, 81); printf("%c", 254);
+            setlocale(LC_ALL, "Portuguese");
+            printf(" um nível e veja seu ranking ");
+            setlocale(LC_ALL, "C");
+            printf("%c", 254);*/
+
+            setlocale(LC_ALL, "C");
+            SetConsoleOutputCP(CP_UTF8);
+            linhaCol(12, 96); printf("\u25b2");
+            linhaCol(28, 96); printf("\u25bc");
+            SetConsoleOutputCP(850);
+            setlocale(LC_ALL, "Portuguese");
+            menuTitle = false;
+        }
+        lastOpt = opt;
+        opt = modeloMenu(13, 82, 6, 4, lista, opt);
+
+        if (opt == 5) {
+            textColor(LIGHTRED, _BLACK);
+            box(9, 19, 31, 101);
+            textColor(WHITE, _BLACK);
+
+            linhaCol(12, 23); printf("Você está prestes a ");
+            textColor(LIGHTRED, _BLACK);
+            printf("DELETAR TODOS OS REGISTROS");
+            textColor(WHITE, _BLACK);
+            printf(" de pontuação da dificuldade:");
+            if (lastOpt == 1) exibirBannerDificuldade("-", 0, 0, "FÁCIL", 14, 40);
+            else if (lastOpt == 2) exibirBannerDificuldade("-", 0, 0, "MÉDIO I", 14, 35);
+            else if (lastOpt == 3) exibirBannerDificuldade("-", 0, 0, "MÉDIO II", 14, 32);
+            else if (lastOpt == 4) exibirBannerDificuldade("-", 0, 0, "DIFÍCIL", 14, 38);
+            linhaCol(20, 48); printf("Deseja ");
+            textColor(BROWN, _BLACK);
+            printf("MESMO");
+            textColor(WHITE, _BLACK);
+            printf(" prosseguir?");
+
+            setlocale(LC_ALL, "C");
+            SetConsoleOutputCP(CP_UTF8);
+            linhaCol(22, 59); printf("\u25b2");
+            linhaCol(30, 59); printf("\u25bc");
+            SetConsoleOutputCP(850);
+            setlocale(LC_ALL, "Portuguese");
+
+            opt = modeloMenu(23, 45, 2, 0, lista2, 2);
+            if (opt == 1) {
+                // Código para deletar os registros
+            }
+            opt = lastOpt;
+            cleanScreen(6, false);
+            menuTitle = true;
+        }
+        else if (opt != 6) cleanScreen(9, false);
+    } while(opt != 6);
+    //pressEnter();
     cleanScreen(1, false);
 }
 
@@ -778,7 +865,7 @@ int opcaoA3() {
 
     topBannerContent("Deseja ver um", 12, 87, "EXEMPLO", 13, 79, 6);
 
-    opt = modeloMenu(20, 78, 2, 3, lista);
+    opt = modeloMenu(20, 78, 2, 3, lista, 1);
 
     if (opt == 2 || opt == 9) {
         cleanScreen(1, true);
@@ -811,7 +898,7 @@ int opcaoA3() {
         Sleep(50);
         box(13, 35, 27, 85);
         linhaCol(16, 43); printf("Deseja ver este exemplo novamente?");
-        opt = modeloMenu(18, 42, 2, 0, lista);
+        opt = modeloMenu(18, 42, 2, 0, lista, 2);
     }while(opt != 2 && opt != 9);
 
     cleanScreen(1, true);

@@ -245,14 +245,14 @@ bool newPergunta(bool isDemo, char dificuldade[8], int questao, char letrResp1, 
         textColor(WHITE, _BLUE);
         SetConsoleOutputCP(850);
         setlocale(LC_ALL, "Portuguese");
-        opt = modeloMenu(18, 88, 4, 0, lista);
+        opt = modeloMenu(18, 88, 4, 0, lista, 1);
     } else {
         linhaCol(16, 95); printf("\u25b2");
         linhaCol(30, 95); printf("\u25bc");
         textColor(WHITE, _BLUE);
         SetConsoleOutputCP(850);
         setlocale(LC_ALL, "Portuguese");
-        opt = modeloMenu(17, 88, 5, 0, lista);
+        opt = modeloMenu(17, 88, 5, 0, lista, 1);
     }
 
     //cleanScreen(6, false);
@@ -720,7 +720,7 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
     SetConsoleOutputCP(850);
     setlocale(LC_ALL, "Portuguese");
 
-    opt = modeloMenu(20, 78, 2, 0, lista);
+    opt = modeloMenu(20, 78, 2, 0, lista, 1);
 
     if (opt == 2 || opt == 9) {
         cleanScreen(1, false);
@@ -825,8 +825,9 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
 /* H) FIM DO JOGO (TABELA DE ESTATÍSTICAS) */
 void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
     int tecla = 0, colNivel = 0;
+    char nome[12];
     /*
-     * Código do sistema de Ranking - Futuro (sem previsão no momento)
+     * Código do sistema de Ranking - Futuro (em desenvolvimento)
      */
     //Banner "animado" do Parabéns
     DWORD threadId;
@@ -879,8 +880,8 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
     } else if(((strcmp(nivel, "FÁCIL") == 0 && acertos == 5) || (strcmp(nivel, "MÉDIO I") == 0 && acertos == 10)) || ((strcmp(nivel, "MÉDIO II") == 0 && acertos == 11) || (strcmp(nivel, "DIFÍCIL") == 0 && acertos == 26))){
         textColor(_BLACK, LIGHTGREEN);
         exibirBannerResultado(3);
-        box(21, 26, 23, 95);
-        linhaCol(22, 28); printf("Meus parabéns, você acertou TODAS AS QUESTÕES! É assim que se faz!");
+        box(12, 26, 14, 95);
+        linhaCol(13, 28); printf("Meus parabéns, você acertou TODAS AS QUESTÕES! É assim que se faz!");
     } else {
         exibirBannerResultado(69);
         box(21, 41, 23, 79);
@@ -888,14 +889,29 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
     }
     textColor(_BLACK, WHITE);
     topBannerContent("RESULTADO FINAL DO", 2, 26, nivel, 3, colNivel, 4);
-    setlocale(LC_ALL, "C");
+
+    /*setlocale(LC_ALL, "C");
     linhaCol(26, 43); printf("%c", 254);
     setlocale(LC_ALL, "Portuguese");
     printf(" Pressione ENTER para continuar ");
     setlocale(LC_ALL, "C");
     printf("%c", 254);
-    setlocale(LC_ALL, "Portuguese");
-    pressEnter();
+    setlocale(LC_ALL, "Portuguese");*/
+
+    box(21, 26, 29, 95);
+    linhaCol(23, 43); printf("Nova posição no ranking: 1º posição!");
+    linhaCol(25, 29); printf("Digite seu nome para registrar o novo recorde e pressione Enter.");
+    linhaCol(27, 50); printf("Nome: ");
+    box(26, 56, 28, 70);
+    showCursor();
+    Sleep(50);
+    fflush(stdin);
+    fgets(nome, 12, stdin);
+    linhaCol(27, 58);
+    fgets(nome, 12, stdin);
+    hideCursor();
+
+    //pressEnter();
 
     //As telas de desbloqueio de modos serão mostrados apenas uma única vez
     if (((strcmp(nivel, "FÁCIL") == 0 && modosDisponiveis == 0) || (strcmp(nivel, "MÉDIO I") == 0 && modosDisponiveis == 1)) || ((strcmp(nivel, "MÉDIO II") == 0 && modosDisponiveis == 2) || (strcmp(nivel, "DIFÍCIL") == 0 && modosDisponiveis == 3))) {
@@ -1568,6 +1584,12 @@ void exibirBannerDificuldade(char titulo1[40], int lin1, int col1, char nivel[20
         linhaCol(linha + 2, coluna); printf("|   --|  _| -_| . | |  _| . |_ -|  | . | . |  |  |  | . | . | . |");
         linhaCol(linha + 3, coluna); printf("|_____|_| |___|___|_|_| |___|___|  |___|___|  |_____|___|_  |___|");
         linhaCol(linha + 4, coluna); printf("                                                        |___|    ");
+    } else if (strcmp(nivel, "RANKING") == 0) {
+        linhaCol(linha + 0, coluna); printf(" _____         _   _            __                _ ");
+        linhaCol(linha + 1, coluna); printf("| __  |___ ___| |_|_|___ ___   |  |   ___ ___ ___| |");
+        linhaCol(linha + 2, coluna); printf("|    -| .'|   | '_| |   | . |  |  |__| . |  _| .'| |");
+        linhaCol(linha + 3, coluna); printf("|__|__|__,|_|_|_,_|_|_|_|_  |  |_____|___|___|__,|_|");
+        linhaCol(linha + 4, coluna); printf("                        |___|                       ");
     } else if (strcmp(nivel, "NÃO DESISTA") == 0) {
         linhaCol(linha + 1, coluna); printf(" _____ /\\/        ____          _     _      ");
         linhaCol(linha + 2, coluna); printf("|   | |___ ___   |    \\ ___ ___|_|___| |_ ___");
@@ -1594,23 +1616,23 @@ void exibirBannerDificuldade(char titulo1[40], int lin1, int col1, char nivel[20
         linhaCol(linha + 3, coluna); printf("|     |   |_|  ");
         linhaCol(linha + 4, coluna); printf("|__|__|_|_|_|  ");
     } else if (strcmp(nivel, "FÁCIL") == 0) {
-        linhaCol(linha, coluna); printf(" _____ _         _    _____         _ _ ");
-        linhaCol(linha + 1, coluna); printf("|   | |_|_ _ ___| |  |   __|___ ___|_| |");
+        linhaCol(linha + 0, coluna); printf(" _____  /        _    _____   /     _ _ ");
+        linhaCol(linha + 1, coluna); printf("|   | |_ _ _ ___| |  |   __|___ ___|_| |");
         linhaCol(linha + 2, coluna); printf("| | | | | | | -_| |  |   __| .'|  _| | |");
         linhaCol(linha + 3, coluna); printf("|_|___|_|\\_/|___|_|  |__|  |__,|___|_|_|");
     } else if (strcmp(nivel, "MÉDIO I") == 0) {
-        linhaCol(linha, coluna); printf(" _____ _         _    _____       _ _        _____ ");
-        linhaCol(linha + 1, coluna); printf("|   | |_|_ _ ___| |  |     |___ _| |_|___   |_   _|");
+        linhaCol(linha + 0, coluna); printf(" _____  /        _    _____   /   _ _        _____ ");
+        linhaCol(linha + 1, coluna); printf("|   | |_ _ _ ___| |  |     |___ _| |_|___   |_   _|");
         linhaCol(linha + 2, coluna); printf("| | | | | | | -_| |  | | | | -_| . | | . |   _| |_ ");
         linhaCol(linha + 3, coluna); printf("|_|___|_|\\_/|___|_|  |_|_|_|___|___|_|___|  |_____|");
     } else if (strcmp(nivel, "MÉDIO II") == 0) {
-        linhaCol(linha, coluna); printf(" _____ _         _    _____       _ _        _____ _____ ");
-        linhaCol(linha + 1, coluna); printf("|   | |_|_ _ ___| |  |     |___ _| |_|___   |_   _|_   _|");
+        linhaCol(linha + 0, coluna); printf(" _____  /        _    _____   /   _ _        _____ _____ ");
+        linhaCol(linha + 1, coluna); printf("|   | |_ _ _ ___| |  |     |___ _| |_|___   |_   _|_   _|");
         linhaCol(linha + 2, coluna); printf("| | | | | | | -_| |  | | | | -_| . | | . |   _| |_ _| |_ ");
         linhaCol(linha + 3, coluna); printf("|_|___|_|\\_/|___|_|  |_|_|_|___|___|_|___|  |_____|_____|");
     } else if (strcmp(nivel, "DIFÍCIL") == 0) {
-        linhaCol(linha, coluna); printf(" _____ _         _    ____  _ ___ _     _ _ ");
-        linhaCol(linha + 1, coluna); printf("|   | |_|_ _ ___| |  |    \\|_|  _|_|___|_| |");
+        linhaCol(linha + 0, coluna); printf(" _____  /        _    ____  _ ___  /    _ _ ");
+        linhaCol(linha + 1, coluna); printf("|   | |_ _ _ ___| |  |    \\|_|  _|_ ___|_| |");
         linhaCol(linha + 2, coluna); printf("| | | | | | | -_| |  |  |  | |  _| |  _| | |");
         linhaCol(linha + 3, coluna); printf("|_|___|_|\\_/|___|_|  |____/|_|_| |_|___|_|_|");
     } else if(strcmp(nivel, "???") == 0) {
@@ -2062,10 +2084,12 @@ void bottomBannerTitle(int opt) {
 }
 
 void bottomBannerContent(int opt, int menuAtual) {
-    for (int descLinha = 34; descLinha <= 36; descLinha ++) {
-        linhaCol(descLinha, 2);
-        for (int limpar = 2; limpar < 117; limpar ++) {
-            printf(" ");
+    if (menuAtual != 0) {
+        for (int descLinha = 34; descLinha <= 36; descLinha ++) {
+            linhaCol(descLinha, 2);
+            for (int limpar = 2; limpar < 117; limpar ++) {
+                printf(" ");
+            }
         }
     }
     if (menuAtual == 1) {
@@ -2188,6 +2212,63 @@ void bottomBannerContent(int opt, int menuAtual) {
                 printf("Espera, que modo é esse?");
                 textColor(WHITE, _BLACK);
             break;
+            case 6:
+                linhaCol(35, 48); printf("Volte ao ");
+                textColor(BROWN, _BLACK);
+                printf("Menu Principal");
+                textColor(WHITE, _BLACK);
+                printf(".");
+                break;
+        }
+    } else if (menuAtual == 4){
+        switch(opt) {
+            case 1:
+                linhaCol(35, 34); printf("Visualize as pontuações registradas do nível ");
+                textColor(BROWN, _BLACK);
+                printf("\"Fácil\"");
+                textColor(WHITE, _BLACK);
+                printf(".");
+                break;
+            case 2:
+                linhaCol(35, 33); printf("Visualize as pontuações registradas do nível ");
+                textColor(BROWN, _BLACK);
+                printf("\"Médio I\"");
+                textColor(WHITE, _BLACK);
+                printf(".");
+                break;
+            case 3:
+                linhaCol(35, 33); printf("Visualize as pontuações registradas do nível ");
+                textColor(BROWN, _BLACK);
+                printf("\"Médio II\"");
+                textColor(WHITE, _BLACK);
+                printf(".");
+                break;
+            case 4:
+                linhaCol(35, 33); printf("Visualize as pontuações registradas do nível ");
+                textColor(BROWN, _BLACK);
+                printf("\"Difícil\"");
+                textColor(WHITE, _BLACK);
+                printf(".");
+                break;
+            case 5:
+                linhaCol(35, 28);
+                textColor(BROWN, _BLACK);
+                printf("Apague");
+                textColor(WHITE, _BLACK);
+                printf(" todas as pontuações registradas na ");
+                textColor(BROWN, _BLACK);
+                printf("dificuldade selecionada");
+                textColor(WHITE, _BLACK);
+                printf(".");
+                textColor(LIGHTRED, _BLACK);
+                linhaCol(36, 39); printf("[ATENÇÃO]");
+                textColor(WHITE, _BLACK);
+                printf(" Esta ação não poderá ser ");
+                textColor(BROWN, _BLACK);
+                printf("DESFEITA");
+                textColor(WHITE, _BLACK);
+                printf(".");
+                break;
             case 6:
                 linhaCol(35, 48); printf("Volte ao ");
                 textColor(BROWN, _BLACK);
@@ -2355,8 +2436,8 @@ void exibirLetras(char nivel[9]) {
     textColor(WHITE, _BLACK);
 }
 
-int modeloMenu(int lin1, int col1, int qtd, int menuAtual, char lista[][40]) {
-    int opt = 1, infoOpt = 1, lin2, col2, linhaSelecionada, i, tamMaxItem, tecla, limpar, espacamento;
+int modeloMenu(int lin1, int col1, int qtd, int menuAtual, char lista[][40], int opt) {
+    int infoOpt = 1, lin2, col2, linhaSelecionada, i, tamMaxItem, tecla, limpar, espacamento;
     bool enterPressed = false, lRPressed = true, bannerAnimado = true;
 
     char wav[30];

@@ -9,7 +9,7 @@ bool mudarRedes = true;
 bool isFullScreen = false;
 bool isInOpeningScene = true;
 
-char caminho[50] = "sounds/";
+char caminho[50] = "sound/";
 
 // Variável que controla os modos disponíveis
 int modosDisponiveis = 4;
@@ -89,7 +89,7 @@ void bottomBannerTitle(int opt);
 void bottomBannerContent(int opt, int menuAtual);
 void cleanScreen(int opt, bool inferiorCompleto);
 void exibirLetras(char nivel[9]);
-int modeloMenu(int lin1, int col1, int qtd, int menuAtual, char lista[][40]);
+int modeloMenu(int lin1, int col1, int qtd, int menuAtual, char lista[][40], int opt);
 void currentProgressionBanner(char difficulty[8], int currentProgression[26], int acertos, int erros, int pontos);
 int pressEnter(void);
 void cheatBanner();
