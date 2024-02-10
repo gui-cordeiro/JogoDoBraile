@@ -31,7 +31,7 @@
 int main(int argc, char *args[]) {
     configJogo();
     apresentacao();
-    fimJogo("FÁCIL", 750, 5, 5);
+    //fimJogo("FÁCIL", 750, 5, 5);
     int opt = 0;
     do {
         opt = mainMenu();
@@ -79,7 +79,7 @@ int main(int argc, char *args[]) {
                 apresentacao();
         };
     } while(opt != 6);
-    //opcaoA6();
+    opcaoA6();
     system("cls");
     return 0;
 }

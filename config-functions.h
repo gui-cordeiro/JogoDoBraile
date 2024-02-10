@@ -453,7 +453,7 @@ void apresentacao(){
     Mix_FreeChunk(intro);
     isInOpeningScene = false;
     //PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
-    Mix_PlayChannel(-1, menu, -1);
+    Mix_PlayChannel(0, menu, -1);
     topBannerDesign();
     bottomBannerDesign();
     return;
@@ -900,6 +900,7 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
 
     box(21, 26, 29, 95);
     linhaCol(23, 43); printf("Nova posição no ranking: 1º posição!");
+    Sleep(1000);
     linhaCol(25, 29); printf("Digite seu nome para registrar o novo recorde e pressione Enter.");
     linhaCol(27, 50); printf("Nome: ");
     box(26, 56, 28, 70);
@@ -909,6 +910,13 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
     fgets(nome, 12, stdin);
     linhaCol(27, 58);
     fgets(nome, 12, stdin);
+    box(21, 26, 29, 95);
+    linhaCol(23, 38); printf("Nome registrado no ranking local com sucesso!");
+    linhaCol(25, 29); printf("Veja seu recorde na opção de \"Ranking Local\" no Menu Principal.");
+    linhaCol(27, 45); printf("Pressione ENTER para continuar");
+    pressEnter();
+
+
     hideCursor();
 
     //pressEnter();
@@ -1150,7 +1158,10 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
     if (acertos == numPerg) exibirTelaRedes(0, nivel);
     else exibirTelaRedes(2, nivel);
     cleanScreen(1, false);
-    PlaySound(TEXT("..\\sounds\\menu.wav"), NULL, SND_LOOP | SND_ASYNC);
+    char wav[30];
+    strcat(strcpy(wav, caminho), "menu.wav");
+    Mix_Chunk *menu = Mix_LoadWAV(wav);
+    Mix_PlayChannel(0, menu, -1);
     return;
 }
 
@@ -2835,9 +2846,15 @@ int pressEnter(void) {
 }
 
 void cheatBanner() {
+    int wav[30];
+    strcat(strcpy(wav, caminho), "wasted.wav");
+    Mix_Chunk *wasted = Mix_LoadWAV(wav);
+    strcat(strcpy(wav, caminho), "cheat.wav");
+    Mix_Chunk *cheat = Mix_LoadWAV(wav);
+
     textColor(WHITE, _BLACK);
     linhaCol(13, 27); printf("Você achou que poderia trapacear na cara dura? ACHOU ERRADO, OTÁRIO!");
-    PlaySound(TEXT("..\\sounds\\wasted.wav"), NULL, SND_ASYNC);
+    Mix_PlayChannel(0, wasted, -1);
     Sleep(2146); //7039
     textColor(LIGHTRED, _BLACK);
     linhaCol(14, 2); printf("                                                                                                            .......  ");
@@ -2858,7 +2875,7 @@ void cheatBanner() {
     Sleep(3500);
 
     cleanScreen(6, false);
-    PlaySound(TEXT("..\\sounds\\cheat.wav"), NULL, SND_LOOP | SND_ASYNC);
+    Mix_PlayChannel(0, cheat, -1);
 
     box(21, 16, 30, 104);
 

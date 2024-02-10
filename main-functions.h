@@ -155,16 +155,22 @@ int opcaoB1() {
                 cleanScreen(6, false);
                 topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "FÁCIL", 3, 17, 6);
                 titulo("-", "Modo de Edição Rápida detectada");
+                int wav[30];
+                strcat(strcpy(wav, caminho), "cheatDeactivated.wav");
+                Mix_Chunk *cheatDeactivated = Mix_LoadWAV(wav);
+                strcat(strcpy(wav, caminho), "countdown.wav");
+                Mix_Chunk *countdown = Mix_LoadWAV(wav);
                 textColor(WHITE, _BLACK);
                 cheatBanner();
                 while (isTextEditingEnabled){}
                 cleanScreen(6, false);
                 cont ++;
                 linhaCol(20, 30); printf("[ATENÇÃO] Modo de Edição Rápida desativado. Voltando ao jogo...");
-                PlaySound(TEXT("..\\sounds\\cheatDeactivated.wav"), NULL, SND_SYNC);
+                Mix_PlayChannel(0, cheatDeactivated, 0);
+                Sleep(1500);
                 cleanScreen(6, false);
-                PlaySound(TEXT("..\\sounds\\nosound.wav"), NULL, SND_LOOP | SND_ASYNC);
                 titulo("FÁCIL", "O jogo começará em breve...");
+                Mix_PlayChannel(0, countdown, -1);
                 topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "FÁCIL", 3, 17, 5);
             }
             Sleep(10);
@@ -757,13 +763,14 @@ void opcaoA2() {
         //box(13, 2, 31, 70);
         // Esta tabela de pontuação trata-se de um mero placeholder
         linhaCol(14, 4); printf("    Posição \t      Nome \t Rank \t Pontuação \t Tempo");
-        linhaCol(17, 4); printf("\t 1st \t      GUI \t  S \t   0650 \t02m37seg");
-        linhaCol(19, 4); printf("\t 2nd \t      GUI \t  S \t   0650 \t02m37seg");
-        linhaCol(21, 4); printf("\t 3rd \t      GUI \t  S \t   0650 \t02m37seg");
-        linhaCol(23, 4); printf("\t 4th \t      GUI \t  S \t   0650 \t02m37seg");
-        linhaCol(25, 4); printf("\t 5th \t      GUI \t  A \t   0650 \t02m37seg");
-        linhaCol(27, 4); printf("\t 6th \t      GUI \t  B \t   0650 \t02m37seg");
-        linhaCol(29, 4); printf("\t 7th \t      GUI \t  B \t   0650 \t02m37seg");
+        linhaCol(15, 7); printf("___________________________________________________________");
+        linhaCol(17, 4); printf("\t 1st \t  Guilherme C. \t  S \t   0650 \t02m37seg");
+        linhaCol(19, 4); printf("\t 1st \t  Guilherme C. \t  S \t   0650 \t02m37seg");
+        linhaCol(21, 4); printf("\t 1st \t  Guilherme C. \t  S \t   0650 \t02m37seg");
+        linhaCol(23, 4); printf("\t 1st \t  Guilherme C. \t  S \t   0650 \t02m37seg");
+        linhaCol(25, 4); printf("\t 1st \t  Guilherme C. \t  S \t   0650 \t02m37seg");
+        linhaCol(27, 4); printf("\t 1st \t  Guilherme C. \t  S \t   0650 \t02m37seg");
+        linhaCol(29, 4); printf("\t 1st \t  Guilherme C. \t  S \t   0650 \t02m37seg");
 
         if (menuTitle) {
             setlocale(LC_ALL, "C");
@@ -1004,7 +1011,13 @@ void opcaoA5() {
 /* 10) SAIR DO JOGO */
 void opcaoA6() {
     system("cls");
-    PlaySound(TEXT("..\\sounds\\ending.wav"), NULL, SND_ASYNC);
+
+    char wav[30];
+    strcat(strcpy(wav, caminho), "ending.wav");
+    Mix_Chunk *ending = Mix_LoadWAV(wav);
+    strcat(strcpy(wav, caminho), "closing.wav");
+    Mix_Chunk *closing = Mix_LoadWAV(wav);
+    Mix_PlayChannel(0, ending, 0);
     titulo("-", "Obrigado por Jogar!");
     exibirBannerDificuldade("MUITO OBRIGADO POR JOGAR O", 15, 47, "AGRADECIMENTO", 15, 33);
     Sleep(1100);
@@ -1013,7 +1026,7 @@ void opcaoA6() {
     Sleep(600);
     box(8, 3, 32, 117);
     exibirTelaRedes(1, "-");
-    PlaySound(TEXT("..\\sounds\\closing.wav"), NULL, SND_ASYNC);
+    Mix_PlayChannel(0, closing, 0);
     titulo("-", "Saindo do Jogo...");
     if(!isFullScreen) addFade(8, 0, 0);
     else addFade(18, 0, 0);
