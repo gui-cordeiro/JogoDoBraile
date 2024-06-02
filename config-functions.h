@@ -16,8 +16,9 @@ void exibirTelaRedes(int endOfGame, char nivel[8]){
 
     if (endOfGame == 0) {
         Sleep(350);
-        if (strcmp(nivel, "DIFÍCIL") != 0) hThread2 = CreateThread(NULL, 0x0, bannerEncerramento, NULL, 0, &threadId2);
-        else {
+        if (strcmp(nivel, "DIFÍCIL") != 0 && strcmp(nivel, "-") != 0) {
+            hThread2 = CreateThread(NULL, 0x0, bannerEncerramento, NULL, 0, &threadId2);
+        } else {
             textColor(BROWN, _BLACK);
             setlocale(LC_ALL, "C");
             linhaCol(35, 35); printf("%c ", 254);
@@ -398,7 +399,6 @@ void apresentacao(){
     system("cls");
     titulo("-", "Tela de título");
 
-    //PlaySound(TEXT("..\\sounds\\intro.wav"), NULL, SND_ASYNC);
     Mix_PlayChannel(0, intro, 0);
 
     setlocale(LC_ALL, "C");
@@ -829,6 +829,12 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
     /*
      * Código do sistema de Ranking - Futuro (em desenvolvimento)
      */
+
+    char sound[30];
+
+    strcat(strcpy(sound, caminho), "drumroll.wav");
+    Mix_Chunk *drumroll = Mix_LoadWAV(sound);
+
     //Banner "animado" do Parabéns
     DWORD threadId;
     HANDLE hThread;
@@ -860,7 +866,9 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
     printf("%c", 254);
     setlocale(LC_ALL, "Portuguese");
 
-    Sleep(2000); //3500
+    // Musiis
+    Mix_PlayChannel(0, drumroll, 0);
+    SDL_Delay(4000);
 
     if(((strcmp(nivel, "FÁCIL") == 0 && acertos <= 2) || (strcmp(nivel, "MÉDIO I") == 0 && acertos <= 3)) || ((strcmp(nivel, "MÉDIO II") == 0 && acertos <= 4) || (strcmp(nivel, "DIFÍCIL") == 0 && acertos <= 8))){
         textColor(_BLACK, LIGHTRED);
@@ -2567,7 +2575,7 @@ int modeloMenu(int lin1, int col1, int qtd, int menuAtual, char lista[][40], int
     char wav[30];
 
 
-    strcat(strcpy(wav, caminho), "confirm.wav");
+    strcat(strcpy(wav, caminho), "confirm2.wav");
     Mix_Chunk *enter = Mix_LoadWAV(wav);
 
     strcat(strcpy(wav, caminho), "selection.wav");
@@ -2940,8 +2948,8 @@ void currentProgressionBanner(char difficulty[8], int currentProgression[26], in
 int pressEnter(void) {
     char teste[30];
     strcpy(teste, caminho);
-    if (isInOpeningScene) strcat(teste, "start.wav");
-    else strcat(teste, "confirm.wav");
+    if (isInOpeningScene) strcat(teste, "confirm2.wav");
+    else strcat(teste, "confirm2.wav");
     Mix_Chunk *enter = Mix_LoadWAV(teste);
 
     bool enterPressed = false;

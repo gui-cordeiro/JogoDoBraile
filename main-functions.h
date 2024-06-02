@@ -750,7 +750,7 @@ void opcaoA2() {
     int opt = 1, lastOpt;
     bool menuTitle = true;
     char lista [6][40] = {"Ranking - NÍVEL FÁCIL","Ranking - NÍVEL MÉDIO I","Ranking - NÍVEL MÉDIO II","Ranking - NÍVEL DIFÍCIL","Resetar registros","Voltar ao Menu Principal"};
-    char lista2 [2][40] = {"SIM, eu quero resetar tudo", "NÃO, eu quero cancelar"};
+    char lista2 [2][40] = {"SIM, eu quero resetar tudo.", "NÃO, eu quero cancelar."};
     titulo("-", "Ranking dos Jogadores");
     topBannerContent("VOCÊ ESTÁ VISUALIZANDO O", 2, 23, "RANKING", 3, 11, 2);
 
@@ -762,15 +762,26 @@ void opcaoA2() {
 
         //box(13, 2, 31, 70);
         // Esta tabela de pontuação trata-se de um mero placeholder
-        linhaCol(14, 4); printf("    Posição \t      Nome \t Rank \t Pontuação \t Tempo");
-        linhaCol(15, 7); printf("___________________________________________________________");
-        linhaCol(17, 4); printf("\t 1st \t  Guilherme C. \t  S \t   0650 \t02m37seg");
-        linhaCol(19, 4); printf("\t 1st \t  Guilherme C. \t  S \t   0650 \t02m37seg");
-        linhaCol(21, 4); printf("\t 1st \t  Guilherme C. \t  S \t   0650 \t02m37seg");
-        linhaCol(23, 4); printf("\t 1st \t  Guilherme C. \t  S \t   0650 \t02m37seg");
-        linhaCol(25, 4); printf("\t 1st \t  Guilherme C. \t  S \t   0650 \t02m37seg");
-        linhaCol(27, 4); printf("\t 1st \t  Guilherme C. \t  S \t   0650 \t02m37seg");
-        linhaCol(29, 4); printf("\t 1st \t  Guilherme C. \t  S \t   0650 \t02m37seg");
+        linhaCol(14, 8); printf("Posição");
+        linhaCol(14, 23); printf("Nome");
+        linhaCol(14, 34); printf("Rank");
+        linhaCol(14, 43); printf("Pontuação");
+        linhaCol(14, 58); printf("Tempo");
+        linhaCol(15, 6); printf("_____________________________________________________________");
+        for (int cont = 0; cont < 7; cont ++) {
+            if (cont == 0) textColor(YELLOW, _BLACK);
+            else if (cont == 1) textColor(LIGHTGRAY, _BLACK);
+            else if (cont == 2) textColor(BROWN, _BLACK);
+            else textColor(DARKGRAY, _BLACK);
+
+            linhaCol(17 + (cont * 2), 10); printf("%dº", cont + 1);
+            linhaCol(17 + (cont * 2), 19); printf("Guilherme C.");
+            linhaCol(17 + (cont * 2), 36); printf("A");
+            linhaCol(17 + (cont * 2), 45); printf("1250");
+            linhaCol(17 + (cont * 2), 56); printf("01min06seg");
+        }
+        textColor(WHITE, _BLACK);
+        linhaCol(30, 6); printf("_____________________________________________________________");
 
         if (menuTitle) {
             setlocale(LC_ALL, "C");
@@ -780,18 +791,6 @@ void opcaoA2() {
             }
             linhaCol(32,72); printf("%c", 193);
             setlocale(LC_ALL, "Portuguese");
-
-            /*linhaCol(9, 79); printf(" _____     _         _             ");
-            linhaCol(10, 79); printf("|   __|___| |___ ___|_|___ ___ ___ ");
-            linhaCol(11, 79); printf("|__   | -_| | -_|  _| | . |   | -_|");
-            linhaCol(12, 79); printf("|_____|___|_|___|___|_|___|_|_|___|");
-
-            setlocale(LC_ALL, "C");
-            linhaCol(13, 81); printf("%c", 254);
-            setlocale(LC_ALL, "Portuguese");
-            printf(" um nível e veja seu ranking ");
-            setlocale(LC_ALL, "C");
-            printf("%c", 254);*/
 
             setlocale(LC_ALL, "C");
             SetConsoleOutputCP(CP_UTF8);
@@ -831,17 +830,15 @@ void opcaoA2() {
             SetConsoleOutputCP(850);
             setlocale(LC_ALL, "Portuguese");
 
-            opt = modeloMenu(23, 45, 2, 0, lista2, 2);
+            opt = modeloMenu(23, 44, 2, 0, lista2, 2);
             if (opt == 1) {
                 // Código para deletar os registros
             }
             opt = lastOpt;
             cleanScreen(6, false);
             menuTitle = true;
-        }
-        else if (opt != 6) cleanScreen(9, false);
-    } while(opt != 6);
-    //pressEnter();
+        } else if (opt < 6) cleanScreen(9, false);
+    } while(opt < 6);
     cleanScreen(1, false);
 }
 
@@ -1015,7 +1012,7 @@ void opcaoA5() {
     int screenWidth = GetSystemMetrics(SM_CXSCREEN);
     int screenHeight = GetSystemMetrics(SM_CYSCREEN);
 
-    if (screenWidth == 1280 && screenHeight == 600) {
+    if ((screenWidth == 1280 && screenHeight == 600) && isFullScreen) {
         topBannerContent("VOCÊ ESTÁ NO", 2, 29, "MENU", 3, 9, 4);
         textColor(LIGHTRED, _BLACK);
         box(13, 12, 27, 109);

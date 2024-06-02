@@ -13,7 +13,7 @@ bool itIsThe1stTimeOpening = true;
 char caminho[50] = "sounds";
 
 // Variável que controla os modos disponíveis
-int modosDisponiveis = 4;
+int modosDisponiveis = 0;
 
 int mouseX = 0;
 int mouseY = 0;
