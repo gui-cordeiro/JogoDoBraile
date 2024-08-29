@@ -824,12 +824,9 @@ int confirmarJogo(char nivel[9], int progresso[26]) {
 
 /* H) FIM DO JOGO (TABELA DE ESTATÍSTICAS) */
 void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
-    int tecla = 0, colNivel = 0;
-    char nome[12];
-    /*
-     * Código do sistema de Ranking - Futuro (em desenvolvimento)
-     */
-
+    int tecla = 0, colNivel = 0, tempoTotal = 0;
+    char rankFinal;
+    char nome[13];
     char sound[30];
 
     strcat(strcpy(sound, caminho), "drumroll.wav");
@@ -871,21 +868,25 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
     SDL_Delay(4000);
 
     if(((strcmp(nivel, "FÁCIL") == 0 && acertos <= 2) || (strcmp(nivel, "MÉDIO I") == 0 && acertos <= 3)) || ((strcmp(nivel, "MÉDIO II") == 0 && acertos <= 4) || (strcmp(nivel, "DIFÍCIL") == 0 && acertos <= 8))){
+        rankFinal = 'C';
         textColor(_BLACK, LIGHTRED);
         exibirBannerResultado(0);
         box(21, 24, 23, 95);
         linhaCol(22, 26); printf("Não se frustre! Errar faz parte, e é somente errando que se aprende!");
     } else if(((strcmp(nivel, "FÁCIL") == 0 && acertos <= 3) || (strcmp(nivel, "MÉDIO I") == 0 && acertos <= 6)) || ((strcmp(nivel, "MÉDIO II") == 0 && acertos <= 7) || (strcmp(nivel, "DIFÍCIL") == 0 && acertos <= 16))){
+        rankFinal = 'B';
         textColor(_BLACK, LIGHTBLUE);
         exibirBannerResultado(1);
         box(21, 27, 23, 93);
         linhaCol(22, 29); printf("Você está indo no caminho certo! Continue firme, você consegue!");
     } else if(((strcmp(nivel, "FÁCIL") == 0 && acertos <= 4) || (strcmp(nivel, "MÉDIO I") == 0 && acertos <= 9)) || ((strcmp(nivel, "MÉDIO II") == 0 && acertos <= 10) || (strcmp(nivel, "DIFÍCIL") == 0 && acertos <= 25))){
+        rankFinal = 'A';
         textColor(_BLACK, LIGHTMAGENTA);
         exibirBannerResultado(2);
         box(21, 28, 23, 92);
         linhaCol(22, 30); printf("Muito bem! A perseverança é a chave, então continue tentando!");
     } else if(((strcmp(nivel, "FÁCIL") == 0 && acertos == 5) || (strcmp(nivel, "MÉDIO I") == 0 && acertos == 10)) || ((strcmp(nivel, "MÉDIO II") == 0 && acertos == 11) || (strcmp(nivel, "DIFÍCIL") == 0 && acertos == 26))){
+        rankFinal = 'S';
         textColor(_BLACK, LIGHTGREEN);
         exibirBannerResultado(3);
         box(12, 26, 14, 95);
@@ -906,24 +907,52 @@ void fimJogo(char nivel[9], int pts, int acertos, int numPerg){
     printf("%c", 254);
     setlocale(LC_ALL, "Portuguese");*/
 
-    box(21, 26, 29, 95);
-    linhaCol(23, 43); printf("Nova posição no ranking: 1º posição!");
-    Sleep(1000);
-    linhaCol(25, 29); printf("Digite seu nome para registrar o novo recorde e pressione Enter.");
-    linhaCol(27, 50); printf("Nome: ");
-    box(26, 56, 28, 70);
-    showCursor();
-    Sleep(50);
-    fflush(stdin);
-    fgets(nome, 12, stdin);
-    linhaCol(27, 58);
-    fgets(nome, 12, stdin);
-    box(21, 26, 29, 95);
-    linhaCol(23, 38); printf("Nome registrado no ranking local com sucesso!");
-    linhaCol(25, 29); printf("Veja seu recorde na opção de \"Ranking Local\" no Menu Principal.");
+    Jogador jogadores[8];
+    int numJogadores = lerPontuacoes("facil.txt", jogadores, 7, false);
+
+    tempoTotal = 30;
+
+    for (int cont = 0; cont < numJogadores; cont ++) {
+        if (pts >= jogadores[cont].pontuacao) {
+            box(21, 26, 29, 95);
+            linhaCol(23, 43); printf("Nova posição no ranking: %dº posição!", cont + 1);
+            Sleep(1000);
+            linhaCol(25, 29); printf("Digite seu nome para registrar o novo recorde e pressione Enter.");
+            box(26, 56, 28, 71);
+            linhaCol(27, 50); printf("Nome:");
+            linhaCol(27, 58); showCursor();
+            lerStringComLimite(nome, sizeof(nome));
+            SpaceToSub(nome, true);
+
+            strcpy(jogadores[numJogadores].nome, nome);
+            jogadores[numJogadores].nota = rankFinal;
+            jogadores[numJogadores].pontuacao = pts;
+            jogadores[numJogadores].tempo = tempoTotal;
+
+            atualizarTopPontuacoes(jogadores, "facil.txt");
+
+            box(21, 26, 29, 95);
+            linhaCol(23, 38); printf("Nome registrado no ranking local com sucesso!");
+            linhaCol(25, 29); printf("Veja seu recorde na opção de \"Ranking Local\" no Menu Principal.");
+            break;
+        }
+    }
+
+    /* Código do sistema de Ranking - em desenvolvimento:
+     *  1) Verificar se o arquivo de texto existe (se não, criar um novo);
+     *  2) Ler todos os 7 registros do arquivo de texto;
+     *  3) Comparar a pontuação destes registros com a pontuação recentemente obtida e ver qual posição assumirá;
+     *
+     * Caso a nova pontuação não esteja no top 8, descartar e continuar o programa. Se estiver no top 8, fazer o seguinte:
+     *  4) Registrar a nova pontuação no vetor de pontuação dos jogadores (como um "8º jogador", sem ordem);
+     *  5) Rearranjar o vetor dos jogadores em ordem decrescente de pontuação;
+     *  6) Registrar no arquivo de texto APENAS os 7 primeiros jogadores - o 8º será descartado.
+     */
+    /*Jogador jogador = {7, nome, rankFinal, pts, 90};
+    atualizarTopPontuacoes(jogador, "facil.txt");*/
+
     linhaCol(27, 45); printf("Pressione ENTER para continuar");
     pressEnter();
-
 
     hideCursor();
 
@@ -3177,4 +3206,31 @@ void AltEnter(int repeticoes) {
         keybd_event(VK_RETURN, 0x1C, KEYEVENTF_KEYUP, 0);
         keybd_event(VK_MENU  , 0x38, KEYEVENTF_KEYUP, 0);
     }
+}
+
+void lerStringComLimite(char *str, int limite) {
+    int i = 0;
+    char ch;
+    ch = getch();
+
+    while (1) {
+        ch = getch();
+
+        if (ch == '\r' || ch == '\n') {  // Tecla Enter pressionado
+            pressEnter();
+            break;
+        } else if (ch == '\b') {  // Tecla Backspace pressionado
+            if (i > 0) {
+                i--;
+                printf("\b \b");  // Move o cursor para trás, printa Espaço e move o cursor back again
+            }
+        } else if (ch >= ' ' && ch <= '~') {  // Entre o intervalo ' ' e '~' (tabela ASCII), são caracteres válidos para serem printados
+            if (i < limite - 1) {
+                str[i] = ch;
+                i++;
+                putchar(ch);
+            }
+        }
+    }
+    str[i] = '\0';  // Caractere que indica o fim da String
 }

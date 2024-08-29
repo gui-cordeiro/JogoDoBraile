@@ -747,38 +747,62 @@ void opcaoB5() {
 
 /* 6) Ranking dos Jogadores*/
 void opcaoA2() {
-    int opt = 1, lastOpt;
+    int opt = 1, lastOpt, numJogadores;
     bool menuTitle = true;
+
     char lista [6][40] = {"Ranking - NÍVEL FÁCIL","Ranking - NÍVEL MÉDIO I","Ranking - NÍVEL MÉDIO II","Ranking - NÍVEL DIFÍCIL","Resetar registros","Voltar ao Menu Principal"};
     char lista2 [2][40] = {"SIM, eu quero resetar tudo.", "NÃO, eu quero cancelar."};
     titulo("-", "Ranking dos Jogadores");
     topBannerContent("VOCÊ ESTÁ VISUALIZANDO O", 2, 23, "RANKING", 3, 11, 2);
 
     do {
-        if (opt == 1) exibirBannerDificuldade("-", 0, 0, "FÁCIL", 9, 16);
-        else if (opt == 2) exibirBannerDificuldade("-", 0, 0, "MÉDIO I", 9, 11);
-        else if (opt == 3) exibirBannerDificuldade("-", 0, 0, "MÉDIO II", 9, 8);
-        else if (opt == 4) exibirBannerDificuldade("-", 0, 0, "DIFÍCIL", 9, 14);
+        // Verificando ou criando os arquivos de ranking caso não existam
+        verificarOuCriarArquivo("facil.txt");
+        verificarOuCriarArquivo("medio1.txt");
+        verificarOuCriarArquivo("medio2.txt");
+        verificarOuCriarArquivo("dificil.txt");
 
-        //box(13, 2, 31, 70);
-        // Esta tabela de pontuação trata-se de um mero placeholder
+        // Ler e exibir as pontuações atualizadas
+        Jogador jogadores[7];
+        if (opt == 1) {
+            exibirBannerDificuldade("-", 0, 0, "FÁCIL", 9, 16);
+            numJogadores = lerPontuacoes("facil.txt", jogadores, 7, false);
+        } else if (opt == 2) {
+            exibirBannerDificuldade("-", 0, 0, "MÉDIO I", 9, 11);
+            numJogadores = lerPontuacoes("medio1.txt", jogadores, 7, false);
+        } else if (opt == 3) {
+            exibirBannerDificuldade("-", 0, 0, "MÉDIO II", 9, 8);
+            numJogadores = lerPontuacoes("medio2.txt", jogadores, 7, false);
+        } else if (opt == 4) {
+            exibirBannerDificuldade("-", 0, 0, "DIFÍCIL", 9, 14);
+            numJogadores = lerPontuacoes("dificil.txt", jogadores, 7, false);
+        }
+
         linhaCol(14, 8); printf("Posição");
         linhaCol(14, 23); printf("Nome");
         linhaCol(14, 34); printf("Rank");
         linhaCol(14, 43); printf("Pontuação");
         linhaCol(14, 58); printf("Tempo");
         linhaCol(15, 6); printf("_____________________________________________________________");
-        for (int cont = 0; cont < 7; cont ++) {
+
+        for (int cont = 0; cont < numJogadores; cont ++) {
             if (cont == 0) textColor(YELLOW, _BLACK);
             else if (cont == 1) textColor(LIGHTGRAY, _BLACK);
             else if (cont == 2) textColor(BROWN, _BLACK);
             else textColor(DARKGRAY, _BLACK);
 
             linhaCol(17 + (cont * 2), 10); printf("%dº", cont + 1);
-            linhaCol(17 + (cont * 2), 19); printf("Guilherme C.");
-            linhaCol(17 + (cont * 2), 36); printf("A");
-            linhaCol(17 + (cont * 2), 45); printf("1250");
-            linhaCol(17 + (cont * 2), 56); printf("01min06seg");
+            linhaCol(17 + (cont * 2), 19); printf("%s", jogadores[cont].nome);
+            linhaCol(17 + (cont * 2), 36); printf("%c", jogadores[cont].nota);
+            linhaCol(17 + (cont * 2), 45);
+            if (jogadores[cont].pontuacao < 1000) printf("0");
+            if (jogadores[cont].pontuacao < 100) printf("0");
+            if (jogadores[cont].pontuacao < 10) printf("0");
+            printf("%d", jogadores[cont].pontuacao);
+            linhaCol(17 + (cont * 2), 56);
+            printf("%dmin", ((int)jogadores[cont].tempo/60));
+            if ((jogadores[cont].tempo % 60) < 10) printf("0");
+            printf("%dseg", (jogadores[cont].tempo%60));
         }
         textColor(WHITE, _BLACK);
         linhaCol(30, 6); printf("_____________________________________________________________");
@@ -832,7 +856,10 @@ void opcaoA2() {
 
             opt = modeloMenu(23, 44, 2, 0, lista2, 2);
             if (opt == 1) {
-                // Código para deletar os registros
+                if (lastOpt == 1) apagarArquivo("facil.txt");
+                else if (lastOpt == 2) apagarArquivo("medio1.txt");
+                else if (lastOpt == 3) apagarArquivo("medio2.txt");
+                else if (lastOpt == 4) apagarArquivo("dificil.txt");
             }
             opt = lastOpt;
             cleanScreen(6, false);

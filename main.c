@@ -17,15 +17,15 @@
 #include <process.h>
 #include <processthreadsapi.h>
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_mixer.h>
+#include <SDL.h>
+#include <SDL_mixer.h>
 
 #define _WIN32_WINNT 0x0500
-#define tempo 50
 
 #include "declarations.h"
 #include "aux-threads.h"
 #include "config-functions.h"
+#include "savesystem.h"
 #include "main-functions.h"
 
 int main(int argc, char *args[]) {

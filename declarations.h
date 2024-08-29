@@ -6,17 +6,19 @@
 
 bool mudar = false;
 bool mudarRedes = true;
-bool isFullScreen = true;
+bool isFullScreen = false;
 bool isInOpeningScene = true;
 bool itIsThe1stTimeOpening = true;
 
-char caminho[50] = "sounds";
+char caminho[50] = "sounds/";
 
 // Variável que controla os modos disponíveis
 int modosDisponiveis = 0;
 
 int mouseX = 0;
 int mouseY = 0;
+
+const tempo = 50;
 
 enum {
     BLACK,
@@ -56,6 +58,15 @@ enum {
     _WHITE=240
 };
 
+// Estrutura para armazenar os dados do jogador
+typedef struct {
+    char nome[13];
+    char nota;
+    int pontuacao;
+    int tempo;
+    int ordemRegistro;
+} Jogador;
+
 /* 1) ASSINATURAS DAS FUNÇÕES DO ARQUIVO "config-functions.h" */
 
 void exibirTelaRedes(int endOfGame, char nivel[8]);
@@ -94,6 +105,7 @@ int modeloMenu(int lin1, int col1, int qtd, int menuAtual, char lista[][40], int
 void currentProgressionBanner(char difficulty[8], int currentProgression[26], int acertos, int erros, int pontos);
 int pressEnter(void);
 void cheatBanner();
+void lerStringComLimite(char *str, int limite);
 
 /* 2) ASSINATURAS DAS FUNÇÕES DO ARQUIVO "main-functions.h" */
 
@@ -130,3 +142,9 @@ DWORD WINAPI antiCheat(LPVOID params);
 
 DWORD WINAPI bannerParabens(LPVOID params);
 DWORD WINAPI bannerEncerramento(LPVOID params);
+
+/* 4) CONFIGURAÇÕES GLOBAIS DAS THREADS AUXILIARES DO ARQUIVO "savesystem.h" */
+
+void salvarPontuacoes(const char *nomeArquivo, Jogador *jogadores, int numJogadores);
+int lerPontuacoes(const char *nomeArquivo, Jogador *jogadores, int maxJogadores, bool retornarOrdemRegistro);
+void SpaceToSub(char *str, bool inverse);
