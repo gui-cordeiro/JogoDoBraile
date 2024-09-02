@@ -5,6 +5,7 @@
       "process.h": "c",
       "locale.h": "c",
       "conio.h": "c",
-      "string.h": "c"
+      "string.h": "c",
+      "stdlib.h": "c"
    }
 }
