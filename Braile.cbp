@@ -36,8 +36,8 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add directory="C:/Users/guilh/OneDrive/Documentos/Projetos GitHub/JogoDoBraile/libs/SDL2-2.28.5/x86_64-w64-mingw32/include/SDL2" />
-			<Add directory="C:/Users/guilh/OneDrive/Documentos/Projetos GitHub/JogoDoBraile/libs/SDL2_mixer-2.8.0/x86_64-w64-mingw32/include/SDL2" />
+			<Add directory="libs/SDL2-2.28.5/x86_64-w64-mingw32/include/SDL2" />
+			<Add directory="libs/SDL2_mixer-2.8.0/x86_64-w64-mingw32/include/SDL2" />
 		</Compiler>
 		<Linker>
 			<Add option="-lwinmm" />
@@ -48,8 +48,8 @@
 			<Add library="SDL2" />
 			<Add library="SDL2main" />
 			<Add library="SDL2_mixer" />
-			<Add directory="C:/Users/guilh/OneDrive/Documentos/Projetos GitHub/JogoDoBraile/libs/SDL2-2.28.5/x86_64-w64-mingw32/lib" />
-			<Add directory="C:/Users/guilh/OneDrive/Documentos/Projetos GitHub/JogoDoBraile/libs/SDL2_mixer-2.8.0/x86_64-w64-mingw32/lib" />
+			<Add directory="libs/SDL2-2.28.5/x86_64-w64-mingw32/lib" />
+			<Add directory="libs/SDL2_mixer-2.8.0/x86_64-w64-mingw32/lib" />
 		</Linker>
 		<Unit filename="aux-threads.h" />
 		<Unit filename="config-functions.h" />
