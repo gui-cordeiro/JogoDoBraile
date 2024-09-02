@@ -6,7 +6,8 @@
       "locale.h": "c",
       "conio.h": "c",
       "string.h": "c",
-      "stdlib.h": "c"
+      "stdlib.h": "c",
+      "sdl.h": "c"
    },
    "cSpell.words": [
       "apresentacao",
