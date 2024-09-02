@@ -1,5 +1,5 @@
 /*
- * -> C√≥digo-Fonte do Jogo do Braile
+ * -> CÛdigo-Fonte do Jogo do Braile
  * -> Desenvolvido por: Guilherme Cordeiro
  * -> Ano: 2017, 2024
  */
@@ -21,7 +21,7 @@
 #include "include/SDL_main.h"
 #include "include/SDL_mixer.h"
 
-#define _WIN32_WINNT 0x0500
+#define _WIN32_WINNT 0x0500 // Define que as APIs do Windows 2000 ou posterior ser„o utilizados neste projeto
 
 #include "declarations.h"
 #include "aux-threads.h"
@@ -29,11 +29,10 @@
 #include "savesystem.h"
 #include "main-functions.h"
 
-int main(int argc, char *argv[]) {
-    setlocale(LC_ALL,"Portuguese");
+int main(int argc, char *args[]) {
     configJogo();
     apresentacao();
-    //fimJogo("F√ÅCIL", 750, 5, 5);
+    //fimJogo("F¡CIL", 750, 5, 5);
     int opt = 0;
     do {
         opt = mainMenu();
