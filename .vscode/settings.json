@@ -7,5 +7,10 @@
       "conio.h": "c",
       "string.h": "c",
       "stdlib.h": "c"
-   }
+   },
+   "cSpell.words": [
+      "apresentacao",
+      "Disponiveis",
+      "opcao"
+   ]
 }
