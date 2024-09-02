@@ -4,43 +4,102 @@
        {
            "label": "Compilar C",
            "type": "shell",
-           "command": "gcc",
+           "command": "gcc.exe",
            "args": [
-               "-g",
-               "${file}",
-               "-o",
-               "${fileDirname}/${fileBasenameNoExtension}.exe"
-           ],
+                "-Wall",
+                "-g",
+                "-Ilibs\\include",
+                "-c",
+                "${workspaceFolder}\\main.c",
+                "-o",
+                "obj\\Debug\\main.o",
+                "&&",
+                "gcc.exe",
+                "-Llibs\\lib",
+                "-o",
+                "bin\\Debug\\Braile.exe",
+                "obj\\Debug\\main.o",
+                "obj\\Debug\\resources.res",
+                "-lwinmm",
+                "-lSDL2",
+                "-lSDL2main",
+                "-lSDL2_mixer",
+                "-lmingw32",
+                "-lSDL2",
+                "-lSDL2main",
+                "-lSDL2_mixer",
+                "-lmingw32",
+                "-lSDL2main",
+                "-lSDL2",
+                "-lSDL2_mixer"
+            ],
            "group": {
                "kind": "build",
                "isDefault": true
            },
            "problemMatcher": ["$gcc"],
-           "detail": "Compilando o programa"
-       },
-       {
-           "label": "Executar C",
-           "type": "shell",
-           "command": "${fileDirname}/${fileBasenameNoExtension}.exe",
-           "group": {
-               "kind": "test",
-               "isDefault": true
+           "detail": "Compilando o programa C/C++",
+           "dependsOn": [],
+           "runOptions": {
+               "runOn": "folderOpen"
            },
            "presentation": {
                "reveal": "always",
-               "panel": "new",
-               "echo": true,
-               "showReuseMessage": true,
-               "clear": false,
-               "close": false
-           },
-           "options": {
-               "shell": {
-                   "executable": "cmd.exe",
-                   "args": ["/c"]
-               }
-           },
-           "detail": "Executando o programa"
-       }
+               "panel": "new"
+           }
+       },
+       {
+        "label": "Compilar e Executar C",
+        "type": "shell",
+        "command": "gcc.exe",
+        "args": [
+             "-Wall",
+             "-g",
+             "-Ilibs\\include",
+             "-c",
+             "${workspaceFolder}\\main.c",
+             "-o",
+             "obj\\Debug\\main.o",
+             "&&",
+             "gcc.exe",
+             "-Llibs\\lib",
+             "-o",
+             "bin\\Debug\\Braile.exe",
+             "obj\\Debug\\main.o",
+             "obj\\Debug\\resources.res",
+             "-lwinmm",
+             "-lSDL2",
+             "-lSDL2main",
+             "-lSDL2_mixer",
+             "-lmingw32",
+             "-lSDL2",
+             "-lSDL2main",
+             "-lSDL2_mixer",
+             "-lmingw32",
+             "-lSDL2main",
+             "-lSDL2",
+             "-lSDL2_mixer",
+             "&&",
+             "start",
+             "cmd",
+             "/c",
+             "bin\\Debug\\Braile.exe"
+         ],
+        "group": {
+            "kind": "build",
+            "isDefault": true
+        },
+        "problemMatcher": ["$gcc"],
+        "detail": "Compilando e executando o programa C/C++",
+        "dependsOn": [],
+        "runOptions": {
+            "runOn": "folderOpen"
+        },
+        "presentation": {
+            "reveal": "always",
+            "panel": "new"
+        }
+    },
+    
    ]
 }

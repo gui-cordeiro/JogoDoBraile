@@ -1,3 +1,10 @@
 {
-   "cmake.sourceDirectory": "C:/Users/guilh/Documents/GitHub/JogoDoBraile/libs/SDL2-2.28.5/test"
+   "cmake.sourceDirectory": "C:/Users/guilh/Documents/GitHub/JogoDoBraile/libs/SDL2-2.28.5/test",
+   "files.associations": {
+      "sdl_main.h": "c",
+      "process.h": "c",
+      "locale.h": "c",
+      "conio.h": "c",
+      "string.h": "c"
+   }
 }
