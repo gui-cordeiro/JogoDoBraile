@@ -1,14 +1,14 @@
 /*
- * -> CÛdigo-Fonte do Jogo do Braile
+ * -> C√≥digo-Fonte do Jogo do Braile
  * -> Desenvolvido por: Guilherme Cordeiro
  * -> Ano: 2017, 2024
  */
 
-// FunÁ„o para verificar se o arquivo existe e, se n„o, criar um novo arquivo
+// Fun√ß√£o para verificar se o arquivo existe e, se n√£o, criar um novo arquivo
 void verificarOuCriarArquivo(const char *nomeArquivo) {
     FILE *arquivo = fopen(nomeArquivo, "r");
     if (arquivo == NULL) {
-        // O arquivo n„o existe, ent„o ele ser· criado
+        // O arquivo n√£o existe, ent√£o ele ser√° criado
         arquivo = fopen(nomeArquivo, "w");
         if (arquivo == NULL) {
             printf("Erro ao criar o arquivo %s!", nomeArquivo);
@@ -23,7 +23,7 @@ void verificarOuCriarArquivo(const char *nomeArquivo) {
     fclose(arquivo);
 }
 
-// FunÁ„o para ler os dados dos jogadores de um arquivo
+// Fun√ß√£o para ler os dados dos jogadores de um arquivo
 int lerPontuacoes(const char *nomeArquivo, Jogador *jogadores, int maxJogadores, bool retornarOrdemRegistro) {
     verificarOuCriarArquivo(nomeArquivo);
     FILE *arquivo = fopen(nomeArquivo, "r");
@@ -50,7 +50,7 @@ int lerPontuacoes(const char *nomeArquivo, Jogador *jogadores, int maxJogadores,
     } else return i;
 }
 
-// FunÁ„o para salvar os dados dos jogadores em um arquivo
+// Fun√ß√£o para salvar os dados dos jogadores em um arquivo
 void salvarPontuacoes(const char *nomeArquivo, Jogador *jogadores, int numJogadores) {
     FILE *arquivo = fopen(nomeArquivo, "w");
     if (arquivo == NULL) {
@@ -67,7 +67,7 @@ void salvarPontuacoes(const char *nomeArquivo, Jogador *jogadores, int numJogado
 
     /*system("cls");
     for (int cont = 0; cont < numJogadores; cont ++) {
-        linhaCol(17 + (cont * 2), 10); printf("%d∫", jogadores[cont].posicao);
+        linhaCol(17 + (cont * 2), 10); printf("%d¬∫", jogadores[cont].posicao);
         linhaCol(17 + (cont * 2), 19); printf("%s", jogadores[cont].nome);
         linhaCol(17 + (cont * 2), 36); printf("%c", jogadores[cont].nota);
         linhaCol(17 + (cont * 2), 45);
@@ -89,38 +89,38 @@ void apagarArquivo(const char *nomeArquivo) {
     }
 }
 
-// FunÁ„o de comparaÁ„o para ordenar os regitros dos jogadores (ordem decrescente de pontuaÁ„o)
+// Fun√ß√£o de compara√ß√£o para ordenar os regitros dos jogadores (ordem decrescente de pontua√ß√£o)
 int compararJogadores(const void *a, const void *b) {
     Jogador *jogadorA = (Jogador *)a;
     Jogador *jogadorB = (Jogador *)b;
 
-    // CritÈrio 1: Maior pontuaÁ„o
+    // Crit√©rio 1: Maior pontua√ß√£o
     if (jogadorA->pontuacao != jogadorB->pontuacao) {
         return jogadorB->pontuacao - jogadorA->pontuacao;
     }
 
-    // CritÈrio 2: Menor tempo
+    // Crit√©rio 2: Menor tempo
     if (jogadorA->tempo != jogadorB->tempo) {
         return jogadorA->tempo - jogadorB->tempo;
     }
 
-    // CritÈrio 3: Ordem de registro (mais antigo primeiro)
+    // Crit√©rio 3: Ordem de registro (mais antigo primeiro)
     return jogadorA->ordemRegistro - jogadorB->ordemRegistro;
 }
 
 
-// FunÁ„o para adicionar uma nova pontuaÁ„o e manter o top 7
+// Fun√ß√£o para adicionar uma nova pontua√ß√£o e manter o top 7
 void atualizarTopPontuacoes(Jogador *jogadores, const char *nomeArquivo) {
-    //Jogador jogadores[8];  // Array para armazenar atÈ 8 jogadores (7 existentes + 1 novo)
+    //Jogador jogadores[8];  // Array para armazenar at√© 8 jogadores (7 existentes + 1 novo)
     int numJogadores = 8;
 
-    int maiorRegistro = lerPontuacoes("f·cil.txt", jogadores, numJogadores - 1, true) + 1;
+    int maiorRegistro = lerPontuacoes("f√°cil.txt", jogadores, numJogadores - 1, true) + 1;
 
     // Adicionar o novo jogador
     /*jogadores[numJogadores] = novoJogador;
     numJogadores++;*/
 
-    // Ordenar os jogadores por pontuaÁ„o (ordem decrescente)
+    // Ordenar os jogadores por pontua√ß√£o (ordem decrescente)
     qsort(jogadores, numJogadores, sizeof(Jogador), compararJogadores);
 
     // Manter apenas os top 7 jogadores
@@ -128,7 +128,7 @@ void atualizarTopPontuacoes(Jogador *jogadores, const char *nomeArquivo) {
 
     /*system("cls");
     for (int cont = 0; cont < numJogadores; cont ++) {
-        linhaCol(17 + (cont * 2), 10); printf("%d∫", jogadores[cont].posicao);
+        linhaCol(17 + (cont * 2), 10); printf("%d¬∫", jogadores[cont].posicao);
         linhaCol(17 + (cont * 2), 19); printf("%s", jogadores[cont].nome);
         linhaCol(17 + (cont * 2), 36); printf("%c", jogadores[cont].nota);
         linhaCol(17 + (cont * 2), 45);

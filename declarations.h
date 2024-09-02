@@ -1,5 +1,5 @@
 /*
- * -> Código-Fonte do Jogo do Braile
+ * -> CÃ³digo-Fonte do Jogo do Braile
  * -> Desenvolvido por: Guilherme Cordeiro
  * -> Ano: 2017, 2024
  */
@@ -12,7 +12,7 @@ bool itIsThe1stTimeOpening = true;
 
 char caminho[50] = "sounds/";
 
-// Variável que controla os modos disponíveis
+// VariÃ¡vel que controla os modos disponÃ­veis
 int modosDisponiveis = 0;
 
 int mouseX = 0;
@@ -67,7 +67,7 @@ typedef struct {
     int ordemRegistro;
 } Jogador;
 
-/* 1) ASSINATURAS DAS FUNÇÕES DO ARQUIVO "config-functions.h" */
+/* 1) ASSINATURAS DAS FUNÃ‡Ã•ES DO ARQUIVO "config-functions.h" */
 
 void exibirTelaRedes(int endOfGame, char nivel[8]);
 bool newPergunta(bool isDemo, char dificuldade[8], int questao, char letrResp1, char letrResp2, char letrResp3, char letrResp4, char letrResp5, int *acertos, int *erros, int *pts, int progresso[26]);
@@ -107,7 +107,7 @@ int pressEnter(void);
 void cheatBanner();
 void lerStringComLimite(char *str, int limite);
 
-/* 2) ASSINATURAS DAS FUNÇÕES DO ARQUIVO "main-functions.h" */
+/* 2) ASSINATURAS DAS FUNÃ‡Ã•ES DO ARQUIVO "main-functions.h" */
 
 int mainMenu();
 int modeSelect();
@@ -122,9 +122,9 @@ void opcaoA4();
 void opcaoA5();
 void opcaoA6();
 
-/* 3) CONFIGURAÇÕES GLOBAIS DAS THREADS AUXILIARES DO ARQUIVO "aux-threads.h" */
+/* 3) CONFIGURAÃ‡Ã•ES GLOBAIS DAS THREADS AUXILIARES DO ARQUIVO "aux-threads.h" */
 
-// Variáveis globais que serão utilizadas na thread anti-trapaça
+// VariÃ¡veis globais que serÃ£o utilizadas na thread anti-trapaÃ§a
 bool isTextEditingEnabled = false;
 bool mostrarLetras = true;
 DWORD aCThreadId;
@@ -143,7 +143,7 @@ DWORD WINAPI antiCheat(LPVOID params);
 DWORD WINAPI bannerParabens(LPVOID params);
 DWORD WINAPI bannerEncerramento(LPVOID params);
 
-/* 4) CONFIGURAÇÕES GLOBAIS DAS THREADS AUXILIARES DO ARQUIVO "savesystem.h" */
+/* 4) CONFIGURAÃ‡Ã•ES GLOBAIS DAS THREADS AUXILIARES DO ARQUIVO "savesystem.h" */
 
 void salvarPontuacoes(const char *nomeArquivo, Jogador *jogadores, int numJogadores);
 int lerPontuacoes(const char *nomeArquivo, Jogador *jogadores, int maxJogadores, bool retornarOrdemRegistro);

@@ -1,5 +1,5 @@
 /*
- * -> CÛdigo-Fonte do Jogo do Braile
+ * -> C√≥digo-Fonte do Jogo do Braile
  * -> Desenvolvido por: Guilherme Cordeiro
  * -> Ano: 2017, 2024
  */
@@ -7,7 +7,7 @@
 /* MENU PRINCIPAL */
 int mainMenu() {
     int opt = 0, ajusteMenu = 44;
-    char lista [6][40] = {"Iniciar Jogo do Braile","Ranking Local","InstruÁıes do Jogo","CrÈditos do Jogo","Mudar para modo \"Tela Cheia\"","Sair do Jogo do Braile"};
+    char lista [6][40] = {"Iniciar Jogo do Braile","Ranking Local","Instru√ß√µes do Jogo","Cr√©ditos do Jogo","Mudar para modo \"Tela Cheia\"","Sair do Jogo do Braile"};
 
     if (isFullScreen) {
         strcpy(lista[4], "Mudar para modo \"Janela\"");
@@ -16,8 +16,8 @@ int mainMenu() {
 
     titulo("-", "Menu Principal");
 
-    // 0) Todas as teclas, Enter e Esc; 1) Todas as teclas e Enter; 2) Teclas CIMA e BAIXO, Enter e Esc; 3) Teclas CIMA e BAIXO e Enter; 4) Somente Enter; 5) Somente Barra de EspaÁo (2x); 6) Nenhuma aÁ„o ou bot„o.
-    topBannerContent("VOC  EST¡ NO", 2, 29, "MENU", 3, 9, 2);
+    // 0) Todas as teclas, Enter e Esc; 1) Todas as teclas e Enter; 2) Teclas CIMA e BAIXO, Enter e Esc; 3) Teclas CIMA e BAIXO e Enter; 4) Somente Enter; 5) Somente Barra de Espa√ßo (2x); 6) Nenhuma a√ß√£o ou bot√£o.
+    topBannerContent("VOC√ä EST√Å NO", 2, 29, "MENU", 3, 9, 2);
 
     setlocale(LC_ALL, "C");
     SetConsoleOutputCP(CP_UTF8);
@@ -26,7 +26,7 @@ int mainMenu() {
     linhaCol(28, 59); printf("\u25bc");
     textColor(WHITE, _BLUE);
     SetConsoleOutputCP(850);
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "Portuguese_Brazil.1252");
 
     opt = modeloMenu(13, ajusteMenu, 6, 1, lista, 1);
     if (opt == 3) cleanScreen(1, true);
@@ -38,22 +38,22 @@ int mainMenu() {
 /* MENU DOS MODOS DE JOGO */
 int modeSelect() {
     int opt = 0;
-    //char lista [6][40] = {"Jogar - NÕVEL F¡CIL","Jogar - NÕVEL M…DIO I","Jogar - NÕVEL M…DIO II","Jogar - NÕVEL DIFÕCIL","Jogar - MODO LIVRE","Voltar ao Menu Principal"};
+    //char lista [6][40] = {"Jogar - N√çVEL F√ÅCIL","Jogar - N√çVEL M√âDIO I","Jogar - N√çVEL M√âDIO II","Jogar - N√çVEL DIF√çCIL","Jogar - MODO LIVRE","Voltar ao Menu Principal"};
     char lista [6][40];
 
-    strcpy(lista[0], "Jogar - NÕVEL F¡CIL");
-    if (modosDisponiveis >= 1 && modosDisponiveis <= 4) strcpy(lista[1], "Jogar - NÕVEL M…DIO I");
+    strcpy(lista[0], "Jogar - N√çVEL F√ÅCIL");
+    if (modosDisponiveis >= 1 && modosDisponiveis <= 4) strcpy(lista[1], "Jogar - N√çVEL M√âDIO I");
     else strcpy(lista[1], "???");
-    if (modosDisponiveis >= 2 && modosDisponiveis <= 4) strcpy(lista[2], "Jogar - NÕVEL M…DIO II");
+    if (modosDisponiveis >= 2 && modosDisponiveis <= 4) strcpy(lista[2], "Jogar - N√çVEL M√âDIO II");
     else strcpy(lista[2], "???");
-    if (modosDisponiveis >= 3 && modosDisponiveis <= 4) strcpy(lista[3], "Jogar - NÕVEL DIFÕCIL");
+    if (modosDisponiveis >= 3 && modosDisponiveis <= 4) strcpy(lista[3], "Jogar - N√çVEL DIF√çCIL");
     else strcpy(lista[3], "???");
     if (modosDisponiveis == 4) strcpy(lista[4], "Jogar - MODO ???");
     else strcpy(lista[4], "???");
     strcpy(lista[5], "Voltar ao Menu Principal");
 
     titulo("-", "Menu Principal");
-    topBannerContent("VOC  EST¡ NAVEGANDO NOS", 2, 23, "MODOS", 3, 9, 2);
+    topBannerContent("VOC√ä EST√Å NAVEGANDO NOS", 2, 23, "MODOS", 3, 9, 2);
 
     setlocale(LC_ALL, "C");
     SetConsoleOutputCP(CP_UTF8);
@@ -62,13 +62,13 @@ int modeSelect() {
     linhaCol(28, 59); printf("\u25bc");
     textColor(WHITE, _BLUE);
     SetConsoleOutputCP(850);
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "Portuguese_Brazil.1252");
 
     opt = modeloMenu(13, 46, 6, 2, lista, 1);
     return opt;
 }
 
-/* 1) JOGAR - NÕVEL F¡CIL */
+/* 1) JOGAR - N√çVEL F√ÅCIL */
 int opcaoB1() {
     int cont = 15;
     int pts = 0, acertos = 0, erros = 0, tecla = 0;
@@ -82,10 +82,10 @@ int opcaoB1() {
     int perguntaEscolhida = 0;
     mostrarLetras = true;
 
-    if(confirmarJogo("F¡CIL", progresso) == 0) return 0;
-    topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "F¡CIL", 3, 17, 5);
+    if(confirmarJogo("F√ÅCIL", progresso) == 0) return 0;
+    topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "F√ÅCIL", 3, 17, 5);
 
-    titulo("F¡CIL", "O jogo comeÁar· em breve...");
+    titulo("F√ÅCIL", "O jogo come√ßar√° em breve...");
 
     setlocale(LC_ALL, "C");
     linhaCol(36, 53); printf("%c", 196);
@@ -95,24 +95,24 @@ int opcaoB1() {
 
     textColor(_BLACK, BROWN);
     linhaCol(37, 41);printf("  %c ", 254);
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "Portuguese_Brazil.1252");
     printf("Tempo restante: ");
     if (cont < 10) printf("0");
     printf("%d segundo(s)", cont);
     setlocale(LC_ALL, "C");
     printf(" %c   ", 254);
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "Portuguese_Brazil.1252");
     textColor(WHITE, _BLACK);
 
     do{
         if (mostrarLetras) {
             setlocale(LC_ALL, "C");
             linhaCol(16, 36); printf("%c ", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             printf("Tente memorizar as letras abaixo e boa sorte!");
             setlocale(LC_ALL, "C");
             printf(" %c", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
 
             printAlfabeto('A', 20, 37, 1);
             printAlfabeto('E', 20, 48, 1);
@@ -122,7 +122,7 @@ int opcaoB1() {
 
             setlocale(LC_ALL, "C");
             linhaCol(25, 32); printf("%c ", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             printf("Cuidado com o ");
             textColor(_BLACK, BROWN);
             printf("temporizador");
@@ -130,7 +130,7 @@ int opcaoB1() {
             printf(", situado na barra inferior!");
             setlocale(LC_ALL, "C");
             printf(" %c", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             mostrarLetras = false;
         }
         if (!isTextEditingEnabled) {
@@ -141,20 +141,20 @@ int opcaoB1() {
             }
             setlocale(LC_ALL, "C");
             linhaCol(37, 41);printf("  %c ", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             printf("Tempo restante: ");
             if (cont < 10) printf("0");
             printf("%d segundo(s)", cont);
             setlocale(LC_ALL, "C");
             printf(" %c   ", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             textColor(WHITE, _BLACK);
         }
         for (int fast = 0; fast < 70; fast ++) {
-            if (isTextEditingEnabled) { //Se a ediÁ„o de texto do console estiver ativada, um loop ser· ativo atÈ que a ediÁ„o seja desativada
+            if (isTextEditingEnabled) { //Se a edi√ß√£o de texto do console estiver ativada, um loop ser√° ativo at√© que a edi√ß√£o seja desativada
                 cleanScreen(6, false);
-                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "F¡CIL", 3, 17, 6);
-                titulo("-", "Modo de EdiÁ„o R·pida detectada");
+                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "F√ÅCIL", 3, 17, 6);
+                titulo("-", "Modo de Edi√ß√£o R√°pida detectada");
                 int wav[30];
                 strcat(strcpy(wav, caminho), "cheatDeactivated.wav");
                 Mix_Chunk *cheatDeactivated = Mix_LoadWAV(wav);
@@ -165,13 +165,13 @@ int opcaoB1() {
                 while (isTextEditingEnabled){}
                 cleanScreen(6, false);
                 cont ++;
-                linhaCol(20, 30); printf("[ATEN«√O] Modo de EdiÁ„o R·pida desativado. Voltando ao jogo...");
+                linhaCol(20, 30); printf("[ATEN√á√ÉO] Modo de Edi√ß√£o R√°pida desativado. Voltando ao jogo...");
                 Mix_PlayChannel(0, cheatDeactivated, 0);
                 Sleep(1500);
                 cleanScreen(6, false);
-                titulo("F¡CIL", "O jogo comeÁar· em breve...");
+                titulo("F√ÅCIL", "O jogo come√ßar√° em breve...");
                 Mix_PlayChannel(0, countdown, -1);
-                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "F¡CIL", 3, 17, 5);
+                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "F√ÅCIL", 3, 17, 5);
             }
             Sleep(10);
             if (GetAsyncKeyState(VK_SPACE)) {
@@ -182,19 +182,19 @@ int opcaoB1() {
         cont --;
     }while(cont > 0);
 
-    //Encerrando thread anti-trapaÁa
+    //Encerrando thread anti-trapa√ßa
     TerminateThread(aCHandle, 0x0);
     CloseHandle(aCHandle);
 
     cleanScreen(2, false);
-    currentProgressionBanner("F¡CIL", progresso, acertos, erros, pts);
+    currentProgressionBanner("F√ÅCIL", progresso, acertos, erros, pts);
     gerarSeqPerguntas(ordem, totPerguntas);
     for (int numPergunta = 1; numPergunta <= 5; numPergunta ++) {
-        strcpy(tituloPergunta, "Pergunta n∫ ");
+        strcpy(tituloPergunta, "Pergunta n¬∫ ");
         if (numPergunta < 10) strcat(tituloPergunta, "0");
         sprintf(numPerguntaChar, "%d", numPergunta);
         strcat(tituloPergunta, numPerguntaChar);
-        titulo("F¡CIL", tituloPergunta);
+        titulo("F√ÅCIL", tituloPergunta);
 
         perguntaEscolhida = ordem[numPergunta - 1];
 
@@ -202,7 +202,7 @@ int opcaoB1() {
             altAtuais[0] = '-';
             altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
             altAtuais[2] = letras[ordem[numPergunta] - 1];
-        } else if (numPergunta == totPerguntas) {// ⁄ltima pergunta
+        } else if (numPergunta == totPerguntas) {// √öltima pergunta
             altAtuais[0] = letras[ordem[numPergunta - 2] - 1];
             altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
             altAtuais[2] = '-';
@@ -211,13 +211,13 @@ int opcaoB1() {
             altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
             altAtuais[2] = letras[ordem[numPergunta] - 1];
         }
-        newPergunta(false, "F¡CIL", numPergunta, '-', altAtuais[0], altAtuais[1], altAtuais[2], '-', &acertos, &erros, &pts, progresso);
+        newPergunta(false, "F√ÅCIL", numPergunta, '-', altAtuais[0], altAtuais[1], altAtuais[2], '-', &acertos, &erros, &pts, progresso);
     }
-    fimJogo("F¡CIL", pts, acertos, totPerguntas);
+    fimJogo("F√ÅCIL", pts, acertos, totPerguntas);
     return 0;
 }
 
-/* 2) JOGAR - NÕVEL M…DIO I */
+/* 2) JOGAR - N√çVEL M√âDIO I */
 void opcaoB2() {
     int cont = 25;
     int pts = 0, acertos = 0, erros = 0, pontos = 0, tecla = 0;
@@ -231,10 +231,10 @@ void opcaoB2() {
     int perguntaEscolhida = 0;
     mostrarLetras = true;
 
-    if(confirmarJogo("M…DIO I", progresso) == 0) return 0;
-    topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "M…DIO I", 3, 11, 5);
+    if(confirmarJogo("M√âDIO I", progresso) == 0) return 0;
+    topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "M√âDIO I", 3, 11, 5);
 
-    titulo("M…DIO I", "O jogo comeÁar· em breve...");
+    titulo("M√âDIO I", "O jogo come√ßar√° em breve...");
 
     setlocale(LC_ALL, "C");
     linhaCol(36, 53); printf("%c", 196);
@@ -244,24 +244,24 @@ void opcaoB2() {
 
     textColor(_BLACK, BROWN);
     linhaCol(37, 41); printf("  %c ", 254);
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "Portuguese_Brazil.1252");
     printf("Tempo restante: ");
     if (cont < 10) printf("0");
     printf("%d segundo(s)", cont);
     setlocale(LC_ALL, "C");
     printf(" %c   ", 254);
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "Portuguese_Brazil.1252");
     textColor(WHITE, _BLACK);
 
     do{
         if (mostrarLetras) {
             setlocale(LC_ALL, "C");
             linhaCol(12, 36); printf("%c ", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             printf("Tente memorizar as letras abaixo e boa sorte!");
             setlocale(LC_ALL, "C");
             printf(" %c", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
 
             printAlfabeto('B', 16, 37, 1);
             printAlfabeto('C', 16, 48, 1);
@@ -277,7 +277,7 @@ void opcaoB2() {
 
             setlocale(LC_ALL, "C");
             linhaCol(28, 32); printf("%c ", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             printf("Cuidado com o ");
             textColor(_BLACK, BROWN);
             printf("temporizador");
@@ -285,7 +285,7 @@ void opcaoB2() {
             printf(", situado na barra inferior!");
             setlocale(LC_ALL, "C");
             printf(" %c", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             mostrarLetras = false;
         }
         if (!isTextEditingEnabled) {
@@ -296,31 +296,31 @@ void opcaoB2() {
             }
             setlocale(LC_ALL, "C");
             linhaCol(37, 41);printf("  %c ", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             printf("Tempo restante: ");
             if (cont < 10) printf("0");
             printf("%d segundo(s)", cont);
             setlocale(LC_ALL, "C");
             printf(" %c   ", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             textColor(WHITE, _BLACK);
         }
         for (int fast = 0; fast < 70; fast ++) {
-            if (isTextEditingEnabled) { //Se a ediÁ„o de texto do console estiver ativada, um loop ser· ativo atÈ que a ediÁ„o seja desativada
+            if (isTextEditingEnabled) { //Se a edi√ß√£o de texto do console estiver ativada, um loop ser√° ativo at√© que a edi√ß√£o seja desativada
                 cleanScreen(6, false);
-                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "M…DIO I", 3, 11, 6);
-                titulo("-", "Modo de EdiÁ„o R·pida detectada");
+                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "M√âDIO I", 3, 11, 6);
+                titulo("-", "Modo de Edi√ß√£o R√°pida detectada");
                 textColor(WHITE, _BLACK);
                 cheatBanner();
                 while (isTextEditingEnabled){}
                 cleanScreen(6, false);
                 cont ++;
-                linhaCol(20, 30); printf("[ATEN«√O] Modo de EdiÁ„o R·pida desativado. Voltando ao jogo...");
+                linhaCol(20, 30); printf("[ATEN√á√ÉO] Modo de Edi√ß√£o R√°pida desativado. Voltando ao jogo...");
                 PlaySound(TEXT("..\\sounds\\cheatDeactivated.wav"), NULL, SND_SYNC);
                 cleanScreen(6, false);
                 PlaySound(TEXT("..\\sounds\\nosound.wav"), NULL, SND_LOOP | SND_ASYNC);
-                titulo("M…DIO I", "O jogo comeÁar· em breve...");
-                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "M…DIO I", 3, 11, 5);
+                titulo("M√âDIO I", "O jogo come√ßar√° em breve...");
+                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "M√âDIO I", 3, 11, 5);
             }
             Sleep(10);
             if (GetAsyncKeyState(VK_SPACE)) {
@@ -331,19 +331,19 @@ void opcaoB2() {
         cont --;
     }while(cont > 0);
 
-    //Encerrando thread anti-trapaÁa
+    //Encerrando thread anti-trapa√ßa
     TerminateThread(aCHandle, 0x0);
     CloseHandle(aCHandle);
 
     cleanScreen(2, false);
-    currentProgressionBanner("M…DIO I", progresso, acertos, erros, pts);
+    currentProgressionBanner("M√âDIO I", progresso, acertos, erros, pts);
     gerarSeqPerguntas(ordem, totPerguntas);
     for (int numPergunta = 1; numPergunta <= 10; numPergunta ++) {
-        strcpy(tituloPergunta, "Pergunta n∫ ");
+        strcpy(tituloPergunta, "Pergunta n¬∫ ");
         if (numPergunta < 10) strcat(tituloPergunta, "0");
         sprintf(numPerguntaChar, "%d", numPergunta);
         strcat(tituloPergunta, numPerguntaChar);
-        titulo("M…DIO I", tituloPergunta);
+        titulo("M√âDIO I", tituloPergunta);
 
         perguntaEscolhida = ordem[numPergunta - 1];
 
@@ -351,7 +351,7 @@ void opcaoB2() {
             altAtuais[0] = '-';
             altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
             altAtuais[2] = letras[ordem[numPergunta] - 1];
-        } else if (numPergunta == totPerguntas) {// ⁄ltima pergunta
+        } else if (numPergunta == totPerguntas) {// √öltima pergunta
             altAtuais[0] = letras[ordem[numPergunta - 2] - 1];
             altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
             altAtuais[2] = '-';
@@ -361,13 +361,13 @@ void opcaoB2() {
             altAtuais[2] = letras[ordem[numPergunta] - 1];
         }
 
-        newPergunta(false, "M…DIO I", numPergunta, '-', altAtuais[0], altAtuais[1], altAtuais[2], '-', &acertos, &erros, &pts, progresso);
+        newPergunta(false, "M√âDIO I", numPergunta, '-', altAtuais[0], altAtuais[1], altAtuais[2], '-', &acertos, &erros, &pts, progresso);
     }
-    fimJogo("M…DIO I", pts, acertos, totPerguntas);
+    fimJogo("M√âDIO I", pts, acertos, totPerguntas);
     return;
 }
 
-/* 3) JOGAR - NÕVEL M…DIO II */
+/* 3) JOGAR - N√çVEL M√âDIO II */
 void opcaoB3() {
     int cont = 30;
     int pts = 0, acertos = 0, erros = 0, pontos = 0, tecla = 0;
@@ -381,10 +381,10 @@ void opcaoB3() {
     int perguntaEscolhida = 0;
     mostrarLetras = true;
 
-    if(confirmarJogo("M…DIO II", progresso) == 0) return 0;
-    topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "M…DIO II", 3, 8, 5);
+    if(confirmarJogo("M√âDIO II", progresso) == 0) return 0;
+    topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "M√âDIO II", 3, 8, 5);
 
-    titulo("M…DIO II", "O jogo comeÁar· em breve...");
+    titulo("M√âDIO II", "O jogo come√ßar√° em breve...");
 
     setlocale(LC_ALL, "C");
     linhaCol(36, 53); printf("%c", 196);
@@ -394,24 +394,24 @@ void opcaoB3() {
 
     textColor(_BLACK, BROWN);
     linhaCol(37, 41); printf("  %c ", 254);
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "Portuguese_Brazil.1252");
     printf("Tempo restante: ");
     if (cont < 10) printf("0");
     printf("%d segundo(s)", cont);
     setlocale(LC_ALL, "C");
     printf(" %c   ", 254);
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "Portuguese_Brazil.1252");
     textColor(WHITE, _BLACK);
 
     do{
         if (mostrarLetras) {
             setlocale(LC_ALL, "C");
             linhaCol(12, 36); printf("%c ", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             printf("Tente memorizar as letras abaixo e boa sorte!");
             setlocale(LC_ALL, "C");
             printf(" %c", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
 
             printAlfabeto('N', 16, 31, 1);
             printAlfabeto('P', 16, 42, 1);
@@ -428,7 +428,7 @@ void opcaoB3() {
 
             setlocale(LC_ALL, "C");
             linhaCol(28, 32); printf("%c ", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             printf("Cuidado com o ");
             textColor(_BLACK, BROWN);
             printf("temporizador");
@@ -436,7 +436,7 @@ void opcaoB3() {
             printf(", situado na barra inferior!");
             setlocale(LC_ALL, "C");
             printf(" %c", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             mostrarLetras = false;
         }
         if (!isTextEditingEnabled) {
@@ -447,31 +447,31 @@ void opcaoB3() {
             }
             setlocale(LC_ALL, "C");
             linhaCol(37, 41);printf("  %c ", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             printf("Tempo restante: ");
             if (cont < 10) printf("0");
             printf("%d segundo(s)", cont);
             setlocale(LC_ALL, "C");
             printf(" %c   ", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             textColor(WHITE, _BLACK);
         }
         for (int fast = 0; fast < 70; fast ++) {
-            if (isTextEditingEnabled) { //Se a ediÁ„o de texto do console estiver ativada, um loop ser· ativo atÈ que a ediÁ„o seja desativada
+            if (isTextEditingEnabled) { //Se a edi√ß√£o de texto do console estiver ativada, um loop ser√° ativo at√© que a edi√ß√£o seja desativada
                 cleanScreen(6, false);
-                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "M…DIO II", 3, 8, 6);
-                titulo("-", "Modo de EdiÁ„o R·pida detectada");
+                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "M√âDIO II", 3, 8, 6);
+                titulo("-", "Modo de Edi√ß√£o R√°pida detectada");
                 textColor(WHITE, _BLACK);
                 cheatBanner();
                 while (isTextEditingEnabled){}
                 cleanScreen(6, false);
                 cont ++;
-                linhaCol(20, 30); printf("[ATEN«√O] Modo de EdiÁ„o R·pida desativado. Voltando ao jogo...");
+                linhaCol(20, 30); printf("[ATEN√á√ÉO] Modo de Edi√ß√£o R√°pida desativado. Voltando ao jogo...");
                 PlaySound(TEXT("..\\sounds\\cheatDeactivated.wav"), NULL, SND_SYNC);
                 cleanScreen(6, false);
                 PlaySound(TEXT("..\\sounds\\nosound.wav"), NULL, SND_LOOP | SND_ASYNC);
-                titulo("M…DIO II", "O jogo comeÁar· em breve...");
-                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "M…DIO II", 3, 8, 5);
+                titulo("M√âDIO II", "O jogo come√ßar√° em breve...");
+                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "M√âDIO II", 3, 8, 5);
             }
             Sleep(10);
             if (GetAsyncKeyState(VK_SPACE)) {
@@ -482,19 +482,19 @@ void opcaoB3() {
         cont --;
     }while(cont > 0);
 
-    //Encerrando thread anti-trapaÁa
+    //Encerrando thread anti-trapa√ßa
     TerminateThread(aCHandle, 0x0);
     CloseHandle(aCHandle);
 
     cleanScreen(2, false);
-    currentProgressionBanner("M…DIO II", progresso, acertos, erros, pts);
+    currentProgressionBanner("M√âDIO II", progresso, acertos, erros, pts);
     gerarSeqPerguntas(ordem, totPerguntas);
     for (int numPergunta = 1; numPergunta <= 11; numPergunta ++) {
-        strcpy(tituloPergunta, "Pergunta n∫ ");
+        strcpy(tituloPergunta, "Pergunta n¬∫ ");
         if (numPergunta < 10) strcat(tituloPergunta, "0");
         sprintf(numPerguntaChar, "%d", numPergunta);
         strcat(tituloPergunta, numPerguntaChar);
-        titulo("M…DIO II", tituloPergunta);
+        titulo("M√âDIO II", tituloPergunta);
 
         perguntaEscolhida = ordem[numPergunta - 1];
 
@@ -502,7 +502,7 @@ void opcaoB3() {
             altAtuais[0] = '-';
             altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
             altAtuais[2] = letras[ordem[numPergunta] - 1];
-        } else if (numPergunta == totPerguntas) {// ⁄ltima pergunta
+        } else if (numPergunta == totPerguntas) {// √öltima pergunta
             altAtuais[0] = letras[ordem[numPergunta - 2] - 1];
             altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
             altAtuais[2] = '-';
@@ -511,13 +511,13 @@ void opcaoB3() {
             altAtuais[1] = letras[ordem[numPergunta - 1] - 1];
             altAtuais[2] = letras[ordem[numPergunta] - 1];
         }
-        newPergunta(false, "M…DIO II", numPergunta, '-', altAtuais[0], altAtuais[1], altAtuais[2], '-', &acertos, &erros, &pts, progresso);
+        newPergunta(false, "M√âDIO II", numPergunta, '-', altAtuais[0], altAtuais[1], altAtuais[2], '-', &acertos, &erros, &pts, progresso);
     }
-    fimJogo("M…DIO II", pts, acertos, totPerguntas);
+    fimJogo("M√âDIO II", pts, acertos, totPerguntas);
     return;
 }
 
-/* 4) JOGAR - NÕVEL DIFÕCIL */
+/* 4) JOGAR - N√çVEL DIF√çCIL */
 void opcaoB4() {
     int cont = 50;
     int pts = 0, acertos = 0, erros = 0, pontos = 0, tecla = 0;
@@ -532,10 +532,10 @@ void opcaoB4() {
     char numPerguntaChar[3];
     mostrarLetras = true;
 
-    if(confirmarJogo("DIFÕCIL", progresso) == 0) return 0;
-    topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "DIFÕCIL", 3, 15, 5);
+    if(confirmarJogo("DIF√çCIL", progresso) == 0) return 0;
+    topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "DIF√çCIL", 3, 15, 5);
 
-    titulo("DIFÕCIL", "O jogo comeÁar· em breve...");
+    titulo("DIF√çCIL", "O jogo come√ßar√° em breve...");
 
     setlocale(LC_ALL, "C");
     linhaCol(36, 53); printf("%c", 196);
@@ -545,20 +545,20 @@ void opcaoB4() {
 
     textColor(_BLACK, BROWN);
     linhaCol(37, 41); printf("  %c ", 254);
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "Portuguese_Brazil.1252");
     printf("Tempo restante: ");
     if (cont < 10) printf("0");
     printf("%d segundo(s)", cont);
     setlocale(LC_ALL, "C");
     printf(" %c   ", 254);
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "Portuguese_Brazil.1252");
     textColor(WHITE, _BLACK);
 
     do{
         if (mostrarLetras) {
             setlocale(LC_ALL, "C");
             linhaCol(10, 8); printf("%c ", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             printf("Tente memorizar as letras abaixo e boa sorte! Cuidado com o ");
             textColor(_BLACK, BROWN);
             printf("temporizador");
@@ -566,7 +566,7 @@ void opcaoB4() {
             printf(", situado na barra inferior!");
             setlocale(LC_ALL, "C");
             printf(" %c", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
 
             printAlfabeto('A', 14, 9, 1);
             printAlfabeto('B', 14, 20, 1);
@@ -606,31 +606,31 @@ void opcaoB4() {
             }
             setlocale(LC_ALL, "C");
             linhaCol(37, 41);printf("  %c ", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             printf("Tempo restante: ");
             if (cont < 10) printf("0");
             printf("%d segundo(s)", cont);
             setlocale(LC_ALL, "C");
             printf(" %c   ", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             textColor(WHITE, _BLACK);
         }
         for (int fast = 0; fast < 70; fast ++) {
-            if (isTextEditingEnabled) { //Se a ediÁ„o de texto do console estiver ativada, um loop ser· ativo atÈ que a ediÁ„o seja desativada
-                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "DIFÕCIL", 3, 15, 6);
+            if (isTextEditingEnabled) { //Se a edi√ß√£o de texto do console estiver ativada, um loop ser√° ativo at√© que a edi√ß√£o seja desativada
+                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "DIF√çCIL", 3, 15, 6);
                 cleanScreen(6, false);
-                titulo("-", "Modo de EdiÁ„o R·pida detectada");
+                titulo("-", "Modo de Edi√ß√£o R√°pida detectada");
                 textColor(WHITE, _BLACK);
                 cheatBanner();
                 while (isTextEditingEnabled){}
                 cleanScreen(6, false);
                 cont ++;
-                linhaCol(20, 30); printf("[ATEN«√O] Modo de EdiÁ„o R·pida desativado. Voltando ao jogo...");
+                linhaCol(20, 30); printf("[ATEN√á√ÉO] Modo de Edi√ß√£o R√°pida desativado. Voltando ao jogo...");
                 PlaySound(TEXT("..\\sounds\\cheatDeactivated.wav"), NULL, SND_SYNC);
                 cleanScreen(6, false);
                 PlaySound(TEXT("..\\sounds\\nosound.wav"), NULL, SND_LOOP | SND_ASYNC);
-                titulo("DIFÕCIL", "O jogo comeÁar· em breve...");
-                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "DIFÕCIL", 3, 15, 5);
+                titulo("DIF√çCIL", "O jogo come√ßar√° em breve...");
+                topBannerContent("DIFICULDADE SELECIONADA", 2, 23, "DIF√çCIL", 3, 15, 5);
             }
             Sleep(10);
             if (GetAsyncKeyState(VK_SPACE)) {
@@ -641,19 +641,19 @@ void opcaoB4() {
         cont --;
     }while(cont > 0);
 
-    //Encerrando thread anti-trapaÁa
+    //Encerrando thread anti-trapa√ßa
     TerminateThread(aCHandle, 0x0);
     CloseHandle(aCHandle);
 
     cleanScreen(2, false);
-    currentProgressionBanner("DIFÕCIL", progresso, acertos, erros, pts);
+    currentProgressionBanner("DIF√çCIL", progresso, acertos, erros, pts);
     gerarSeqPerguntas(ordem, totPerguntas);
     for (int numPergunta = 1; numPergunta <= 26; numPergunta ++) {
-        strcpy(tituloPergunta, "Pergunta n∫ ");
+        strcpy(tituloPergunta, "Pergunta n¬∫ ");
         if (numPergunta < 10) strcat(tituloPergunta, "0");
         sprintf(numPerguntaChar, "%d", numPergunta);
         strcat(tituloPergunta, numPerguntaChar);
-        titulo("DIFÕCIL", tituloPergunta);
+        titulo("DIF√çCIL", tituloPergunta);
 
         if (numPergunta == 1) { // Primeira pergunta
             altAtuais[0] = '-';
@@ -667,13 +667,13 @@ void opcaoB4() {
             altAtuais[2] = letras[ordem[numPergunta - 1] - 1];
             altAtuais[3] = letras[ordem[numPergunta + 0] - 1];
             altAtuais[4] = letras[ordem[numPergunta + 1] - 1];
-        } else if (numPergunta == totPerguntas - 1) {// Pen˙ltima pergunta
+        } else if (numPergunta == totPerguntas - 1) {// Pen√∫ltima pergunta
             altAtuais[0] = letras[ordem[numPergunta - 3] - 1];
             altAtuais[1] = letras[ordem[numPergunta - 2] - 1];
             altAtuais[2] = letras[ordem[numPergunta - 1] - 1];
             altAtuais[3] = letras[ordem[numPergunta - 0] - 1];
             altAtuais[4] = '-';
-        } else if (numPergunta == totPerguntas) {// ⁄ltima pergunta
+        } else if (numPergunta == totPerguntas) {// √öltima pergunta
             altAtuais[0] = letras[ordem[numPergunta - 3] - 1];
             altAtuais[1] = letras[ordem[numPergunta - 2] - 1];
             altAtuais[2] = letras[ordem[numPergunta - 1] - 1];
@@ -686,10 +686,10 @@ void opcaoB4() {
             altAtuais[3] = letras[ordem[numPergunta + 0] - 1];
             altAtuais[4] = letras[ordem[numPergunta + 1] - 1];
         }
-        newPergunta(false, "DIFÕCIL", numPergunta, altAtuais[0], altAtuais[1], altAtuais[2], altAtuais[3], altAtuais[4], &acertos, &erros, &pts, progresso);
+        newPergunta(false, "DIF√çCIL", numPergunta, altAtuais[0], altAtuais[1], altAtuais[2], altAtuais[3], altAtuais[4], &acertos, &erros, &pts, progresso);
 
     }
-    fimJogo("DIFÕCIL", pts, acertos, totPerguntas);
+    fimJogo("DIF√çCIL", pts, acertos, totPerguntas);
     return;
 }
 
@@ -703,14 +703,14 @@ void opcaoB5() {
 
     cleanScreen(1, true);
 
-    titulo("-", "VocÍ caiu em um \"Rickroll\"");
+    titulo("-", "Voc√™ caiu em um \"Rickroll\"");
 
     setlocale(LC_ALL, "C");
     linhaCol(36, 53); printf("%c", 196);
     linhaCol(36, 65); printf("%c", 196);
     linhaCol(38, 53); printf("%c", 196);
     linhaCol(38, 65); printf("%c", 196);
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "Portuguese_Brazil.1252");
 
     box(36, 39, 38, 80);
 
@@ -750,38 +750,38 @@ void opcaoA2() {
     int opt = 1, lastOpt, numJogadores;
     bool menuTitle = true;
 
-    char lista [6][40] = {"Ranking - NÕVEL F¡CIL","Ranking - NÕVEL M…DIO I","Ranking - NÕVEL M…DIO II","Ranking - NÕVEL DIFÕCIL","Resetar registros","Voltar ao Menu Principal"};
-    char lista2 [2][40] = {"SIM, eu quero resetar tudo.", "N√O, eu quero cancelar."};
+    char lista [6][40] = {"Ranking - N√çVEL F√ÅCIL","Ranking - N√çVEL M√âDIO I","Ranking - N√çVEL M√âDIO II","Ranking - N√çVEL DIF√çCIL","Resetar registros","Voltar ao Menu Principal"};
+    char lista2 [2][40] = {"SIM, eu quero resetar tudo.", "N√ÉO, eu quero cancelar."};
     titulo("-", "Ranking dos Jogadores");
-    topBannerContent("VOC  EST¡ VISUALIZANDO O", 2, 23, "RANKING", 3, 11, 2);
+    topBannerContent("VOC√ä EST√Å VISUALIZANDO O", 2, 23, "RANKING", 3, 11, 2);
 
     do {
-        // Verificando ou criando os arquivos de ranking caso n„o existam
+        // Verificando ou criando os arquivos de ranking caso n√£o existam
         verificarOuCriarArquivo("facil.txt");
         verificarOuCriarArquivo("medio1.txt");
         verificarOuCriarArquivo("medio2.txt");
         verificarOuCriarArquivo("dificil.txt");
 
-        // Ler e exibir as pontuaÁıes atualizadas
+        // Ler e exibir as pontua√ß√µes atualizadas
         Jogador jogadores[7];
         if (opt == 1) {
-            exibirBannerDificuldade("-", 0, 0, "F¡CIL", 9, 16);
+            exibirBannerDificuldade("-", 0, 0, "F√ÅCIL", 9, 16);
             numJogadores = lerPontuacoes("facil.txt", jogadores, 7, false);
         } else if (opt == 2) {
-            exibirBannerDificuldade("-", 0, 0, "M…DIO I", 9, 11);
+            exibirBannerDificuldade("-", 0, 0, "M√âDIO I", 9, 11);
             numJogadores = lerPontuacoes("medio1.txt", jogadores, 7, false);
         } else if (opt == 3) {
-            exibirBannerDificuldade("-", 0, 0, "M…DIO II", 9, 8);
+            exibirBannerDificuldade("-", 0, 0, "M√âDIO II", 9, 8);
             numJogadores = lerPontuacoes("medio2.txt", jogadores, 7, false);
         } else if (opt == 4) {
-            exibirBannerDificuldade("-", 0, 0, "DIFÕCIL", 9, 14);
+            exibirBannerDificuldade("-", 0, 0, "DIF√çCIL", 9, 14);
             numJogadores = lerPontuacoes("dificil.txt", jogadores, 7, false);
         }
 
-        linhaCol(14, 8); printf("PosiÁ„o");
+        linhaCol(14, 8); printf("Posi√ß√£o");
         linhaCol(14, 23); printf("Nome");
         linhaCol(14, 34); printf("Rank");
-        linhaCol(14, 43); printf("PontuaÁ„o");
+        linhaCol(14, 43); printf("Pontua√ß√£o");
         linhaCol(14, 58); printf("Tempo");
         linhaCol(15, 6); printf("_____________________________________________________________");
 
@@ -791,7 +791,7 @@ void opcaoA2() {
             else if (cont == 2) textColor(BROWN, _BLACK);
             else textColor(DARKGRAY, _BLACK);
 
-            linhaCol(17 + (cont * 2), 10); printf("%d∫", cont + 1);
+            linhaCol(17 + (cont * 2), 10); printf("%d¬∫", cont + 1);
             linhaCol(17 + (cont * 2), 19); printf("%s", jogadores[cont].nome);
             linhaCol(17 + (cont * 2), 36); printf("%c", jogadores[cont].nota);
             linhaCol(17 + (cont * 2), 45);
@@ -814,14 +814,14 @@ void opcaoA2() {
                 linhaCol(divisoria,72); printf("%c", 179);
             }
             linhaCol(32,72); printf("%c", 193);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
 
             setlocale(LC_ALL, "C");
             SetConsoleOutputCP(CP_UTF8);
             linhaCol(12, 96); printf("\u25b2");
             linhaCol(28, 96); printf("\u25bc");
             SetConsoleOutputCP(850);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             menuTitle = false;
         }
         lastOpt = opt;
@@ -832,15 +832,15 @@ void opcaoA2() {
             box(9, 19, 31, 101);
             textColor(WHITE, _BLACK);
 
-            linhaCol(12, 23); printf("VocÍ est· prestes a ");
+            linhaCol(12, 23); printf("Voc√™ est√° prestes a ");
             textColor(LIGHTRED, _BLACK);
             printf("DELETAR TODOS OS REGISTROS");
             textColor(WHITE, _BLACK);
-            printf(" de pontuaÁ„o da dificuldade:");
-            if (lastOpt == 1) exibirBannerDificuldade("-", 0, 0, "F¡CIL", 14, 40);
-            else if (lastOpt == 2) exibirBannerDificuldade("-", 0, 0, "M…DIO I", 14, 35);
-            else if (lastOpt == 3) exibirBannerDificuldade("-", 0, 0, "M…DIO II", 14, 32);
-            else if (lastOpt == 4) exibirBannerDificuldade("-", 0, 0, "DIFÕCIL", 14, 38);
+            printf(" de pontua√ß√£o da dificuldade:");
+            if (lastOpt == 1) exibirBannerDificuldade("-", 0, 0, "F√ÅCIL", 14, 40);
+            else if (lastOpt == 2) exibirBannerDificuldade("-", 0, 0, "M√âDIO I", 14, 35);
+            else if (lastOpt == 3) exibirBannerDificuldade("-", 0, 0, "M√âDIO II", 14, 32);
+            else if (lastOpt == 4) exibirBannerDificuldade("-", 0, 0, "DIF√çCIL", 14, 38);
             linhaCol(20, 48); printf("Deseja ");
             textColor(BROWN, _BLACK);
             printf("MESMO");
@@ -852,7 +852,7 @@ void opcaoA2() {
             linhaCol(22, 59); printf("\u25b2");
             linhaCol(30, 59); printf("\u25bc");
             SetConsoleOutputCP(850);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
 
             opt = modeloMenu(23, 44, 2, 0, lista2, 2);
             if (opt == 1) {
@@ -869,13 +869,13 @@ void opcaoA2() {
     cleanScreen(1, false);
 }
 
-/* 7) INSTRU«’ES DO JOGO */
+/* 7) INSTRU√á√ïES DO JOGO */
 int opcaoA3() {
-    titulo("-", "Tela de InstruÁıes");
+    titulo("-", "Tela de Instru√ß√µes");
     int opt = 0, finalopt = 0;
-    char lista[2][40] = {"SIM, eu quero ver o exemplo!", "N√O, eu quero voltar para o menu."};
+    char lista[2][40] = {"SIM, eu quero ver o exemplo!", "N√ÉO, eu quero voltar para o menu."};
 
-    topBannerContent("VOC  EST¡ VENDO AS", 2, 25, "INSTRU«’ES", 3, 15, 6);
+    topBannerContent("VOC√ä EST√Å VENDO AS", 2, 25, "INSTRU√á√ïES", 3, 15, 6);
 
     setlocale(LC_ALL, "C");
     linhaCol(8,72);printf("%c", 197);
@@ -883,7 +883,7 @@ int opcaoA3() {
         linhaCol(divisoria,72); printf("%c", 179);
     }
     linhaCol(32,72);printf("%c", 193);
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "Portuguese_Brazil.1252");
 
     textColor(WHITE, _BLACK);
 
@@ -892,7 +892,7 @@ int opcaoA3() {
     linhaCol(19, 96); printf("\u25b2");
     linhaCol(27, 96); printf("\u25bc");
     SetConsoleOutputCP(850);
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "Portuguese_Brazil.1252");
 
     topBannerContent("Deseja ver um", 12, 87, "EXEMPLO", 13, 79, 6);
 
@@ -910,9 +910,9 @@ int opcaoA3() {
     do{
         pts = 0, acertos = 0, erros = 0, tecla = 0;
         cleanScreen(1, false);
-        newPergunta(true, "F¡CIL", 1, '-', '-', 'A', 'E', '-', &acertos, &erros, &pts, progresso);
+        newPergunta(true, "F√ÅCIL", 1, '-', '-', 'A', 'E', '-', &acertos, &erros, &pts, progresso);
         cleanScreen(1, true);
-        topBannerContent("VOC  EST¡ VENDO AS", 2, 25, "INSTRU«’ES", 3, 15, 2);
+        topBannerContent("VOC√ä EST√Å VENDO AS", 2, 25, "INSTRU√á√ïES", 3, 15, 2);
         linhaCol(33, 14); printf("          __ _____ _____ _____    ____  _____    _____ _____ _____ _____ __    _____        ");
         linhaCol(34, 14); printf("       __|  |     |   __|     |  |    \\|     |  | __  | __  |  _  |_   _|  |  |   __|       ");
         linhaCol(35, 14); printf("      |  |  |  |  |  |  |  |  |  |  |  |  |  |  | __ -|    -|     |_| |_|  |__|   __|       ");
@@ -922,7 +922,7 @@ int opcaoA3() {
         SetConsoleOutputCP(CP_UTF8);
         setlocale(LC_ALL, "C");
         printf("\u2665");
-        setlocale(LC_ALL, "Portuguese");
+        setlocale(LC_ALL, "Portuguese_Brazil.1252");
         SetConsoleOutputCP(850);
         textColor(WHITE, _BLACK);
         printf(" por Guilherme Cordeiro");
@@ -937,11 +937,11 @@ int opcaoA3() {
     return 0;
 }
 
-/* 8) CR…DITOS DO JOGO */
+/* 8) CR√âDITOS DO JOGO */
 void opcaoA4() {
-    titulo("-", "CrÈditos do Jogo");
+    titulo("-", "Cr√©ditos do Jogo");
 
-    topBannerContent("VOC  EST¡ VENDO OS", 2, 25, "CR…DITOS", 3, 4, 6);
+    topBannerContent("VOC√ä EST√Å VENDO OS", 2, 25, "CR√âDITOS", 3, 4, 6);
 
     textColor(LIGHTBLUE, _BLACK);
     box(10, 3, 30, 53);
@@ -958,12 +958,12 @@ void opcaoA4() {
     textColor(WHITE, _BLACK);
 
     linhaCol(18, 6); printf("     Este jogo foi originalmente desenvolvido");
-    linhaCol(20, 6); printf("como forma de avaliaÁ„o parcial do ");
+    linhaCol(20, 6); printf("como forma de avalia√ß√£o parcial do ");
     textColor(BROWN, _BLACK);
     printf("trabalho fi-"); //Amarelo
     linhaCol(22, 6); printf("nal ");
     textColor(WHITE, _BLACK);
-    printf("do 1∫ ano do Curso TÈcnico em Inform·tica"); //Amarelo
+    printf("do 1¬∫ ano do Curso T√©cnico em Inform√°tica"); //Amarelo
     textColor(WHITE, _BLACK);
     printf(",");
     linhaCol(24, 6); printf("ofertado pelo ");
@@ -996,7 +996,7 @@ void opcaoA4() {
     linhaCol(25, 58); printf("\u2022");
     linhaCol(27, 58); printf("\u2022");
     SetConsoleOutputCP(850);
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "Portuguese_Brazil.1252");
 
     linhaCol(19, 60); printf("Arthur Ogg - ");
     textColor(LIGHTGREEN, _BLACK);
@@ -1008,11 +1008,11 @@ void opcaoA4() {
     textColor(WHITE, _BLACK);
     printf(" - ");
     textColor(LIGHTGREEN, _BLACK);
-    printf("Contatos na prÛxima tela!"); //Verde
+    printf("Contatos na pr√≥xima tela!"); //Verde
     textColor(WHITE, _BLACK);
-    linhaCol(23, 60); printf("Jo„o Lucas - ");
+    linhaCol(23, 60); printf("Jo√£o Lucas - ");
     textColor(LIGHTRED, _BLACK);
-    printf("Nenhuma rede social foi achada... perd„o :("); //Verde
+    printf("Nenhuma rede social foi achada... perd√£o :("); //Verde
     textColor(WHITE, _BLACK);
     linhaCol(25, 60); printf("Lucas Pereira - ");
     textColor(LIGHTGREEN, _BLACK);
@@ -1024,7 +1024,7 @@ void opcaoA4() {
     textColor(WHITE, _BLACK);
 
     exibirBannerAnimado();
-    topBannerContent("VOC  EST¡ VENDO OS", 2, 25, "CR…DITOS", 3, 4, 4);
+    topBannerContent("VOC√ä EST√Å VENDO OS", 2, 25, "CR√âDITOS", 3, 4, 4);
 
     pressEnter();
     cleanScreen(4, true);
@@ -1033,14 +1033,14 @@ void opcaoA4() {
     textColor(WHITE, _BLACK);
 }
 
-/* 9) ALTERAR EXIBI«√O DO JOGO */
+/* 9) ALTERAR EXIBI√á√ÉO DO JOGO */
 void opcaoA5() {
-    // Armazena a resoluÁ„o de tela do monitor
+    // Armazena a resolu√ß√£o de tela do monitor
     int screenWidth = GetSystemMetrics(SM_CXSCREEN);
     int screenHeight = GetSystemMetrics(SM_CYSCREEN);
 
     if ((screenWidth == 1280 && screenHeight == 600) && isFullScreen) {
-        topBannerContent("VOC  EST¡ NO", 2, 29, "MENU", 3, 9, 4);
+        topBannerContent("VOC√ä EST√Å NO", 2, 29, "MENU", 3, 9, 4);
         textColor(LIGHTRED, _BLACK);
         box(13, 12, 27, 109);
         linhaCol(14, 43); printf("                               __ ");
@@ -1050,16 +1050,16 @@ void opcaoA5() {
         linhaCol(18, 43); printf("|__|__|_| |___|_|_|___|__,|___|__|");
         linhaCol(19, 43); printf("                    |             ");
         textColor(WHITE, _BLACK);
-        linhaCol(21, 15); printf("Devido ‡ ");
+        linhaCol(21, 15); printf("Devido √† ");
         textColor(BROWN, _BLACK);
-        printf("resoluÁ„o de tela ");
+        printf("resolu√ß√£o de tela ");
         textColor(WHITE, _BLACK);
         printf("do seu monitor, ");
         textColor(LIGHTRED, _BLACK);
-        printf("n„o È possÌvel alterar o jogo ");
+        printf("n√£o √© poss√≠vel alterar o jogo ");
         textColor(WHITE, _BLACK);
         printf("para o modo Janela.");
-        linhaCol(24, 20); printf("VocÍ continuar· no modo Tela Cheia. ");
+        linhaCol(24, 20); printf("Voc√™ continuar√° no modo Tela Cheia. ");
         textColor(BROWN, _BLACK);
         printf("Pressione Enter para voltar ao Menu Principal.");
         textColor(WHITE, _BLACK);

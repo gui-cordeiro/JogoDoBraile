@@ -1,5 +1,5 @@
 /*
- * -> CÛdigo-Fonte do Jogo do Braile
+ * -> C√≥digo-Fonte do Jogo do Braile
  * -> Desenvolvido por: Guilherme Cordeiro
  * -> Ano: 2017, 2024
  */
@@ -143,7 +143,7 @@ DWORD WINAPI e1(LPVOID params) {
 
         textColor(_BLACK, WHITE);
         SetConsoleOutputCP(850);
-        setlocale(LC_ALL, "Portuguese");
+        setlocale(LC_ALL, "Portuguese_Brazil.1252");
 
         while(mudar == false) {
             if (mudar == true) {
@@ -212,10 +212,10 @@ DWORD WINAPI e1(LPVOID params) {
 
     linhaCol(16, 18); printf("Acalme-se, torcedor(a) flamenguista/tricolor/botafoguense ou de qualquer outro time!");
 
-    linhaCol(19, 12); printf("Isso aqui foi uma brincadeira que eu quis adicionar ao Jogo do Braile! Foi bem divertido cri·-lo");
+    linhaCol(19, 12); printf("Isso aqui foi uma brincadeira que eu quis adicionar ao Jogo do Braile! Foi bem divertido cri√°-lo");
     linhaCol(20, 13); printf("pois o Vasco da Gama sempre foi muito importante para a minha vida. Por fim, dedico esta minha");
-    linhaCol(21, 15); printf("singela homenagem do Gigante da Colina ao meu pai, um grande vascaÌno que me ensinou a ser");
-    linhaCol(22, 33); printf("apaixonado pelo LegÌtimo Clube do Povo desde crianÁa!");
+    linhaCol(21, 15); printf("singela homenagem do Gigante da Colina ao meu pai, um grande vasca√≠no que me ensinou a ser");
+    linhaCol(22, 33); printf("apaixonado pelo Leg√≠timo Clube do Povo desde crian√ßa!");
 
     linhaCol(25, 3); printf("Espero que tenha gostado, e claro, respeito em primeiro lugar! Pressione Enter para continuar com o Jogo do Braile.");
 
@@ -228,7 +228,7 @@ DWORD WINAPI e1(LPVOID params) {
 }
 
 DWORD WINAPI letra(LPVOID params){
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "Portuguese_Brazil.1252");
 
     Sleep(3000); //18180
     mudar = true;
@@ -255,16 +255,16 @@ DWORD WINAPI letra(LPVOID params){
     Sleep(2700);
     textColor(_BLACK, BROWN);
 
-    linhaCol(37, 41); printf("    Vamos todos cantar de coraÁ„o     ");
+    linhaCol(37, 41); printf("    Vamos todos cantar de cora√ß√£o     ");
     textColor(_BLACK, WHITE);
     Sleep(3700); //18100
     textColor(_BLACK, BROWN);
-    linhaCol(37, 41); printf("    A Cruz de Malta È o meu pend„o    ");
+    linhaCol(37, 41); printf("    A Cruz de Malta √© o meu pend√£o    ");
     textColor(_BLACK, WHITE);
     mudar = true;
     Sleep(3820); //21920
     textColor(_BLACK, BROWN);
-    linhaCol(37, 41); printf(" Tu tens o nome do heroico portuguÍs  ");
+    linhaCol(37, 41); printf(" Tu tens o nome do heroico portugu√™s  ");
     textColor(_BLACK, WHITE);
     Sleep(3740); //25660
     textColor(_BLACK, BROWN);
@@ -273,7 +273,7 @@ DWORD WINAPI letra(LPVOID params){
     mudar = true;
     Sleep(3980); //29640
     textColor(_BLACK, BROWN);
-    linhaCol(37, 41); printf("    Tua imensa torcida È bem feliz    ");
+    linhaCol(37, 41); printf("    Tua imensa torcida √© bem feliz    ");
     textColor(_BLACK, WHITE);
     Sleep(3750); //33390
     textColor(_BLACK, BROWN);
@@ -314,38 +314,38 @@ DWORD WINAPI letra(LPVOID params){
 
     Sleep(3050);//56130
     textColor(_BLACK, BROWN);
-    linhaCol(37, 41); printf("      No atletismo, Ès um braÁo       ");
+    linhaCol(37, 41); printf("      No atletismo, √©s um bra√ßo       ");
     textColor(_BLACK, WHITE);
     Sleep(3500); //59630
     textColor(_BLACK, BROWN);
-    linhaCol(37, 41); printf("         No remo, Ès imortal          ");
+    linhaCol(37, 41); printf("         No remo, √©s imortal          ");
     textColor(_BLACK, WHITE);
     mudar = true;
     Sleep(3750); //63380
     textColor(_BLACK, BROWN);
-    linhaCol(37, 41); printf("       No futebol, Ès um traÁo        ");
+    linhaCol(37, 41); printf("       No futebol, √©s um tra√ßo        ");
     textColor(_BLACK, WHITE);
     Sleep(3270); //66650
     textColor(_BLACK, BROWN);
-    linhaCol(37, 41); printf("      De uni„o Brasil-Portugal!       ");
+    linhaCol(37, 41); printf("      De uni√£o Brasil-Portugal!       ");
     textColor(_BLACK, WHITE);
     mudar = true;
     Sleep(4500); //71130
     textColor(_BLACK, BROWN);
-    linhaCol(37, 41); printf("      No atletismo, Ès um braÁo       ");
+    linhaCol(37, 41); printf("      No atletismo, √©s um bra√ßo       ");
     textColor(_BLACK, WHITE);
     Sleep(3500); //59630
     textColor(_BLACK, BROWN);
-    linhaCol(37, 41); printf("         No remo, Ès imortal          ");
+    linhaCol(37, 41); printf("         No remo, √©s imortal          ");
     textColor(_BLACK, WHITE);
     mudar = true;
     Sleep(3750); //63380
     textColor(_BLACK, BROWN);
-    linhaCol(37, 41); printf("       No futebol, Ès um traÁo        ");
+    linhaCol(37, 41); printf("       No futebol, √©s um tra√ßo        ");
     textColor(_BLACK, WHITE);
     Sleep(3270); //66650
     textColor(_BLACK, BROWN);
-    linhaCol(37, 41); printf("      De uni„o Brasil-Portugal!       ");
+    linhaCol(37, 41); printf("      De uni√£o Brasil-Portugal!       ");
     textColor(_BLACK, WHITE);
     mudar = true;
     Sleep(3970); //86190
@@ -363,7 +363,7 @@ DWORD WINAPI letra(LPVOID params){
     textColor(_BLACK, WHITE);
     Sleep(2000); //94080
     textColor(_BLACK, BROWN);
-    linhaCol(37, 41); printf(" Criado com carinho pelo vascaÌno Gui ");
+    linhaCol(37, 41); printf(" Criado com carinho pelo vasca√≠no Gui ");
     textColor(_BLACK, WHITE);
 
 
@@ -581,14 +581,14 @@ DWORD WINAPI nicetry(LPVOID params) {
     linhaCol(14, 14); printf("|_|_|_|___|___|___|  |___|___|  |_____|___|_  |___|  |___|_|_|_|  |_____|_| |___|\\_/|___|__|");
     linhaCol(15, 56); printf("|___|");
 
-    linhaCol(19, 54); printf("No momento, este modo est· sendo ");
+    linhaCol(19, 54); printf("No momento, este modo est√° sendo ");
     textColor(_BLACK, DARKGRAY);
     printf("desenvolvido");
     textColor(_BLACK, WHITE);
     printf(".");
-    linhaCol(20, 42); printf("Verifique o repositÛrio no GitHub e veja se h· uma ");
+    linhaCol(20, 42); printf("Verifique o reposit√≥rio no GitHub e veja se h√° uma ");
     textColor(_BLACK, LIGHTGREEN);
-    printf("atualizaÁ„o do jogo");
+    printf("atualiza√ß√£o do jogo");
     textColor(_BLACK, WHITE);
     printf(".");
 
@@ -614,7 +614,7 @@ DWORD WINAPI nicetry(LPVOID params) {
 
     textColor(_BLACK, LIGHTRED);
     box(26, 41, 30, 113);
-    linhaCol(27, 43); printf("A m˙sica \"Never Gonna Give You Up\" em 8-bits foi gerada pelo programa");
+    linhaCol(27, 43); printf("A m√∫sica \"Never Gonna Give You Up\" em 8-bits foi gerada pelo programa");
     linhaCol(28, 43); printf("GXSCC e com base no arquivo MIDI criado e disponibilizado pelo canal");
     linhaCol(29, 43); printf("   do YouTube \"The Music Decomposer\": https://youtu.be/r2K1yPbLrWc");
     textColor(_BLACK, WHITE);
@@ -623,7 +623,7 @@ DWORD WINAPI nicetry(LPVOID params) {
 }
 
 DWORD WINAPI ricklyrics(LPVOID params){
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "Portuguese_Brazil.1252");
 
     Sleep(3000); //18180
     mudar = true;
@@ -733,7 +733,7 @@ DWORD WINAPI redes(LPVOID params){
     int linha = 10, coluna = 9;
     textColor(WHITE, _BLACK);
     box(9, coluna - 2, 12, coluna + 56);
-    linhaCol(linha, coluna + 1); printf("O cÛdigo-fonte do jogo est· disponÌvel no repositÛrio");
+    linhaCol(linha, coluna + 1); printf("O c√≥digo-fonte do jogo est√° dispon√≠vel no reposit√≥rio");
     linhaCol(linha + 1, coluna + 4); printf("\"https://github.com/gui-cordeiro/JogoDoBraile\"");
     linhaCol(linha + 4, coluna); printf("                  @@@@@@@@@@@@@@@@@@@                  ");
     linhaCol(linha + 5, coluna); printf("              @@@@@@@@@@@@@@@@@@@@@@@@@@@              ");
@@ -909,22 +909,22 @@ DWORD WINAPI bannerEncerramento(LPVOID params) {
     while(1) {
         textColor(BROWN, _BLACK);
         if (modosDisponiveis == 1) {
-            exibirBannerDificuldade("ESSA FOI F¡CIL, MAS AGORA AS COISAS V√O", 35, 7, "M…DIO I", 33, 62);
-            linhaCol(36, 12);printf("DIFICULTAR UM POUCO! V¡ AGORA AO: ");
+            exibirBannerDificuldade("ESSA FOI F√ÅCIL, MAS AGORA AS COISAS V√ÉO", 35, 7, "M√âDIO I", 33, 62);
+            linhaCol(36, 12);printf("DIFICULTAR UM POUCO! V√Å AGORA AO: ");
         } else if (modosDisponiveis == 2) {
-            exibirBannerDificuldade("SIGA ADIANTE! CONTINUE O SEU APRENDIZADO NO:", 35, 5, "M…DIO II", 33, 59);
+            exibirBannerDificuldade("SIGA ADIANTE! CONTINUE O SEU APRENDIZADO NO:", 35, 5, "M√âDIO II", 33, 59);
         } else if (modosDisponiveis == 3) {
-            exibirBannerDificuldade("MUITO BEM! AGORA V¡ ADIANTE AO SEU ⁄LTIMO", 35, 6, "DIFÕCIL", 33, 65);
-            linhaCol(36, 10);printf("DESAFIO. AO INIGUAL¡VEL, AO TEMÕVEL:");
+            exibirBannerDificuldade("MUITO BEM! AGORA V√Å ADIANTE AO SEU √öLTIMO", 35, 6, "DIF√çCIL", 33, 65);
+            linhaCol(36, 10);printf("DESAFIO. AO INIGUAL√ÅVEL, AO TEM√çVEL:");
         } else if (modosDisponiveis == 4) {
-            //exibirBannerDificuldade("", 0, 0, "AGRADECIMENTO", 33, 27); //Frase do NÌvel Livre
+            //exibirBannerDificuldade("", 0, 0, "AGRADECIMENTO", 33, 27); //Frase do N√≠vel Livre
             setlocale(LC_ALL, "C");
             linhaCol(35, 40); printf("%c ", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             printf("Pressione Enter para retornar ao Menu");
             setlocale(LC_ALL, "C");
             printf(" %c   ", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
         }
         textColor(WHITE, _BLACK);
         Sleep(3500);
@@ -935,13 +935,13 @@ DWORD WINAPI bannerEncerramento(LPVOID params) {
             textColor(BROWN, _BLACK);
             setlocale(LC_ALL, "C");
             linhaCol(35, 2); printf("      %c ", 254);
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             printf("Pressione Enter para retornar ao Menu");
             setlocale(LC_ALL, "C");
             printf(" %c     ", 254);
             linhaCol(36, 5);
             printf("                                            ");
-            setlocale(LC_ALL, "Portuguese");
+            setlocale(LC_ALL, "Portuguese_Brazil.1252");
             textColor(WHITE, _BLACK);
             Sleep(1500);
         }
