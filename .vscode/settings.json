@@ -7,11 +7,36 @@
       "conio.h": "c",
       "string.h": "c",
       "stdlib.h": "c",
-      "sdl.h": "c"
+      "sdl.h": "c",
+      "config-functions.h": "c",
+      "savesystem.h": "c"
    },
+   "files.encoding": "windows1252",
    "cSpell.words": [
       "apresentacao",
+      "CXSCREEN",
+      "CYSCREEN",
+      "DARKGRAY",
+      "dificil",
       "Disponiveis",
-      "opcao"
+      "divisoria",
+      "dseg",
+      "facil",
+      "finalopt",
+      "IFPR",
+      "LIGHTCYAN",
+      "LIGHTGRAY",
+      "LIGHTGREEN",
+      "LIGHTMAGENTA",
+      "LIGHTRED",
+      "medio",
+      "nicetry",
+      "nosound",
+      "opcao",
+      "pontuacao",
+      "Pontuacoes",
+      "resetar",
+      "ricklyrics",
+      "Rickroll"
    ]
 }

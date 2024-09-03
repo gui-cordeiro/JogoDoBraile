@@ -4,6 +4,8 @@
  * -> Ano: 2017, 2024
  */
 
+#define _WIN32_WINNT 0x0500 // Define que as APIs do Windows 2000 ou posterior serão utilizados neste projeto
+
 bool mudar = false;
 bool mudarRedes = true;
 bool isFullScreen = false;
@@ -18,7 +20,7 @@ int modosDisponiveis = 0;
 int mouseX = 0;
 int mouseY = 0;
 
-const tempo = 50;
+const int tempo = 50;
 
 enum {
     BLACK,
@@ -112,9 +114,9 @@ void lerStringComLimite(char *str, int limite);
 int mainMenu();
 int modeSelect();
 int opcaoB1();
-void opcaoB2();
-void opcaoB3();
-void opcaoB4();
+int opcaoB2();
+int opcaoB3();
+int opcaoB4();
 void opcaoB5();
 void opcaoA2();
 int opcaoA3();

@@ -21,8 +21,6 @@
 #include "include/SDL_main.h"
 #include "include/SDL_mixer.h"
 
-#define _WIN32_WINNT 0x0500 // Define que as APIs do Windows 2000 ou posterior serão utilizados neste projeto
-
 #include "declarations.h"
 #include "aux-threads.h"
 #include "config-functions.h"

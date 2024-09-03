@@ -4,8 +4,6 @@
             "name": "Win32",
             "includePath": [
                 "${default}",
-                "${workspaceFolder}/include",
-                "${workspaceFolder}/lib",
                 "${workspaceFolder}"
             ],
             "defines": [
