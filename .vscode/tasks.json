@@ -7,6 +7,7 @@
            "command": "gcc.exe",
            "args": [
                 "-Wall",
+                "-Wno-trigraphs",
                 "-g",
                 "-Ilibs\\include",
                 "-c",
@@ -48,11 +49,31 @@
            }
        },
        {
+        "label": "Executar C",
+        "type": "shell",
+        "command": "start cmd /c ${workspaceFolder}\\bin\\Debug\\Braile.exe",
+        "group": {
+            "kind": "build",
+            "isDefault": true
+        },
+        "problemMatcher": ["$gcc"],
+        "detail": "Executando o programa C/C++",
+        "dependsOn": [],
+        "runOptions": {
+            "runOn": "folderOpen"
+        },
+        "presentation": {
+            "reveal": "always",
+            "panel": "new"
+        }
+    },
+       {
         "label": "Compilar e Executar C",
         "type": "shell",
         "command": "gcc.exe",
         "args": [
              "-Wall",
+             "-Wno-trigraphs",
              "-g",
              "-Ilibs\\include",
              "-c",
@@ -94,8 +115,7 @@
             "runOn": "folderOpen"
         },
         "presentation": {
-            "reveal": "always",
-            "panel": "new"
+            "reveal": "always"
         }
     },
     
